@@ -51,6 +51,16 @@ def allocation_summary(rows):
             "utilization_percent_mean": statistics.mean(row["utilization_percent"] for row in rows)}
 
 
+def classify_allocation(allocation, transition_mib, min_samples=10, max_gap_seconds=10):
+    if not allocation.get("samples"):
+        return "unavailable"
+    if allocation["allocation_range_mib"] > transition_mib:
+        return "resource-transition-confounded"
+    if allocation["samples"] < min_samples or allocation["max_sample_gap_seconds"] > max_gap_seconds:
+        return "monitoring-insufficient"
+    return "allocation-stable"
+
+
 def phase_window(raw, path):
     if "wall_utc" in raw:
         return {"method": "reported UTC phase timestamps",
@@ -80,8 +90,7 @@ def main():
         csv_path = directory / f"{cell['name']}-gpu.csv"
         rows = gpu_rows(csv_path, args.gpu_index, args.timezone)
         allocation = allocation_summary(rows)
-        classification = ("unavailable" if not rows else "resource-transition-confounded"
-                          if allocation["allocation_range_mib"] > args.transition_mib else "allocation-stable")
+        classification = classify_allocation(allocation, args.transition_mib)
         result = {"name": cell["name"], "status": cell["status"], "classification": classification,
                   "whole_cell": allocation, "arms": {}}
         if csv_path.exists():
@@ -102,7 +111,9 @@ def main():
             stable.append(cell)
     result = {"gpu_index": args.gpu_index, "gpu_timestamp_timezone": args.timezone,
               "allocation_transition_threshold_mib": args.transition_mib,
-              "interpretation": "All completed pairs remain the primary aggregate. Sensitivity uses cells whose whole-cell observed target GPU allocation range is <= threshold. This does not establish constant utilization or remove all confounding. Missing/sparse logs limit classification; inspect sample counts/gaps. Legacy arm timing estimates depend on original filesystem mtimes, preserved here with source hashes.",
+              "minimum_samples": 10, "maximum_sample_gap_seconds": 10,
+              "analysis_script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+              "interpretation": "All completed pairs remain the primary aggregate. Sensitivity uses cells whose whole-cell observed target GPU allocation range is <= threshold, with at least 10 samples and no gap above 10 seconds. This does not establish constant utilization or remove all confounding. Missing/sparse logs are excluded from the stable subset. Legacy arm timing estimates depend on original filesystem mtimes, preserved here with source hashes.",
               "cells": cells, "all_completed_aggregate": aggregate(report["cells"]),
               "allocation_stable_cell_names": [cell["name"] for cell in stable],
               "allocation_stable_aggregate": aggregate(stable)}

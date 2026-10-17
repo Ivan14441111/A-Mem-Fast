@@ -15,6 +15,7 @@ import json
 import math
 from pathlib import Path
 import statistics
+from summarize_suite import saved_complete_runs
 
 
 def read(path):
@@ -29,9 +30,9 @@ def describe(cells):
         grouped = defaultdict(list)
         for entry in cells:
             cell = entry["cell"]
-            if cell["status"] != "complete" or arm not in cell["summary"]["runs"]:
+            runs = cell.get("summary", {}).get("runs", {})
+            if "baseline" not in runs or arm not in runs:
                 continue
-            runs = cell["summary"]["runs"]
             baseline, candidate = runs["baseline"], runs[arm]
             grouped[(cell["sample_index"], cell["actual_turns"])].append({
                 "build_log_speedup": math.log(baseline["build_seconds"] / candidate["build_seconds"]),
@@ -44,6 +45,10 @@ def describe(cells):
                          for (sample, turns), rows in sorted(grouped.items())]
         if conversations:
             metrics[arm] = {"paired_runs": sum(row["repeats"] for row in conversations),
+                            "unique_selected_qa": len({(entry["cell"]["sample_index"], index) for entry in cells
+                                                        if "baseline" in entry["cell"].get("summary", {}).get("runs", {})
+                                                        and arm in entry["cell"].get("summary", {}).get("runs", {})
+                                                        for index in entry["cell"]["source_qa_indices"]}),
                             "independent_conversations": len({row["sample_index"] for row in conversations}),
                             "build_speedup_equal_conversation_geomean": math.exp(statistics.mean(row["build_log_speedup"] for row in conversations)),
                             "total_speedup_equal_conversation_geomean": math.exp(statistics.mean(row["total_log_speedup"] for row in conversations)),
@@ -51,14 +56,27 @@ def describe(cells):
                                for key in ("baseline_f1", "candidate_f1", "f1_delta")},
                             "conversations": conversations}
     unique_qa = {(entry["cell"]["sample_index"], index) for entry in cells
-                 if entry["cell"]["status"] == "complete" for index in entry["cell"]["source_qa_indices"]}
+                 if entry["cell"].get("summary", {}).get("runs") for index in entry["cell"]["source_qa_indices"]}
+    arm_counts = {}
+    for arm in ("baseline", "optimized", "fused", "joint"):
+        planned = [entry["cell"] for entry in cells
+                   if arm in entry["cell"].get("modes", ",".join(entry["cell"].get("summary", {}).get("runs", {}))).split(",")]
+        if planned:
+            arm_counts[arm] = {"planned": len(planned),
+                               "completed": sum(arm in cell.get("summary", {}).get("runs", {}) for cell in planned),
+                               "completed_baseline_pairs": sum(arm in cell.get("summary", {}).get("runs", {}) and
+                                                               "baseline" in cell.get("summary", {}).get("runs", {})
+                                                               for cell in planned)}
     return {"cell_refs": [{"origin": entry["origin"], "name": entry["cell"]["name"]} for entry in cells],
+            "whole_cell_status_counts": {status: sum(entry["cell"]["status"] == status for entry in cells)
+                                         for status in sorted({entry["cell"]["status"] for entry in cells})},
+            "cold_arm_counts": arm_counts,
             "unique_selected_qa": len(unique_qa), "metrics": metrics}
 
 
-def entries(suite, audit, origin):
+def entries(suite, audit, origin, suite_dir):
     classifications = {row["name"]: row["classification"] for row in audit["cells"]}
-    return [{"origin": origin, "cell": cell,
+    return [{"origin": origin, "cell": {**cell, "summary": {"runs": saved_complete_runs(cell, suite_dir)}},
              "classification": classifications.get(cell["name"], "unavailable")}
             for cell in suite["cells"]]
 
@@ -79,15 +97,14 @@ def main():
     primary = read(args.suite)
     if len({cell["actual_turns"] for cell in primary["cells"]}) > 1:
         parser.error("Analyze one turn-count suite at a time so conversation weights remain explicit")
-    primary_entries = entries(primary, read(args.audit), "primary")
-    stable = [entry for entry in primary_entries if entry["cell"]["status"] == "complete"
-              and entry["classification"] == "allocation-stable"]
+    primary_entries = entries(primary, read(args.audit), "primary", args.suite.parent)
+    stable = [entry for entry in primary_entries if entry["classification"] == "allocation-stable"]
     retained = list(primary_entries)
     views = {"planned_all": describe(primary_entries), "planned_allocation_stable": describe(stable),
              "supplemental_balanced_stable": {"available": False, "reason": "Confirmation not yet supplied"}}
     if args.confirmation_suite:
         confirmation = read(args.confirmation_suite)
-        confirmations = entries(confirmation, read(args.confirmation_audit), "confirmation")
+        confirmations = entries(confirmation, read(args.confirmation_audit), "confirmation", args.confirmation_suite.parent)
         retained += confirmations
         target = next((entry for entry in primary_entries if entry["cell"]["name"] == args.replace_cell), None)
         others = [entry for entry in primary_entries if entry["cell"]["name"] != args.replace_cell]
@@ -111,10 +128,11 @@ def main():
             views["supplemental_balanced_stable"] = {"available": True, **describe(others + confirmations)}
         else:
             views["supplemental_balanced_stable"] = {"available": False, "reason": reason}
-    result = {"aggregation": "Mean log paired speedup within conversation, then equal-conversation mean and exponentiation. F1 averages repeats within conversation then conversations equally. Repeated QA and confirmation do not add independent conversations or questions.",
+    result = {"aggregation": "Use completed baseline/candidate cold-arm pairs, independently of a later arm's failure or pending replay. Pair denominators are policy-specific; replay verification is reported separately. Mean log paired speedup within conversation, then equal-conversation mean and exponentiation. F1 averages repeats within conversation then conversations equally. Repeated QA and confirmation do not add independent conversations or questions.",
               "sensitivity_limit": "Allocation-stable only classifies observed GPU memory allocation range, not all compute-load changes. Primary planned data is always retained.",
               "inputs": {"primary_suite": str(args.suite), "primary_suite_sha256": hashlib.sha256(args.suite.read_bytes()).hexdigest(),
                          "primary_audit": str(args.audit)},
+              "analysis_script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               "views": views,
               "retained_cells": [{"origin": entry["origin"], "name": entry["cell"]["name"],
                                   "status": entry["cell"]["status"], "classification": entry["classification"]}

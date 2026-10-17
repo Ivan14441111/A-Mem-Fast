@@ -1,0 +1,77 @@
+baseline: memory 8/128, HTTP=22
+baseline: memory 16/128, HTTP=46
+baseline: memory 24/128, HTTP=70
+baseline: memory 32/128, HTTP=94
+baseline: memory 40/128, HTTP=118
+baseline: memory 48/128, HTTP=143
+baseline: memory 56/128, HTTP=167
+baseline: memory 64/128, HTTP=191
+baseline: memory 72/128, HTTP=215
+baseline: memory 80/128, HTTP=240
+baseline: memory 88/128, HTTP=265
+baseline: memory 96/128, HTTP=290
+baseline: memory 104/128, HTTP=314
+baseline: memory 112/128, HTTP=339
+baseline: memory 120/128, HTTP=364
+baseline: memory 128/128, HTTP=389
+baseline: build=309.712s QA=15.023s F1=0.369
+optimized: memory 8/128, HTTP=38
+optimized: memory 16/128, HTTP=62
+optimized: memory 24/128, HTTP=86
+optimized: memory 32/128, HTTP=110
+optimized: memory 40/128, HTTP=134
+optimized: memory 48/128, HTTP=158
+optimized: memory 56/128, HTTP=182
+optimized: memory 64/128, HTTP=206
+optimized: memory 72/128, HTTP=230
+optimized: memory 80/128, HTTP=255
+optimized: memory 88/128, HTTP=280
+optimized: memory 96/128, HTTP=304
+optimized: memory 104/128, HTTP=328
+optimized: memory 112/128, HTTP=352
+optimized: memory 120/128, HTTP=369
+optimized: memory 128/128, HTTP=386
+optimized: build=240.014s QA=16.122s F1=0.426
+fused: memory 8/128, HTTP=30
+fused: memory 16/128, HTTP=46
+Traceback (most recent call last):
+  File "/data2/xyf25/A-Mem-Fast/fast_amem/evolution.py", line 62, in parse_fused_evolution
+    result = json.loads(strip_markdown_fences(response))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/xyf25/qingcheng/.conda/envs/vllm-py312/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/xyf25/qingcheng/.conda/envs/vllm-py312/lib/python3.12/json/decoder.py", line 341, in decode
+    raise JSONDecodeError("Extra data", s, end)
+json.decoder.JSONDecodeError: Extra data: line 1 column 651 (char 650)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/data2/xyf25/A-Mem-Fast/scripts/benchmark.py", line 501, in <module>
+    main()
+  File "/data2/xyf25/A-Mem-Fast/scripts/benchmark.py", line 468, in main
+    reports[mode] = run_mode(args, subset, mode, shared_model)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/xyf25/A-Mem-Fast/scripts/benchmark.py", line 152, in run_mode
+    return _run_mode(args, subset, mode, shared_model)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/xyf25/A-Mem-Fast/scripts/benchmark.py", line 266, in _run_mode
+    system.ingest(subset["turns"], analysis_workers=args.workers,
+  File "/data2/xyf25/A-Mem-Fast/fast_amem/system.py", line 261, in ingest
+    self.add_note(turn["content"], time=turn["timestamp"])
+  File "/data2/xyf25/A-Mem-Fast/fast_amem/system.py", line 89, in add_note
+    evo_label, note = self.process_memory(note)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/xyf25/A-Mem-Fast/scripts/benchmark.py", line 234, in measured
+    return _fn(*a, **kw)
+           ^^^^^^^^^^^^^
+  File "/data2/xyf25/A-Mem-Fast/fast_amem/system.py", line 123, in process_memory
+    return self._evolve_fused(note, neighbor_memory, indices)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/xyf25/A-Mem-Fast/fast_amem/system.py", line 167, in _evolve_fused
+    result = parse_fused_evolution(response, indices)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/xyf25/A-Mem-Fast/fast_amem/evolution.py", line 64, in parse_fused_evolution
+    raise ValueError("fused evolution must return a JSON object") from exc
+ValueError: fused evolution must return a JSON object

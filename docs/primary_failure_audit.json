@@ -1,0 +1,313 @@
+{
+  "scope": "Final observed primary, all nine independent planned cells attempted exactly once. Failure classification is a read-only whole-response JSON parse and required update-field audit; no clipping, repair, retry or inference.",
+  "suite_path": "results/suite128-primary-observed-v1-20261018/suite.json",
+  "suite_sha256": "731b2807375bf1a715d19412d7e61e74ec2b24d87e4f935f44a6ed782e624073",
+  "cell_counts": {
+    "planned": 9,
+    "attempted": 9,
+    "completed_all_cold_arms": 0,
+    "failed": 9,
+    "not_run": 0
+  },
+  "cold_arm_counts": {
+    "baseline": {
+      "planned": 9,
+      "attempted": 3,
+      "completed": 3,
+      "failed": 0,
+      "not_run": 6
+    },
+    "optimized": {
+      "planned": 9,
+      "attempted": 6,
+      "completed": 6,
+      "failed": 0,
+      "not_run": 3
+    },
+    "fused": {
+      "planned": 9,
+      "attempted": 9,
+      "completed": 0,
+      "failed": 9,
+      "not_run": 0
+    }
+  },
+  "fused_failure_classification": {
+    "json_syntax": 4,
+    "valid_json_missing_update_fields": 5
+  },
+  "interpretation": [
+    "All9cell failures occurred in fused; none of3attemptedbaseline or6attemptedexact cold arms failed.",
+    "Unattempted baseline6/exact3 are blocked by preceding fused failure under preplanned rotation, not observed default-path failures.",
+    "9/9 fused failed before128turn completion, at turns4–31. This is sequence-level outcome for this model/prompt/profile, not an IID per-call failure-rate estimate or a universal statement aboutA-Mem.",
+    "All cached failedfused responses reportnormalstop; JSON syntax/schema validity is separate from HTTP completion and tag-budget observation.",
+    "Missing update context could be represented by an explicit emptystring underexistingpolicy, but accepting omission would change thecontract; no suchrepairwasapplied.",
+    "Schema-guided generation is a separately preregistered next experiment, not a retroactive fix to these failedruns."
+  ],
+  "failures": [
+    {
+      "cell": "turns128-sample0-upstream-r1",
+      "classification": "json_syntax",
+      "failed_turn_1based": 4,
+      "dia_id": "D1:4",
+      "source_diagnostic": "results/suite128-primary-observed-v1-20261018/turns128-sample0-upstream-r1/fused-response-diagnostic.json",
+      "source_sha256": "0802fbec7e3ff25a6b362ea374d632cb7d4b1bd41dd269777e9258a512d2cb9c",
+      "request_key": "a216cfc4f1cf3f395e7692acbafdbe137a00d170797567ef2f1452721307801b",
+      "content_sha256": "2652ba1993b13a975bcaff8eef4abed324b3979572db6f9edb75973f7fc90b9e",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 716,
+        "total_tokens": 800,
+        "completion_tokens": 84,
+        "prompt_tokens_details": null
+      },
+      "json_error": "Extra data: line 1 column 392 (char 391)",
+      "position": 391,
+      "trailing_data": "}"
+    },
+    {
+      "cell": "turns128-sample0-upstream-r2",
+      "classification": "json_syntax",
+      "failed_turn_1based": 4,
+      "dia_id": "D1:4",
+      "source_diagnostic": "results/suite128-primary-observed-v1-20261018/turns128-sample0-upstream-r2/fused-response-diagnostic.json",
+      "source_sha256": "19badf077683472098d058a6c1628764015d4877d4451307dff4418dc66983c4",
+      "request_key": "dad56217096a19148f6b30851e325a157b363439d8cddfc16217ea48144f031e",
+      "content_sha256": "e82d6843be0ce7893b116c0eec33b0096b2e1ff51081f96f63ccec30f64a14df",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 720,
+        "total_tokens": 807,
+        "completion_tokens": 87,
+        "prompt_tokens_details": null
+      },
+      "json_error": "Extra data: line 1 column 416 (char 415)",
+      "position": 415,
+      "trailing_data": "}"
+    },
+    {
+      "cell": "turns128-sample0-upstream-r3",
+      "classification": "valid_json_missing_update_fields",
+      "failed_turn_1based": 7,
+      "dia_id": "D1:7",
+      "source_diagnostic": "results/suite128-primary-observed-v1-20261018/turns128-sample0-upstream-r3/fused-response-diagnostic.json",
+      "source_sha256": "9fc6e1092f42cc861b6a92caec528b06e45e1698a0f5387a5fc6bd60c98edd00",
+      "request_key": "1aae8b4c60fd0fc08b5d9813ab7e3e7699498f38e7075a0f2dbf1a1d47bb026d",
+      "content_sha256": "efa80a6900c9dd9b18a937723eaa85e0b249a97abcb29165e91752cc6602283d",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 991,
+        "total_tokens": 1126,
+        "completion_tokens": 135,
+        "prompt_tokens_details": null
+      },
+      "missing_update_fields": [
+        {
+          "update_position": 0,
+          "missing": [
+            "context"
+          ]
+        },
+        {
+          "update_position": 1,
+          "missing": [
+            "context"
+          ]
+        },
+        {
+          "update_position": 2,
+          "missing": [
+            "context"
+          ]
+        }
+      ],
+      "extra_update_fields": []
+    },
+    {
+      "cell": "turns128-sample1-upstream-r1",
+      "classification": "valid_json_missing_update_fields",
+      "failed_turn_1based": 10,
+      "dia_id": "D1:10",
+      "source_diagnostic": "results/suite128-primary-observed-v1-20261018/turns128-sample1-upstream-r1/fused-response-diagnostic.json",
+      "source_sha256": "71b37f98190ad942f3f5078e688c072ac7066816bf3b7292343805c389eb6fbd",
+      "request_key": "033a5bb19bb2ac3a57719f7f9b2ec16abecc4e74f9c3092aab0bdb608cb70bb5",
+      "content_sha256": "2e7cb65714be4c7dc0e3a98b5a14fd703104ceeee7b839b2c7abb2ec99f382d5",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 1046,
+        "total_tokens": 1223,
+        "completion_tokens": 177,
+        "prompt_tokens_details": null
+      },
+      "missing_update_fields": [
+        {
+          "update_position": 0,
+          "missing": [
+            "context"
+          ]
+        },
+        {
+          "update_position": 1,
+          "missing": [
+            "context"
+          ]
+        },
+        {
+          "update_position": 2,
+          "missing": [
+            "context"
+          ]
+        },
+        {
+          "update_position": 3,
+          "missing": [
+            "context"
+          ]
+        },
+        {
+          "update_position": 4,
+          "missing": [
+            "context"
+          ]
+        }
+      ],
+      "extra_update_fields": []
+    },
+    {
+      "cell": "turns128-sample1-upstream-r2",
+      "classification": "valid_json_missing_update_fields",
+      "failed_turn_1based": 10,
+      "dia_id": "D1:10",
+      "source_diagnostic": "results/suite128-primary-observed-v1-20261018/turns128-sample1-upstream-r2/fused-response-diagnostic.json",
+      "source_sha256": "eeeecc4a30bc752beeb882ae40de817b6c917ef9fd44bc746fe0d910c0180467",
+      "request_key": "9d6e5bac0655ce8d8fff5ddf2599de95dd8259f41f86a9ecb57bc824fb39b4ea",
+      "content_sha256": "41e9f98c29fb9fe5f2d8de6a4f0facbf78464d4ec9e3461733b230ee92f46974",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 1043,
+        "total_tokens": 1148,
+        "completion_tokens": 105,
+        "prompt_tokens_details": null
+      },
+      "missing_update_fields": [
+        {
+          "update_position": 0,
+          "missing": [
+            "context"
+          ]
+        },
+        {
+          "update_position": 1,
+          "missing": [
+            "context"
+          ]
+        }
+      ],
+      "extra_update_fields": []
+    },
+    {
+      "cell": "turns128-sample1-upstream-r3",
+      "classification": "valid_json_missing_update_fields",
+      "failed_turn_1based": 26,
+      "dia_id": "D1:26",
+      "source_diagnostic": "results/suite128-primary-observed-v1-20261018/turns128-sample1-upstream-r3/fused-response-diagnostic.json",
+      "source_sha256": "d7a80f321654891a4d091a71f3d9ff43e6e7de69d7211485ecd4209b2f27df89",
+      "request_key": "877265b89c168f9c0f15b849c2773a8b7d8023a8722693185002849cc0831c94",
+      "content_sha256": "7f09b4bcb65cfebae8f362a4fc919ac7ea419fd3e3d2753870a5b82b3266c1c9",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 1085,
+        "total_tokens": 1227,
+        "completion_tokens": 142,
+        "prompt_tokens_details": null
+      },
+      "missing_update_fields": [
+        {
+          "update_position": 0,
+          "missing": [
+            "context"
+          ]
+        }
+      ],
+      "extra_update_fields": []
+    },
+    {
+      "cell": "turns128-sample2-upstream-r1",
+      "classification": "json_syntax",
+      "failed_turn_1based": 31,
+      "dia_id": "D2:15",
+      "source_diagnostic": "results/suite128-primary-observed-v1-20261018/turns128-sample2-upstream-r1/fused-response-diagnostic.json",
+      "source_sha256": "caadb5a6b93e5be3747aa1e4b44429a2262393be29a6ddd6b6708c56784e7547",
+      "request_key": "ff8ad686e4a12f734ac4660b1388d946aacd75b86aa3d1dca44c2af0244024d3",
+      "content_sha256": "c9e26a75a5c687e45bb4d280151f1d277c731c3445a51f0a09f247503330756e",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 1004,
+        "total_tokens": 1112,
+        "completion_tokens": 108,
+        "prompt_tokens_details": null
+      },
+      "json_error": "Extra data: line 1 column 407 (char 406)",
+      "position": 406,
+      "trailing_data": "}"
+    },
+    {
+      "cell": "turns128-sample2-upstream-r2",
+      "classification": "json_syntax",
+      "failed_turn_1based": 19,
+      "dia_id": "D2:3",
+      "source_diagnostic": "results/suite128-primary-observed-v1-20261018/turns128-sample2-upstream-r2/fused-response-diagnostic.json",
+      "source_sha256": "d05d6d1b25fc89c9ffdec7c834c2bdfb7ff8f6da889b40a487c6e6e6ec0e05c3",
+      "request_key": "4fad3d6a96f1662ce5a81049c91b7622cfee72e5e08d317c3469f90f8aad5cd5",
+      "content_sha256": "7ca060ca1d2c8eae43a9e60bb961d9e822234f54babfe061b89063eb30775ed6",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 958,
+        "total_tokens": 1089,
+        "completion_tokens": 131,
+        "prompt_tokens_details": null
+      },
+      "json_error": "Extra data: line 1 column 651 (char 650)",
+      "position": 650,
+      "trailing_data": "}"
+    },
+    {
+      "cell": "turns128-sample2-upstream-r3",
+      "classification": "valid_json_missing_update_fields",
+      "failed_turn_1based": 31,
+      "dia_id": "D2:15",
+      "source_diagnostic": "results/suite128-primary-observed-v1-20261018/turns128-sample2-upstream-r3/fused-response-diagnostic.json",
+      "source_sha256": "607697b31d6b5731be0a6acbc9ef1262e8b3347677a65209dc899e035c96eec8",
+      "request_key": "eb00f30482f977bca20961e8e4ef1c59a7c5124d172a43d98105940ae2ebf039",
+      "content_sha256": "80ccf0643af402824b084853621460f7e1e3b39ae757148122df6839660359ee",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 1006,
+        "total_tokens": 1113,
+        "completion_tokens": 107,
+        "prompt_tokens_details": null
+      },
+      "missing_update_fields": [
+        {
+          "update_position": 0,
+          "missing": [
+            "context"
+          ]
+        },
+        {
+          "update_position": 1,
+          "missing": [
+            "context"
+          ]
+        },
+        {
+          "update_position": 2,
+          "missing": [
+            "context"
+          ]
+        }
+      ],
+      "extra_update_fields": []
+    }
+  ]
+}

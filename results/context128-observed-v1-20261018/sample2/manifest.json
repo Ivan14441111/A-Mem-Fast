@@ -1,0 +1,365 @@
+{
+  "args": {
+    "run_dir": "results/suite128-primary-observed-v1-20261018/turns128-sample2-upstream-r2",
+    "graph_mode": "baseline",
+    "output": "results/context128-observed-v1-20261018/sample2",
+    "order": "upstream,deduplicated",
+    "base_url": null,
+    "embedding_model": null,
+    "prefix_cache_reset": "required",
+    "plan_only": false
+  },
+  "fixed_memory_digest": "58a8db49a33012e2f1580a6bed2bbc00d9b54f0baf37f8c9f789d786c87386e0",
+  "subset_fingerprint": "a994a343f7ab86549b240b0444a2699572d8ac7b73083d5cf639b80dc020b0a1",
+  "fixed_keywords_digest": "e24874e96282ebd207a5c1fcf2ef70d0d27bcfed4d1f36656b196d7117a21c2f",
+  "graph_replay_llm": {
+    "logical_calls": 529,
+    "repetition_penalty": 1.05,
+    "tag_budget": 16,
+    "tag_budget_policy": "observe",
+    "generation_profile": "observed-tags-v1",
+    "tag_budget_overshoots": {
+      "logical_response_inspections": 390,
+      "live_response_inspections": 0,
+      "cache_response_inspections": 390,
+      "logical_tag_lists_inspected": 418,
+      "live_tag_lists_inspected": 0,
+      "cache_tag_lists_inspected": 418,
+      "logical_overshoot_responses": 0,
+      "live_overshoot_responses": 0,
+      "cache_overshoot_observations": 0,
+      "unique_overshoot_request_keys": 0,
+      "over_budget_lists_live": 0,
+      "max_actual_tags": 16
+    },
+    "upstream_calls": 401,
+    "prefetch_calls": 128,
+    "http_requests": 0,
+    "cache_hits": 529,
+    "errors": 0,
+    "http_seconds_sum": 0.0,
+    "cache_read_seconds_sum": 0.0008521340787410736,
+    "cache_write_seconds_sum": 0.0,
+    "prompt_tokens_live": 0,
+    "completion_tokens_live": 0,
+    "latency_seconds_p50": 9.356439113616943e-05,
+    "latency_seconds_p95": 0.0002721711993217468,
+    "latency_seconds_max": 0.0024747662246227264,
+    "by_stage": {
+      "analysis": {
+        "logical_calls": 256,
+        "http_requests": 0,
+        "cache_hits": 256,
+        "seconds_sum": 0.04560602456331253,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 0.0001251809298992157,
+        "latency_seconds_p95": 0.00027634482830762863,
+        "latency_seconds_max": 0.0024747662246227264
+      },
+      "evolution_decision": {
+        "logical_calls": 127,
+        "http_requests": 0,
+        "cache_hits": 127,
+        "seconds_sum": 0.0020675696432590485,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 1.5955418348312378e-05,
+        "latency_seconds_p95": 1.9472092390060425e-05,
+        "latency_seconds_max": 6.209313869476318e-05
+      },
+      "strengthen": {
+        "logical_calls": 127,
+        "http_requests": 0,
+        "cache_hits": 127,
+        "seconds_sum": 0.009614214301109314,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 7.332488894462585e-05,
+        "latency_seconds_p95": 8.6463987827301e-05,
+        "latency_seconds_max": 0.00023506581783294678
+      },
+      "update_neighbors": {
+        "logical_calls": 7,
+        "http_requests": 0,
+        "cache_hits": 7,
+        "seconds_sum": 0.002647239714860916,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 0.00032063573598861694,
+        "latency_seconds_p95": 0.0006235066801309583,
+        "latency_seconds_max": 0.0007495805621147156
+      },
+      "query_keywords": {
+        "logical_calls": 12,
+        "http_requests": 0,
+        "cache_hits": 12,
+        "seconds_sum": 7.902830839157104e-05,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 6.251037120819092e-06,
+        "latency_seconds_p95": 1.0544992983341212e-05,
+        "latency_seconds_max": 1.3981014490127563e-05
+      }
+    }
+  },
+  "source_run_manifest": {
+    "args": {
+      "dataset": "/data2/xyf25/A-Mem-Fast/data/locomo10.json",
+      "sample_index": 2,
+      "max_turns": 128,
+      "max_questions": 12,
+      "retrieve_k": 10,
+      "evo_threshold": 100,
+      "workers": 4,
+      "context_policy": "upstream",
+      "evolution_policy": "upstream",
+      "prefix_cache_reset": "required",
+      "skip_server_warmup": false,
+      "prefetch_window": 16,
+      "base_url": "http://127.0.0.1:21014/v1",
+      "model": "Qwen3-8B",
+      "model_revision": "qwen3-8b-config-f7c4eadf-index-f9fdbcb9-template-01de28f8",
+      "embedding_model": "/home/xyf25/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "max_tokens": 2000,
+      "tag_budget_policy": "observe",
+      "tag_budget": 16,
+      "repetition_penalty": 1.05,
+      "seed": 42,
+      "output": "results/suite128-primary-observed-v1-20261018/turns128-sample2-upstream-r2",
+      "modes": "baseline,optimized,fused,replay,warm,fused_warm"
+    },
+    "python": "3.12.13",
+    "versions": {
+      "torch": "2.9.0+cu129",
+      "transformers": "4.57.6",
+      "sentence-transformers": "5.1.2",
+      "numpy": "2.2.6",
+      "scikit-learn": "1.7.2",
+      "vllm": "0.11.2"
+    },
+    "upstream_commit": "0c8039f28fdcc08189a23c07a3437d9d2482f9c2",
+    "project_commit": "2019a73d4ce7135acff4fc2cf51978ccee087124",
+    "upstream_repository": "https://github.com/WujiangXu/A-mem",
+    "subset_fingerprint": "a994a343f7ab86549b240b0444a2699572d8ac7b73083d5cf639b80dc020b0a1",
+    "timing_note": "Model download/server startup/model loading/warmup excluded; real live inference and fast-cache overhead included. Init reported separately. Nested timing is inclusive.",
+    "decoding": {
+      "temperature": 0,
+      "seed": 42,
+      "enable_thinking": false,
+      "max_tokens": 2000,
+      "repetition_penalty": 1.05,
+      "tag_budget": 16,
+      "tag_budget_policy": "observe",
+      "prompt_protocol": "observed-tags-v1",
+      "note": "Common configured decoding in all arms; differs from upstream default temperature."
+    },
+    "source_sha256": {
+      "scripts/benchmark.py": "d0bb3d65522f9c045760254e62c0b3bfba9da61b813267751767ad41483d628f",
+      "memory_layer.py": "b9a5b5797881b25c5524b98a543b22a1bbbcc7f285437ca667a5673e7f293eba",
+      "memory_layer_robust.py": "1c5cd36b50c9113440db0523b1f3d781aebc3711ff9b86b72b20e0f9bc981aef",
+      "llm_text_parsers.py": "353b77f57ce081ee51789e953ae8604b0c57e6470a332adc0377cf48f76d3a90",
+      "fast_amem/__init__.py": "ddedf9ae40b93083fb18887337d211049fd28e7a4a878bfe61999424a634018d",
+      "fast_amem/client.py": "59aeabab1b15794c4e735626533fe61b1eee6e470612bcc059810163d87b6f4c",
+      "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+      "fast_amem/joint.py": "eb8ca78cbdc06732ad526a4c952a35ce46c62a541ebd043c1e71e6ef763fe2cd",
+      "fast_amem/retriever.py": "59f1e08a60470f447b5fd9c2a3df19b7a94bc2d0a541dea73e2e5a3fa8833e02",
+      "fast_amem/system.py": "cb0c2d82ea8632acfe2ee45ed30a2ed2c6b61f134f1b573ed2b10d69157cac3f"
+    },
+    "baseline_recording": "Responses buffered in RAM; SQLite flush excluded. Optimized persistent cache overhead included.",
+    "shared_encoder_and_warmup_seconds": 1.53032760694623
+  },
+  "source_sha256": {
+    "scripts/benchmark_context.py": "0fd339f8ad61aced712ac38aba218f5bc9b5e1ec00d1876bf949b181a7e10354",
+    "scripts/benchmark.py": "d0bb3d65522f9c045760254e62c0b3bfba9da61b813267751767ad41483d628f",
+    "fast_amem/__init__.py": "ddedf9ae40b93083fb18887337d211049fd28e7a4a878bfe61999424a634018d",
+    "fast_amem/client.py": "59aeabab1b15794c4e735626533fe61b1eee6e470612bcc059810163d87b6f4c",
+    "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+    "fast_amem/joint.py": "eb8ca78cbdc06732ad526a4c952a35ce46c62a541ebd043c1e71e6ef763fe2cd",
+    "fast_amem/retriever.py": "59f1e08a60470f447b5fd9c2a3df19b7a94bc2d0a541dea73e2e5a3fa8833e02",
+    "fast_amem/system.py": "cb0c2d82ea8632acfe2ee45ed30a2ed2c6b61f134f1b573ed2b10d69157cac3f"
+  },
+  "timing_note": "Graph replay, keyword lookup, encoder load, and one READY warmup excluded. Each timed arm includes one cold answer request per question and SQLite recording. QA context changes intentionally; this is not an exact-behavior optimization.",
+  "context_plan": [
+    {
+      "source_qa_index": 2,
+      "question": "What martial arts has John done?",
+      "category": 1,
+      "upstream": {
+        "context_digest": "023a61fb4254d3149f3e7a1503c701bff1017d31ef48f6ff921be637c56b1fe0",
+        "context_utf8_bytes": 24044,
+        "context_rows": 39
+      },
+      "deduplicated": {
+        "context_digest": "60dd5050804ddabca8af53489470af0da454cd57c2d4a1244e2b87313722c063",
+        "context_utf8_bytes": 19111,
+        "context_rows": 29
+      }
+    },
+    {
+      "source_qa_index": 1,
+      "question": "When did Maria donate her car?",
+      "category": 2,
+      "upstream": {
+        "context_digest": "83eca5b4a7bd141b84d4f83fce00b544a09d6f9f4112303270ea09135d5c6bda",
+        "context_utf8_bytes": 27757,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "61ee0e95cda78ab424b2a78960ba70471aa7dde5ccfca367003d206b9bb24a06",
+        "context_utf8_bytes": 19677,
+        "context_rows": 28
+      }
+    },
+    {
+      "source_qa_index": 8,
+      "question": "What might John's financial status be?",
+      "category": 3,
+      "upstream": {
+        "context_digest": "679d1404af5ad831de3baa5c84c5ede83fe0d37901df42566005efa784a4ce57",
+        "context_utf8_bytes": 28625,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "fe7cee25e2bdabaac44c8458d7638c51df9dfd7baf985740e42037438166af06",
+        "context_utf8_bytes": 20390,
+        "context_rows": 28
+      }
+    },
+    {
+      "source_qa_index": 65,
+      "question": "What is John's main focus in local politics?",
+      "category": 4,
+      "upstream": {
+        "context_digest": "4cae0dbdea34ceff2fe330731b3358630abe371ef58e292d399de0ea9e64a731",
+        "context_utf8_bytes": 29176,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "e0dbac9b0b11484ae7349d2fd8475d0a12671577a66350813c14feecf9e1e56a",
+        "context_utf8_bytes": 17007,
+        "context_rows": 24
+      }
+    },
+    {
+      "source_qa_index": 3,
+      "question": "What type of volunteering have John and Maria both done?",
+      "category": 1,
+      "upstream": {
+        "context_digest": "fb6c5d0896802f78058a5286c3bcf0eb5d1c0fa6b9ec533688cc2281d74ac196",
+        "context_utf8_bytes": 28279,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "1f10c827d469d4268d7e453fe233a5b6024ddba3b49964fa86a82d2edb6e8c7d",
+        "context_utf8_bytes": 21562,
+        "context_rows": 30
+      }
+    },
+    {
+      "source_qa_index": 4,
+      "question": "When did John join the online support group?",
+      "category": 2,
+      "upstream": {
+        "context_digest": "4e869fecdf780061966ec5a0d388d1267275adef45260040ae562d2330c8a8c2",
+        "context_utf8_bytes": 26842,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "ff1b71efad0e63c4ec0de1c7664f7da051d3ffc03af416f6744840c3e059b296",
+        "context_utf8_bytes": 16998,
+        "context_rows": 25
+      }
+    },
+    {
+      "source_qa_index": 66,
+      "question": "What sparked John's interest in improving education and infrastructure in the community?",
+      "category": 4,
+      "upstream": {
+        "context_digest": "f02e15294f2b54f2d0a82ad020c877798438e616f80cbecc37c312f33948d256",
+        "context_utf8_bytes": 30472,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "d2fa42c219e727d39164cd8da951561335040b709a59f610a290d3ab367eac69",
+        "context_utf8_bytes": 15067,
+        "context_rows": 20
+      }
+    },
+    {
+      "source_qa_index": 7,
+      "question": "What items des John mention having as a child?",
+      "category": 1,
+      "upstream": {
+        "context_digest": "15162872bfb525266d9d89c91b41de8d3cc3b12607e77ac70edb1a7f11cb7f8a",
+        "context_utf8_bytes": 28338,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "379949f078c6d9eb9ff23b5f5353f6a0737fe355ff35cb8f25c7cbee3a928acc",
+        "context_utf8_bytes": 23537,
+        "context_rows": 33
+      }
+    },
+    {
+      "source_qa_index": 5,
+      "question": "When did Maria go to the beach?",
+      "category": 2,
+      "upstream": {
+        "context_digest": "6d15d1cc496ecfb59c82d26798d19140e341d725c58b908ffd186afd149bffc1",
+        "context_utf8_bytes": 25205,
+        "context_rows": 38
+      },
+      "deduplicated": {
+        "context_digest": "a3ed73e0b510f7066b1e27cb38f75578b2c0c88bff8c437a0a47790bcc9bc978",
+        "context_utf8_bytes": 14087,
+        "context_rows": 22
+      }
+    },
+    {
+      "source_qa_index": 67,
+      "question": "How did the extra funding help the school shown in the photo shared by John?",
+      "category": 4,
+      "upstream": {
+        "context_digest": "d3f513a0828e1c3688a0103b731953134417d77fcc1dfd1bba14415c06f68907",
+        "context_utf8_bytes": 31323,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "f623e62c9e619f8aff75d7aef91294195600fefa4a52fa07dff0eedb19f6740c",
+        "context_utf8_bytes": 15390,
+        "context_rows": 21
+      }
+    },
+    {
+      "source_qa_index": 9,
+      "question": "Who gave Maria's family money when she was younger and her family was going through tough times?",
+      "category": 1,
+      "upstream": {
+        "context_digest": "8d7d3cb7609b1b81208b6e18092d2baafb3c37a361114220c6e69c13d6149ffc",
+        "context_utf8_bytes": 27044,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "724d51563c5b216b2f879054e3d2e130b29e171c96436d13379d5afd90c4d7e3",
+        "context_utf8_bytes": 19068,
+        "context_rows": 28
+      }
+    },
+    {
+      "source_qa_index": 10,
+      "question": "When did Maria meet Jean?",
+      "category": 2,
+      "upstream": {
+        "context_digest": "351aa465934b63847460f63bee46bb323cd34713f6bee7c76ce168478a7a0dfa",
+        "context_utf8_bytes": 23520,
+        "context_rows": 35
+      },
+      "deduplicated": {
+        "context_digest": "b70f5b185befa3d508ea09e8e878c11abbf6719c0aa4efc399da299678e263ca",
+        "context_utf8_bytes": 16086,
+        "context_rows": 24
+      }
+    }
+  ]
+}

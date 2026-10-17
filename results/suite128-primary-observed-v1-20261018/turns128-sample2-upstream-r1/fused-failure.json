@@ -1,0 +1,16 @@
+{
+  "mode": "fused",
+  "exception_type": "ValueError",
+  "error": "fused evolution must return a JSON object",
+  "failed_utc": "2026-10-17T18:25:26.233631+00:00",
+  "subset_fingerprint": "a994a343f7ab86549b240b0444a2699572d8ac7b73083d5cf639b80dc020b0a1",
+  "evolution_policy": "fused",
+  "note": "Incomplete arm; excluded from timing and quality aggregates. Inspect suite log and local response cache.",
+  "progress": {
+    "phase": "build",
+    "last_completed_turn": 30,
+    "failed_turn_1based": 31,
+    "dia_id": "D2:15",
+    "memory_count_at_failure": 30
+  }
+}

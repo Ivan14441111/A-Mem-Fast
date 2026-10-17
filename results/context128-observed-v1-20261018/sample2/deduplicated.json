@@ -1,0 +1,527 @@
+{
+  "context_policy": "deduplicated",
+  "qa_seconds": 7.088509988039732,
+  "answer_llm": {
+    "logical_calls": 12,
+    "repetition_penalty": 1.05,
+    "tag_budget": 16,
+    "tag_budget_policy": "observe",
+    "generation_profile": "observed-tags-v1",
+    "tag_budget_overshoots": {
+      "logical_response_inspections": 0,
+      "live_response_inspections": 0,
+      "cache_response_inspections": 0,
+      "logical_tag_lists_inspected": 0,
+      "live_tag_lists_inspected": 0,
+      "cache_tag_lists_inspected": 0,
+      "logical_overshoot_responses": 0,
+      "live_overshoot_responses": 0,
+      "cache_overshoot_observations": 0,
+      "unique_overshoot_request_keys": 0,
+      "over_budget_lists_live": 0,
+      "max_actual_tags": 0
+    },
+    "upstream_calls": 12,
+    "prefetch_calls": 0,
+    "http_requests": 12,
+    "cache_hits": 0,
+    "errors": 0,
+    "http_seconds_sum": 6.5126613564789295,
+    "cache_read_seconds_sum": 4.913657903671265e-06,
+    "cache_write_seconds_sum": 0.5518067739903927,
+    "prompt_tokens_live": 50492,
+    "completion_tokens_live": 166,
+    "latency_seconds_p50": 0.5870609525591135,
+    "latency_seconds_p95": 0.7080541389063001,
+    "latency_seconds_max": 0.731834352016449,
+    "by_stage": {
+      "answer": {
+        "logical_calls": 12,
+        "http_requests": 12,
+        "cache_hits": 0,
+        "seconds_sum": 7.065503861755133,
+        "prompt_tokens_live": 50492,
+        "completion_tokens_live": 166,
+        "latency_seconds_p50": 0.5870609525591135,
+        "latency_seconds_p95": 0.7080541389063001,
+        "latency_seconds_max": 0.731834352016449
+      }
+    }
+  },
+  "memory_digest": "58a8db49a33012e2f1580a6bed2bbc00d9b54f0baf37f8c9f789d786c87386e0",
+  "context_metrics": {
+    "queries": 12,
+    "rows_before": 472,
+    "rows_after": 312
+  },
+  "metrics": {
+    "exact_match": 0.08333333333333333,
+    "token_f1": 0.44757187257187253
+  },
+  "context_utf8_bytes": 217980,
+  "context_rows": 312,
+  "qa": [
+    {
+      "question": "What martial arts has John done?",
+      "answer": "Kickboxing, Taekwondo",
+      "evidence": [
+        "D2:28",
+        "D1:4"
+      ],
+      "category": 1,
+      "source_qa_index": 2,
+      "prediction": "Taekwondo and kickboxing.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.8
+      },
+      "context_digest": "60dd5050804ddabca8af53489470af0da454cd57c2d4a1244e2b87313722c063",
+      "prompt_digest": "3f32cc5da7b2cbef3e15e39defeb7848cee945f3a05085b200e620d3825b2fff",
+      "context_utf8_bytes": 19111,
+      "context_rows": 29,
+      "context_unique_rows": 29
+    },
+    {
+      "question": "When did Maria donate her car?",
+      "answer": "21 December 2022",
+      "evidence": [
+        "D2:1"
+      ],
+      "category": 2,
+      "source_qa_index": 1,
+      "prediction": "Short answer: 22 December 2022.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.5
+      },
+      "context_digest": "61ee0e95cda78ab424b2a78960ba70471aa7dde5ccfca367003d206b9bb24a06",
+      "prompt_digest": "fd8918429d87c13e8e52bb94e96a9676e38a9d3d398aa5f83a23e354b43f006e",
+      "context_utf8_bytes": 19677,
+      "context_rows": 28,
+      "context_unique_rows": 28
+    },
+    {
+      "question": "What might John's financial status be?",
+      "answer": "Middle-class or wealthy",
+      "evidence": [
+        "D5:5"
+      ],
+      "category": 3,
+      "source_qa_index": 8,
+      "prediction": "John's financial status might be stable, as he was able to provide assistance and resources.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "context_digest": "fe7cee25e2bdabaac44c8458d7638c51df9dfd7baf985740e42037438166af06",
+      "prompt_digest": "554523e63be2dd991d3672b156b57f5b6b600a7365289aa8be365d5fe21419a2",
+      "context_utf8_bytes": 20390,
+      "context_rows": 28,
+      "context_unique_rows": 28
+    },
+    {
+      "question": "What is John's main focus in local politics?",
+      "answer": "Improving education and infrastructure",
+      "evidence": [
+        "D1:8"
+      ],
+      "category": 4,
+      "source_qa_index": 65,
+      "prediction": "Improving education and infrastructure in our community.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.7272727272727273
+      },
+      "context_digest": "e0dbac9b0b11484ae7349d2fd8475d0a12671577a66350813c14feecf9e1e56a",
+      "prompt_digest": "901f105d53aebb7d28d91687b02844aeee96919967a4d63337b87a9d6008511b",
+      "context_utf8_bytes": 17007,
+      "context_rows": 24,
+      "context_unique_rows": 24
+    },
+    {
+      "question": "What type of volunteering have John and Maria both done?",
+      "answer": "Volunteering at a homeless shelter",
+      "evidence": [
+        "D3:5",
+        "D2:1"
+      ],
+      "category": 1,
+      "source_qa_index": 3,
+      "prediction": "Volunteering at a homeless shelter.",
+      "metrics": {
+        "exact_match": 1.0,
+        "token_f1": 1.0
+      },
+      "context_digest": "1f10c827d469d4268d7e453fe233a5b6024ddba3b49964fa86a82d2edb6e8c7d",
+      "prompt_digest": "9e2170b2e13382f1bd85deedca95010b6947d75adb49c2669dd17707127bd9c2",
+      "context_utf8_bytes": 21562,
+      "context_rows": 30,
+      "context_unique_rows": 30
+    },
+    {
+      "question": "When did John join the online support group?",
+      "answer": "The week before 1 January 2023",
+      "evidence": [
+        "D3:1"
+      ],
+      "category": 2,
+      "source_qa_index": 4,
+      "prediction": "Short answer: 1 January 2023",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.6
+      },
+      "context_digest": "ff1b71efad0e63c4ec0de1c7664f7da051d3ffc03af416f6744840c3e059b296",
+      "prompt_digest": "363aeb129f113f89853182c68ce4e847b512c54a2c26a835c114955169cdfb96",
+      "context_utf8_bytes": 16998,
+      "context_rows": 25,
+      "context_unique_rows": 25
+    },
+    {
+      "question": "What sparked John's interest in improving education and infrastructure in the community?",
+      "answer": "Seeing how lack of education and crumbling infrastructure affected his neighborhood while growing up.",
+      "evidence": [
+        "D1:10"
+      ],
+      "category": 4,
+      "source_qa_index": 66,
+      "prediction": "John's interest in improving education and infrastructure in the community was sparked by his childhood experiences in a neighborhood affected by lack of education and poor infrastructure.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.41025641025641024
+      },
+      "context_digest": "d2fa42c219e727d39164cd8da951561335040b709a59f610a290d3ab367eac69",
+      "prompt_digest": "0a5b8e956b32e0058e733b2e77b884ead3b29ebb78d52c972dc556d781ad0d56",
+      "context_utf8_bytes": 15067,
+      "context_rows": 20,
+      "context_unique_rows": 20
+    },
+    {
+      "question": "What items des John mention having as a child?",
+      "answer": "A doll, a film camera",
+      "evidence": [
+        "D5:13",
+        "D3:15"
+      ],
+      "category": 1,
+      "source_qa_index": 7,
+      "prediction": "A little doll",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.4
+      },
+      "context_digest": "379949f078c6d9eb9ff23b5f5353f6a0737fe355ff35cb8f25c7cbee3a928acc",
+      "prompt_digest": "9977de8954840fa0bc083aefb19cb757b88cd91708fa54f909ead2917d602537",
+      "context_utf8_bytes": 23537,
+      "context_rows": 33,
+      "context_unique_rows": 33
+    },
+    {
+      "question": "When did Maria go to the beach?",
+      "answer": "December 2022",
+      "evidence": [
+        "D3:15"
+      ],
+      "category": 2,
+      "source_qa_index": 5,
+      "prediction": "Short answer: Last month.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "context_digest": "a3ed73e0b510f7066b1e27cb38f75578b2c0c88bff8c437a0a47790bcc9bc978",
+      "prompt_digest": "cd3e22dbe4eda37d3bc93d1d45283d7cbec1596b9f97c584f7f9e56fe23d1809",
+      "context_utf8_bytes": 14087,
+      "context_rows": 22,
+      "context_unique_rows": 22
+    },
+    {
+      "question": "How did the extra funding help the school shown in the photo shared by John?",
+      "answer": "Enabled needed repairs and renovations, making the learning environment safer and more modern for students.",
+      "evidence": [
+        "D1:12"
+      ],
+      "category": 4,
+      "source_qa_index": 67,
+      "prediction": "The extra funding enabled needed repairs and renovations, making the learning environment safer and more modern for students.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.9333333333333333
+      },
+      "context_digest": "f623e62c9e619f8aff75d7aef91294195600fefa4a52fa07dff0eedb19f6740c",
+      "prompt_digest": "f864ed299f7fb5fe34a1849f47df36dac44b1640a36d58ee366c99a3aeb891bf",
+      "context_utf8_bytes": 15390,
+      "context_rows": 21,
+      "context_unique_rows": 21
+    },
+    {
+      "question": "Who gave Maria's family money when she was younger and her family was going through tough times?",
+      "answer": "Her aunt",
+      "evidence": [
+        "D6:9",
+        "D5:8"
+      ],
+      "category": 1,
+      "source_qa_index": 9,
+      "prediction": "The context does not mention anyone giving Maria's family money when she was younger.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "context_digest": "724d51563c5b216b2f879054e3d2e130b29e171c96436d13379d5afd90c4d7e3",
+      "prompt_digest": "fc4bda7ca806138a2ded18a413af767ad151689e43c6892b905f7eafa5cf6450",
+      "context_utf8_bytes": 19068,
+      "context_rows": 28,
+      "context_unique_rows": 28
+    },
+    {
+      "question": "When did Maria meet Jean?",
+      "answer": "February 24, 2023",
+      "evidence": [
+        "D7:1"
+      ],
+      "category": 2,
+      "source_qa_index": 10,
+      "prediction": "Short answer: 22 December 2022.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "context_digest": "b70f5b185befa3d508ea09e8e878c11abbf6719c0aa4efc399da299678e263ca",
+      "prompt_digest": "e891fe97a997d0ec433ec60b646fae9381723879656c4e0822b8d04f7add56c9",
+      "context_utf8_bytes": 16086,
+      "context_rows": 24,
+      "context_unique_rows": 24
+    }
+  ],
+  "llm_events": [
+    {
+      "stage": "answer",
+      "key": "e5839db563ddc26a0a318ec3685f5fe2cb8daff53268a38124f6fcc42b0cb450",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5215337201952934,
+      "cache_read_seconds": 5.960464477539062e-07,
+      "cache_write_seconds": 0.05577532947063446,
+      "usage": {
+        "prompt_tokens": 4482,
+        "completion_tokens": 9,
+        "total_tokens": 4491
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5774388425052166
+    },
+    {
+      "stage": "answer",
+      "key": "f8300cd3c79f6847b4d482b49ed92627108438f9d6d31ed9fb2d0ff517249f4d",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5812672935426235,
+      "cache_read_seconds": 4.6193599700927734e-07,
+      "cache_write_seconds": 0.04861454293131828,
+      "usage": {
+        "prompt_tokens": 4587,
+        "completion_tokens": 14,
+        "total_tokens": 4601
+      },
+      "finish_reason": "stop",
+      "seconds": 0.6299705132842064
+    },
+    {
+      "stage": "answer",
+      "key": "105e4e6b92076173a14c699f516bfe19e73d7d26321140e678352179663aa54b",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.6498268246650696,
+      "cache_read_seconds": 5.178153514862061e-07,
+      "cache_write_seconds": 0.03865068778395653,
+      "usage": {
+        "prompt_tokens": 4633,
+        "completion_tokens": 19,
+        "total_tokens": 4652
+      },
+      "finish_reason": "stop",
+      "seconds": 0.6885976009070873
+    },
+    {
+      "stage": "answer",
+      "key": "7385d6bfc00cdcdfac178b2a8b5fbfde2d4d9666b77b0a4db54b45de8ec1a342",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.46242531016469,
+      "cache_read_seconds": 5.811452865600586e-07,
+      "cache_write_seconds": 0.042746249586343765,
+      "usage": {
+        "prompt_tokens": 3856,
+        "completion_tokens": 10,
+        "total_tokens": 3866
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5052810050547123
+    },
+    {
+      "stage": "answer",
+      "key": "93addbf96c03de256355a349db0fd2b709f9c4dd2add09e2d32715f45267ac7a",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5649198107421398,
+      "cache_read_seconds": 6.07222318649292e-07,
+      "cache_write_seconds": 0.03215327486395836,
+      "usage": {
+        "prompt_tokens": 4986,
+        "completion_tokens": 9,
+        "total_tokens": 4995
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5971460752189159
+    },
+    {
+      "stage": "answer",
+      "key": "6cbc1ee281fd8064d79d4c379dda614e044e550d02b3efcca5b27f236f4b82b0",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.4912372902035713,
+      "cache_read_seconds": 3.46451997756958e-07,
+      "cache_write_seconds": 0.03210458904504776,
+      "usage": {
+        "prompt_tokens": 3951,
+        "completion_tokens": 12,
+        "total_tokens": 3963
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5234209857881069
+    },
+    {
+      "stage": "answer",
+      "key": "100ada8fbac8fde34858782569599cef3c516e5378c9e224d92f97512e677c5f",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.6540787555277348,
+      "cache_read_seconds": 3.241002559661865e-07,
+      "cache_write_seconds": 0.07768446952104568,
+      "usage": {
+        "prompt_tokens": 3377,
+        "completion_tokens": 30,
+        "total_tokens": 3407
+      },
+      "finish_reason": "stop",
+      "seconds": 0.731834352016449
+    },
+    {
+      "stage": "answer",
+      "key": "f61087a41079b279855c05fa9522d56884bd67785bb924cf3993393c2f397588",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.541080079972744,
+      "cache_read_seconds": 3.5762786865234375e-07,
+      "cache_write_seconds": 0.04089663550257683,
+      "usage": {
+        "prompt_tokens": 5472,
+        "completion_tokens": 4,
+        "total_tokens": 5476
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5820503309369087
+    },
+    {
+      "stage": "answer",
+      "key": "5eca92dca2241e1e3a6f53dab906c7b980c9fb4526f22059057a59b490879878",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.38020703196525574,
+      "cache_read_seconds": 3.203749656677246e-07,
+      "cache_write_seconds": 0.0684330090880394,
+      "usage": {
+        "prompt_tokens": 3413,
+        "completion_tokens": 7,
+        "total_tokens": 3420
+      },
+      "finish_reason": "stop",
+      "seconds": 0.4487067274749279
+    },
+    {
+      "stage": "answer",
+      "key": "ebcde845cbbc62f0a669bfe05a2efc4c72c6c6b56c634ebba6bf76e7d13a97f1",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5570141039788723,
+      "cache_read_seconds": 3.129243850708008e-07,
+      "cache_write_seconds": 0.03497198596596718,
+      "usage": {
+        "prompt_tokens": 3480,
+        "completion_tokens": 21,
+        "total_tokens": 3501
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5920715741813183
+    },
+    {
+      "stage": "answer",
+      "key": "198468d27c4c02ba1e92e9cf60d57c91cf1fc1de3dfdd64785a9ed609b2058b5",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.6023579686880112,
+      "cache_read_seconds": 3.0919909477233887e-07,
+      "cache_write_seconds": 0.03785564377903938,
+      "usage": {
+        "prompt_tokens": 4451,
+        "completion_tokens": 17,
+        "total_tokens": 4468
+      },
+      "finish_reason": "stop",
+      "seconds": 0.6402816213667393
+    },
+    {
+      "stage": "answer",
+      "key": "7d6c7ab22784102aa129cac12adac3abea415cbef61377be2d4d91ae944ad754",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5067131668329239,
+      "cache_read_seconds": 1.7881393432617188e-07,
+      "cache_write_seconds": 0.04192035645246506,
+      "usage": {
+        "prompt_tokens": 3804,
+        "completion_tokens": 14,
+        "total_tokens": 3818
+      },
+      "finish_reason": "stop",
+      "seconds": 0.548704233020544
+    }
+  ]
+}

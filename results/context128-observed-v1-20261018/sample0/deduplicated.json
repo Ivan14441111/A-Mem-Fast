@@ -1,0 +1,526 @@
+{
+  "context_policy": "deduplicated",
+  "qa_seconds": 6.73866481333971,
+  "answer_llm": {
+    "logical_calls": 12,
+    "repetition_penalty": 1.05,
+    "tag_budget": 16,
+    "tag_budget_policy": "observe",
+    "generation_profile": "observed-tags-v1",
+    "tag_budget_overshoots": {
+      "logical_response_inspections": 0,
+      "live_response_inspections": 0,
+      "cache_response_inspections": 0,
+      "logical_tag_lists_inspected": 0,
+      "live_tag_lists_inspected": 0,
+      "cache_tag_lists_inspected": 0,
+      "logical_overshoot_responses": 0,
+      "live_overshoot_responses": 0,
+      "cache_overshoot_observations": 0,
+      "unique_overshoot_request_keys": 0,
+      "over_budget_lists_live": 0,
+      "max_actual_tags": 0
+    },
+    "upstream_calls": 12,
+    "prefetch_calls": 0,
+    "http_requests": 12,
+    "cache_hits": 0,
+    "errors": 0,
+    "http_seconds_sum": 6.247013404965401,
+    "cache_read_seconds_sum": 6.94766640663147e-06,
+    "cache_write_seconds_sum": 0.4509960189461708,
+    "prompt_tokens_live": 53383,
+    "completion_tokens_live": 134,
+    "latency_seconds_p50": 0.5593677200376987,
+    "latency_seconds_p95": 0.6790130810812115,
+    "latency_seconds_max": 0.7132394798099995,
+    "by_stage": {
+      "answer": {
+        "logical_calls": 12,
+        "http_requests": 12,
+        "cache_hits": 0,
+        "seconds_sum": 6.699380397796631,
+        "prompt_tokens_live": 53383,
+        "completion_tokens_live": 134,
+        "latency_seconds_p50": 0.5593677200376987,
+        "latency_seconds_p95": 0.6790130810812115,
+        "latency_seconds_max": 0.7132394798099995
+      }
+    }
+  },
+  "memory_digest": "27c160eb2fb158367be914c2c0877079837d12806890465c6b46ea0ad57ba399",
+  "context_metrics": {
+    "queries": 12,
+    "rows_before": 493,
+    "rows_after": 297
+  },
+  "metrics": {
+    "exact_match": 0.16666666666666666,
+    "token_f1": 0.4318028930516031
+  },
+  "context_utf8_bytes": 221740,
+  "context_rows": 297,
+  "qa": [
+    {
+      "question": "What did Caroline research?",
+      "answer": "Adoption agencies",
+      "evidence": [
+        "D2:8"
+      ],
+      "category": 1,
+      "source_qa_index": 3,
+      "prediction": "Research on mental health and personal growth.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "context_digest": "3c88aa3fb19eda4976e38badfe3aae5e0d4315594c08d5fff8d02897b049158d",
+      "prompt_digest": "0a658a0a02aa04ff546b2bc705db86eade41b0b120f2649b8d09a77d43eec6b3",
+      "context_utf8_bytes": 23215,
+      "context_rows": 33,
+      "context_unique_rows": 33
+    },
+    {
+      "question": "When did Caroline go to the LGBTQ support group?",
+      "answer": "7 May 2023",
+      "evidence": [
+        "D1:3"
+      ],
+      "category": 2,
+      "source_qa_index": 0,
+      "prediction": "8 May 2023",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.6666666666666666
+      },
+      "context_digest": "bd60e7f82e37d42f74bd59bdde1bef9db4e582fc69cef256aed3f43634f8a54e",
+      "prompt_digest": "96710279b8b5910e35800c6ba6f9f0943a9a2bf0185c16befb6d0aa912536db7",
+      "context_utf8_bytes": 19967,
+      "context_rows": 24,
+      "context_unique_rows": 24
+    },
+    {
+      "question": "What fields would Caroline be likely to pursue in her educaton?",
+      "answer": "Psychology, counseling certification",
+      "evidence": [
+        "D1:9",
+        "D1:11"
+      ],
+      "category": 3,
+      "source_qa_index": 2,
+      "prediction": "Short answer: counseling and mental health fields.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.2
+      },
+      "context_digest": "f3148fdd2e2c1dbe7c69137f1aaa0383dad69a6ca2c9ec08352bd2351203ee7b",
+      "prompt_digest": "2a25593c26e6784c0a835d35066f8af18ecddde3ba93dc766f97d74183facf66",
+      "context_utf8_bytes": 16996,
+      "context_rows": 22,
+      "context_unique_rows": 22
+    },
+    {
+      "question": "What did the charity race raise awareness for?",
+      "answer": "mental health",
+      "evidence": [
+        "D2:2"
+      ],
+      "category": 4,
+      "source_qa_index": 82,
+      "prediction": "mental health",
+      "metrics": {
+        "exact_match": 1.0,
+        "token_f1": 1.0
+      },
+      "context_digest": "261d79bf7100c0fc199d9137d6457831532f975aec457909f81a6ca5f769e8c1",
+      "prompt_digest": "6c9030f9b876938695d4ab66eed2c3f70fc1176c1555389a9d0c076afd9e01dd",
+      "context_utf8_bytes": 18934,
+      "context_rows": 23,
+      "context_unique_rows": 23
+    },
+    {
+      "question": "What is Caroline's identity?",
+      "answer": "Transgender woman",
+      "evidence": [
+        "D1:5"
+      ],
+      "category": 1,
+      "source_qa_index": 4,
+      "prediction": "Caroline is a transgender individual involved in an LGBTQ support group.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.18181818181818182
+      },
+      "context_digest": "9e9bf3568d1d6a8e0254c02c4204c3607f44fdf7b7769cd089f5793593123ba2",
+      "prompt_digest": "be437b3c008e3b7bf8890bd4a77b961858fcafc9aa08f2094b94d81445225bdc",
+      "context_utf8_bytes": 21818,
+      "context_rows": 33,
+      "context_unique_rows": 33
+    },
+    {
+      "question": "When did Melanie paint a sunrise?",
+      "answer": 2022,
+      "evidence": [
+        "D1:12"
+      ],
+      "category": 2,
+      "source_qa_index": 1,
+      "prediction": "Short answer: Last year.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "context_digest": "5a310af0d75c0916113c03ee27fb917767c877ebfffaaaf84de1e6e6fe5a3595",
+      "prompt_digest": "2186cb537d70a9cfcb98b4bbd00d939d0123d4f324b791a0a11eb564077d09e1",
+      "context_utf8_bytes": 12598,
+      "context_rows": 19,
+      "context_unique_rows": 19
+    },
+    {
+      "question": "Would Caroline still want to pursue counseling as a career if she hadn't received support growing up?",
+      "answer": "Likely no",
+      "evidence": [
+        "D4:15",
+        "D3:5"
+      ],
+      "category": 3,
+      "source_qa_index": 14,
+      "prediction": "No, Caroline would not want to pursue counseling as a career if she hadn't received support growing up.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.10526315789473684
+      },
+      "context_digest": "a8166fd7c85f1ebfcecdea0076243ca1c7e7e3ac2bd295a9265f4ab821f32e80",
+      "prompt_digest": "aed4902815b613c6a7303c0cf0bc44dfc61938e5446ed80502a2624d657c0c13",
+      "context_utf8_bytes": 14008,
+      "context_rows": 18,
+      "context_unique_rows": 18
+    },
+    {
+      "question": "What did Melanie realize after the charity race?",
+      "answer": "self-care is important",
+      "evidence": [
+        "D2:3"
+      ],
+      "category": 4,
+      "source_qa_index": 83,
+      "prediction": "Melanie realized that self-care is really important.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.6
+      },
+      "context_digest": "fddea0a50e9853bb515ac1f15df382823d91d4875c22336cc16d4e41dedf22a4",
+      "prompt_digest": "020a162ed1774ee47e7b4ef75b6336ebc39b9ec68b7c565e20387e87ac95deda",
+      "context_utf8_bytes": 17539,
+      "context_rows": 21,
+      "context_unique_rows": 21
+    },
+    {
+      "question": "What is Caroline's relationship status?",
+      "answer": "Single",
+      "evidence": [
+        "D3:13",
+        "D2:14"
+      ],
+      "category": 1,
+      "source_qa_index": 7,
+      "prediction": "Single",
+      "metrics": {
+        "exact_match": 1.0,
+        "token_f1": 1.0
+      },
+      "context_digest": "2b31ddf6aa15531ee2d7d956f7a95d71010f357524c7c691fa6545dc1022f4e1",
+      "prompt_digest": "d48111f7092d1f90219fe0602a4d85d673610f13e87a214b8317c448ff974f8f",
+      "context_utf8_bytes": 23734,
+      "context_rows": 32,
+      "context_unique_rows": 32
+    },
+    {
+      "question": "When did Melanie run a charity race?",
+      "answer": "The sunday before 25 May 2023",
+      "evidence": [
+        "D2:1"
+      ],
+      "category": 2,
+      "source_qa_index": 5,
+      "prediction": "Short answer: 25 May 2023",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.6
+      },
+      "context_digest": "86fe530111c748b466c914ce27af1e12219ec52b00eb590fadfbb578691d2e1b",
+      "prompt_digest": "7b81687790f38821f5d7fe5f706d366d394ef2bd44f0d193004e5f348f45f697",
+      "context_utf8_bytes": 18587,
+      "context_rows": 24,
+      "context_unique_rows": 24
+    },
+    {
+      "question": "Would Caroline likely have Dr. Seuss books on her bookshelf?",
+      "answer": "Yes, since she collects classic children's books",
+      "evidence": [
+        "D6:9"
+      ],
+      "category": 3,
+      "source_qa_index": 22,
+      "prediction": "Yes, Caroline likely has Dr. Seuss books on her bookshelf.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.23529411764705882
+      },
+      "context_digest": "04b8003b76b786d3ad6d890cca717a7242d18034679a35d7b52b63138af1eea3",
+      "prompt_digest": "7d7e97ec458049e83ea054d995427de4f2d0745181e79d14eb14d8b8c2f997f2",
+      "context_utf8_bytes": 18989,
+      "context_rows": 28,
+      "context_unique_rows": 28
+    },
+    {
+      "question": "How does Melanie prioritize self-care?",
+      "answer": "by carving out some me-time each day for activities like running, reading, or playing the violin",
+      "evidence": [
+        "D2:5"
+      ],
+      "category": 4,
+      "source_qa_index": 84,
+      "prediction": "Melanie prioritizes self-care by running, reading, or playing her violin each day.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.5925925925925926
+      },
+      "context_digest": "e8a7794ab66c83543bcb3f94a6e7d30df5928d859be386475661a31adf52e80d",
+      "prompt_digest": "1cc3f2a9691e605be06403d26bd67aa8f06ed058510b6d1a11f4d00aab71863f",
+      "context_utf8_bytes": 15355,
+      "context_rows": 20,
+      "context_unique_rows": 20
+    }
+  ],
+  "llm_events": [
+    {
+      "stage": "answer",
+      "key": "3d1db961589c8feffe2ed94971c31d51f7af94c4396fd631ca7a120e6fad8671",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.6114552319049835,
+      "cache_read_seconds": 7.040798664093018e-07,
+      "cache_write_seconds": 0.0394829623401165,
+      "usage": {
+        "prompt_tokens": 5595,
+        "completion_tokens": 9,
+        "total_tokens": 5604
+      },
+      "finish_reason": "stop",
+      "seconds": 0.651009663939476
+    },
+    {
+      "stage": "answer",
+      "key": "18582b7b9ffd0f6e700a63c44c123e0733f757da5694df57ed63fe6f74ecfc26",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5079629831016064,
+      "cache_read_seconds": 6.780028343200684e-07,
+      "cache_write_seconds": 0.047192636877298355,
+      "usage": {
+        "prompt_tokens": 4623,
+        "completion_tokens": 8,
+        "total_tokens": 4631
+      },
+      "finish_reason": "stop",
+      "seconds": 0.555268656462431
+    },
+    {
+      "stage": "answer",
+      "key": "b2a2bdb560240d566856fcdc10f94abda60627b557752e4343ec2b90f6c45262",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.47603682056069374,
+      "cache_read_seconds": 7.078051567077637e-07,
+      "cache_write_seconds": 0.03414948657155037,
+      "usage": {
+        "prompt_tokens": 4053,
+        "completion_tokens": 10,
+        "total_tokens": 4063
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5104430019855499
+    },
+    {
+      "stage": "answer",
+      "key": "c6e6b4af9fe391ec8d9ee0d5dadc831af60e1a881426bcb032d344bc359f21c3",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.42326704040169716,
+      "cache_read_seconds": 4.4330954551696777e-07,
+      "cache_write_seconds": 0.04045601561665535,
+      "usage": {
+        "prompt_tokens": 4418,
+        "completion_tokens": 3,
+        "total_tokens": 4421
+      },
+      "finish_reason": "stop",
+      "seconds": 0.4638191759586334
+    },
+    {
+      "stage": "answer",
+      "key": "18f5e2328585ed14f19ac35c2ea713d21e262c59f6585942af24d309ecee2a54",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.6723136454820633,
+      "cache_read_seconds": 6.07222318649292e-07,
+      "cache_write_seconds": 0.04082773998379707,
+      "usage": {
+        "prompt_tokens": 5505,
+        "completion_tokens": 14,
+        "total_tokens": 5519
+      },
+      "finish_reason": "stop",
+      "seconds": 0.7132394798099995
+    },
+    {
+      "stage": "answer",
+      "key": "c3304166311af8ab14e44c2d94fb9a2b5225d7a59b7e992d6458510aeb75b045",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.3554741106927395,
+      "cache_read_seconds": 6.295740604400635e-07,
+      "cache_write_seconds": 0.03332030773162842,
+      "usage": {
+        "prompt_tokens": 3217,
+        "completion_tokens": 7,
+        "total_tokens": 3224
+      },
+      "finish_reason": "stop",
+      "seconds": 0.3889074847102165
+    },
+    {
+      "stage": "answer",
+      "key": "7f7a2ef8cf133f84fc2f8e441a0ab2d02ac17a995cf2d8a1a24d36a74a97cc09",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.4682335890829563,
+      "cache_read_seconds": 4.3958425521850586e-07,
+      "cache_write_seconds": 0.0377374030649662,
+      "usage": {
+        "prompt_tokens": 3362,
+        "completion_tokens": 22,
+        "total_tokens": 3384
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5060630030930042
+    },
+    {
+      "stage": "answer",
+      "key": "c2d74add6516b18ad043683740f81ed86f99bb489706b1db23d6f4bd01ec0b18",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.4867633208632469,
+      "cache_read_seconds": 3.0547380447387695e-07,
+      "cache_write_seconds": 0.03635291010141373,
+      "usage": {
+        "prompt_tokens": 4074,
+        "completion_tokens": 11,
+        "total_tokens": 4085
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5232367143034935
+    },
+    {
+      "stage": "answer",
+      "key": "119efb61a2b212d5e4c4bdca0694ee036737c20682b03d4f2159b72917e57bef",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5280203633010387,
+      "cache_read_seconds": 8.568167686462402e-07,
+      "cache_write_seconds": 0.03534005209803581,
+      "usage": {
+        "prompt_tokens": 5683,
+        "completion_tokens": 2,
+        "total_tokens": 5685
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5634667836129665
+    },
+    {
+      "stage": "answer",
+      "key": "655c66d6697d530b78c6462fc4175743db14abcf1e03f7138d828b713d13c171",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5475096590816975,
+      "cache_read_seconds": 5.550682544708252e-07,
+      "cache_write_seconds": 0.04051787778735161,
+      "usage": {
+        "prompt_tokens": 4391,
+        "completion_tokens": 13,
+        "total_tokens": 4404
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5881368927657604
+    },
+    {
+      "stage": "answer",
+      "key": "1fba8622bfc5ed01398afa9505bf1fb299ab673c138481c14e217dcb6a3f9eb5",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.6202263198792934,
+      "cache_read_seconds": 3.390014171600342e-07,
+      "cache_write_seconds": 0.027036253362894058,
+      "usage": {
+        "prompt_tokens": 4752,
+        "completion_tokens": 16,
+        "total_tokens": 4768
+      },
+      "finish_reason": "stop",
+      "seconds": 0.6473406814038754
+    },
+    {
+      "stage": "answer",
+      "key": "2d232f271521774213ed7a8133926e651ce50dea26addae15ed04c24aa328610",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5497503206133842,
+      "cache_read_seconds": 6.817281246185303e-07,
+      "cache_write_seconds": 0.03858237341046333,
+      "usage": {
+        "prompt_tokens": 3710,
+        "completion_tokens": 19,
+        "total_tokens": 3729
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5884488597512245
+    }
+  ]
+}

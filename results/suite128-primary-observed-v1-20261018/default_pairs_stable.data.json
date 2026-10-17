@@ -1,0 +1,148 @@
+{
+  "source_suite": "results/suite128-primary-observed-v1-20261018/suite.json",
+  "view": "planned_allocation_stable",
+  "confirmation_suite": null,
+  "source_sha256": "731b2807375bf1a715d19412d7e61e74ec2b24d87e4f935f44a6ed782e624073",
+  "analysis_script": "/data2/xyf25/A-Mem-Fast/scripts/plot_suite.py",
+  "analysis_script_sha256": "a532284a08b847350ac27d8ce47459a11485949997f53d3d5628699b5dafcc5f",
+  "analysis_dependencies_sha256": {
+    "scripts/summarize_suite.py": "57c51a5b3acfa8a60a8adca1091400413f8699b95812fe8c727e7d15e9773858"
+  },
+  "source_cell_counts": {
+    "planned": 9,
+    "completed": 0,
+    "failed": 9,
+    "pending_or_running": 0
+  },
+  "plotted_cells_with_complete_arms": 2,
+  "completed_arm_counts": {
+    "baseline": 2,
+    "optimized": 2
+  },
+  "replay_note": "Completed cold-arm build+QA outputs can precede another arm's failure; replay verification is separate.",
+  "paired_only": true,
+  "paired_annotations": [
+    {
+      "sample_index": 0,
+      "arm": "optimized",
+      "paired_runs": 1,
+      "build_speedup_geomean": 0.9599311949704646,
+      "f1_delta_mean": -0.024537037037037024
+    },
+    {
+      "sample_index": 1,
+      "arm": "optimized",
+      "paired_runs": 1,
+      "build_speedup_geomean": 1.2049643750172816,
+      "f1_delta_mean": -0.015158044338859256
+    }
+  ],
+  "tag_budget": 16,
+  "tag_budget_policy": "observe",
+  "structured_policy_outputs": false,
+  "arms": [
+    "baseline",
+    "optimized"
+  ],
+  "arm_offsets": {
+    "baseline": -0.19,
+    "optimized": 0.19
+  },
+  "bar_slot_width": 0.38,
+  "matplotlib_version": "3.10.9",
+  "rows": [
+    {
+      "origin": "primary",
+      "cell": "turns128-sample0-upstream-r1",
+      "sample_index": 0,
+      "sample_id": "conv-26",
+      "turns": 128,
+      "question_count": 12,
+      "repeat": 1,
+      "arm": "baseline",
+      "experiment_policy": "upstream",
+      "order": [
+        "baseline",
+        "optimized",
+        "fused"
+      ],
+      "build_seconds": 344.09256729483604,
+      "http_requests_build": 395,
+      "token_f1": 0.4485958223445323
+    },
+    {
+      "origin": "primary",
+      "cell": "turns128-sample0-upstream-r1",
+      "sample_index": 0,
+      "sample_id": "conv-26",
+      "turns": 128,
+      "question_count": 12,
+      "repeat": 1,
+      "arm": "optimized",
+      "experiment_policy": "upstream",
+      "order": [
+        "baseline",
+        "optimized",
+        "fused"
+      ],
+      "build_seconds": 358.4554487839341,
+      "http_requests_build": 405,
+      "token_f1": 0.4240587853074953
+    },
+    {
+      "origin": "primary",
+      "cell": "turns128-sample1-upstream-r3",
+      "sample_index": 1,
+      "sample_id": "conv-30",
+      "turns": 128,
+      "question_count": 12,
+      "repeat": 3,
+      "arm": "baseline",
+      "experiment_policy": "upstream",
+      "order": [
+        "baseline",
+        "optimized",
+        "fused"
+      ],
+      "build_seconds": 285.570373930037,
+      "http_requests_build": 386,
+      "token_f1": 0.37712683906469197
+    },
+    {
+      "origin": "primary",
+      "cell": "turns128-sample1-upstream-r3",
+      "sample_index": 1,
+      "sample_id": "conv-30",
+      "turns": 128,
+      "question_count": 12,
+      "repeat": 3,
+      "arm": "optimized",
+      "experiment_policy": "upstream",
+      "order": [
+        "baseline",
+        "optimized",
+        "fused"
+      ],
+      "build_seconds": 236.99486877024174,
+      "http_requests_build": 387,
+      "token_f1": 0.3619687947258327
+    }
+  ],
+  "metric_definitions": [
+    [
+      "build_seconds",
+      "Memory build time",
+      "Seconds"
+    ],
+    [
+      "http_requests_build",
+      "Live requests during build",
+      "HTTP requests"
+    ],
+    [
+      "token_f1",
+      "QA quality",
+      "Normalized token F1"
+    ]
+  ]
+}

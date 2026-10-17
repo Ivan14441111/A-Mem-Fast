@@ -1,6 +1,6 @@
 # Engineering notes
 
-The [project README](README.md) contains portable setup and benchmark commands. Detailed measurements and limits live in [docs/experiments.md](docs/experiments.md); the [source audit](docs/audit.md) explains the original bottlenecks.
+The [project README](README.md) contains portable setup and benchmark commands. Current measurements and limits live in [docs/experiments_v2.md](docs/experiments_v2.md), with [technical analysis](docs/deep_analysis.md) and [historical measurements](docs/experiments.md); the [source audit](docs/audit.md) explains the original bottlenecks.
 
 ## Library example
 
@@ -28,6 +28,7 @@ client = MeasuredClient(
     cache_mode=os.environ.get("AMEM_CACHE_MODE", "readwrite"),
     revision=os.environ["AMEM_MODEL_REVISION"],
     max_tokens=2000, repetition_penalty=1.05, tag_budget=16,
+    tag_budget_policy="observe",
 )
 memory = FastAgenticMemorySystem(encoder, client)
 turns = iter([
@@ -57,7 +58,7 @@ The exact retriever uses normalized vectors, growing contiguous storage, an embe
 
 `MeasuredClient` hashes the complete request, endpoint and explicit model revision. Only complete successful HTTP text responses are persisted in SQLite WAL mode. Semantic/schema validation occurs afterward; a schema-invalid response can be recorded, and policy failures remain visible in counters or raised exceptions. Concurrent identical requests share one live request. `write` records the reference while bypassing reads; `readwrite` enables the optimized pipeline; `replay` raises on every miss and never contacts the server.
 
-The benchmark uses separate configured-reference, optimized, fused and optional joint databases. The measured `bounded-tags-v1` profile passes max_tokens=2000, repetition_penalty=1.05 and tag_budget=16 uniformly. The tag budget adds a common system instruction and validates recognized tag lists before cache writes and on reads; it rejects excess items instead of clipping. User prompt templates remain unchanged. Historical omitted optional parameters retain their cache identities. The unbounded 1000-token pilot and the failed RP-only diagnostic are retained separately, never pooled with the bounded-profile primary. Cold-arm prefix caches are reset, and initialization/warmup is reported separately. The reference's write-only recording is buffered in memory and flushed outside timing; optimized cache overhead remains timed. Reported nested stage timings are inclusive and must not be summed into wall time. Per-call latency percentiles also include overlapping requests and are not end-to-end latency.
+The benchmark uses separate configured-reference, optimized, fused and optional joint databases. The measured `observed-tags-v1` profile passes max_tokens=2000, repetition_penalty=1.05, tag_budget=16 and tag_budget_policy="observe" uniformly. A common system instruction requests tag lists of at most 16 items. Otherwise valid complete overshoots are recorded without clipping; live-generation counts are separated from cached response inspections. Truncated or malformed HTTP responses remain errors. The optional default `"error"` policy rejects oversized lists. User prompt templates remain unchanged, and observe uses a separate cache identity. Historical omitted parameters retain their original identities. The unbounded 1000-token pilot, failed RP-only diagnostic and strict tag-budget abort remain separate from the observed-profile primary. Cold-arm prefix caches are reset, and initialization/warmup is reported separately. The reference's write-only recording is buffered in memory and flushed outside timing; optimized cache overhead remains timed. Reported nested stage timings are inclusive and must not be summed into wall time. Per-call latency percentiles also include overlapping requests and are not end-to-end latency.
 
 Three different comparisons serve different purposes:
 

@@ -150,6 +150,8 @@ def command_for(args, cell):
         value = getattr(args, flag)
         if value is not None:
             command.extend(["--" + flag.replace("_", "-"), str(value)])
+    if args.structured_policy_outputs:
+        command.append("--structured-policy-outputs")
     return command
 
 
@@ -209,6 +211,8 @@ def main():
     parser.add_argument("--embedding-model", default="")
     parser.add_argument("--max-tokens", type=int, default=1000)
     parser.add_argument("--tag-budget-policy", choices=("error", "observe"), default="error")
+    parser.add_argument("--structured-policy-outputs", action="store_true",
+                        help="Use fixed JSON-schema generation only for fused/joint stages")
     parser.add_argument("--tag-budget", type=int)
     parser.add_argument("--repetition-penalty", type=float)
     parser.add_argument("--seed", type=int, default=42)

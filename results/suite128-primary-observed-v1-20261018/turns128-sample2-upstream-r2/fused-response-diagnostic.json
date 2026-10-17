@@ -1,0 +1,27 @@
+{
+  "mode": "fused",
+  "exception_type": "ValueError",
+  "error": "fused evolution must return a JSON object",
+  "failed_utc": "2026-10-17T18:35:50.669071+00:00",
+  "subset_fingerprint": "a994a343f7ab86549b240b0444a2699572d8ac7b73083d5cf639b80dc020b0a1",
+  "evolution_policy": "fused",
+  "note": "Last sequential fused response in closed failed-arm cache; offline extraction, no retry or repair.",
+  "progress": {
+    "phase": "build",
+    "last_completed_turn": 18,
+    "failed_turn_1based": 19,
+    "dia_id": "D2:3",
+    "memory_count_at_failure": 18
+  },
+  "request_key": "4fad3d6a96f1662ce5a81049c91b7622cfee72e5e08d317c3469f90f8aad5cd5",
+  "source_database_sha256": "fee4903a49f51af526fade773cccf2a38c4519abfcf78dcdb0656a0285b667cc",
+  "content_sha256": "7ca060ca1d2c8eae43a9e60bb961d9e822234f54babfe061b89063eb30775ed6",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 958,
+    "total_tokens": 1089,
+    "completion_tokens": 131,
+    "prompt_tokens_details": null
+  },
+  "content": "{\"decision\":\"STRENGTHEN_AND_UPDATE\",\"connections\":[17,8,13],\"tags\":[\"networking\", \"perspectives\", \"insights\"],\"neighbor_updates\":[{\"memory_index\":17,\"context\":\"The speaker reflects on networking experiences and the value of gaining new perspectives and insights.\",\"tags\":[\"Communication\", \"Personal Development\", \"Social Interaction\"]},{\"memory_index\":13,\"context\":\"The speaker plans to engage with local leaders and organizations to seek support and gather ideas for their next steps, emphasizing the importance of networking for insights and perspectives.\",\"tags\":[\"Community Engagement\", \"Networking\", \"Strategy Planning\", \"Political Strategy\"]}]}}"
+}

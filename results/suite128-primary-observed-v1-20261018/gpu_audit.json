@@ -1,0 +1,335 @@
+{
+  "gpu_index": 2,
+  "gpu_timestamp_timezone": "Asia/Shanghai",
+  "allocation_transition_threshold_mib": 1024,
+  "minimum_samples": 10,
+  "maximum_sample_gap_seconds": 10,
+  "analysis_script_sha256": "429018af82c4a16b7dac55f13f34eb608e5b6774080b1ab33be633123b52ba0f",
+  "interpretation": "All completed pairs remain the primary aggregate. Sensitivity uses cells whose whole-cell observed target GPU allocation range is <= threshold, with at least 10 samples and no gap above 10 seconds. This does not establish constant utilization or remove all confounding. Missing/sparse logs are excluded from the stable subset. Legacy arm timing estimates depend on original filesystem mtimes, preserved here with source hashes.",
+  "cells": [
+    {
+      "name": "turns128-sample0-upstream-r1",
+      "status": "failed",
+      "classification": "allocation-stable",
+      "whole_cell": {
+        "samples": 381,
+        "start_utc": "2026-10-17T17:51:05.225000+00:00",
+        "end_utc": "2026-10-17T18:03:51.068000+00:00",
+        "memory_min_mib": 44483.0,
+        "memory_max_mib": 44483.0,
+        "allocation_range_mib": 0.0,
+        "max_sample_gap_seconds": 2.028,
+        "utilization_percent_mean": 86.5249343832021
+      },
+      "arms": {
+        "baseline": {
+          "report_sha256": "e3fdf96da1ea8489d26d9b54b2829a54e9dcaf9e63fe8cb16bab7126a3d52979",
+          "window": {
+            "method": "reported UTC phase timestamps",
+            "build_start": "2026-10-17T17:51:15.330313+00:00",
+            "build_end": "2026-10-17T17:56:59.422892+00:00"
+          },
+          "build_gpu_samples": {
+            "samples": 170,
+            "start_utc": "2026-10-17T17:51:17.344000+00:00",
+            "end_utc": "2026-10-17T17:56:57.958000+00:00",
+            "memory_min_mib": 44483.0,
+            "memory_max_mib": 44483.0,
+            "allocation_range_mib": 0.0,
+            "max_sample_gap_seconds": 2.028,
+            "utilization_percent_mean": 89.52941176470588
+          }
+        },
+        "optimized": {
+          "report_sha256": "836797826841d0647b301b179a4c482160b13c8df92ab2561705152b3673676b",
+          "window": {
+            "method": "reported UTC phase timestamps",
+            "build_start": "2026-10-17T17:57:30.191051+00:00",
+            "build_end": "2026-10-17T18:03:28.646515+00:00"
+          },
+          "build_gpu_samples": {
+            "samples": 178,
+            "start_utc": "2026-10-17T17:57:30.217000+00:00",
+            "end_utc": "2026-10-17T18:03:26.874000+00:00",
+            "memory_min_mib": 44483.0,
+            "memory_max_mib": 44483.0,
+            "allocation_range_mib": 0.0,
+            "max_sample_gap_seconds": 2.026,
+            "utilization_percent_mean": 89.34269662921348
+          }
+        }
+      },
+      "gpu_csv_sha256": "cd23db8a0cee3d0aff9ce849a8a640193f963866d5377bd794f2a9df6d0d5354"
+    },
+    {
+      "name": "turns128-sample0-upstream-r2",
+      "status": "failed",
+      "classification": "allocation-stable",
+      "whole_cell": {
+        "samples": 156,
+        "start_utc": "2026-10-17T18:03:52.321000+00:00",
+        "end_utc": "2026-10-17T18:09:04.737000+00:00",
+        "memory_min_mib": 44483.0,
+        "memory_max_mib": 44483.0,
+        "allocation_range_mib": 0.0,
+        "max_sample_gap_seconds": 2.033,
+        "utilization_percent_mean": 86.2051282051282
+      },
+      "arms": {
+        "optimized": {
+          "report_sha256": "20e8df6f4069c45b04ae6c6175cbc115d8a1379f9a29016b1f87830958bdddff",
+          "window": {
+            "method": "reported UTC phase timestamps",
+            "build_start": "2026-10-17T18:04:01.376322+00:00",
+            "build_end": "2026-10-17T18:08:44.034120+00:00"
+          },
+          "build_gpu_samples": {
+            "samples": 140,
+            "start_utc": "2026-10-17T18:04:02.412000+00:00",
+            "end_utc": "2026-10-17T18:08:42.551000+00:00",
+            "memory_min_mib": 44483.0,
+            "memory_max_mib": 44483.0,
+            "allocation_range_mib": 0.0,
+            "max_sample_gap_seconds": 2.033,
+            "utilization_percent_mean": 88.99285714285715
+          }
+        }
+      },
+      "gpu_csv_sha256": "ea9890e4f5930aa1615a94fd79f51a9fa2b84eb134910a20df2c5a6a7a0dbb4c"
+    },
+    {
+      "name": "turns128-sample0-upstream-r3",
+      "status": "failed",
+      "classification": "allocation-stable",
+      "whole_cell": {
+        "samples": 10,
+        "start_utc": "2026-10-17T18:09:06.949000+00:00",
+        "end_utc": "2026-10-17T18:09:25.097000+00:00",
+        "memory_min_mib": 44483.0,
+        "memory_max_mib": 44483.0,
+        "allocation_range_mib": 0.0,
+        "max_sample_gap_seconds": 2.024,
+        "utilization_percent_mean": 35.1
+      },
+      "arms": {},
+      "gpu_csv_sha256": "9f97ed0d68072e9d873745afdbb354fdf7df10a737661ca79f5f26f1016cf1e5"
+    },
+    {
+      "name": "turns128-sample1-upstream-r1",
+      "status": "failed",
+      "classification": "allocation-stable",
+      "whole_cell": {
+        "samples": 134,
+        "start_utc": "2026-10-17T18:09:26.244000+00:00",
+        "end_utc": "2026-10-17T18:13:54.282000+00:00",
+        "memory_min_mib": 44483.0,
+        "memory_max_mib": 44483.0,
+        "allocation_range_mib": 0.0,
+        "max_sample_gap_seconds": 2.024,
+        "utilization_percent_mean": 81.67910447761194
+      },
+      "arms": {
+        "optimized": {
+          "report_sha256": "78e31e8cb00d3b5c9b81911d84a5bf6041c1653145cfb9597fa761bce0c55159",
+          "window": {
+            "method": "reported UTC phase timestamps",
+            "build_start": "2026-10-17T18:09:37.314430+00:00",
+            "build_end": "2026-10-17T18:13:27.062966+00:00"
+          },
+          "build_gpu_samples": {
+            "samples": 114,
+            "start_utc": "2026-10-17T18:09:38.348000+00:00",
+            "end_utc": "2026-10-17T18:13:26.065000+00:00",
+            "memory_min_mib": 44483.0,
+            "memory_max_mib": 44483.0,
+            "allocation_range_mib": 0.0,
+            "max_sample_gap_seconds": 2.024,
+            "utilization_percent_mean": 85.74561403508773
+          }
+        }
+      },
+      "gpu_csv_sha256": "b101c574bb3df90ec6f68d49bba43dd505e13d376df3fc2705323b01eb4de209"
+    },
+    {
+      "name": "turns128-sample1-upstream-r2",
+      "status": "failed",
+      "classification": "allocation-stable",
+      "whole_cell": {
+        "samples": 13,
+        "start_utc": "2026-10-17T18:13:56.488000+00:00",
+        "end_utc": "2026-10-17T18:14:20.701000+00:00",
+        "memory_min_mib": 44483.0,
+        "memory_max_mib": 44483.0,
+        "allocation_range_mib": 0.0,
+        "max_sample_gap_seconds": 2.047,
+        "utilization_percent_mean": 40.38461538461539
+      },
+      "arms": {},
+      "gpu_csv_sha256": "9cd94e47c2299fb04094b07c6fc1b3f9b4af13f10404ea2dab534cb6b3e5b7d0"
+    },
+    {
+      "name": "turns128-sample1-upstream-r3",
+      "status": "failed",
+      "classification": "allocation-stable",
+      "whole_cell": {
+        "samples": 307,
+        "start_utc": "2026-10-17T18:14:21.856000+00:00",
+        "end_utc": "2026-10-17T18:24:38.637000+00:00",
+        "memory_min_mib": 44483.0,
+        "memory_max_mib": 44483.0,
+        "allocation_range_mib": 0.0,
+        "max_sample_gap_seconds": 2.074,
+        "utilization_percent_mean": 83.46905537459283
+      },
+      "arms": {
+        "baseline": {
+          "report_sha256": "0f18cd63988eb990a180a1f6706a145197448456516b0af0053e53ec856197bb",
+          "window": {
+            "method": "reported UTC phase timestamps",
+            "build_start": "2026-10-17T18:14:36.436929+00:00",
+            "build_end": "2026-10-17T18:19:22.007315+00:00"
+          },
+          "build_gpu_samples": {
+            "samples": 141,
+            "start_utc": "2026-10-17T18:14:37.981000+00:00",
+            "end_utc": "2026-10-17T18:19:20.168000+00:00",
+            "memory_min_mib": 44483.0,
+            "memory_max_mib": 44483.0,
+            "allocation_range_mib": 0.0,
+            "max_sample_gap_seconds": 2.074,
+            "utilization_percent_mean": 88.7517730496454
+          }
+        },
+        "optimized": {
+          "report_sha256": "e3a4ce5cada3aebafd44d9ed2c3ef4e2c37d205ce758eee55451ba4f6038de34",
+          "window": {
+            "method": "reported UTC phase timestamps",
+            "build_start": "2026-10-17T18:19:52.551800+00:00",
+            "build_end": "2026-10-17T18:23:49.546681+00:00"
+          },
+          "build_gpu_samples": {
+            "samples": 117,
+            "start_utc": "2026-10-17T18:19:54.414000+00:00",
+            "end_utc": "2026-10-17T18:23:48.247000+00:00",
+            "memory_min_mib": 44483.0,
+            "memory_max_mib": 44483.0,
+            "allocation_range_mib": 0.0,
+            "max_sample_gap_seconds": 2.036,
+            "utilization_percent_mean": 85.64957264957265
+          }
+        }
+      },
+      "gpu_csv_sha256": "8310a1176d7913c37aba087d4103a80864c1855e0c6ad30afab128118705031b"
+    },
+    {
+      "name": "turns128-sample2-upstream-r1",
+      "status": "failed",
+      "classification": "allocation-stable",
+      "whole_cell": {
+        "samples": 24,
+        "start_utc": "2026-10-17T18:24:40.840000+00:00",
+        "end_utc": "2026-10-17T18:25:27.233000+00:00",
+        "memory_min_mib": 44483.0,
+        "memory_max_mib": 44483.0,
+        "allocation_range_mib": 0.0,
+        "max_sample_gap_seconds": 2.027,
+        "utilization_percent_mean": 67.70833333333333
+      },
+      "arms": {},
+      "gpu_csv_sha256": "acc22d0d231344e779c810e252f000d8eb81d6945791e6bacdab1b3227d9e7ef"
+    },
+    {
+      "name": "turns128-sample2-upstream-r2",
+      "status": "failed",
+      "classification": "resource-transition-confounded",
+      "whole_cell": {
+        "samples": 310,
+        "start_utc": "2026-10-17T18:25:28.393000+00:00",
+        "end_utc": "2026-10-17T18:35:51.123000+00:00",
+        "memory_min_mib": 44483.0,
+        "memory_max_mib": 80216.0,
+        "allocation_range_mib": 35733.0,
+        "max_sample_gap_seconds": 2.029,
+        "utilization_percent_mean": 84.07741935483871
+      },
+      "arms": {
+        "baseline": {
+          "report_sha256": "cd135a1a04457a940e8ae7d8330320b8778b8cc43723b7776e148223e70b886d",
+          "window": {
+            "method": "reported UTC phase timestamps",
+            "build_start": "2026-10-17T18:25:42.959500+00:00",
+            "build_end": "2026-10-17T18:30:52.671256+00:00"
+          },
+          "build_gpu_samples": {
+            "samples": 153,
+            "start_utc": "2026-10-17T18:25:44.523000+00:00",
+            "end_utc": "2026-10-17T18:30:50.827000+00:00",
+            "memory_min_mib": 44483.0,
+            "memory_max_mib": 80216.0,
+            "allocation_range_mib": 35733.0,
+            "max_sample_gap_seconds": 2.023,
+            "utilization_percent_mean": 89.76470588235294
+          }
+        },
+        "optimized": {
+          "report_sha256": "2319ae59d5837d20d222f3f9afaecf3af620c23f774e021e72e8f8de8ad95572",
+          "window": {
+            "method": "reported UTC phase timestamps",
+            "build_start": "2026-10-17T18:31:21.654115+00:00",
+            "build_end": "2026-10-17T18:35:21.668574+00:00"
+          },
+          "build_gpu_samples": {
+            "samples": 119,
+            "start_utc": "2026-10-17T18:31:23.063000+00:00",
+            "end_utc": "2026-10-17T18:35:20.902000+00:00",
+            "memory_min_mib": 44483.0,
+            "memory_max_mib": 44483.0,
+            "allocation_range_mib": 0.0,
+            "max_sample_gap_seconds": 2.029,
+            "utilization_percent_mean": 86.00840336134453
+          }
+        }
+      },
+      "gpu_csv_sha256": "090e7b3226453855dab28ce2b4f1f25bfc3634a65325b53132f58543d2b5ad20"
+    },
+    {
+      "name": "turns128-sample2-upstream-r3",
+      "status": "failed",
+      "classification": "allocation-stable",
+      "whole_cell": {
+        "samples": 159,
+        "start_utc": "2026-10-17T18:35:53.313000+00:00",
+        "end_utc": "2026-10-17T18:41:11.700000+00:00",
+        "memory_min_mib": 44483.0,
+        "memory_max_mib": 44483.0,
+        "allocation_range_mib": 0.0,
+        "max_sample_gap_seconds": 2.027,
+        "utilization_percent_mean": 83.34591194968553
+      },
+      "arms": {
+        "optimized": {
+          "report_sha256": "6f22b8eddf972c32169f0681ffe5dddb039ed08288541cb89a94b8146785eeb4",
+          "window": {
+            "method": "reported UTC phase timestamps",
+            "build_start": "2026-10-17T18:36:02.865403+00:00",
+            "build_end": "2026-10-17T18:40:22.652093+00:00"
+          },
+          "build_gpu_samples": {
+            "samples": 129,
+            "start_utc": "2026-10-17T18:36:03.400000+00:00",
+            "end_utc": "2026-10-17T18:40:21.331000+00:00",
+            "memory_min_mib": 44483.0,
+            "memory_max_mib": 44483.0,
+            "allocation_range_mib": 0.0,
+            "max_sample_gap_seconds": 2.025,
+            "utilization_percent_mean": 86.82170542635659
+          }
+        }
+      },
+      "gpu_csv_sha256": "a0c45127b6b62180d236c30779326a159bec18422de223b57e2a94c88d57d5c4"
+    }
+  ],
+  "all_completed_aggregate": {},
+  "allocation_stable_cell_names": [],
+  "allocation_stable_aggregate": {}
+}

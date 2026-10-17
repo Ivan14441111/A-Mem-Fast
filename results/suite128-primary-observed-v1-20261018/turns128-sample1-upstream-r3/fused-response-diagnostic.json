@@ -1,0 +1,27 @@
+{
+  "mode": "fused",
+  "exception_type": "ValueError",
+  "error": "fused evolution update requires memory_index, context, tags",
+  "failed_utc": "2026-10-17T18:24:38.633969+00:00",
+  "subset_fingerprint": "9a61c0c1eeff8dd783ca2272a1cd03034d599e7fc810ddd1a4ce637c6cbd0287",
+  "evolution_policy": "fused",
+  "note": "Last sequential fused response in closed failed-arm cache; offline extraction, no retry or repair.",
+  "progress": {
+    "phase": "build",
+    "last_completed_turn": 25,
+    "failed_turn_1based": 26,
+    "dia_id": "D1:26",
+    "memory_count_at_failure": 25
+  },
+  "request_key": "877265b89c168f9c0f15b849c2773a8b7d8023a8722693185002849cc0831c94",
+  "source_database_sha256": "73034c5727ddf07809cda4c108be688f92d7e11a0e37c0d3fd16eb419b8f41e5",
+  "content_sha256": "7f09b4bcb65cfebae8f362a4fc919ac7ea419fd3e3d2753870a5b82b3266c1c9",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 1085,
+    "total_tokens": 1227,
+    "completion_tokens": 142,
+    "prompt_tokens_details": null
+  },
+  "content": "{\n  \"decision\": \"STRENGTHEN_AND_UPDATE\",\n  \"connections\": [23, 24, 17, 15, 16],\n  \"tags\": [\"event\", \"performance\", \"preparation\", \"dance\"],\n  \"neighbor_updates\": [\n    {\"memory_index\": 23, \"tags\": [\"Dance\", \"Performance\", \"Art\", \"Preparation\"]},\n    {\"memory_index\": 24, \"context\": \"The speaker is expressing admiration for a group performing at a festival, noting their grace and impressive skills.\", \"tags\": [\"dance\", \"festival\", \"graceful\", \"performance\"]}\n  ]\n}"
+}

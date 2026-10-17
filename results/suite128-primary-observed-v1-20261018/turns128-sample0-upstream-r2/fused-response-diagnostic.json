@@ -1,0 +1,27 @@
+{
+  "mode": "fused",
+  "exception_type": "ValueError",
+  "error": "fused evolution must return a JSON object",
+  "failed_utc": "2026-10-17T18:09:04.637939+00:00",
+  "subset_fingerprint": "a04a4135825e2c5ad26ca9d5e2a2e85f3b82a0456f9cc7dd341461c5141a09dd",
+  "evolution_policy": "fused",
+  "note": "Last sequential fused response in the closed failed-arm cache; offline inspection, no retry/repair/inference.",
+  "progress": {
+    "phase": "build",
+    "last_completed_turn": 3,
+    "failed_turn_1based": 4,
+    "dia_id": "D1:4",
+    "memory_count_at_failure": 3
+  },
+  "request_key": "dad56217096a19148f6b30851e325a157b363439d8cddfc16217ea48144f031e",
+  "source_database_sha256": "aa2accd3a36eccbb3aafb03cf9eda4dac01bfce00023f426f910a4877044e86d",
+  "content_sha256": "e82d6843be0ce7893b116c0eec33b0096b2e1ff51081f96f63ccec30f64a14df",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 720,
+    "total_tokens": 807,
+    "completion_tokens": 87,
+    "prompt_tokens_details": null
+  },
+  "content": "{\"decision\":\"STRENGTHEN_AND_UPDATE\",\"connections\":[0,1],\"tags\":[\"conversation\", \"storytelling\", \"inspiration\", \"social interaction\"],\"neighbor_updates\":[{\"memory_index\":2,\"context\":\"The speaker shares a powerful experience from attending an LGBTQ support group, which inspired storytelling and discussion of personal experiences.\",\"tags\":[\"Social support\", \"Personal experience\", \"Mental health\", \"storytelling\"]}]}}"
+}

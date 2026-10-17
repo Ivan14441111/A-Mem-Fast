@@ -1,0 +1,79 @@
+{
+  "defined_utc": "2026-10-17T17:52:19.201725+00:00",
+  "purpose": "Fixed-graph fixed-keyword answer-only context ablation",
+  "source_project_commit": "2019a73d4ce7135acff4fc2cf51978ccee087124",
+  "source_fingerprint": "4d475aeb3218110018ab0d03505c0b0b95f27fa2c8b89012eaf71fee544fdd4b",
+  "context_helper_sha256": "0fd339f8ad61aced712ac38aba218f5bc9b5e1ec00d1876bf949b181a7e10354",
+  "cases": [
+    {
+      "sample_index": 0,
+      "source_run": "results/suite128-primary-observed-v1-20261018/turns128-sample0-upstream-r1",
+      "graph_mode": "baseline",
+      "order": "upstream,deduplicated",
+      "command": [
+        ".venv/bin/python",
+        "scripts/benchmark_context.py",
+        "--run-dir",
+        "results/suite128-primary-observed-v1-20261018/turns128-sample0-upstream-r1",
+        "--graph-mode",
+        "baseline",
+        "--order",
+        "upstream,deduplicated",
+        "--output",
+        "results/context128-observed-v1-20261018/sample0"
+      ],
+      "source_repeat": 1
+    },
+    {
+      "sample_index": 1,
+      "source_run": "results/suite128-primary-observed-v1-20261018/turns128-sample1-upstream-r3",
+      "graph_mode": "baseline",
+      "order": "deduplicated,upstream",
+      "command": [
+        ".venv/bin/python",
+        "scripts/benchmark_context.py",
+        "--run-dir",
+        "results/suite128-primary-observed-v1-20261018/turns128-sample1-upstream-r3",
+        "--graph-mode",
+        "baseline",
+        "--order",
+        "deduplicated,upstream",
+        "--output",
+        "results/context128-observed-v1-20261018/sample1"
+      ],
+      "source_repeat": 3
+    },
+    {
+      "sample_index": 2,
+      "source_run": "results/suite128-primary-observed-v1-20261018/turns128-sample2-upstream-r2",
+      "graph_mode": "baseline",
+      "order": "upstream,deduplicated",
+      "command": [
+        ".venv/bin/python",
+        "scripts/benchmark_context.py",
+        "--run-dir",
+        "results/suite128-primary-observed-v1-20261018/turns128-sample2-upstream-r2",
+        "--graph-mode",
+        "baseline",
+        "--order",
+        "upstream,deduplicated",
+        "--output",
+        "results/context128-observed-v1-20261018/sample2"
+      ],
+      "source_repeat": 2
+    }
+  ],
+  "questions_per_case": 12,
+  "context_arms": [
+    "upstream",
+    "deduplicated"
+  ],
+  "graph_and_keyword_calls": "Strict offline replay; no live graph/keyword inference",
+  "configuration": "Inherit source observed-tags-v1, max2000/RP1.05/tag16/observe, seed42/temperature0",
+  "execution_gate": "No dependent live answer calls until all nine primary cells finish attempts",
+  "scope": "All selected source QA, no score-based prompt selection or retries to improve quality",
+  "amended_utc": "2026-10-17T18:11:33.674590+00:00",
+  "original_protocol": "protocol-original-r1-plan.json",
+  "selection_rule": "Select the baseline-first cell solely from the original prerecorded arm rotation: sample0r1, sample1r3, sample2r2. If its baseline does not finish, mark that context case unavailable; no fallback or resampling. Selection does not depend on timing, QA or generation success.",
+  "amendment_rationale": "An optional fused failure can prevent a later baseline arm from being attempted; choosing the preplanned baseline-first cell prevents this order artifact without outcome-based selection."
+}

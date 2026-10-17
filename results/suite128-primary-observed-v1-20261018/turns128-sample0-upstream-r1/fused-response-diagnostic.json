@@ -1,0 +1,19 @@
+{
+  "cell": "turns128-sample0-upstream-r1",
+  "arm": "fused",
+  "failed_turn_1based": 4,
+  "dia_id": "D1:4",
+  "request_key": "a216cfc4f1cf3f395e7692acbafdbe137a00d170797567ef2f1452721307801b",
+  "source_database_sha256": "fcf1f5e86dd3e1aa899881fff9f2e6a2e1710a1a0d1894289585140c77b664bd",
+  "content_sha256": "2652ba1993b13a975bcaff8eef4abed324b3979572db6f9edb75973f7fc90b9e",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 716,
+    "total_tokens": 800,
+    "completion_tokens": 84,
+    "prompt_tokens_details": null
+  },
+  "content": "{\"decision\":\"STRENGTHEN_AND_UPDATE\",\"connections\":[0,1],\"tags\":[\"conversation\", \"storytelling\", \"inspiration\", \"social interaction\"],\"neighbor_updates\":[{\"memory_index\":2,\"context\":\"The speaker shares a powerful experience from attending an LGBTQ support group, which inspired storytelling and connection.\",\"tags\":[\"Social support\", \"Personal experience\", \"Mental health\", \"storytelling\"]}]}}",
+  "json_error": "Extra data: line 1 column 392 (char 391)",
+  "note": "Offline inspection of a completed HTTP200 response cached before downstream semantic parsing. No inference, repair, clipping or retry."
+}

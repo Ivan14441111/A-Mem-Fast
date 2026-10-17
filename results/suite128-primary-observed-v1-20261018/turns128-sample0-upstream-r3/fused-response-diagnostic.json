@@ -1,0 +1,27 @@
+{
+  "mode": "fused",
+  "exception_type": "ValueError",
+  "error": "fused evolution update requires memory_index, context, tags",
+  "failed_utc": "2026-10-17T18:09:24.709105+00:00",
+  "subset_fingerprint": "a04a4135825e2c5ad26ca9d5e2a2e85f3b82a0456f9cc7dd341461c5141a09dd",
+  "evolution_policy": "fused",
+  "note": "Last sequential fused response in the closed failed-arm cache; offline inspection, no retry/repair/inference.",
+  "progress": {
+    "phase": "build",
+    "last_completed_turn": 6,
+    "failed_turn_1based": 7,
+    "dia_id": "D1:7",
+    "memory_count_at_failure": 6
+  },
+  "request_key": "1aae8b4c60fd0fc08b5d9813ab7e3e7699498f38e7075a0f2dbf1a1d47bb026d",
+  "source_database_sha256": "8ce4c63d8757e1ce939daf4f20e13346979c4a27a4eb3eb24152b2106ee2690a",
+  "content_sha256": "efa80a6900c9dd9b18a937723eaa85e0b249a97abcb29165e91752cc6602283d",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 991,
+    "total_tokens": 1126,
+    "completion_tokens": 135,
+    "prompt_tokens_details": null
+  },
+  "content": "{\"decision\":\"STRENGTHEN_AND_UPDATE\",\"connections\":[2,4,5],\"tags\":[\"mental health\", \"personal growth\", \"community support\", \"acceptance\", \"courage\"],\"neighbor_updates\":[{\"memory_index\":2,\"tags\":[\"Social support\", \"Personal experience\", \"Mental health\", \"inspiration\", \"art\", \"acceptance\"]},{\"memory_index\":4,\"tags\":[\"personal experience\", \"emotional expression\", \"social issues\", \"transgender stories\", \"art\", \"acceptance\"]},{\"memory_index\":5,\"tags\":[\"art\", \"community\", \"appreciation\", \"support\", \"inspiration\", \"acceptance\"]}]}"
+}

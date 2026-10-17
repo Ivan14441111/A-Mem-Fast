@@ -1,6 +1,7 @@
 """Context deduplication is an explicit QA-only prompt ablation."""
 
 from types import SimpleNamespace
+from copy import deepcopy
 import json
 
 import pytest
@@ -112,3 +113,39 @@ def test_empty_context_dedup_returns_no_text():
 def test_invalid_context_policy_is_rejected():
     with pytest.raises(ValueError, match="context_policy"):
         FastAgenticMemorySystem(None, None, context_policy="unknown")
+
+
+@pytest.mark.parametrize("recorded_flag", [None, False, True])
+def test_context_replay_inherits_recorded_structured_flag(tmp_path, recorded_flag):
+    import fast_amem.client as client
+    import scripts.benchmark_context as context
+    config = {"base_url": "http://mock.invalid/v1", "model": "model", "model_revision": "weights-template",
+              "seed": 42, "max_tokens": 2000, "workers": 1, "prefetch_window": 1, "evo_threshold": 100,
+              "tag_budget": 16, "tag_budget_policy": "observe", "repetition_penalty": 1.05}
+    if recorded_flag is not None:
+        config["structured_policy_outputs"] = recorded_flag
+    subset = {"turns": [], "questions": [{"question": "Recorded question?", "category": 1}]}
+    subset["fingerprint"] = context.digest(subset)
+    report = {"subset_fingerprint": subset["fingerprint"], "memory_trace": [],
+              "memory_digest": context.digest([]), "evolution_policy": "upstream"}
+    for name, value in [("manifest", {"args": config}), ("subset", subset), ("baseline", report)]:
+        (tmp_path / (name + ".json")).write_text(json.dumps(value))
+    calls = []
+    def post(url, *, json, timeout):
+        calls.append(deepcopy(json))
+        return SimpleNamespace(status_code=200, raise_for_status=lambda: None,
+                               json=lambda: {"choices": [{"message": {"content": "fixed keywords"}, "finish_reason": "stop"}]})
+    source = client.MeasuredClient(config["base_url"], config["model"],
+                                  cache=client.SQLiteResponseCache(tmp_path / "baseline.sqlite"),
+                                  cache_mode="write", revision=config["model_revision"], seed=42,
+                                  max_tokens=2000, tag_budget=16, tag_budget_policy="observe", repetition_penalty=1.05,
+                                  structured_policy_outputs=bool(recorded_flag))
+    source._session = lambda: SimpleNamespace(post=post)
+    prompt = context.query_prompt("Recorded question?")
+    source.get_completion(prompt)
+    _, queries, inherited, _, _, summary = context.reconstruct_graph(tmp_path, "baseline", None)
+    assert inherited == config
+    assert queries == {prompt: "fixed keywords"}
+    assert summary["http_requests"] == 0
+    assert summary["structured_policy_outputs"] is bool(recorded_flag)
+    assert "response_format" not in calls[0]

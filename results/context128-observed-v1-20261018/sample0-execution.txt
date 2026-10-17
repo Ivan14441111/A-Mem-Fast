@@ -1,0 +1,11 @@
+upstream: answer_seconds=10.336, prompt_tokens=89040, F1=0.436
+deduplicated: answer_seconds=6.739, prompt_tokens=53383, F1=0.432
+{
+  "answer_speedup": 1.5338708731538846,
+  "prompt_token_reduction": 0.40046046720575024,
+  "context_byte_reduction": 0.4102910514446194,
+  "context_row_reduction": 0.39756592292089254,
+  "f1_delta": -0.004166666666666652,
+  "exact_match_delta": 0.0,
+  "predictions_equal": false
+}

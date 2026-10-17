@@ -198,7 +198,8 @@ def _run_mode(args, subset, mode, shared_model):
                                         "joint": "readwrite", "joint_warm": "replay"}[mode],
                             revision=args.model_revision, max_tokens=args.max_tokens, seed=args.seed,
                             repetition_penalty=args.repetition_penalty, tag_budget=args.tag_budget,
-                            tag_budget_policy=args.tag_budget_policy)
+                            tag_budget_policy=args.tag_budget_policy,
+                            structured_policy_outputs=args.structured_policy_outputs)
     wall_utc["init_start"] = datetime.now(timezone.utc).isoformat()
     init_start = time.perf_counter()
     if mode == "baseline":
@@ -300,6 +301,7 @@ def _run_mode(args, subset, mode, shared_model):
               "repetition_penalty": args.repetition_penalty,
               "tag_budget": args.tag_budget,
               "tag_budget_policy": args.tag_budget_policy,
+              "structured_policy_outputs": args.structured_policy_outputs,
               "prefix_cache_reset_seconds": reset_seconds,
               "recording_flush_seconds_excluded": recording_flush_seconds,
               "qa_seconds": qa_seconds, "total_seconds": build_seconds + qa_seconds,
@@ -350,6 +352,8 @@ def main():
     p.add_argument("--embedding-model", required=True)
     p.add_argument("--max-tokens", type=int, default=1000)
     p.add_argument("--tag-budget-policy", choices=("error", "observe"), default="error")
+    p.add_argument("--structured-policy-outputs", action="store_true",
+                   help="Constrain fused/joint replies using a fixed JSON schema; changes the request/cache identity")
     p.add_argument("--tag-budget", type=int, help="Optional common system-message tag-list bound; configured protocol bounded-tags-v1")
     p.add_argument("--repetition-penalty", type=float, help="Optional deterministic vLLM decoding parameter; common to all live/replay arms")
     p.add_argument("--seed", type=int, default=42)
@@ -417,9 +421,9 @@ def main():
     if manifest_path.exists():
         old = json.loads(manifest_path.read_text())
         keys = ("model", "model_revision", "base_url", "embedding_model", "max_tokens",
-                "seed", "retrieve_k", "evo_threshold", "evolution_policy", "context_policy", "prefix_cache_reset", "repetition_penalty", "tag_budget", "tag_budget_policy")
+                "seed", "retrieve_k", "evo_threshold", "evolution_policy", "context_policy", "prefix_cache_reset", "repetition_penalty", "tag_budget", "tag_budget_policy", "structured_policy_outputs")
         if (old["subset_fingerprint"] != subset["fingerprint"] or
-                any(old["args"].get(k, "error" if k == "tag_budget_policy" else None) != getattr(args, k) for k in keys)):
+                any(old["args"].get(k, "error" if k == "tag_budget_policy" else False if k == "structured_policy_outputs" else None) != getattr(args, k) for k in keys)):
             raise ValueError("Existing output belongs to a different subset or model configuration")
     (output / "subset.json").write_text(json.dumps(subset, indent=2, ensure_ascii=False))
     versions = {}
@@ -440,6 +444,7 @@ def main():
                 "decoding": {"temperature": 0, "seed": args.seed, "enable_thinking": False,
                              "max_tokens": args.max_tokens, "repetition_penalty": args.repetition_penalty,
                              "tag_budget": args.tag_budget, "tag_budget_policy": args.tag_budget_policy,
+                             "structured_policy_outputs": args.structured_policy_outputs,
                              "prompt_protocol": (("observed-tags-v1" if args.tag_budget_policy == "observe" else "bounded-tags-v1")
                                                  if args.tag_budget is not None else "upstream-system"),
                              "note": "Common configured decoding in all arms; differs from upstream default temperature."},
@@ -459,7 +464,8 @@ def main():
     if not args.skip_server_warmup and any(mode in {"baseline", "optimized", "fused", "joint"} for mode in modes):
         MeasuredClient(args.base_url, args.model, max_tokens=args.max_tokens, seed=args.seed,
                        repetition_penalty=args.repetition_penalty, tag_budget=args.tag_budget,
-                            tag_budget_policy=args.tag_budget_policy).get_completion(
+                            tag_budget_policy=args.tag_budget_policy,
+                            structured_policy_outputs=args.structured_policy_outputs).get_completion(
                            "Reply with exactly one word: READY")
     manifest["shared_encoder_and_warmup_seconds"] = time.perf_counter() - started
     manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False))

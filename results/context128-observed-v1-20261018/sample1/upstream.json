@@ -1,0 +1,532 @@
+{
+  "context_policy": "upstream",
+  "qa_seconds": 9.67881379276514,
+  "answer_llm": {
+    "logical_calls": 12,
+    "repetition_penalty": 1.05,
+    "tag_budget": 16,
+    "tag_budget_policy": "observe",
+    "generation_profile": "observed-tags-v1",
+    "tag_budget_overshoots": {
+      "logical_response_inspections": 0,
+      "live_response_inspections": 0,
+      "cache_response_inspections": 0,
+      "logical_tag_lists_inspected": 0,
+      "live_tag_lists_inspected": 0,
+      "cache_tag_lists_inspected": 0,
+      "logical_overshoot_responses": 0,
+      "live_overshoot_responses": 0,
+      "cache_overshoot_observations": 0,
+      "unique_overshoot_request_keys": 0,
+      "over_budget_lists_live": 0,
+      "max_actual_tags": 0
+    },
+    "upstream_calls": 12,
+    "prefetch_calls": 0,
+    "http_requests": 12,
+    "cache_hits": 0,
+    "errors": 0,
+    "http_seconds_sum": 9.263017605990171,
+    "cache_read_seconds_sum": 5.405396223068237e-06,
+    "cache_write_seconds_sum": 0.37580886110663414,
+    "prompt_tokens_live": 78476,
+    "completion_tokens_live": 178,
+    "latency_seconds_p50": 0.7665491160005331,
+    "latency_seconds_p95": 1.0618319993838667,
+    "latency_seconds_max": 1.0711640268564224,
+    "by_stage": {
+      "answer": {
+        "logical_calls": 12,
+        "http_requests": 12,
+        "cache_hits": 0,
+        "seconds_sum": 9.6401460878551,
+        "prompt_tokens_live": 78476,
+        "completion_tokens_live": 178,
+        "latency_seconds_p50": 0.7665491160005331,
+        "latency_seconds_p95": 1.0618319993838667,
+        "latency_seconds_max": 1.0711640268564224
+      }
+    }
+  },
+  "memory_digest": "df70bad4e1133e60b493cbc2a8d358acefe733ac4da57caba7d4ae80211ce771",
+  "context_metrics": {
+    "queries": 0,
+    "rows_before": 0,
+    "rows_after": 0
+  },
+  "metrics": {
+    "exact_match": 0.16666666666666666,
+    "token_f1": 0.37712683906469197
+  },
+  "context_utf8_bytes": 318878,
+  "context_rows": 482,
+  "qa": [
+    {
+      "question": "What do Jon and Gina both have in common?",
+      "answer": "They lost their jobs and decided to start their own businesses.",
+      "evidence": [
+        "D1:2",
+        "D1:3",
+        "D1:4",
+        "D2:1"
+      ],
+      "category": 1,
+      "source_qa_index": 3,
+      "prediction": "Both Jon and Gina have a passion for dancing and entrepreneurship.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.09523809523809523
+      },
+      "context_digest": "cf0032ccc99b9e3dd28a19384eb652ea7126af49d2fa8f08275493b7c8631a3e",
+      "prompt_digest": "790ad35abd934bef782e667f7987b20edbc7e2e61ae4990f6aeaf5e967fccdbb",
+      "context_utf8_bytes": 25337,
+      "context_rows": 40,
+      "context_unique_rows": 28
+    },
+    {
+      "question": "When Jon has lost his job as a banker?",
+      "answer": "19 January, 2023",
+      "evidence": [
+        "D1:2"
+      ],
+      "category": 2,
+      "source_qa_index": 0,
+      "prediction": "20 January 2023",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.6666666666666666
+      },
+      "context_digest": "122c28e587ced5fcd54618a9205122a78d2d6e5bdd27888cc8c72d86a2c30579",
+      "prompt_digest": "bbd5cd2779c0f949bc17dcb778e7132f40b113a5f304358692f76bbbd33cb13f",
+      "context_utf8_bytes": 24374,
+      "context_rows": 38,
+      "context_unique_rows": 27
+    },
+    {
+      "question": "How do Jon and Gina both like to destress?",
+      "answer": "by dancing",
+      "evidence": [
+        "D1:7",
+        "D1:6"
+      ],
+      "category": 4,
+      "source_qa_index": 2,
+      "prediction": "Jon and Gina both like to destress through dance.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "context_digest": "79f1cb9fb6b4a3614f5ada125ac84605f43a29245a58ebd905021c42e424c3c9",
+      "prompt_digest": "86427bee86e48d9fd77c5f2b95a7322e8f6b9127cd93efb1a0849389ef5f4933",
+      "context_utf8_bytes": 24494,
+      "context_rows": 37,
+      "context_unique_rows": 24
+    },
+    {
+      "question": "What Jon thinks the ideal dance studio should look like?",
+      "answer": "By the water, with natural light and Marley flooring",
+      "evidence": [
+        "D1:20",
+        "D2:4",
+        "D2:8"
+      ],
+      "category": 1,
+      "source_qa_index": 5,
+      "prediction": "The ideal dance studio should have great natural light, a good dance floor with enough bounce for safe dancing, and be located in a downtown area.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.25806451612903225
+      },
+      "context_digest": "b9d8c132c42a1726a83acb02d9c86c9406c9f55fb938755a16944de59c032b70",
+      "prompt_digest": "9bcbc86316c8160bf3b31a51cb55118d1417e4bb32ce85cc05cf436fd59022b2",
+      "context_utf8_bytes": 28730,
+      "context_rows": 41,
+      "context_unique_rows": 25
+    },
+    {
+      "question": "When Gina has lost her job at Door Dash?",
+      "answer": "January, 2023",
+      "evidence": [
+        "D1:3"
+      ],
+      "category": 2,
+      "source_qa_index": 1,
+      "prediction": "Short answer: 29 January 2023",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.5714285714285714
+      },
+      "context_digest": "7c51f1e9caa1b40115d30ec12b5adcb4cb0ea2401ff599dc0bbafa00c4e23a54",
+      "prompt_digest": "88f214049061d031ab793bae8664f5688f1fafb93882d5a60fb4d046bd418fad",
+      "context_utf8_bytes": 23245,
+      "context_rows": 37,
+      "context_unique_rows": 24
+    },
+    {
+      "question": "Why did Jon decide to start his dance studio?",
+      "answer": "He lost his job and decided to start his own business to share his passion.",
+      "evidence": [
+        "D1:2",
+        "D1:4"
+      ],
+      "category": 4,
+      "source_qa_index": 4,
+      "prediction": "Jon decided to start his dance studio because he is passionate about dancing and wants to share the joy that dancing brings him with others.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.41025641025641024
+      },
+      "context_digest": "9b46a0be78c3bd02a5fddf2360b31c0333de634ceed5e9e1083262a2297e0f9d",
+      "prompt_digest": "811f44b0a119b3598edd1b2a6c14bfef057cca6e23a2654b43f83bd57b9a204a",
+      "context_utf8_bytes": 30359,
+      "context_rows": 44,
+      "context_unique_rows": 22
+    },
+    {
+      "question": "Why did Gina decide to start her own clothing store?",
+      "answer": "She always loved fashion trends and finding unique pieces and she lost her job so decided it was time to start her own business.",
+      "evidence": [
+        "D6:8",
+        "D1:3"
+      ],
+      "category": 1,
+      "source_qa_index": 17,
+      "prediction": "Gina decided to start her own clothing store because she wanted to blend her love for dance and fashion.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.4186046511627907
+      },
+      "context_digest": "ba5dd99e751e7ea1591f09602cb35fa41d7f843e5be15b13b73a1ffc36e11c68",
+      "prompt_digest": "84a4c4ab5fbd2ffc2ad8bd7007cbb52094a3e689d42a9ce5cb15214681f66c36",
+      "context_utf8_bytes": 26874,
+      "context_rows": 40,
+      "context_unique_rows": 24
+    },
+    {
+      "question": "When is Jon's group performing at a festival?",
+      "answer": "February, 2023",
+      "evidence": [
+        "D1:24"
+      ],
+      "category": 2,
+      "source_qa_index": 6,
+      "prediction": "Next month.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "context_digest": "492510f0da5b349174078a2a4fa579ce3af410795ecaa9543100dc40ea0a157b",
+      "prompt_digest": "220c4d70c329bb5f036a469bb90eea9609f890b96b76f78e990705b696ed4cc5",
+      "context_utf8_bytes": 25564,
+      "context_rows": 40,
+      "context_unique_rows": 26
+    },
+    {
+      "question": "What is Gina's favorite style of dance?",
+      "answer": "Contemporary",
+      "evidence": [
+        "D1:9"
+      ],
+      "category": 4,
+      "source_qa_index": 39,
+      "prediction": "Contemporary",
+      "metrics": {
+        "exact_match": 1.0,
+        "token_f1": 1.0
+      },
+      "context_digest": "36f8cf62d560edf754938ab404c494cfb057d022eb476a1f49151e8c7420a256",
+      "prompt_digest": "9c5b7ce64222d4dacc67955398f989473afda6c1364c33d2fed1ec1a4169cc25",
+      "context_utf8_bytes": 29012,
+      "context_rows": 42,
+      "context_unique_rows": 23
+    },
+    {
+      "question": "Do Jon and Gina start businesses out of what they love?",
+      "answer": "Yes",
+      "evidence": [
+        "D1:4",
+        "D6:8"
+      ],
+      "category": 1,
+      "source_qa_index": 18,
+      "prediction": "Yes, Jon and Gina start businesses out of their passion for dance and sharing their love for it.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.10526315789473684
+      },
+      "context_digest": "91d6eceecc5c739d553336ca8f786c1d119ea19d8ee1d70eb6e1ed9977e6b3d9",
+      "prompt_digest": "bfa0379ab1c1d4ab7c4389a29f182c2e30d8308bc4cf893e5f377c7f59599525",
+      "context_utf8_bytes": 24938,
+      "context_rows": 39,
+      "context_unique_rows": 28
+    },
+    {
+      "question": "When did Gina launch an ad campaign for her store?",
+      "answer": "29 January, 2023",
+      "evidence": [
+        "D2:1"
+      ],
+      "category": 2,
+      "source_qa_index": 7,
+      "prediction": "29 January 2023",
+      "metrics": {
+        "exact_match": 1.0,
+        "token_f1": 1.0
+      },
+      "context_digest": "f6dcaee16a77f70f44842ae2e107d423e352f02e7a6ff0adf6d0e9631fca782c",
+      "prompt_digest": "e4e57381d9be961ce905dbea97a2fce466d2bbbbf314da0d727047ba1aae47c4",
+      "context_utf8_bytes": 26672,
+      "context_rows": 40,
+      "context_unique_rows": 28
+    },
+    {
+      "question": "What is Jon's favorite style of dance?",
+      "answer": "Contemporary",
+      "evidence": [
+        "D1:8"
+      ],
+      "category": 4,
+      "source_qa_index": 40,
+      "prediction": "Jon's favorite style of dance is not explicitly mentioned in the context.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "context_digest": "cd3182480c1dd3b571974c19bb91a7c1df46e2e19f3dc98ccf6a27bb2b64cb44",
+      "prompt_digest": "d018ec9de0ef191661c72ba9cbf9d58903a898c499c73ee0fd9a88097e885d06",
+      "context_utf8_bytes": 29279,
+      "context_rows": 44,
+      "context_unique_rows": 24
+    }
+  ],
+  "llm_events": [
+    {
+      "stage": "answer",
+      "key": "181d839af168eb9eb90092e00e734a5d2fd9e72c9be519f0d43e3fec561ff568",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.7357966564595699,
+      "cache_read_seconds": 3.8370490074157715e-07,
+      "cache_write_seconds": 0.025222890079021454,
+      "usage": {
+        "prompt_tokens": 6215,
+        "completion_tokens": 13,
+        "total_tokens": 6228
+      },
+      "finish_reason": "stop",
+      "seconds": 0.7611310482025146
+    },
+    {
+      "stage": "answer",
+      "key": "0db24df5fdd6a046b3418f433629d623d6f2bffcffa1ee42c591d1e9f8fb2b5e",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.6563058160245419,
+      "cache_read_seconds": 5.736947059631348e-07,
+      "cache_write_seconds": 0.04001905396580696,
+      "usage": {
+        "prompt_tokens": 6059,
+        "completion_tokens": 9,
+        "total_tokens": 6068
+      },
+      "finish_reason": "stop",
+      "seconds": 0.6964429691433907
+    },
+    {
+      "stage": "answer",
+      "key": "2f7edbdd89030d04e7201fa686861d3f6c6a2ad39ce43e277a459a087742bf29",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.6080176271498203,
+      "cache_read_seconds": 5.662441253662109e-07,
+      "cache_write_seconds": 0.03833579272031784,
+      "usage": {
+        "prompt_tokens": 5947,
+        "completion_tokens": 12,
+        "total_tokens": 5959
+      },
+      "finish_reason": "stop",
+      "seconds": 0.6464794687926769
+    },
+    {
+      "stage": "answer",
+      "key": "05a8b9fd8b341f2594abeb66fefea0c934422cbca58dafd54c94ad9a47a217d5",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.0368718914687634,
+      "cache_read_seconds": 3.390014171600342e-07,
+      "cache_write_seconds": 0.03417836129665375,
+      "usage": {
+        "prompt_tokens": 7101,
+        "completion_tokens": 30,
+        "total_tokens": 7131
+      },
+      "finish_reason": "stop",
+      "seconds": 1.0711640268564224
+    },
+    {
+      "stage": "answer",
+      "key": "fc63dddb012f9422e2a2fd56c51751c84f8af382b76c8da92d53f0157f82e3e8",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.6358512751758099,
+      "cache_read_seconds": 4.0605664253234863e-07,
+      "cache_write_seconds": 0.026905398815870285,
+      "usage": {
+        "prompt_tokens": 5788,
+        "completion_tokens": 13,
+        "total_tokens": 5801
+      },
+      "finish_reason": "stop",
+      "seconds": 0.6628926061093807
+    },
+    {
+      "stage": "answer",
+      "key": "0d8f53b9095ff1c5bb6eac003feb65e199e1c49faeecc3a779c5a4208590329f",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.019687868654728,
+      "cache_read_seconds": 6.07222318649292e-07,
+      "cache_write_seconds": 0.03439284488558769,
+      "usage": {
+        "prompt_tokens": 7318,
+        "completion_tokens": 27,
+        "total_tokens": 7345
+      },
+      "finish_reason": "stop",
+      "seconds": 1.0541967041790485
+    },
+    {
+      "stage": "answer",
+      "key": "0d3abff34fd25a63194880535e0d4a3be5f13c84aa5454dc9aeff5f672249fa3",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.8772898241877556,
+      "cache_read_seconds": 4.3213367462158203e-07,
+      "cache_write_seconds": 0.02702901139855385,
+      "usage": {
+        "prompt_tokens": 6578,
+        "completion_tokens": 22,
+        "total_tokens": 6600
+      },
+      "finish_reason": "stop",
+      "seconds": 0.9044148698449135
+    },
+    {
+      "stage": "answer",
+      "key": "05d14a084fd13aa5dfa428159e182bdad896960d57ac353bc59964d14f0fdff1",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.6348374262452126,
+      "cache_read_seconds": 3.2782554626464844e-07,
+      "cache_write_seconds": 0.02965681254863739,
+      "usage": {
+        "prompt_tokens": 6372,
+        "completion_tokens": 4,
+        "total_tokens": 6376
+      },
+      "finish_reason": "stop",
+      "seconds": 0.6645914427936077
+    },
+    {
+      "stage": "answer",
+      "key": "6b0f4c754d75342adb0dce6afe2fa42e17c69b2ae26d0a3f82701dc13d41dc4e",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.7029612772166729,
+      "cache_read_seconds": 4.284083843231201e-07,
+      "cache_write_seconds": 0.027602646499872208,
+      "usage": {
+        "prompt_tokens": 7103,
+        "completion_tokens": 3,
+        "total_tokens": 7106
+      },
+      "finish_reason": "stop",
+      "seconds": 0.7306550741195679
+    },
+    {
+      "stage": "answer",
+      "key": "fd80966a2d59b3a29ff7829f8e226d8fb23876d7ed671de1bd001a4b3ed829ab",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.8165230713784695,
+      "cache_read_seconds": 4.3585896492004395e-07,
+      "cache_write_seconds": 0.02237825095653534,
+      "usage": {
+        "prompt_tokens": 6165,
+        "completion_tokens": 21,
+        "total_tokens": 6186
+      },
+      "finish_reason": "stop",
+      "seconds": 0.8389900326728821
+    },
+    {
+      "stage": "answer",
+      "key": "88e2fc15298aae1ed72ea83e43f6aa8caf340927ba6d89749a7238932f559568",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.7303691282868385,
+      "cache_read_seconds": 4.023313522338867e-07,
+      "cache_write_seconds": 0.041485633701086044,
+      "usage": {
+        "prompt_tokens": 6606,
+        "completion_tokens": 9,
+        "total_tokens": 6615
+      },
+      "finish_reason": "stop",
+      "seconds": 0.7719671837985516
+    },
+    {
+      "stage": "answer",
+      "key": "3a0bd2dddfc9b1afbed7f2dfae9f2d62ca226499775c5572ed539fd74177ecae",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.8085057437419891,
+      "cache_read_seconds": 5.029141902923584e-07,
+      "cache_write_seconds": 0.02860216423869133,
+      "usage": {
+        "prompt_tokens": 7224,
+        "completion_tokens": 15,
+        "total_tokens": 7239
+      },
+      "finish_reason": "stop",
+      "seconds": 0.837220661342144
+    }
+  ]
+}

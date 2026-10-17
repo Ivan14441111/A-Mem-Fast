@@ -1,0 +1,68 @@
+{
+  "started_utc": "2026-10-17T18:43:39.135389+00:00",
+  "protocol_sha256": "2087184dec0f2ae69638aa0b418fbab37c760cf05734ab26a4397df902831620",
+  "source_commit": "2019a73d4ce7135acff4fc2cf51978ccee087124",
+  "cases": [
+    {
+      "sample_index": 0,
+      "source_run": "results/suite128-primary-observed-v1-20261018/turns128-sample0-upstream-r1",
+      "command": [
+        ".venv/bin/python",
+        "scripts/benchmark_context.py",
+        "--run-dir",
+        "results/suite128-primary-observed-v1-20261018/turns128-sample0-upstream-r1",
+        "--graph-mode",
+        "baseline",
+        "--order",
+        "upstream,deduplicated",
+        "--output",
+        "results/context128-observed-v1-20261018/sample0"
+      ],
+      "started_utc": "2026-10-17T18:43:39.136240+00:00",
+      "status": "complete",
+      "returncode": 0,
+      "finished_utc": "2026-10-17T18:44:10.853198+00:00"
+    },
+    {
+      "sample_index": 1,
+      "source_run": "results/suite128-primary-observed-v1-20261018/turns128-sample1-upstream-r3",
+      "command": [
+        ".venv/bin/python",
+        "scripts/benchmark_context.py",
+        "--run-dir",
+        "results/suite128-primary-observed-v1-20261018/turns128-sample1-upstream-r3",
+        "--graph-mode",
+        "baseline",
+        "--order",
+        "deduplicated,upstream",
+        "--output",
+        "results/context128-observed-v1-20261018/sample1"
+      ],
+      "started_utc": "2026-10-17T18:44:10.857063+00:00",
+      "status": "complete",
+      "returncode": 0,
+      "finished_utc": "2026-10-17T18:44:41.085713+00:00"
+    },
+    {
+      "sample_index": 2,
+      "source_run": "results/suite128-primary-observed-v1-20261018/turns128-sample2-upstream-r2",
+      "command": [
+        ".venv/bin/python",
+        "scripts/benchmark_context.py",
+        "--run-dir",
+        "results/suite128-primary-observed-v1-20261018/turns128-sample2-upstream-r2",
+        "--graph-mode",
+        "baseline",
+        "--order",
+        "upstream,deduplicated",
+        "--output",
+        "results/context128-observed-v1-20261018/sample2"
+      ],
+      "started_utc": "2026-10-17T18:44:41.089805+00:00",
+      "status": "complete",
+      "returncode": 0,
+      "finished_utc": "2026-10-17T18:45:11.042369+00:00"
+    }
+  ],
+  "finished_utc": "2026-10-17T18:45:11.043362+00:00"
+}

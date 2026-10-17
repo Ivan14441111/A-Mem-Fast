@@ -1,0 +1,151 @@
+{
+  "aggregation": "Summarize fixed-graph context cases without model inference.\n\nTiming uses geometric paired answer-time ratios across completed conversations;\nquality gives each conversation equal weight. Resource reductions use pooled\ntoken/byte totals. Planned and unavailable cases remain explicit.\n",
+  "planned_cases": 3,
+  "completed_cases": 3,
+  "unique_selected_qa_in_completed_cases": 36,
+  "cases": [
+    {
+      "sample_index": 0,
+      "source_run": "results/suite128-primary-observed-v1-20261018/turns128-sample0-upstream-r1",
+      "status": "complete"
+    },
+    {
+      "sample_index": 1,
+      "source_run": "results/suite128-primary-observed-v1-20261018/turns128-sample1-upstream-r3",
+      "status": "complete"
+    },
+    {
+      "sample_index": 2,
+      "source_run": "results/suite128-primary-observed-v1-20261018/turns128-sample2-upstream-r2",
+      "status": "complete"
+    }
+  ],
+  "rows": [
+    {
+      "sample_index": 0,
+      "context_policy": "upstream",
+      "qa_seconds": 10.33624168112874,
+      "metrics": {
+        "exact_match": 0.16666666666666666,
+        "token_f1": 0.43596955971826973
+      },
+      "http_requests": 12,
+      "prompt_tokens": 89040,
+      "completion_tokens": 136,
+      "context_rows": 493,
+      "context_utf8_bytes": 376016
+    },
+    {
+      "sample_index": 0,
+      "context_policy": "deduplicated",
+      "qa_seconds": 6.73866481333971,
+      "metrics": {
+        "exact_match": 0.16666666666666666,
+        "token_f1": 0.4318028930516031
+      },
+      "http_requests": 12,
+      "prompt_tokens": 53383,
+      "completion_tokens": 134,
+      "context_rows": 297,
+      "context_utf8_bytes": 221740
+    },
+    {
+      "sample_index": 1,
+      "context_policy": "deduplicated",
+      "qa_seconds": 6.8896821439266205,
+      "metrics": {
+        "exact_match": 0.08333333333333333,
+        "token_f1": 0.380421520634699
+      },
+      "http_requests": 12,
+      "prompt_tokens": 49245,
+      "completion_tokens": 183,
+      "context_rows": 303,
+      "context_utf8_bytes": 196620
+    },
+    {
+      "sample_index": 1,
+      "context_policy": "upstream",
+      "qa_seconds": 9.67881379276514,
+      "metrics": {
+        "exact_match": 0.16666666666666666,
+        "token_f1": 0.37712683906469197
+      },
+      "http_requests": 12,
+      "prompt_tokens": 78476,
+      "completion_tokens": 178,
+      "context_rows": 482,
+      "context_utf8_bytes": 318878
+    },
+    {
+      "sample_index": 2,
+      "context_policy": "upstream",
+      "qa_seconds": 9.419589761644602,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.42224627224627226
+      },
+      "http_requests": 12,
+      "prompt_tokens": 75463,
+      "completion_tokens": 163,
+      "context_rows": 472,
+      "context_utf8_bytes": 330625
+    },
+    {
+      "sample_index": 2,
+      "context_policy": "deduplicated",
+      "qa_seconds": 7.088509988039732,
+      "metrics": {
+        "exact_match": 0.08333333333333333,
+        "token_f1": 0.44757187257187253
+      },
+      "http_requests": 12,
+      "prompt_tokens": 50492,
+      "completion_tokens": 166,
+      "context_rows": 312,
+      "context_utf8_bytes": 217980
+    }
+  ],
+  "aggregates": {
+    "upstream": {
+      "conversations": 3,
+      "qa_seconds_sum": 29.434645235538483,
+      "http_requests_sum": 36,
+      "prompt_tokens_sum": 242979,
+      "completion_tokens_sum": 477,
+      "context_rows_sum": 1447,
+      "context_utf8_bytes_sum": 1025519,
+      "token_f1_equal_conversation_mean": 0.41178089034307797,
+      "exact_match_equal_conversation_mean": 0.1111111111111111
+    },
+    "deduplicated": {
+      "conversations": 3,
+      "qa_seconds_sum": 20.716856945306063,
+      "http_requests_sum": 36,
+      "prompt_tokens_sum": 153120,
+      "completion_tokens_sum": 483,
+      "context_rows_sum": 912,
+      "context_utf8_bytes_sum": 636340,
+      "token_f1_equal_conversation_mean": 0.4199320954193915,
+      "exact_match_equal_conversation_mean": 0.1111111111111111
+    },
+    "comparison": {
+      "answer_speedup_equal_conversation_geomean": 1.420025884470972,
+      "f1_delta_equal_conversation_mean": 0.008151205076313561,
+      "prompt_tokens_pooled_reduction": 0.3698220833899226,
+      "context_rows_pooled_reduction": 0.36973047684865235,
+      "context_utf8_bytes_pooled_reduction": 0.37949467537900317
+    }
+  },
+  "input_sha256": {
+    "results/context128-observed-v1-20261018/protocol.json": "2087184dec0f2ae69638aa0b418fbab37c760cf05734ab26a4397df902831620",
+    "results/context128-observed-v1-20261018/execution.json": "f2f56372ebd7fb4487f6e06cb8ddb7a54837d60bd38cbf1141d985fc766d571b",
+    "results/context128-observed-v1-20261018/sample0/summary.json": "8e16ba0dd898fea3fedad5b8a6f639602e003940e8ec4765718c30c108da909f",
+    "results/context128-observed-v1-20261018/sample0/manifest.json": "85afa784bc163351b449048542bae6deafcce38c897e37581ff12259364b9502",
+    "results/context128-observed-v1-20261018/sample1/summary.json": "0b4d4c5ffb2a35d133dde940792be8cbfcc32947b6cc9d5787513955d676aaeb",
+    "results/context128-observed-v1-20261018/sample1/manifest.json": "becdca615abc717d2435ab2e8f9f4fc874ce964d32c871ed72411f532eacd995",
+    "results/context128-observed-v1-20261018/sample2/summary.json": "cd68974bffe6f1bbeeda919880b7e2b96b8012653dc1ac4db86c7b53abcbda48",
+    "results/context128-observed-v1-20261018/sample2/manifest.json": "f9d8e27d36faf66fe55935cacf75f1d61915761091baa673637e9639332b2c23"
+  },
+  "analysis_script_sha256": "f7fd5b418d6fe7ed23912b223e0a1121eec2d589902cecfdd424fb875d7c96de"
+}

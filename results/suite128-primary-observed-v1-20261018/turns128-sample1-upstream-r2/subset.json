@@ -1,0 +1,771 @@
+{
+  "sample_id": "conv-30",
+  "turns": [
+    {
+      "content": "Speaker Ginasays : Hey Jon! Good to see you. What's up? Anything new?",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:1"
+    },
+    {
+      "content": "Speaker Jonsays : Hey Gina! Good to see you too. Lost my job as a banker yesterday, so I'm gonna take a shot at starting my own business.",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:2"
+    },
+    {
+      "content": "Speaker Ginasays : Sorry about your job Jon, but starting your own business sounds awesome! Unfortunately, I also lost my job at Door Dash this month. What business are you thinking of?",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:3"
+    },
+    {
+      "content": "Speaker Jonsays : Sorry to hear that! I'm starting a dance studio 'cause I'm passionate about dancing and it'd be great to share it with others.",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:4"
+    },
+    {
+      "content": "Speaker Ginasays : That's cool, Jon! What got you into this biz?",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:5"
+    },
+    {
+      "content": "Speaker Jonsays : I've been into dancing since I was a kid and it's been my passion and escape. I wanna start a dance studio so I can teach others the joy that dancing brings me.",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:6"
+    },
+    {
+      "content": "Speaker Ginasays : Wow Jon, same here! Dance is pretty much my go-to for stress relief. Got any fave styles?",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:7"
+    },
+    {
+      "content": "Speaker Jonsays : Cool, Gina! I love all dances, but contemporary is my top pick. It's so expressive and powerful! What's your fave?",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:8"
+    },
+    {
+      "content": "Speaker Ginasays : Yeah, me too! Contemporary dance is so expressive and graceful - it really speaks to me.",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:9"
+    },
+    {
+      "content": "Speaker Jonsays : Wow, great idea! Let's go to a dance class, it'll be so much fun!",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:10"
+    },
+    {
+      "content": "Speaker Ginasays : Yeah! Let's explore some new dance moves. We should plan a dance session soon!",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:11"
+    },
+    {
+      "content": "Speaker Jonsays : Yeah definitely! Wanna see my moves next Fri? Can't wait!",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:12"
+    },
+    {
+      "content": "Speaker Ginasays : Sounds great, Jon! Next Friday works. Let's boogie!",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:13"
+    },
+    {
+      "content": "Speaker Jonsays : [Image: a photography of a man in a suit is performing a dance] Wow, I'm excited too! This is gonna be great!",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:14"
+    },
+    {
+      "content": "Speaker Ginasays : Wow! What did you get?",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:15"
+    },
+    {
+      "content": "Speaker Jonsays : Woah, that pic's from when my dance crew took home first in a local comp last year. It was amazing up on that stage! I'm super keen to spread that intensity with other peeps. Gina, you ever been in any dance comps or shows?",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:16"
+    },
+    {
+      "content": "Speaker Ginasays : [Image: a photography of a couple of people standing next to each other] I used to compete in a few dance competitions and shows - my fav memory was when my team won first place at a regionals at age fifteen. It was an awesome feeling of accomplishment!",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:17"
+    },
+    {
+      "content": "Speaker Jonsays : Wow! Winning first place is amazing! What dance were you doing?",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:18"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks! We just did a contemporary piece called \"Finding Freedom.\" It was really emotional and powerful.",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:19"
+    },
+    {
+      "content": "Speaker Jonsays : [Image: a photography of a room with a view of the ocean and a few yoga mats] Wow, that must've been great! Check my ideal dance studio by the water.",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:20"
+    },
+    {
+      "content": "Speaker Ginasays : Cool setup! Man, you can't deny that view! Got time to rehearse with a biz and a new store?",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:21"
+    },
+    {
+      "content": "Speaker Jonsays : Hopefully, we will find a place like this that will inspire us!",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:22"
+    },
+    {
+      "content": "Speaker Ginasays : Wow, it looks great! What dances do you practice? Got any projects planned?",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:23"
+    },
+    {
+      "content": "Speaker Jonsays : [Image: a photo of a group of dancers in white dresses on a stage] Thanks! I rehearsed with a small group of dancers after work. We do all kinds of dances, from contemporary to hip-hop. We've got some cool projects in the works. Finishing up choreography to perform at a nearby festival next month. Can't wait!",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:24"
+    },
+    {
+      "content": "Speaker Ginasays : Wow, it looks awesome! Are they yours at the festival? They're so graceful!",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:25"
+    },
+    {
+      "content": "Speaker Jonsays : Yeah, they're the ones performing at the festival! They've been practicing hard and will definitely impress with their grace and skill.",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:26"
+    },
+    {
+      "content": "Speaker Ginasays : Wow, they look great! Can't wait to see them rock the festival. Gonna be awesome!",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:27"
+    },
+    {
+      "content": "Speaker Jonsays : Yeah, awesome! Glad to be part of it.",
+      "timestamp": "4:04 pm on 20 January, 2023",
+      "dia_id": "D1:28"
+    },
+    {
+      "content": "Speaker Ginasays : Hey Jon! Long time no see! Things have been hectic lately. I just launched an ad campaign for my clothing store in hopes of growing the business. Starting my own store and taking risks is both scary and rewarding. I'm excited to see where it takes me!",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:1"
+    },
+    {
+      "content": "Speaker Jonsays : Hey Gina! Whoa, your store looks great! All your hard work really paid off - congrats! Must be awesome to see your stuff on display.",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:2"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks a bunch! It's awesome seeing my vision happen. How's the dance studio going? Did you find the right spot?",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:3"
+    },
+    {
+      "content": "Speaker Jonsays : [Image: a photo of a bathroom with a blue floor and a pink wall] Hey Gina! Thanks for asking. I'm on the hunt for the ideal spot for my dance studio and it's been quite a journey! I've been looking at different places and picturing how the space would look. I even found a place with great natural light! Oh, I've been to Paris yesterday! It was sooo cool.",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:4"
+    },
+    {
+      "content": "Speaker Ginasays : Wow, nice spot! Where is it? Got any other features you want to think about before you decide? Paris?! That is really great Jon! Never had a chance to visit it. Been only to Rome once.",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:5"
+    },
+    {
+      "content": "Speaker Jonsays : It's downtown which is awesome cuz it's easy to get to. Plus the natural light! Gotta check the size & floor quality too. We need a good dance floor with enough bounce for me & my students to dance safely.",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:6"
+    },
+    {
+      "content": "Speaker Ginasays : Definitely! Dance floors help avoid injuries and make dancing more enjoyable. You thinking about it is great. Any particular type of flooring you like?",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:7"
+    },
+    {
+      "content": "Speaker Jonsays : Yeah, good flooring's crucial. I'm after Marley flooring, which is what dance studios usually use. It's great 'cause it's grippy but still lets you move, plus it's tough and easy to keep clean.",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:8"
+    },
+    {
+      "content": "Speaker Ginasays : Sounds great! Marley's perfect; it's got the right amount of grip and movement. Can't wait to see your dance studio done!",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:9"
+    },
+    {
+      "content": "Speaker Jonsays : Yeah, can't wait to see it done! Looking for the right place and getting everything ready has been a mix of exciting and nerve-wracking, but I'm determined to make it work. It'll be worth it!",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:10"
+    },
+    {
+      "content": "Speaker Ginasays : Believe in yourself, Jon! The process may be tough, but you got this. Push through and it'll be worth it. Don't forget to take breaks and dance it out when you need to destress!",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:11"
+    },
+    {
+      "content": "Speaker Jonsays : Glad I have you in my corner! Gotta make time to dance and vent, that's for sure. We'll make it through this - hang in there!",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:12"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks, Jon! Appreciate your support!",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:13"
+    },
+    {
+      "content": "Speaker Jonsays : Let's keep going and chase our dreams!",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:14"
+    },
+    {
+      "content": "Speaker Ginasays : Yeah! We've done so much, and there's nothing but good stuff coming. Let's keep going after our goals and making them happen.",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:15"
+    },
+    {
+      "content": "Speaker Jonsays : Success is almost here. We got this!",
+      "timestamp": "2:32 pm on 29 January, 2023",
+      "dia_id": "D2:16"
+    },
+    {
+      "content": "Speaker Jonsays : Hey Gina, hope you're doing ok! Still following my passion for dance. It's been bumpy, but I'm determined to make it work. I'm still searching for a place to open my dance studio.",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:1"
+    },
+    {
+      "content": "Speaker Ginasays : [Image: a photography of a shopping mall with a glass entrance and a sign] Hi Jon! So happy you're pushing forward with dancing! Inspiring 💪 I emailed some wholesalers and one replied and said yes today! I'm over the moon because now I can expand my clothing store and get closer to my customers. Check it out - here's a pic!",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:2"
+    },
+    {
+      "content": "Speaker Jonsays : Wow, Gina! You found the perfect spot for your store. Way to go, hard work's paying off!",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:3"
+    },
+    {
+      "content": "Speaker Ginasays : [Image: a photography of a clothing store with a lot of clothes on display] Thanks! Glad you like it. Yeah, it's a great spot. Here's a peek at the space I designed. Cozy and inviting - perfect for customers to check out all the trendy pieces.",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:4"
+    },
+    {
+      "content": "Speaker Jonsays : Wow, it looks great! Must've taken you ages to design it. What made you pick out the furniture and decor?",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:5"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks! It took a bit of time but I wanted to make the place look like my own style and make my customers feel cozy. I chose furniture that looks great and is comfy too. The chandelier adds a nice glam feel while matching the style of the store.",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:6"
+    },
+    {
+      "content": "Speaker Jonsays : Your store looks great - your customers will be so comfy.",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:7"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks! Making my spot comfortable and inviting for my customers is key. I want 'em to feel like they're in a cool oasis. Just creating an experience that'll make 'em wanna come back.",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:8"
+    },
+    {
+      "content": "Speaker Jonsays : That's a great goal! Creating a special experience for customers is the key to making them feel welcome and coming back. I think you can create that space you're imagining.",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:9"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks. Your support means a lot. I'm sure with my hard work and effort, I can make a special shopping experience for my customers. It's tough but I'm up for the challenge!",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:10"
+    },
+    {
+      "content": "Speaker Jonsays : I'm always here to support you! Go create something awesome with your store. Keep it up!",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:11"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks, Jon! I'll try my best. You're gonna do great with your dance studio, just keep going and stay positive! We'll get through this!",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:12"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks! Your words mean a lot. I'm staying positive and pushing forward. We've put our hearts into our dreams and I'm sure we'll make it.",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:13"
+    },
+    {
+      "content": "Speaker Ginasays : Sure thing, Jon! Stay motivated and keep going. Hard work pays off eventually. We can do this!",
+      "timestamp": "12:48 am on 1 February, 2023",
+      "dia_id": "D3:14"
+    },
+    {
+      "content": "Speaker Jonsays : Hey Gina! What's up? How's the store going? I gotta tell you about this thing with my biz.",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:1"
+    },
+    {
+      "content": "Speaker Ginasays : Hey Jon! The store's doing great! It's a wild ride. How's the biz?",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:2"
+    },
+    {
+      "content": "Speaker Jonsays : Hey Gina! I'm putting in a lot of work on my business even with the obstacles. I'm gonna make it happen!",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:3"
+    },
+    {
+      "content": "Speaker Ginasays : Wow! You've got drive! Keep it up and you'll definitely make a splash.",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:4"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks Gina! Your help really means a lot. Sometimes it's hard when things don't go my way, but I'm sure if I keep pushing, I'll reach my dreams!",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:5"
+    },
+    {
+      "content": "Speaker Ginasays : Understand where you're at, Jon. Setbacks are just opportunities for comebacks. You got the skills, passion, and drive. Plus my full support. Don't give up, buddy!",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:6"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks! Setbacks can be tough, but with your support, I can handle anything. Appreciate you having my back!",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:7"
+    },
+    {
+      "content": "Speaker Ginasays : I'm here for you no matter what! Anything you want to say about your biz?",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:8"
+    },
+    {
+      "content": "Speaker Jonsays : Searching for a dance studio location has been tricky, but I'm determined to find the right spot - when I do, I'm sure the rest will follow!",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:9"
+    },
+    {
+      "content": "Speaker Ginasays : Searching for the perfect dance studio's a tough job, Jon. Hang in there and you'll find it soon!",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:10"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks! Appreciate your encouragement - it means a lot! I'm working on my business and some new dance routines - rehearsing hard for an upcoming show. I'm passionate about dancing and it brings me so much joy and fulfillment.",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:11"
+    },
+    {
+      "content": "Speaker Ginasays : Wow, Jon! You're so talented! What show ya got planned?",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:12"
+    },
+    {
+      "content": "Speaker Jonsays : I'm getting ready for a dance comp near me next month. It's a great chance for me to show my skillz and, hopefully, get some props from the dance fam. Super stoked!",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:13"
+    },
+    {
+      "content": "Speaker Ginasays : Wow Jon, you're gonna kill it in that competition. Your hard work and talent will pay off! Good luck.",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:14"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks! Your help means a lot. I'll do my best to make you proud!",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:15"
+    },
+    {
+      "content": "Speaker Ginasays : No doubt, Jon you've got this. Your passion and commitment are awesome! Keep it up!",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:16"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks! I'm going for my dreams!",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:17"
+    },
+    {
+      "content": "Speaker Ginasays : Absolutely Jon. I'm always here to cheer you on. Make your dreams happen - keep going and believe in yourself. You got this!",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:18"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks, Gina! Your kind words mean a lot. I won't give up!",
+      "timestamp": "10:43 am on 4 February, 2023",
+      "dia_id": "D4:19"
+    },
+    {
+      "content": "Speaker Ginasays : Hey Jon! Great hearing from you again. How have you been? BTW, I found a cool new fashion piece for my store. Can't wait to share with my customers.",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:1"
+    },
+    {
+      "content": "Speaker Jonsays : Hey Gina! Congrats on the new fashion piece! Looks like your store is growing. Remenber the festival I told you about? Had that performance and it was awesome - so many people there complementing my dance moves. Dancing brings me joy and it was nice to be reminded why I'm passionate about it.",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:2"
+    },
+    {
+      "content": "Speaker Ginasays : Wow! That looks great. You look badass on stage. BTW, what's your favorite part of running your own studio?",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:3"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks, Gina! I love running my own studio. It's great having the freedom to create a space and help dancers of all ages and levels express themselves. I'm super thrilled about dancing each day and seeing my students progress. It's so fulfilling.",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:4"
+    },
+    {
+      "content": "Speaker Ginasays : [Image: a photo of a rack of clothes with a coat and a dress] That's awesome! I'm sure you feel great knowing your students are doing so well with dance. It's amazing what it can do for people! Oh, and btw - I've been working hard on my online store and just teamed up with a local artist for some cool designs. Check 'em out!",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:5"
+    },
+    {
+      "content": "Speaker Jonsays : It looks awesome. Your commitment and creativity in your business really stands out. How'd you come up with these cool designs?",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:6"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks Jon! I got the idea from a fashion mag and saw there wasn't much around like it. So I worked with the artist to make it happen - it's all about being ahead of the game and giving my customers something different.",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:7"
+    },
+    {
+      "content": "Speaker Jonsays : Nice one, Gina! You never shy away from a challenge and always try something new. I'm impressed by your willingness to take risks - it's really inspiring.",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:8"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks! Taking risks is scary but it's the only way to grow, right? Just part of the journey to success.",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:9"
+    },
+    {
+      "content": "Speaker Jonsays : Yeah, I totally agree - taking risks is key for success. It's made me grow, and even got me out of my secure 9-5 as a banker. Now, I'm aiming to turn my dancing passion into a business. I'm determined to make it work, I just know it! That being said, I definitely don't underestimate the difficulties - it ain't been a walk in the park, that's for sure.",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:10"
+    },
+    {
+      "content": "Speaker Ginasays : It's tough starting a biz, but don't let it get you down. You can make your studio work, I'm sure. And remember, I'm always here for you.",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:11"
+    },
+    {
+      "content": "Speaker Jonsays : [Image: a photography of a cartoon character with a quote about fear] Thanks, Gina. Your help means a lot. I'll keep plugging away and stay optimistic.",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:12"
+    },
+    {
+      "content": "Speaker Ginasays : This quote kept me positive through tough times. We all need a push sometimes, right? Even made a tattoo to remind myself about it.",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:13"
+    },
+    {
+      "content": "Speaker Jonsays : Love the tattoo, did you just get it?",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:14"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks! Got the tattoo a few years ago, it stands for freedom - dancing without worrying what people think. A reminder to follow my passions and express myself.",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:15"
+    },
+    {
+      "content": "Speaker Jonsays : Nice reminder, Gina! It's so important to have freedom and express ourselves without worry. Dance gives me an escape to be myself.",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:16"
+    },
+    {
+      "content": "Speaker Ginasays : Totally agree, Jon. Dancing lets us be ourselves and ain't nothing like the feeling it gives us. You're so dedicated to your studio, it's inspiring. Chase those dreams, buddy!",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:17"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks, Gina! Your support means so much. I'm gonna keep chasing after those dreams. Dance is my passion, and I'm gonna keep working hard to make it a success!",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:18"
+    },
+    {
+      "content": "Speaker Ginasays : This is the right attitude! How have you been juggling dance and business goals?",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:19"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks! Juggling both my passions can be tricky, but so rewarding. Dancing and running my biz need hard work, plus they give me energy for each other. My dance moves get me pumped to tackle my business goals, and successes there boost my drive to keep dreaming on the dance floor. It's a balancing act, but fun.",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:20"
+    },
+    {
+      "content": "Speaker Ginasays : Wow, Jon! You're amazing at juggling both your passions. Finding that happy medium is key - keep going and don't stop dreaming, buddy!",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:21"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks, Gina! Your pep-talk really meant a lot. I'm not gonna give up on my dreams - my dance studio and biz ventures need the hard work I'm putting in. Love having you in my corner, thanks for always being there!",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:22"
+    },
+    {
+      "content": "Speaker Ginasays : Yeah Jon, I'm here for you! Chasing our dreams and helping each other out. Let's keep movin' forward!",
+      "timestamp": "9:32 am on 8 February, 2023",
+      "dia_id": "D5:23"
+    },
+    {
+      "content": "Speaker Jonsays : Hi Gina! Been hectic for me lately. Started hitting the gym last week to stay on track with the venture. Gotta figure out how to balance it all, but it's going well. How about you?",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:1"
+    },
+    {
+      "content": "Speaker Ginasays : Hey Jon! Great to hear from you. Been having some tough times lately.",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:2"
+    },
+    {
+      "content": "Speaker Jonsays : Oof, sorry to hear that. What's up? Is there anything I can do to help?",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:3"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks, Jon! Appreciate your offer. Since I lost my job at Door Dash, things have been tough. But here's some good news - I've got something to share!",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:4"
+    },
+    {
+      "content": "Speaker Jonsays : Wow, that's awesome! Can't wait to hear it!",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:5"
+    },
+    {
+      "content": "Speaker Ginasays : [Image: a photo of a computer screen showing a book and a pair of shoes] Yay! My online clothes store is open! I've been dreaming of this for a while now - can't wait to see what happens!",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:6"
+    },
+    {
+      "content": "Speaker Jonsays : Congrats! That's awesome! What gave you the idea to start the online store?",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:7"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks! I'm passionate about fashion trends and finding unique pieces. Plus, I wanted to blend my love for dance and fashion, so it was a perfect match.",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:8"
+    },
+    {
+      "content": "Speaker Jonsays : Wow, that's awesome! Combining your two interests into a store is super cool. Best of luck with it!",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:9"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks! How is biz going? I hope it's going well!",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:10"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks for askin', Gina! Losing my job was hard, but I'm livin' my dreams now. Startin' my biz has been tough but I'm gonna make it! I keep facing new challenges, but I'm sure it'll be worth it in the end.",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:11"
+    },
+    {
+      "content": "Speaker Ginasays : Yeah, starting and running my own biz has had its ups and downs - but it's been an amazing ride!",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:12"
+    },
+    {
+      "content": "Speaker Jonsays : Yeah, it's been a rollercoaster. But your success really inspires me to keep pushing forward. Your determination is awesome!",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:13"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks, Jon! Your words are really encouraging. Glad my journey is inspiring others.",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:14"
+    },
+    {
+      "content": "Speaker Jonsays : Yeah, totally! It's great we both face the same challenges, it motivates us and it's like having a partner to dance with!",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:15"
+    },
+    {
+      "content": "Speaker Ginasays : Yep! We're both on different paths, but it's nice to have someone to root for us. We can do it!",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:16"
+    },
+    {
+      "content": "Speaker Jonsays : Definitely! Having someone back us up is great. Let's keep going and reach success together!",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:17"
+    },
+    {
+      "content": "Speaker Ginasays : Let's keep chasing our dreams, supporting each other, and celebrating achievements. We can do great things together!",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:18"
+    },
+    {
+      "content": "Speaker Jonsays : [Image: a photo of two glasses of champagne with a bottle of wine in the background] Yeah, Gina, thanks for having my back. Here's to taking on new heights, and all the trials that come with it. Cheers!",
+      "timestamp": "2:35 pm on 16 March, 2023",
+      "dia_id": "D6:19"
+    },
+    {
+      "content": "Speaker Jonsays : Hey Gina, how's it going?",
+      "timestamp": "7:28 pm on 23 March, 2023",
+      "dia_id": "D7:1"
+    },
+    {
+      "content": "Speaker Ginasays : Hey Jon, my online clothing store has been a roller coaster but rewarding. Starting a business takes courage - you hang in there too!",
+      "timestamp": "7:28 pm on 23 March, 2023",
+      "dia_id": "D7:2"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks Gina! It's been tough, but I'm gonna make it happen. It's been great! And hey, you're awesome with your store. How's it going?",
+      "timestamp": "7:28 pm on 23 March, 2023",
+      "dia_id": "D7:3"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks! Appreciate your kind words. Store's going good, just been keeping up with fashion trends so I can offer the best pieces to customers. It's been a lot of work, but really enjoying it. Got any advice or tips on running a successful biz?",
+      "timestamp": "7:28 pm on 23 March, 2023",
+      "dia_id": "D7:4"
+    },
+    {
+      "content": "Speaker Jonsays : Yeah, brand identity is key. Make sure yours stands out. Also be sure to build relationships with your customers – let them know you care. And don't forget to stay positive and motivate others. Your energy will be contagious!",
+      "timestamp": "7:28 pm on 23 March, 2023",
+      "dia_id": "D7:5"
+    },
+    {
+      "content": "Speaker Ginasays : Thanks for the advice, Jon! Building relationships and creating a strong brand image for my store is something I'm always working on. You're right, staying positive is key. What helps you stay motivated with your dance studio business?",
+      "timestamp": "7:28 pm on 23 March, 2023",
+      "dia_id": "D7:6"
+    },
+    {
+      "content": "Speaker Jonsays : [Image: a photography of a group of women doing a dance routine] Seeing my students succeed motivates me. It's awesome to help them learn and reach their goals. Your support, Gina, means a lot too. Here's a photo of us after during one of the dance clases.",
+      "timestamp": "7:28 pm on 23 March, 2023",
+      "dia_id": "D7:7"
+    },
+    {
+      "content": "Speaker Ginasays : That's awesome, Jon! Seeing your students grow and succeed must be really fulfilling. Glad I can be part of this journey!",
+      "timestamp": "7:28 pm on 23 March, 2023",
+      "dia_id": "D7:8"
+    },
+    {
+      "content": "Speaker Jonsays : Thanks for being there for me! It's really made a huge difference and it feels great.",
+      "timestamp": "7:28 pm on 23 March, 2023",
+      "dia_id": "D7:9"
+    }
+  ],
+  "questions": [
+    {
+      "question": "What do Jon and Gina both have in common?",
+      "answer": "They lost their jobs and decided to start their own businesses.",
+      "evidence": [
+        "D1:2",
+        "D1:3",
+        "D1:4",
+        "D2:1"
+      ],
+      "category": 1,
+      "source_qa_index": 3
+    },
+    {
+      "question": "When Jon has lost his job as a banker?",
+      "answer": "19 January, 2023",
+      "evidence": [
+        "D1:2"
+      ],
+      "category": 2,
+      "source_qa_index": 0
+    },
+    {
+      "question": "How do Jon and Gina both like to destress?",
+      "answer": "by dancing",
+      "evidence": [
+        "D1:7",
+        "D1:6"
+      ],
+      "category": 4,
+      "source_qa_index": 2
+    },
+    {
+      "question": "What Jon thinks the ideal dance studio should look like?",
+      "answer": "By the water, with natural light and Marley flooring",
+      "evidence": [
+        "D1:20",
+        "D2:4",
+        "D2:8"
+      ],
+      "category": 1,
+      "source_qa_index": 5
+    },
+    {
+      "question": "When Gina has lost her job at Door Dash?",
+      "answer": "January, 2023",
+      "evidence": [
+        "D1:3"
+      ],
+      "category": 2,
+      "source_qa_index": 1
+    },
+    {
+      "question": "Why did Jon decide to start his dance studio?",
+      "answer": "He lost his job and decided to start his own business to share his passion.",
+      "evidence": [
+        "D1:2",
+        "D1:4"
+      ],
+      "category": 4,
+      "source_qa_index": 4
+    },
+    {
+      "question": "Why did Gina decide to start her own clothing store?",
+      "answer": "She always loved fashion trends and finding unique pieces and she lost her job so decided it was time to start her own business.",
+      "evidence": [
+        "D6:8",
+        "D1:3"
+      ],
+      "category": 1,
+      "source_qa_index": 17
+    },
+    {
+      "question": "When is Jon's group performing at a festival?",
+      "answer": "February, 2023",
+      "evidence": [
+        "D1:24"
+      ],
+      "category": 2,
+      "source_qa_index": 6
+    },
+    {
+      "question": "What is Gina's favorite style of dance?",
+      "answer": "Contemporary",
+      "evidence": [
+        "D1:9"
+      ],
+      "category": 4,
+      "source_qa_index": 39
+    },
+    {
+      "question": "Do Jon and Gina start businesses out of what they love?",
+      "answer": "Yes",
+      "evidence": [
+        "D1:4",
+        "D6:8"
+      ],
+      "category": 1,
+      "source_qa_index": 18
+    },
+    {
+      "question": "When did Gina launch an ad campaign for her store?",
+      "answer": "29 January, 2023",
+      "evidence": [
+        "D2:1"
+      ],
+      "category": 2,
+      "source_qa_index": 7
+    },
+    {
+      "question": "What is Jon's favorite style of dance?",
+      "answer": "Contemporary",
+      "evidence": [
+        "D1:8"
+      ],
+      "category": 4,
+      "source_qa_index": 40
+    }
+  ],
+  "eligible_qa": 34,
+  "category_counts": {
+    "1": 4,
+    "2": 4,
+    "4": 4
+  },
+  "fingerprint": "9a61c0c1eeff8dd783ca2272a1cd03034d599e7fc810ddd1a4ce637c6cbd0287"
+}

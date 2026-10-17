@@ -1,0 +1,19 @@
+{
+  "defined_utc": "2026-10-17T17:50:57.723505+00:00",
+  "planned_cells": 9,
+  "generation_profile": "observed-tags-v1",
+  "max_tokens": 2000,
+  "repetition_penalty": 1.05,
+  "tag_budget": 16,
+  "tag_budget_policy": "observe",
+  "continue_on_error": true,
+  "source_project_commit": "2019a73d4ce7135acff4fc2cf51978ccee087124",
+  "source_fingerprint": "4d475aeb3218110018ab0d03505c0b0b95f27fa2c8b89012eaf71fee544fdd4b",
+  "policy": "Complete oversized tag lists are counted, never clipped. HTTP shape errors, truncation and policy JSON errors remain failures. Each independent planned cell is attempted once; failed cells stay visible in denominator. Source/config/replay integrity failures stop globally.",
+  "old_attempts": "Aborted1000-token pilot and strict bounded-tags-v1 run remain separate, never resumed or pooled.",
+  "diagnostic_scope": "Same HTTP payload as validated hard-budget profile; offline tests cover18tag acceptance, telemetry and isolated observation cache identity. No additional live controls or parameter sweep.",
+  "gpu_index": 2,
+  "gpu_timestamp_timezone": "Asia/Shanghai",
+  "allocation_transition_threshold_mib": 1024,
+  "sensitivity": "All planned9outcomes retained; successful-pair timing/quality are conditional on completion. Secondary descriptive subset excludes observed allocation transitions >1024MiB. Allocation stability does not prove constant compute load."
+}

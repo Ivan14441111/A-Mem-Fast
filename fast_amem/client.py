@@ -14,6 +14,8 @@ import time
 
 import requests
 
+from fast_amem.structured import policy_response_format
+
 SYSTEM_MESSAGE = "Follow the format specified in the prompt exactly. Do not add extra commentary."
 
 
@@ -79,7 +81,8 @@ class MeasuredClient:
 
     def __init__(self, base_url, model, *, cache=None, cache_mode="off", revision="",
                  temperature=0.0, seed=42, max_tokens=1000, timeout=180,
-                 repetition_penalty=None, tag_budget=None, tag_budget_policy="error"):
+                 repetition_penalty=None, tag_budget=None, tag_budget_policy="error",
+                 structured_policy_outputs=False):
         if cache_mode not in {"off", "write", "readwrite", "replay"}:
             raise ValueError("Invalid cache mode")
         if cache_mode != "off" and cache is None:
@@ -96,6 +99,9 @@ class MeasuredClient:
                 raise ValueError("tag_budget must be a positive integer")
         if tag_budget_policy not in {"error", "observe"}:
             raise ValueError("tag_budget_policy must be 'error' or 'observe'")
+        if not isinstance(structured_policy_outputs, bool):
+            raise TypeError("structured_policy_outputs must be a boolean")
+        self.structured_policy_outputs = structured_policy_outputs
         self.base_url = base_url.rstrip("/")
         self.model = model
         self.cache = cache
@@ -257,6 +263,11 @@ class MeasuredClient:
         }
         if self.repetition_penalty is not None:
             payload["repetition_penalty"] = self.repetition_penalty
+        request_stage = stage_for(prompt)
+        if self.structured_policy_outputs:
+            response_format = policy_response_format(request_stage)
+            if response_format is not None:
+                payload["response_format"] = response_format
         identity_data = {"revision": self.revision, "base_url": self.base_url, "request": payload}
         if self.tag_budget_policy == "observe":
             # Acceptance semantics differ although the server payload is identical.
@@ -265,8 +276,9 @@ class MeasuredClient:
         identity = json.dumps(identity_data,
                               sort_keys=True, ensure_ascii=False, separators=(",", ":"))
         key = hashlib.sha256(identity.encode()).hexdigest()
-        event = {"stage": stage_for(prompt), "key": key, "prefetch": _prefetch, "cache_hit": False,
+        event = {"stage": request_stage, "key": key, "prefetch": _prefetch, "cache_hit": False,
                  "tag_budget_policy": self.tag_budget_policy,
+                 "structured_output_applied": "response_format" in payload,
                  "http_requests": 0, "error": None, "http_seconds": 0.0,
                  "cache_read_seconds": 0.0, "cache_write_seconds": 0.0}
         started = time.perf_counter()
@@ -388,6 +400,7 @@ class MeasuredClient:
             generation_profile = "observed-tags-v1" if self.tag_budget_policy == "observe" else "bounded-tags-v1"
         return {"logical_calls": len(events),
                 "repetition_penalty": self.repetition_penalty,
+                "structured_policy_outputs": self.structured_policy_outputs,
                 "tag_budget": self.tag_budget,
                 "tag_budget_policy": self.tag_budget_policy,
                 "generation_profile": generation_profile,

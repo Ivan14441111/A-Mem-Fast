@@ -1,0 +1,29 @@
+warm: memory 8/128, HTTP=0
+warm: memory 16/128, HTTP=0
+warm: memory 24/128, HTTP=0
+warm: memory 32/128, HTTP=0
+warm: memory 40/128, HTTP=0
+warm: memory 48/128, HTTP=0
+warm: memory 56/128, HTTP=0
+warm: memory 64/128, HTTP=0
+warm: memory 72/128, HTTP=0
+warm: memory 80/128, HTTP=0
+warm: memory 88/128, HTTP=0
+warm: memory 96/128, HTTP=0
+warm: memory 104/128, HTTP=0
+warm: memory 112/128, HTTP=0
+warm: memory 120/128, HTTP=0
+warm: memory 128/128, HTTP=0
+warm: build=4.638s QA=0.152s F1=0.397
+{
+  "optimized_vs_warm": {
+    "build_speedup": 49.53288682606807,
+    "total_speedup": 51.50477508651606,
+    "memory_trace_equal": true,
+    "upstream_requests_equal": true,
+    "qa_equal": true,
+    "f1_delta": 0.0,
+    "same_evolution_policy": true,
+    "same_context_policy": true
+  }
+}

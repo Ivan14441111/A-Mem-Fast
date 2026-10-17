@@ -1,0 +1,27 @@
+{
+  "mode": "fused",
+  "exception_type": "ValueError",
+  "error": "fused evolution update requires memory_index, context, tags",
+  "failed_utc": "2026-10-17T18:41:10.947316+00:00",
+  "subset_fingerprint": "a994a343f7ab86549b240b0444a2699572d8ac7b73083d5cf639b80dc020b0a1",
+  "evolution_policy": "fused",
+  "note": "Last sequential fused response in closed failed-arm cache; offline extraction, no retry or repair.",
+  "progress": {
+    "phase": "build",
+    "last_completed_turn": 30,
+    "failed_turn_1based": 31,
+    "dia_id": "D2:15",
+    "memory_count_at_failure": 30
+  },
+  "request_key": "eb00f30482f977bca20961e8e4ef1c59a7c5124d172a43d98105940ae2ebf039",
+  "source_database_sha256": "9df565a8beac81db247ab46590998df6d19aff1c7e78c4c2a928f7aac7772918",
+  "content_sha256": "80ccf0643af402824b084853621460f7e1e3b39ae757148122df6839660359ee",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 1006,
+    "total_tokens": 1113,
+    "completion_tokens": 107,
+    "prompt_tokens_details": null
+  },
+  "content": "{\"decision\":\"STRENGTHEN_AND_UPDATE\",\"connections\":[1,26,29],\"tags\":[\"conversation\", \"family\", \"activities\", \"playground\"],\"neighbor_updates\":[{\"memory_index\":1,\"tags\":[\"Social interaction\", \"Personal update\", \"Conversation\", \"Playground\"]},{\"memory_index\":26,\"tags\":[\"Family\", \"Emotion\", \"Social Support\", \"Love\", \"Playground\"]},{\"memory_index\":29,\"tags\":[\"emotion\", \"personal\", \"family\", \"Playground\"]}]}"
+}

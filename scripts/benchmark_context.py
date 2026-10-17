@@ -84,7 +84,8 @@ def reconstruct_graph(run_dir, graph_mode, model):
                             max_tokens=config["max_tokens"],
                             repetition_penalty=config.get("repetition_penalty"),
                             tag_budget=config.get("tag_budget"),
-                            tag_budget_policy=config.get("tag_budget_policy", "error"))
+                            tag_budget_policy=config.get("tag_budget_policy", "error"),
+                            structured_policy_outputs=config.get("structured_policy_outputs", False))
     system = FastAgenticMemorySystem(model, client, evo_threshold=config["evo_threshold"],
                                      evolution_policy=report.get("evolution_policy", "upstream"))
     trace = []
@@ -132,7 +133,8 @@ def evaluate_arm(system, query_responses, config, subset, policy, output,
                                    max_tokens=config["max_tokens"], seed=config["seed"],
                                    repetition_penalty=config.get("repetition_penalty"),
                                    tag_budget=config.get("tag_budget"),
-                                   tag_budget_policy=config.get("tag_budget_policy", "error"))
+                                   tag_budget_policy=config.get("tag_budget_policy", "error"),
+                                   structured_policy_outputs=config.get("structured_policy_outputs", False))
     proxy = FrozenQueryClient(query_responses, answer_client)
     before = digest(canonical_memories(system))
     started = time.perf_counter()
@@ -203,7 +205,8 @@ def main():
     from fast_amem.client import MeasuredClient
     MeasuredClient(base_url, config["model"], repetition_penalty=config.get("repetition_penalty"),
                    tag_budget=config.get("tag_budget"),
-                   tag_budget_policy=config.get("tag_budget_policy", "error")).get_completion(
+                   tag_budget_policy=config.get("tag_budget_policy", "error"),
+                   structured_policy_outputs=config.get("structured_policy_outputs", False)).get_completion(
         "Reply with exactly one word: READY")
     results = {policy: evaluate_arm(system, queries, config, subset, policy, output,
                                     base_url, args.prefix_cache_reset)

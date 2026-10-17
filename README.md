@@ -63,16 +63,16 @@ Download model weights before starting the server. The script binds to `127.0.0.
 
 ## Run
 
-Inspect coverage and the three-arm order without loading models or contacting a server:
+Inspect coverage and the default paired order without loading models or contacting a server:
 
 ```bash
-python scripts/benchmark_suite.py --plan-only --include-fused \
-  --samples 0 1 2 --turns 128 --repeats 3 --max-questions 12 \
+python scripts/benchmark_suite.py --plan-only \
+  --samples 0 1 2 --turns 128 --repeats 2 --max-questions 12 \
   --max-tokens 2000 --repetition-penalty 1.05 --tag-budget 16 --tag-budget-policy observe \
   --output results/my-plan
 ```
 
-Run an isolated reference / exact pipeline / fused comparison with each arm's replay:
+Run an isolated configured reference / exact pipeline comparison with strict replay:
 
 ```bash
 export EMBEDDING_MODEL=/path/to/all-MiniLM-L6-v2
@@ -83,23 +83,23 @@ export MODEL_REVISION=your-model-and-template-revision
   --embedding-model "$EMBEDDING_MODEL" --model-revision "$MODEL_REVISION" \
   --max-turns 64 --max-questions 12 \
   --max-tokens 2000 --repetition-penalty 1.05 --tag-budget 16 --tag-budget-policy observe \
-  --modes baseline,optimized,fused,replay,warm,fused_warm \
+  --modes baseline,optimized,replay,warm \
   --output results/my-smoke
 ```
 
 Run the repeated suite:
 
 ```bash
-.venv-client/bin/python scripts/benchmark_suite.py --include-fused \
+.venv-client/bin/python scripts/benchmark_suite.py \
   --embedding-model "$EMBEDDING_MODEL" --model-revision "$MODEL_REVISION" \
-  --samples 0 1 2 --turns 128 --repeats 3 --max-questions 12 \
+  --samples 0 1 2 --turns 128 --repeats 2 --max-questions 12 \
   --max-tokens 2000 --repetition-penalty 1.05 --tag-budget 16 --tag-budget-policy observe \
   --continue-on-error --output results/my-suite
 ```
 
 These commands use the explicit `observed-tags-v1` profile: deterministic decoding, repetition penalty 1.05, and a common system instruction requesting tag lists of at most 16 items. Oversized complete lists are recorded without clipping; malformed HTTP responses and truncation remain errors. This contract was introduced after an unbounded strengthen response repeated until truncation; the original failed attempt, fixed diagnostic controls and subsequent strict tag-budget abort are retained. It changes the generator contract equally for configured arms and is separate from the untouched upstream prompts. Omitting the optional flags preserves historical request identities.
 
-The suite attempts each planned cell once. `--continue-on-error` preserves and counts generation/execution failures while attempting remaining independent cells; source, configuration and replay integrity failures stop the suite. Timing/QA summaries are conditional on successful paired cells, and the full planned denominator remains in `suite.json`.
+The suite attempts each planned cell once. `--continue-on-error` preserves and counts generation/execution failures while attempting remaining independent cells; source, configuration and replay integrity failures stop the suite. Timing/QA comparisons use completed baseline/candidate arm pairs, including pairs in a cell where another optional arm later failed. Completion and replay verification are reported separately, and the full planned denominator remains in `suite.json`.
 
 Use a fresh output directory for each cold run. `--resume` skips completed suite cells only when source and configuration hashes match; partial failed cells are preserved for inspection and require a new suite output. `--context-policy deduplicated` changes QA context for fast arms; the default is `upstream`. If a server does not support prefix-cache reset, `--prefix-cache-reset off` runs with that limitation recorded in the manifest.
 
@@ -107,7 +107,7 @@ Every subset keeps chronological turns and selects QA whose nonempty evidence re
 
 Response-cache SQLite files stay local and are excluded from git; the repository includes reports and source fingerprints. After a run has exited, `python scripts/archive_replay_cache.py --run-dir results/my-suite` creates a consistent private cache archive with SHA256 checks under `.private/artifacts/`.
 
-Existing recorded outputs can be replayed with the same benchmark configuration and `--modes replay,warm,fused_warm`. Replay is strict, never falls back to inference, and needs no live server. A changed model or template requires a new revision identity.
+Existing default-path outputs can be replayed with the same benchmark configuration and `--modes replay,warm`. Replay is strict, never falls back to inference, and needs no live server. A changed model or template requires a new revision identity.
 
 ## Test and inspect
 

@@ -1,0 +1,365 @@
+{
+  "args": {
+    "run_dir": "results/suite128-primary-observed-v1-20261018/turns128-sample1-upstream-r3",
+    "graph_mode": "baseline",
+    "output": "results/context128-observed-v1-20261018/sample1",
+    "order": "deduplicated,upstream",
+    "base_url": null,
+    "embedding_model": null,
+    "prefix_cache_reset": "required",
+    "plan_only": false
+  },
+  "fixed_memory_digest": "df70bad4e1133e60b493cbc2a8d358acefe733ac4da57caba7d4ae80211ce771",
+  "subset_fingerprint": "9a61c0c1eeff8dd783ca2272a1cd03034d599e7fc810ddd1a4ce637c6cbd0287",
+  "fixed_keywords_digest": "d2d21ea6cdfb777994739d85fa3c29fafd692193ebe13ab1f868ce3eafc64384",
+  "graph_replay_llm": {
+    "logical_calls": 526,
+    "repetition_penalty": 1.05,
+    "tag_budget": 16,
+    "tag_budget_policy": "observe",
+    "generation_profile": "observed-tags-v1",
+    "tag_budget_overshoots": {
+      "logical_response_inspections": 387,
+      "live_response_inspections": 0,
+      "cache_response_inspections": 387,
+      "logical_tag_lists_inspected": 400,
+      "live_tag_lists_inspected": 0,
+      "cache_tag_lists_inspected": 400,
+      "logical_overshoot_responses": 0,
+      "live_overshoot_responses": 0,
+      "cache_overshoot_observations": 0,
+      "unique_overshoot_request_keys": 0,
+      "over_budget_lists_live": 0,
+      "max_actual_tags": 16
+    },
+    "upstream_calls": 398,
+    "prefetch_calls": 128,
+    "http_requests": 0,
+    "cache_hits": 526,
+    "errors": 0,
+    "http_seconds_sum": 0.0,
+    "cache_read_seconds_sum": 0.0012997090816497803,
+    "cache_write_seconds_sum": 0.0,
+    "prompt_tokens_live": 0,
+    "completion_tokens_live": 0,
+    "latency_seconds_p50": 9.849108755588531e-05,
+    "latency_seconds_p95": 0.00028225407004356384,
+    "latency_seconds_max": 0.001975376158952713,
+    "by_stage": {
+      "analysis": {
+        "logical_calls": 256,
+        "http_requests": 0,
+        "cache_hits": 256,
+        "seconds_sum": 0.04972777143120766,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 0.00014785677194595337,
+        "latency_seconds_p95": 0.0002960721030831337,
+        "latency_seconds_max": 0.001975376158952713
+      },
+      "evolution_decision": {
+        "logical_calls": 127,
+        "http_requests": 0,
+        "cache_hits": 127,
+        "seconds_sum": 0.00233590230345726,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 1.784786581993103e-05,
+        "latency_seconds_p95": 2.363882958889007e-05,
+        "latency_seconds_max": 3.224611282348633e-05
+      },
+      "strengthen": {
+        "logical_calls": 127,
+        "http_requests": 0,
+        "cache_hits": 127,
+        "seconds_sum": 0.00983363762497902,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 7.428228855133057e-05,
+        "latency_seconds_p95": 8.748769760131836e-05,
+        "latency_seconds_max": 0.0002034008502960205
+      },
+      "update_neighbors": {
+        "logical_calls": 4,
+        "http_requests": 0,
+        "cache_hits": 4,
+        "seconds_sum": 0.0016532689332962036,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 0.00037725456058979034,
+        "latency_seconds_p95": 0.0005794299766421318,
+        "latency_seconds_max": 0.0006014257669448853
+      },
+      "query_keywords": {
+        "logical_calls": 12,
+        "http_requests": 0,
+        "cache_hits": 12,
+        "seconds_sum": 7.846951484680176e-05,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 5.342066287994385e-06,
+        "latency_seconds_p95": 1.2262910604476924e-05,
+        "latency_seconds_max": 1.5385448932647705e-05
+      }
+    }
+  },
+  "source_run_manifest": {
+    "args": {
+      "dataset": "/data2/xyf25/A-Mem-Fast/data/locomo10.json",
+      "sample_index": 1,
+      "max_turns": 128,
+      "max_questions": 12,
+      "retrieve_k": 10,
+      "evo_threshold": 100,
+      "workers": 4,
+      "context_policy": "upstream",
+      "evolution_policy": "upstream",
+      "prefix_cache_reset": "required",
+      "skip_server_warmup": false,
+      "prefetch_window": 16,
+      "base_url": "http://127.0.0.1:21014/v1",
+      "model": "Qwen3-8B",
+      "model_revision": "qwen3-8b-config-f7c4eadf-index-f9fdbcb9-template-01de28f8",
+      "embedding_model": "/home/xyf25/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "max_tokens": 2000,
+      "tag_budget_policy": "observe",
+      "tag_budget": 16,
+      "repetition_penalty": 1.05,
+      "seed": 42,
+      "output": "results/suite128-primary-observed-v1-20261018/turns128-sample1-upstream-r3",
+      "modes": "baseline,optimized,fused,replay,warm,fused_warm"
+    },
+    "python": "3.12.13",
+    "versions": {
+      "torch": "2.9.0+cu129",
+      "transformers": "4.57.6",
+      "sentence-transformers": "5.1.2",
+      "numpy": "2.2.6",
+      "scikit-learn": "1.7.2",
+      "vllm": "0.11.2"
+    },
+    "upstream_commit": "0c8039f28fdcc08189a23c07a3437d9d2482f9c2",
+    "project_commit": "2019a73d4ce7135acff4fc2cf51978ccee087124",
+    "upstream_repository": "https://github.com/WujiangXu/A-mem",
+    "subset_fingerprint": "9a61c0c1eeff8dd783ca2272a1cd03034d599e7fc810ddd1a4ce637c6cbd0287",
+    "timing_note": "Model download/server startup/model loading/warmup excluded; real live inference and fast-cache overhead included. Init reported separately. Nested timing is inclusive.",
+    "decoding": {
+      "temperature": 0,
+      "seed": 42,
+      "enable_thinking": false,
+      "max_tokens": 2000,
+      "repetition_penalty": 1.05,
+      "tag_budget": 16,
+      "tag_budget_policy": "observe",
+      "prompt_protocol": "observed-tags-v1",
+      "note": "Common configured decoding in all arms; differs from upstream default temperature."
+    },
+    "source_sha256": {
+      "scripts/benchmark.py": "d0bb3d65522f9c045760254e62c0b3bfba9da61b813267751767ad41483d628f",
+      "memory_layer.py": "b9a5b5797881b25c5524b98a543b22a1bbbcc7f285437ca667a5673e7f293eba",
+      "memory_layer_robust.py": "1c5cd36b50c9113440db0523b1f3d781aebc3711ff9b86b72b20e0f9bc981aef",
+      "llm_text_parsers.py": "353b77f57ce081ee51789e953ae8604b0c57e6470a332adc0377cf48f76d3a90",
+      "fast_amem/__init__.py": "ddedf9ae40b93083fb18887337d211049fd28e7a4a878bfe61999424a634018d",
+      "fast_amem/client.py": "59aeabab1b15794c4e735626533fe61b1eee6e470612bcc059810163d87b6f4c",
+      "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+      "fast_amem/joint.py": "eb8ca78cbdc06732ad526a4c952a35ce46c62a541ebd043c1e71e6ef763fe2cd",
+      "fast_amem/retriever.py": "59f1e08a60470f447b5fd9c2a3df19b7a94bc2d0a541dea73e2e5a3fa8833e02",
+      "fast_amem/system.py": "cb0c2d82ea8632acfe2ee45ed30a2ed2c6b61f134f1b573ed2b10d69157cac3f"
+    },
+    "baseline_recording": "Responses buffered in RAM; SQLite flush excluded. Optimized persistent cache overhead included.",
+    "shared_encoder_and_warmup_seconds": 1.1267019398510456
+  },
+  "source_sha256": {
+    "scripts/benchmark_context.py": "0fd339f8ad61aced712ac38aba218f5bc9b5e1ec00d1876bf949b181a7e10354",
+    "scripts/benchmark.py": "d0bb3d65522f9c045760254e62c0b3bfba9da61b813267751767ad41483d628f",
+    "fast_amem/__init__.py": "ddedf9ae40b93083fb18887337d211049fd28e7a4a878bfe61999424a634018d",
+    "fast_amem/client.py": "59aeabab1b15794c4e735626533fe61b1eee6e470612bcc059810163d87b6f4c",
+    "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+    "fast_amem/joint.py": "eb8ca78cbdc06732ad526a4c952a35ce46c62a541ebd043c1e71e6ef763fe2cd",
+    "fast_amem/retriever.py": "59f1e08a60470f447b5fd9c2a3df19b7a94bc2d0a541dea73e2e5a3fa8833e02",
+    "fast_amem/system.py": "cb0c2d82ea8632acfe2ee45ed30a2ed2c6b61f134f1b573ed2b10d69157cac3f"
+  },
+  "timing_note": "Graph replay, keyword lookup, encoder load, and one READY warmup excluded. Each timed arm includes one cold answer request per question and SQLite recording. QA context changes intentionally; this is not an exact-behavior optimization.",
+  "context_plan": [
+    {
+      "source_qa_index": 3,
+      "question": "What do Jon and Gina both have in common?",
+      "category": 1,
+      "upstream": {
+        "context_digest": "cf0032ccc99b9e3dd28a19384eb652ea7126af49d2fa8f08275493b7c8631a3e",
+        "context_utf8_bytes": 25337,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "1e057299d3a54b1e1c0cab19a0fff7b4d7831149e42304780c0d6f6704106c4f",
+        "context_utf8_bytes": 17594,
+        "context_rows": 28
+      }
+    },
+    {
+      "source_qa_index": 0,
+      "question": "When Jon has lost his job as a banker?",
+      "category": 2,
+      "upstream": {
+        "context_digest": "122c28e587ced5fcd54618a9205122a78d2d6e5bdd27888cc8c72d86a2c30579",
+        "context_utf8_bytes": 24374,
+        "context_rows": 38
+      },
+      "deduplicated": {
+        "context_digest": "013439c77b69ad0fbfe051fae88b15b758f004d567236fb92ba7d4f6f374f3b1",
+        "context_utf8_bytes": 17089,
+        "context_rows": 27
+      }
+    },
+    {
+      "source_qa_index": 2,
+      "question": "How do Jon and Gina both like to destress?",
+      "category": 4,
+      "upstream": {
+        "context_digest": "79f1cb9fb6b4a3614f5ada125ac84605f43a29245a58ebd905021c42e424c3c9",
+        "context_utf8_bytes": 24494,
+        "context_rows": 37
+      },
+      "deduplicated": {
+        "context_digest": "356601d10eef2d0d496ad1f5c6660e2076e3571be8dc9f0e492b79d2ef7f06d9",
+        "context_utf8_bytes": 15565,
+        "context_rows": 24
+      }
+    },
+    {
+      "source_qa_index": 5,
+      "question": "What Jon thinks the ideal dance studio should look like?",
+      "category": 1,
+      "upstream": {
+        "context_digest": "b9d8c132c42a1726a83acb02d9c86c9406c9f55fb938755a16944de59c032b70",
+        "context_utf8_bytes": 28730,
+        "context_rows": 41
+      },
+      "deduplicated": {
+        "context_digest": "34dd3ef9088eeb318b4c5483249a15cdbddc846a06d7dceee0bd31ef4dc13d74",
+        "context_utf8_bytes": 17086,
+        "context_rows": 25
+      }
+    },
+    {
+      "source_qa_index": 1,
+      "question": "When Gina has lost her job at Door Dash?",
+      "category": 2,
+      "upstream": {
+        "context_digest": "7c51f1e9caa1b40115d30ec12b5adcb4cb0ea2401ff599dc0bbafa00c4e23a54",
+        "context_utf8_bytes": 23245,
+        "context_rows": 37
+      },
+      "deduplicated": {
+        "context_digest": "8a164442612e1dcf42b3864f5d6d9fb902914f516ce14737cedbb6b9598816e2",
+        "context_utf8_bytes": 14745,
+        "context_rows": 24
+      }
+    },
+    {
+      "source_qa_index": 4,
+      "question": "Why did Jon decide to start his dance studio?",
+      "category": 4,
+      "upstream": {
+        "context_digest": "9b46a0be78c3bd02a5fddf2360b31c0333de634ceed5e9e1083262a2297e0f9d",
+        "context_utf8_bytes": 30359,
+        "context_rows": 44
+      },
+      "deduplicated": {
+        "context_digest": "49c106c1394fbccd2f8fb806330379b614522498491e2b56b158ea0216b665d6",
+        "context_utf8_bytes": 14600,
+        "context_rows": 22
+      }
+    },
+    {
+      "source_qa_index": 17,
+      "question": "Why did Gina decide to start her own clothing store?",
+      "category": 1,
+      "upstream": {
+        "context_digest": "ba5dd99e751e7ea1591f09602cb35fa41d7f843e5be15b13b73a1ffc36e11c68",
+        "context_utf8_bytes": 26874,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "3b25e94ada1af4c4235af7a04667ba68c322c6fc8a5414570af34077a743567f",
+        "context_utf8_bytes": 16195,
+        "context_rows": 24
+      }
+    },
+    {
+      "source_qa_index": 6,
+      "question": "When is Jon's group performing at a festival?",
+      "category": 2,
+      "upstream": {
+        "context_digest": "492510f0da5b349174078a2a4fa579ce3af410795ecaa9543100dc40ea0a157b",
+        "context_utf8_bytes": 25564,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "36493fd44e247c118e2d2e242a32bababdcf26d48e384c17eff34f094262f708",
+        "context_utf8_bytes": 15964,
+        "context_rows": 26
+      }
+    },
+    {
+      "source_qa_index": 39,
+      "question": "What is Gina's favorite style of dance?",
+      "category": 4,
+      "upstream": {
+        "context_digest": "36f8cf62d560edf754938ab404c494cfb057d022eb476a1f49151e8c7420a256",
+        "context_utf8_bytes": 29012,
+        "context_rows": 42
+      },
+      "deduplicated": {
+        "context_digest": "a97c3ab71df55a5cfdcf794250f62f0a9eca6b36ecd220031c35e70432456f03",
+        "context_utf8_bytes": 15530,
+        "context_rows": 23
+      }
+    },
+    {
+      "source_qa_index": 18,
+      "question": "Do Jon and Gina start businesses out of what they love?",
+      "category": 1,
+      "upstream": {
+        "context_digest": "91d6eceecc5c739d553336ca8f786c1d119ea19d8ee1d70eb6e1ed9977e6b3d9",
+        "context_utf8_bytes": 24938,
+        "context_rows": 39
+      },
+      "deduplicated": {
+        "context_digest": "0f8d339892c171011a93df190f58843acc4389cf602d64ab09ba89a4b040b60b",
+        "context_utf8_bytes": 17553,
+        "context_rows": 28
+      }
+    },
+    {
+      "source_qa_index": 7,
+      "question": "When did Gina launch an ad campaign for her store?",
+      "category": 2,
+      "upstream": {
+        "context_digest": "f6dcaee16a77f70f44842ae2e107d423e352f02e7a6ff0adf6d0e9631fca782c",
+        "context_utf8_bytes": 26672,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "6ad48552d45847bd082845738ef176be248681740d9e3a322a61a54ed8f7e736",
+        "context_utf8_bytes": 18517,
+        "context_rows": 28
+      }
+    },
+    {
+      "source_qa_index": 40,
+      "question": "What is Jon's favorite style of dance?",
+      "category": 4,
+      "upstream": {
+        "context_digest": "cd3182480c1dd3b571974c19bb91a7c1df46e2e19f3dc98ccf6a27bb2b64cb44",
+        "context_utf8_bytes": 29279,
+        "context_rows": 44
+      },
+      "deduplicated": {
+        "context_digest": "cce787df31eb6732d1acec3b75c34b1da08e4cc8e53a18c6c0028e499baf1f42",
+        "context_utf8_bytes": 16182,
+        "context_rows": 24
+      }
+    }
+  ]
+}

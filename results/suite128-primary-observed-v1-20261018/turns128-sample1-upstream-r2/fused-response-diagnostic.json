@@ -1,0 +1,27 @@
+{
+  "mode": "fused",
+  "exception_type": "ValueError",
+  "error": "fused evolution update requires memory_index, context, tags",
+  "failed_utc": "2026-10-17T18:14:19.860667+00:00",
+  "subset_fingerprint": "9a61c0c1eeff8dd783ca2272a1cd03034d599e7fc810ddd1a4ce637c6cbd0287",
+  "evolution_policy": "fused",
+  "note": "Last sequential fused response in closed failed-arm cache; offline extraction, no retry or repair.",
+  "progress": {
+    "phase": "build",
+    "last_completed_turn": 9,
+    "failed_turn_1based": 10,
+    "dia_id": "D1:10",
+    "memory_count_at_failure": 9
+  },
+  "request_key": "9d6e5bac0655ce8d8fff5ddf2599de95dd8259f41f86a9ecb57bc824fb39b4ea",
+  "source_database_sha256": "134e43524aafd25e50338b8cac3c4da24dd06600076d0bb7ba1c9f4072ceb710",
+  "content_sha256": "41e9f98c29fb9fe5f2d8de6a4f0facbf78464d4ec9e3461733b230ee92f46974",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 1043,
+    "total_tokens": 1148,
+    "completion_tokens": 105,
+    "prompt_tokens_details": null
+  },
+  "content": "{\"decision\":\"STRENGTHEN_AND_UPDATE\",\"connections\":[5,6,3,8,7],\"tags\":[\"social activity\", \"recreation\", \"suggestion\", \"entertainment\"],\"neighbor_updates\":[{\"memory_index\":5,\"tags\":[\"personal passion\", \"entrepreneurship\", \"creative expression\", \"Emotional Expression\", \"social activity\"]},{\"memory_index\":3,\"tags\":[\"entrepreneurship\", \"personal passion\", \"community building\", \"dance education\", \"Emotional Expression\", \"social activity\"]}]}"
+}

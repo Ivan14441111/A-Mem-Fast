@@ -1,0 +1,16 @@
+{
+  "mode": "fused",
+  "exception_type": "ValueError",
+  "error": "fused evolution update requires memory_index, context, tags",
+  "failed_utc": "2026-10-17T18:24:38.633969+00:00",
+  "subset_fingerprint": "9a61c0c1eeff8dd783ca2272a1cd03034d599e7fc810ddd1a4ce637c6cbd0287",
+  "evolution_policy": "fused",
+  "note": "Incomplete arm; excluded from timing and quality aggregates. Inspect suite log and local response cache.",
+  "progress": {
+    "phase": "build",
+    "last_completed_turn": 25,
+    "failed_turn_1based": 26,
+    "dia_id": "D1:26",
+    "memory_count_at_failure": 25
+  }
+}
