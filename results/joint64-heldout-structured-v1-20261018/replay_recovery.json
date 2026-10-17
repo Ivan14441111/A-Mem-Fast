@@ -1,0 +1,290 @@
+{
+  "source_suite": "results/joint64-heldout-structured-v1-20261018/suite.json",
+  "source_suite_sha256": "175e712e6e01dd51407be228265a23b3ec5375273ce1f26d21db23e31b334573",
+  "analysis_script_sha256": "64e5b6c49300188f8f11611a356ab626aeaa830cc612128574ea6cb37ad6e748",
+  "started_utc": "2026-10-17T20:06:48.522787+00:00",
+  "note": "Post-suite strict zero-HTTP verification of completed cold arms; no failed generation is retried.",
+  "plan_only": false,
+  "cells": [
+    {
+      "name": "turns64-sample3-upstream-r1",
+      "original_cell_status": "failed",
+      "completed_cold_arms": [
+        "baseline",
+        "optimized"
+      ],
+      "missing_replay_modes": [
+        "replay",
+        "warm"
+      ],
+      "command": [
+        "/data2/xyf25/A-Mem-Fast/.venv/bin/python",
+        "/data2/xyf25/A-Mem-Fast/scripts/benchmark.py",
+        "--dataset",
+        "/data2/xyf25/A-Mem-Fast/data/locomo10.json",
+        "--sample-index",
+        "3",
+        "--max-turns",
+        "64",
+        "--max-questions",
+        "24",
+        "--evolution-policy",
+        "upstream",
+        "--modes",
+        "replay,warm",
+        "--output",
+        "results/joint64-heldout-structured-v1-20261018/turns64-sample3-upstream-r1",
+        "--base-url",
+        "http://127.0.0.1:21014/v1",
+        "--model",
+        "Qwen3-8B",
+        "--model-revision",
+        "qwen3-8b-config-f7c4eadf-index-f9fdbcb9-template-01de28f8",
+        "--embedding-model",
+        "/home/xyf25/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "--max-tokens",
+        "2000",
+        "--seed",
+        "42",
+        "--retrieve-k",
+        "10",
+        "--evo-threshold",
+        "100",
+        "--workers",
+        "4",
+        "--prefetch-window",
+        "16",
+        "--prefix-cache-reset",
+        "required",
+        "--context-policy",
+        "upstream",
+        "--repetition-penalty",
+        "1.05",
+        "--tag-budget",
+        "16",
+        "--tag-budget-policy",
+        "observe",
+        "--structured-policy-outputs",
+        "--skip-server-warmup"
+      ],
+      "returncode": 0,
+      "checks": [
+        {
+          "cold_arm": "baseline",
+          "replay_arm": "replay",
+          "passed": true,
+          "memory_trace_equal": true,
+          "request_sequence_equal": true,
+          "qa_equal": true,
+          "zero_http": true,
+          "zero_client_errors": true,
+          "replay_report_sha256": "c481957403ef2cf59025a5802880dff3df2decf6f052c8a37564032bf6ac6f87"
+        },
+        {
+          "cold_arm": "optimized",
+          "replay_arm": "warm",
+          "passed": true,
+          "memory_trace_equal": true,
+          "request_sequence_equal": true,
+          "qa_equal": true,
+          "zero_http": true,
+          "zero_client_errors": true,
+          "replay_report_sha256": "88b507002efb6bc1ff5b96f377d87797baf606b009900fb1140eed9be5a75e20"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "turns64-sample3-upstream-r2",
+      "original_cell_status": "failed",
+      "completed_cold_arms": [
+        "fused"
+      ],
+      "missing_replay_modes": [
+        "fused_warm"
+      ],
+      "command": [
+        "/data2/xyf25/A-Mem-Fast/.venv/bin/python",
+        "/data2/xyf25/A-Mem-Fast/scripts/benchmark.py",
+        "--dataset",
+        "/data2/xyf25/A-Mem-Fast/data/locomo10.json",
+        "--sample-index",
+        "3",
+        "--max-turns",
+        "64",
+        "--max-questions",
+        "24",
+        "--evolution-policy",
+        "upstream",
+        "--modes",
+        "fused_warm",
+        "--output",
+        "results/joint64-heldout-structured-v1-20261018/turns64-sample3-upstream-r2",
+        "--base-url",
+        "http://127.0.0.1:21014/v1",
+        "--model",
+        "Qwen3-8B",
+        "--model-revision",
+        "qwen3-8b-config-f7c4eadf-index-f9fdbcb9-template-01de28f8",
+        "--embedding-model",
+        "/home/xyf25/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "--max-tokens",
+        "2000",
+        "--seed",
+        "42",
+        "--retrieve-k",
+        "10",
+        "--evo-threshold",
+        "100",
+        "--workers",
+        "4",
+        "--prefetch-window",
+        "16",
+        "--prefix-cache-reset",
+        "required",
+        "--context-policy",
+        "upstream",
+        "--repetition-penalty",
+        "1.05",
+        "--tag-budget",
+        "16",
+        "--tag-budget-policy",
+        "observe",
+        "--structured-policy-outputs",
+        "--skip-server-warmup"
+      ],
+      "returncode": 0,
+      "checks": [
+        {
+          "cold_arm": "fused",
+          "replay_arm": "fused_warm",
+          "passed": true,
+          "memory_trace_equal": true,
+          "request_sequence_equal": true,
+          "qa_equal": true,
+          "zero_http": true,
+          "zero_client_errors": true,
+          "replay_report_sha256": "6f1d19a6c8cf1903ca0bd227785eedaed112b92034ddf7713968bc2deda5ca03"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "turns64-sample4-upstream-r1",
+      "original_cell_status": "complete",
+      "completed_cold_arms": [
+        "baseline",
+        "optimized",
+        "fused",
+        "joint"
+      ],
+      "missing_replay_modes": [],
+      "checks": [
+        {
+          "cold_arm": "baseline",
+          "replay_arm": "replay",
+          "passed": true,
+          "memory_trace_equal": true,
+          "request_sequence_equal": true,
+          "qa_equal": true,
+          "zero_http": true,
+          "zero_client_errors": true,
+          "replay_report_sha256": "dc91b8ee8717e7d2e9395f74f74c55396a99dfb8dc3f750bf7c271aa9ba65434"
+        },
+        {
+          "cold_arm": "optimized",
+          "replay_arm": "warm",
+          "passed": true,
+          "memory_trace_equal": true,
+          "request_sequence_equal": true,
+          "qa_equal": true,
+          "zero_http": true,
+          "zero_client_errors": true,
+          "replay_report_sha256": "ea1d169f933abdb9856818415dfa7a439a5f548e513a9a6a703398e77a4939c6"
+        },
+        {
+          "cold_arm": "fused",
+          "replay_arm": "fused_warm",
+          "passed": true,
+          "memory_trace_equal": true,
+          "request_sequence_equal": true,
+          "qa_equal": true,
+          "zero_http": true,
+          "zero_client_errors": true,
+          "replay_report_sha256": "0b4a765e7ad6f7266caa573766953681c16124cfd0b5a1b155b06101f2dc06a2"
+        },
+        {
+          "cold_arm": "joint",
+          "replay_arm": "joint_warm",
+          "passed": true,
+          "memory_trace_equal": true,
+          "request_sequence_equal": true,
+          "qa_equal": true,
+          "zero_http": true,
+          "zero_client_errors": true,
+          "replay_report_sha256": "169e2c5201b487a4bd92bfb7664748db55e48e58ba4d198592e7ea316e532b40"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "turns64-sample4-upstream-r2",
+      "original_cell_status": "complete",
+      "completed_cold_arms": [
+        "baseline",
+        "optimized",
+        "fused",
+        "joint"
+      ],
+      "missing_replay_modes": [],
+      "checks": [
+        {
+          "cold_arm": "baseline",
+          "replay_arm": "replay",
+          "passed": true,
+          "memory_trace_equal": true,
+          "request_sequence_equal": true,
+          "qa_equal": true,
+          "zero_http": true,
+          "zero_client_errors": true,
+          "replay_report_sha256": "2fe8643e58ba1f826d211eb756e5386bdda363eb37d2077753fc9ed6008437b6"
+        },
+        {
+          "cold_arm": "optimized",
+          "replay_arm": "warm",
+          "passed": true,
+          "memory_trace_equal": true,
+          "request_sequence_equal": true,
+          "qa_equal": true,
+          "zero_http": true,
+          "zero_client_errors": true,
+          "replay_report_sha256": "e298b2ac5daad564c999c824c6c887b4a8ac651eb18a4d750c9d446fba68ac1a"
+        },
+        {
+          "cold_arm": "fused",
+          "replay_arm": "fused_warm",
+          "passed": true,
+          "memory_trace_equal": true,
+          "request_sequence_equal": true,
+          "qa_equal": true,
+          "zero_http": true,
+          "zero_client_errors": true,
+          "replay_report_sha256": "b4685f8f4cada1026d0c0d38b2193389b34213672a6ea46c44805e2f22f52ef3"
+        },
+        {
+          "cold_arm": "joint",
+          "replay_arm": "joint_warm",
+          "passed": true,
+          "memory_trace_equal": true,
+          "request_sequence_equal": true,
+          "qa_equal": true,
+          "zero_http": true,
+          "zero_client_errors": true,
+          "replay_report_sha256": "374b3798eba19c08cf3d0a247b7b22447bb56563e7066772a4e15589920e422a"
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "finished_utc": "2026-10-17T20:07:10.074919+00:00"
+}

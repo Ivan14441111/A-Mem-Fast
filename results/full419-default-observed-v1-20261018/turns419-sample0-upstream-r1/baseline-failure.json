@@ -1,0 +1,29 @@
+{
+  "mode": "baseline",
+  "exception_type": "ValueError",
+  "error": "LLM reached max_tokens; completion is truncated",
+  "failed_utc": "2026-10-17T19:10:18.908629+00:00",
+  "subset_fingerprint": "c1bd83e690ad4ba2721d2a73ad51bafa904d1fc6c1710eaee522ae1fee58e44b",
+  "evolution_policy": "upstream",
+  "note": "Incomplete arm; excluded from timing and quality aggregates. Inspect suite log and local response cache.",
+  "progress": {
+    "phase": "qa",
+    "question_index_0based": 34,
+    "source_qa_index": 69
+  },
+  "llm_diagnostic": {
+    "stage": "answer",
+    "request_key": "c2015c6964cb3b98a3d9712542ca4a424d68768d72dae35d0cc2040a16ce968a",
+    "finish_reason": "length",
+    "usage": {
+      "prompt_tokens": 6591,
+      "completion_tokens": 2000,
+      "total_tokens": 8591
+    },
+    "content_chars": 10748,
+    "content_sha256": "0c804835bf39e0b5f578fe22cc079a09be5aa04513414aef9fed8eb609fff23d",
+    "content_prefix": "Short answer: Empathy, understanding, courage, strength, inspiration, support, gratitude, creativity, expression, resilience, acceptance, love, guidance, kindness, friendship, emotional connection, community, storytelling, communication, dialogue, social interaction, experience, pride, inclusive, artist, expressive, expressive, self-care, self-acceptance, self-expression, self-portrait, emotional connection, LGBTQ support group, support network, conversation, gratitude, power, experience, empathy, understan",
+    "content_suffix": "port, gratitude, emotional connection, community, empathy, experience, power, dialogue, support, gratitude, emotional connection, community, empathy, experience, power, dialogue, support, gratitude, emotional connection, community, empathy, experience, power, dialogue, support, gratitude, emotional connection, community, empathy, experience, power, dialogue, support, gratitude, emotional connection, community, empathy, experience, power, dialogue, support, gratitude, emotional connection, community, empathy",
+    "tag_budget_policy": "observe"
+  }
+}

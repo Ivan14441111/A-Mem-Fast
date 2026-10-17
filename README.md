@@ -1,19 +1,21 @@
 # A-Mem-Fast
 
-A measured performance engineering project built on [A-Mem](https://github.com/WujiangXu/A-mem). It provides a bounded ingestion pipeline, an incremental exact vector index, a persistent response cache, and an opt-in fused memory evolution policy. The benchmark harness separates live inference, response replay, and index microbenchmarks so their speedups can be assessed independently.
+A measured performance engineering project built on [A-Mem](https://github.com/WujiangXu/A-mem). It provides a bounded ingestion pipeline, an incremental exact vector index, a persistent response cache, and opt-in fused/joint memory policies. The benchmark harness separates live inference, response replay, and index microbenchmarks so their speedups can be assessed independently. Recorded LoCoMo ablations reduced answer prompt tokens by 36.98% across three fixed graphs and build requests from 206 to 64 in a one-conversation joint-note pilot.
 
-The reference implementation is the upstream **robust** memory layer at commit `0c8039f28fdcc08189a23c07a3437d9d2482f9c2`. The upstream source files and prompts remain in the repository. The fast implementation follows the upstream successful execution path with stricter error propagation; fused evolution and context deduplication are explicit policy changes. See [engineering details](README_FAST.md), [source audit](docs/audit.md), and [current experiment report](docs/experiments_v2.md).
+The reference implementation is the upstream **robust** memory layer at commit `0c8039f28fdcc08189a23c07a3437d9d2482f9c2`. The upstream source files and prompts remain in the repository. The fast implementation follows the upstream successful execution path with stricter error propagation; fused evolution, joint note construction and context deduplication are explicit policy changes. See [engineering details](README_FAST.md), [source audit](docs/audit.md), and [current experiment report](docs/experiments_v2.md).
 
 ```mermaid
 flowchart LR
-    T[Chronological turns] --> A[Bounded parallel metadata analysis]
-    A --> C[Exact request cache]
-    C --> S[Sequential note insertion]
+    T[Chronological turns] --> P{Note policy}
+    P --> A[Bounded metadata prefetch]
+    A --> S[Ordered note processing]
     S --> E{Evolution policy}
     E --> U[Upstream conditional calls]
-    E --> F[Fused structured call]
+    E --> F[Opt-in fused request]
+    P --> J[Opt-in joint note request]
     U --> G[Memory graph]
     F --> G
+    J --> G
     G --> I[Shared encoder and exact index]
     I --> Q[Retrieval and QA]
 ```
@@ -22,16 +24,43 @@ flowchart LR
 | --- | --- | --- |
 | Rolling metadata prefetch | Overlap independent analysis with ordered graph updates | Default retains upstream prompts and mutation order |
 | Exact incremental index | Reuse encoder, grow vector storage, batch changed documents at consolidation | Retains cosine ranking, row indices, consolidation schedule and stale-vector behavior |
-| SQLite WAL response cache | Reuse complete deterministic requests and audit replay | Includes model revision, endpoint and decoding settings in identity; HTTP failures and truncated outputs are rejected |
+| SQLite WAL response cache | Reuse complete request identities and audit replay | Includes model revision, endpoint and decoding settings in identity; HTTP failures and truncated outputs are rejected |
 | Fused evolution | Replace conditional decision/strengthen/update requests with one structured request | Changes prompts and potentially memory/QA outcomes; opt-in |
 | Joint note construction | Combine metadata and evolution in one ordered request | Changes conditioning and retrieval inputs; experimental opt-in |
 | Context deduplication | Remove duplicate graph rows from QA context | Changes QA prompts; separate opt-in ablation |
 
 ## Evidence and limits
 
-Real Qwen3-8B / MiniLM / LoCoMo measurements, per-question outputs and negative results are documented in [the current experiment report](docs/experiments_v2.md). [The technical analysis](docs/deep_analysis.md) explains where inference time goes and why request fusion changes graph decisions. Fixed-response replay checks the reference memory trace, chronological request sequence and complete QA outputs; it does not guarantee identical independently inferred live outputs. Earlier 64-turn measurements remain in [the historical report](docs/experiments.md).
+Real Qwen3-8B / MiniLM / LoCoMo runs retain successful outputs and failed attempts. All **21 completed cold arms** across the primary, held-out and full-conversation runs passed strict zero-HTTP replay of graph traces, logical request sequences and selected QA outputs. Reference-cache → exact replay checks default-path implementation equivalence on fixed responses. Fused/joint own-cache replay checks reproducibility of each changed policy, not equivalence to the reference. Independently inferred live outputs can differ.
 
-The suite supports multiple conversations, repeated paired runs, three rotated arm orders, evidence-complete QA selection, token counts, stage latencies, parser/error counters, and GPU load logs. Repeats of the same questions are not independent new samples. Measurements on shared hardware and this small LoCoMo subset do not establish a general speed or accuracy guarantee. Cache replay and index-only speedups are reported separately from live end-to-end inference. This project does not reproduce the paper's full evaluation.
+| Experiment | Measured result | Scope |
+| --- | --- | --- |
+| Fixed-graph context deduplication | **36.98% fewer answer prompt tokens**, **1.420×** answer-stage speed, F1 **0.412 → 0.420** | Three fixed graphs, 36 unique questions; separate shared-GPU ablation |
+| Default ordered pipeline, 128 turns | **1.143×** build speed, F1 **0.398 → 0.404** | Three completed, reference-first conversation pairs; shared GPU |
+| Allocation-stable sensitivity | **1.075×** build speed, F1 **0.413 → 0.393** | Two pairs; excludes one conversation crossing a GPU memory transition |
+| Full-conversation scale check | **419 turns, four consolidations**, exact graph/request/48-QA replay matched | One completed exact arm; reference failed during QA, so no paired speed claim |
+
+Build speed uses equal-conversation geometric means of paired ratios. Context timing includes retrieval, rendering, answer generation, scoring and cache access, and excludes memory construction and query-keyword generation. Answer prompt tokens were 242,979 → 153,120 across the same 36 questions. The allocation check detects GPU memory transitions, not all competing compute load; the context phase has no dedicated GPU trace.
+
+![Paired default pipeline measurements](results/suite128-primary-observed-v1-20261018/default_pairs.svg)
+
+A separate held-out 64-turn pilot planned two conversations × two repeats with four policies. These rows use comparison-specific completed reference/candidate pairs; build request/output-token means use those same pairs.
+
+| Candidate | Pairs / conversations / unique QA | Build speed | Build HTTP | Build output tokens | Token F1 |
+| --- | --- | --- | --- | --- | --- |
+| Exact pipeline | 3 / 2 / 31 | **1.383×** | 198.5 → 194.25 | 13,636 → 11,439.75 | 0.445 → 0.437 |
+| Fused evolution + schema | 2 / 1 / 14 | **1.970×** | 206 → 127 | 17,199 → 11,056 | 0.547 → 0.579 |
+| Joint note + schema | 2 / 1 / 14 | **2.301×** | 206 → 64 | 17,199 → 7,250 | 0.547 → 0.610 |
+
+The pilot attempted all four cells: two completed and two failed during joint QA keyword generation after successful memory builds. Of 16 planned cold arms, 13 were attempted, 11 completed, two failed and three were not reached. Fused/joint paired results therefore cover **one conversation and two repeats of the same 14 questions**. These policies change graph decisions and output tokens as well as call counts; the observed times are not pure RPC-fusion effects. All pilot cells met the GPU allocation criterion, while shared compute remained uncontrolled. The model and fixed schemas were prewarmed.
+
+![Joint policy paired pilot](results/joint64-heldout-structured-v1-20261018/joint_pairs.svg)
+
+[Detailed paired metrics](results/joint64-heldout-structured-v1-20261018/paired_metrics.md), [all-four-policy figure](results/joint64-heldout-structured-v1-20261018/four_arm_pairs.svg), and [arm-wise completion tables](results/joint64-heldout-structured-v1-20261018/derived.json) retain the full denominator. The preregistered 128-turn extension was **not executed** because its [conservative timing projection](results/joint128-heldout-structured-v1-20261018/scheduling_decision.json) exceeded the time available after the release reserve.
+
+The original 128-turn primary attempted all nine planned three-arm cells; every optional unstructured fused arm failed JSON/domain validation. Three reference and six exact arms completed, leaving the three reference-first default pairs above. Their completed subset is not counterbalanced. Structured output guidance is an opt-in policy variant; it does not guarantee successful free-form QA or general reliability.
+
+See the [current experiment report](docs/experiments_v2.md), [technical analysis](docs/deep_analysis.md), and [measurement index](results/README.md) for per-question outputs, quality comparisons, source snapshots and preserved failures. Repeated questions do not increase the independent sample count. These small, completion-conditional subsets do not establish a general speed or accuracy guarantee or reproduce the paper's full evaluation. [Earlier 64-turn results](docs/experiments.md) and index-only microbenchmarks remain separate from current live inference evidence.
 
 ## Install
 
@@ -97,7 +126,20 @@ Run the repeated suite:
   --continue-on-error --output results/my-suite
 ```
 
-These commands use the explicit `observed-tags-v1` profile: deterministic decoding, repetition penalty 1.05, and a common system instruction requesting tag lists of at most 16 items. Oversized complete lists are recorded without clipping; malformed HTTP responses and truncation remain errors. This contract was introduced after an unbounded strengthen response repeated until truncation; the original failed attempt, fixed diagnostic controls and subsequent strict tag-budget abort are retained. It changes the generator contract equally for configured arms and is separate from the untouched upstream prompts. Omitting the optional flags preserves historical request identities.
+For experimental fused/joint comparisons, enable schema-guided JSON output explicitly:
+
+```bash
+.venv-client/bin/python scripts/benchmark_suite.py \
+  --embedding-model "$EMBEDDING_MODEL" --model-revision "$MODEL_REVISION" \
+  --samples 3 4 --turns 64 --repeats 2 --max-questions 24 \
+  --max-tokens 2000 --repetition-penalty 1.05 --tag-budget 16 --tag-budget-policy observe \
+  --include-fused --include-joint --structured-policy-outputs \
+  --continue-on-error --output results/my-policy-pilot
+```
+
+This requires an endpoint supporting standard `response_format` JSON schemas. The flag guides only fused/joint stages; reference, upstream-policy and QA payloads remain unchanged. Schema guidance does not replace candidate-ID, branch or graph-update validation. The default path needs no schema backend. See [the API examples](README_FAST.md) for library use.
+
+These commands use the explicit `observed-tags-v1` profile: deterministic decoding, repetition penalty 1.05, and a common system instruction requesting tag lists of at most 16 items. Oversized complete lists are recorded without clipping; malformed HTTP responses and truncation remain errors. This changes the generator contract equally for configured arms and is separate from the untouched upstream prompts. [Protocol history and failed attempts](results/README.md#preserved-failures-and-diagnostics) remain available for review. Omitting the optional flags preserves historical request identities.
 
 The suite attempts each planned cell once. `--continue-on-error` preserves and counts generation/execution failures while attempting remaining independent cells; source, configuration and replay integrity failures stop the suite. Timing/QA comparisons use completed baseline/candidate arm pairs, including pairs in a cell where another optional arm later failed. Completion and replay verification are reported separately, and the full planned denominator remains in `suite.json`.
 

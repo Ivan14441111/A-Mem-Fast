@@ -155,6 +155,40 @@ def command_for(args, cell):
     return command
 
 
+def _is_cache_integrity_error(message):
+    # Inspect exception/error fields only, never model-generated text previews.
+    ambiguity = "Same baseline request returned different text; exact cache replay is ambiguous"
+    return (isinstance(message, str) and
+            (message in {ambiguity, "RuntimeError: " + ambiguity} or
+             message.startswith(("Replay cache miss:", "RuntimeError: Replay cache miss:"))))
+
+
+def _is_sqlite_integrity_error(detail):
+    specific_types = {"InterfaceError", "DatabaseError", "DataError", "OperationalError",
+                      "IntegrityError", "InternalError", "ProgrammingError", "NotSupportedError"}
+    module = detail.get("exception_module", detail.get("error_module"))
+    kind = detail.get("exception_type", detail.get("error_type"))
+    if module is not None:
+        # Explicit non-SQLite provenance must not be inferred from a name.
+        return module in {"sqlite3", "_sqlite3"} and kind in specific_types | {"Error"}
+    if kind is not None:
+        return kind in specific_types
+    # Historical wrapped client errors had only "TypeName: message". The generic
+    # base name Error is deliberately excluded without module provenance.
+    message = detail.get("error", "")
+    return isinstance(message, str) and any(message.startswith(kind + ": ") for kind in specific_types)
+
+
+def _is_evidence_storage_error(detail):
+    storage_os_errors = {"OSError", "IOError", "PermissionError", "FileNotFoundError", "FileExistsError",
+                         "NotADirectoryError", "IsADirectoryError", "BlockingIOError", "InterruptedError"}
+    return (isinstance(detail, dict) and detail.get("error_origin") == "benchmark_evidence"
+            and detail.get("operation") in {"flush_response_cache", "write_build_checkpoint", "write_partial_checkpoint",
+                                            "write_final_report", "write_failure_artifact"}
+            and (_is_sqlite_integrity_error(detail) or
+                 (detail.get("exception_module") in {"builtins", "io"} and detail.get("exception_type") in storage_os_errors)))
+
+
 def is_integrity_failure(details):
     if not details:
         return True
@@ -163,10 +197,23 @@ def is_integrity_failure(details):
     for detail in details:
         if detail.get("mode") in {"replay", "warm", "fused_warm", "joint_warm"}:
             return True
-        if detail.get("exception_type") in fatal_types:
+        if _is_evidence_storage_error(detail) or any(
+                _is_evidence_storage_error(item) for item in detail.get("evidence_errors", [])):
+            return True
+        if detail.get("exception_type") in fatal_types or _is_sqlite_integrity_error(detail):
             return True
         message = detail.get("error", "")
-        if "Replay cache miss" in message:
+        if _is_cache_integrity_error(message):
+            return True
+        # Robust upstream can swallow a cache error; the benchmark wrapper
+        # preserves the original exception in these diagnostic error fields.
+        diagnostics = detail.get("llm_diagnostic", [])
+        if isinstance(diagnostics, dict):
+            diagnostics = [diagnostics]
+        if isinstance(diagnostics, list) and any(
+                isinstance(item, dict) and
+                (_is_cache_integrity_error(item.get("error", "")) or _is_sqlite_integrity_error(item))
+                for item in diagnostics):
             return True
         if detail.get("exception_type") == "TypeError" and any(
                 text in message for text in ("unexpected keyword argument", "required positional argument")):

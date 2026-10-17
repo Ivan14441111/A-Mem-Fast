@@ -1,0 +1,490 @@
+{
+  "sample_id": "conv-42",
+  "turns": [
+    {
+      "content": "Speaker Natesays : Hey Joanna! Long time no see! What's up? Anything fun going on?",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:1"
+    },
+    {
+      "content": "Speaker Joannasays : Hey Nate! Long time no see! I've been working on a project lately - it's been pretty cool. What about you - any fun projects or hobbies?",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:2"
+    },
+    {
+      "content": "Speaker Natesays : Hey Joanna! That's cool! I won my first video game tournament last week - so exciting!",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:3"
+    },
+    {
+      "content": "Speaker Joannasays : Wow Nate! Congrats on winning! Tell me more - what game was it?",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:4"
+    },
+    {
+      "content": "Speaker Natesays : Thanks! it's a team shooter game.",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:5"
+    },
+    {
+      "content": "Speaker Joannasays : Wow, great job! What was is called?",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:6"
+    },
+    {
+      "content": "Speaker Natesays : The game was called Counter-Strike: Global Offensive, and me and my team had a blast to the very end!",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:7"
+    },
+    {
+      "content": "Speaker Joannasays : Cool, Nate! Sounds like a fun experience, even if I'm not into games.",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:8"
+    },
+    {
+      "content": "Speaker Natesays : It was! How about you? Do you have any hobbies you love?",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:9"
+    },
+    {
+      "content": "Speaker Joannasays : Yeah! Besides writing, I also enjoy reading, watching movies, and exploring nature. Anything else you enjoy doing, Nate?",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:10"
+    },
+    {
+      "content": "Speaker Natesays : Playing video games and watching movies are my main hobbies.",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:11"
+    },
+    {
+      "content": "Speaker Joannasays : Cool, Nate! So we both have similar interests. What type of movies do you like best?",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:12"
+    },
+    {
+      "content": "Speaker Natesays : I love action and sci-fi movies, the effects are so cool! What about you, what's your favorite genre?",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:13"
+    },
+    {
+      "content": "Speaker Joannasays : I'm all about dramas and romcoms. I love getting immersed in the feelings and plots.",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:14"
+    },
+    {
+      "content": "Speaker Natesays : Wow, movies can be so powerful! Do you have any recommendations for me?",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:15"
+    },
+    {
+      "content": "Speaker Joannasays : [Image: a photo of a poster of a man and a woman sitting on a bench] Yeah, totally! Have you seen this romantic drama that's all about memory and relationships? It's such a good one.",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:16"
+    },
+    {
+      "content": "Speaker Natesays : Oh cool! I might check that one out some time soon! I do love watching classics.",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:17"
+    },
+    {
+      "content": "Speaker Joannasays : [Image: a photo of a dvd on a table with a blurry background] Yep, that movie is awesome. I first watched it around 3 years ago. I even went out and got a physical copy!",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:18"
+    },
+    {
+      "content": "Speaker Natesays : Sounds cool! Have you seen it a lot? sounds like you know the movie well!",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:19"
+    },
+    {
+      "content": "Speaker Joannasays : A few times. It's one of my favorites! I really like the idea and the acting.",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:20"
+    },
+    {
+      "content": "Speaker Natesays : Cool! I'll definitely check it out. Thanks for the recommendation!",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:21"
+    },
+    {
+      "content": "Speaker Joannasays : No problem, Nate! Let me know if you like it!",
+      "timestamp": "7:31 pm on 21 January, 2022",
+      "dia_id": "D1:22"
+    },
+    {
+      "content": "Speaker Joannasays : Hey Nate! Haven't talked in a few days. Crazy things happened to me!",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:1"
+    },
+    {
+      "content": "Speaker Natesays : Hi Joanna! Long time no see! What's been going on? You sound excited!",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:2"
+    },
+    {
+      "content": "Speaker Joannasays : [Image: a photography of a book with a page of text on it] Woo! I finally finished my first full screenplay and printed it last Friday. I've been working on for a while, such a relief to have it all done!",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:3"
+    },
+    {
+      "content": "Speaker Natesays : Wow, that sounds awesome! What's it about? Glad it's all down!",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:4"
+    },
+    {
+      "content": "Speaker Joannasays : Thanks, Nate! It's a mix of drama and romance!",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:5"
+    },
+    {
+      "content": "Speaker Natesays : Wow, that's amazing! How do you feel now that it's finished? Do you have any new plans for it?",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:6"
+    },
+    {
+      "content": "Speaker Joannasays : Woohoo, Nate! I'm feeling a rollercoaster of emotions - relief, excitement, some anxiety - over finishing this project. Now I'm gonna submit it to some film festivals and (hopefully) get producers and directors to check it out. Here's hoping!",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:7"
+    },
+    {
+      "content": "Speaker Natesays : Congrats, Joanna! That sounds like a wild experience. Rock on and I hope they love it!",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:8"
+    },
+    {
+      "content": "Speaker Joannasays : Thanks Nate! A mix of emotions for sure. Hopefully, it leads to positive feedback and new opportunities.",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:9"
+    },
+    {
+      "content": "Speaker Natesays : [Image: a photography of a turtle and a turtleling sitting on a rock] Yeah, for sure. Hoping for the best! I like having some of these little ones around to keep me calm when things are super important and I'm nervous.",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:10"
+    },
+    {
+      "content": "Speaker Joannasays : Awww! How long have you had them?",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:11"
+    },
+    {
+      "content": "Speaker Natesays : I've had them for 3 years now and they bring me tons of joy!",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:12"
+    },
+    {
+      "content": "Speaker Joannasays : They sure lookl like they do! Adorable!",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:13"
+    },
+    {
+      "content": "Speaker Natesays : Thanks! The turtles might be small, but both sure have big personalities. I really reccomend having something like these little guys for times of stress.",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:14"
+    },
+    {
+      "content": "Speaker Joannasays : Good idea, Nate! I'll think about it and maybe get pets of my own soon if I can find any I'm not allergic to. Have you been up to anything recently?",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:15"
+    },
+    {
+      "content": "Speaker Natesays : Yeah actually! I start to hang out with some people outside of my circle at the tournament. They're pretty cool!",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:16"
+    },
+    {
+      "content": "Speaker Joannasays : Oh? That sounds sweet! Is it a weird relationship with them being competitors and all?",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:17"
+    },
+    {
+      "content": "Speaker Natesays : Oh, kind of. Some people are more competitive then others, so I tend to just stick around the more chill people here.",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:18"
+    },
+    {
+      "content": "Speaker Joannasays : That makes sense! Are you gonna cheer them on even if you lose?",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:19"
+    },
+    {
+      "content": "Speaker Natesays : Absolutely! I don't expect to win big here, I just like playing for fun!  You mentioned you were allergic to pets earlier, how bad is it?",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:20"
+    },
+    {
+      "content": "Speaker Joannasays : Oh, its really bad. My face gets all puffy and itchy when I'm around certain animals, so I've always just stayed away.",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:21"
+    },
+    {
+      "content": "Speaker Natesays : Sorry to hear that. Allergies can be tough. What specifically are you allergic to?",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:22"
+    },
+    {
+      "content": "Speaker Joannasays : I'm allergic to most reptiles and animals with fur. It can be a bit of a drag, but I find other ways to be happy.",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:23"
+    },
+    {
+      "content": "Speaker Natesays : Awesome! There are lots of things that can bring you joy without pets. What else brings you joy?",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:24"
+    },
+    {
+      "content": "Speaker Joannasays : Writing and hanging with friends! That way I can express myself through stories, or just have a good time with people.",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:25"
+    },
+    {
+      "content": "Speaker Natesays : That's great to hear! Those are both great things. I'm glad to hear you've got other things to help you get through times of axiousness despite not being able to have animals!",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:26"
+    },
+    {
+      "content": "Speaker Joannasays : Thanks, Nate! Writing helps me create wild worlds with awesome characters. Plus, it's a great way to express my feelings. I can't imagine life without it.",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:27"
+    },
+    {
+      "content": "Speaker Natesays : Wow, Joanna, that sounds amazing! Keep doing what you love!",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:28"
+    },
+    {
+      "content": "Speaker Joannasays : Thanks, Nate! I'll definitely keep pursuing my passion for writing. It means a lot.",
+      "timestamp": "2:01 pm on 23 January, 2022",
+      "dia_id": "D2:29"
+    },
+    {
+      "content": "Speaker Joannasays : Hey Nate, long time no see! The screenplay I sent in to the film festival has been on my mind all day everyday. I keep bouncing between crazy emotions like relief, excitement and worry! Fingers crossed a producer or director falls in love with it and it ends up on the big screen - that would be awesome!",
+      "timestamp": "9:27 am on 7 February, 2022",
+      "dia_id": "D3:1"
+    },
+    {
+      "content": "Speaker Natesays : Hey Joanna! It is a big deal! I'm sure its been a wild ride. Sending some positive vibes and hoping someone likes it enough to get it on the big screen - that would be awesome!",
+      "timestamp": "9:27 am on 7 February, 2022",
+      "dia_id": "D3:2"
+    },
+    {
+      "content": "Speaker Joannasays : Thanks Nate, your support really means a lot. I put a lot of effort into it and I'm crossing my fingers. What about you? Anything new and exciting happening in your life?",
+      "timestamp": "9:27 am on 7 February, 2022",
+      "dia_id": "D3:3"
+    },
+    {
+      "content": "Speaker Natesays : [Image: a photo of a bowl of ice cream with a spoon in it] Thanks, Joanna. Not much has changed for me, but I just discovered that I can make coconut milk icecream and gave it a try. It was actually pretty good, so I'm proud of myself.",
+      "timestamp": "9:27 am on 7 February, 2022",
+      "dia_id": "D3:4"
+    },
+    {
+      "content": "Speaker Joannasays : Looks delish! Glad you tried something new and it went well. What did you think of it?",
+      "timestamp": "9:27 am on 7 February, 2022",
+      "dia_id": "D3:5"
+    },
+    {
+      "content": "Speaker Natesays : Super good! It was rich and creamy - might be my new favorite snack!",
+      "timestamp": "9:27 am on 7 February, 2022",
+      "dia_id": "D3:6"
+    },
+    {
+      "content": "Speaker Joannasays : Great! I love when you try something new and it actually works out. Will you give it another go?",
+      "timestamp": "9:27 am on 7 February, 2022",
+      "dia_id": "D3:7"
+    },
+    {
+      "content": "Speaker Natesays : Yep, it could be fun! I'm looking forward to trying out different flavors and toppings.",
+      "timestamp": "9:27 am on 7 February, 2022",
+      "dia_id": "D3:8"
+    },
+    {
+      "content": "Speaker Joannasays : Yum! Sounds great. Got any favorite flavors for dairy-free desserts?",
+      "timestamp": "9:27 am on 7 February, 2022",
+      "dia_id": "D3:9"
+    },
+    {
+      "content": "Speaker Natesays : I love coconut milk, but I also enjoy chocolate and mixed berry flavors.",
+      "timestamp": "9:27 am on 7 February, 2022",
+      "dia_id": "D3:10"
+    },
+    {
+      "content": "Speaker Joannasays : Wow, those sound great! Who can say no to chocolate and berries? I'm tempted to try dairy-free flavors now!",
+      "timestamp": "9:27 am on 7 February, 2022",
+      "dia_id": "D3:11"
+    },
+    {
+      "content": "Speaker Natesays : Well I also made a dairy-free chocolate cake with berries on it the other day, maybe you would like that!",
+      "timestamp": "9:27 am on 7 February, 2022",
+      "dia_id": "D3:12"
+    },
+    {
+      "content": "Speaker Joannasays : Wow! That sounds yummy! You're so talented. Thanks for sharing your amazing creations! I should really try making one or just pay you a visit and try one for myself!",
+      "timestamp": "9:27 am on 7 February, 2022",
+      "dia_id": "D3:13"
+    }
+  ],
+  "questions": [
+    {
+      "question": "What are Joanna's hobbies?",
+      "answer": "Writing, watchingmovies, exploringnature, hanging withfriends.",
+      "evidence": [
+        "D1:10",
+        "D2:25"
+      ],
+      "category": 1,
+      "source_qa_index": 5
+    },
+    {
+      "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+      "answer": "2019",
+      "evidence": [
+        "D1:18"
+      ],
+      "category": 2,
+      "source_qa_index": 2
+    },
+    {
+      "question": "Is it likely that Nate has friends besides Joanna?",
+      "answer": "Yesteammates on hisvideo game team.",
+      "evidence": [
+        "D1:7"
+      ],
+      "category": 3,
+      "source_qa_index": 0
+    },
+    {
+      "question": "What type of movies does Nate enjoy watching the most?",
+      "answer": "action and sci-fi",
+      "evidence": [
+        "D1:13"
+      ],
+      "category": 4,
+      "source_qa_index": 96
+    },
+    {
+      "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+      "answer": "Relief, excitement,worry, hope,anxiety.",
+      "evidence": [
+        "D2:7",
+        "D3:1"
+      ],
+      "category": 1,
+      "source_qa_index": 10
+    },
+    {
+      "question": "When did Nate win his first video game tournament?",
+      "answer": "the week before 21Janury, 2022",
+      "evidence": [
+        "D1:3"
+      ],
+      "category": 2,
+      "source_qa_index": 3
+    },
+    {
+      "question": "What pets wouldn't cause any discomfort to Joanna?",
+      "answer": "Hairless cats or pigs,since they don't have fur, which is one of the main causes of Joanna's allergy.",
+      "evidence": [
+        "D2:23"
+      ],
+      "category": 3,
+      "source_qa_index": 4
+    },
+    {
+      "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+      "answer": "screenplay",
+      "evidence": [
+        "D2:3"
+      ],
+      "category": 4,
+      "source_qa_index": 97
+    },
+    {
+      "question": "How long has Nate had his first two turtles?",
+      "answer": "three years",
+      "evidence": [
+        "D2:12"
+      ],
+      "category": 2,
+      "source_qa_index": 6
+    },
+    {
+      "question": "What genre is Joanna's first screenplay?",
+      "answer": "drama and romance",
+      "evidence": [
+        "D2:5"
+      ],
+      "category": 4,
+      "source_qa_index": 98
+    },
+    {
+      "question": "When did Joanna finish her first screenplay?",
+      "answer": "The Friday before 23January, 2022",
+      "evidence": [
+        "D2:3"
+      ],
+      "category": 2,
+      "source_qa_index": 7
+    },
+    {
+      "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+      "answer": "submit it to film festivals and get producers and directors to check it out",
+      "evidence": [
+        "D2:7"
+      ],
+      "category": 4,
+      "source_qa_index": 99
+    },
+    {
+      "question": "When did Nate get his first two turtles?",
+      "answer": "2019",
+      "evidence": [
+        "D2:12"
+      ],
+      "category": 2,
+      "source_qa_index": 8
+    },
+    {
+      "question": "For how long has Nate had his turtles?",
+      "answer": "3 years",
+      "evidence": [
+        "D2:12"
+      ],
+      "category": 4,
+      "source_qa_index": 100
+    },
+    {
+      "question": "What major achievement did Joanna accomplish in January 2022?",
+      "answer": "finished her screenplay and printed it",
+      "evidence": [
+        "D2:3"
+      ],
+      "category": 2,
+      "source_qa_index": 9
+    },
+    {
+      "question": "What did Nate think of the coconut milk ice cream he made?",
+      "answer": "Super good, rich and creamy",
+      "evidence": [
+        "D3:6"
+      ],
+      "category": 4,
+      "source_qa_index": 101
+    },
+    {
+      "question": "Which dairy-free dessert flavors does Nate enjoy?",
+      "answer": "chocolate and mixed berry",
+      "evidence": [
+        "D3:10"
+      ],
+      "category": 4,
+      "source_qa_index": 102
+    }
+  ],
+  "eligible_qa": 17,
+  "category_counts": {
+    "1": 2,
+    "2": 6,
+    "3": 2,
+    "4": 7
+  },
+  "fingerprint": "b140892169e92e95a0801c9a4ae0373a0aec0b295257da288d331bf362cec88f"
+}

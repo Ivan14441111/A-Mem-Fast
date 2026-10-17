@@ -1,0 +1,29 @@
+{
+  "mode": "joint",
+  "exception_type": "ValueError",
+  "error": "LLM reached max_tokens; completion is truncated",
+  "failed_utc": "2026-10-17T19:40:36.775317+00:00",
+  "subset_fingerprint": "b140892169e92e95a0801c9a4ae0373a0aec0b295257da288d331bf362cec88f",
+  "evolution_policy": "joint",
+  "note": "Incomplete arm; excluded from timing and quality aggregates. Inspect suite log and local response cache.",
+  "progress": {
+    "phase": "qa",
+    "question_index_0based": 0,
+    "source_qa_index": 5
+  },
+  "llm_diagnostic": {
+    "stage": "query_keywords",
+    "request_key": "c4cab759b64a7a70cbafc5036dabab0fffa071298dcf82260ae0a41dda6fef5f",
+    "finish_reason": "length",
+    "usage": {
+      "prompt_tokens": 87,
+      "completion_tokens": 2000,
+      "total_tokens": 2087
+    },
+    "content_chars": 8949,
+    "content_sha256": "060e87a96e2ac40209596781f19cacb20489d691c2cdd116d04caebd2bf9d622",
+    "content_prefix": "hobbies, Joanna, interests, activities, pastimes, favorite things, leisure activities, personal interests, entertainment, relaxation, creative pursuits, outdoor activities, indoor activities, sports, reading, music, art, cooking, gardening, traveling, fitness, socializing, technology, photography, writing, volunteering, shopping, gaming, collecting, crafting, dancing, swimming, hiking, cycling, painting, drawing, singing, acting, filmmaking, photography, sports, fitness, travel, books, movies, music, art, c",
+    "content_suffix": "es, music, art, cooking, gardening, shopping, gaming, collecting, crafting, dancing, swimming, hiking, cycling, painting, drawing, singing, acting, filmmaking, photography, sports, fitness, travel, books, movies, music, art, cooking, gardening, shopping, gaming, collecting, crafting, dancing, swimming, hiking, cycling, painting, drawing, singing, acting, filmmaking, photography, sports, fitness, travel, books, movies, music, art, cooking, gardening, shopping, gaming, collecting, crafting, dancing, swimming,",
+    "tag_budget_policy": "observe"
+  }
+}

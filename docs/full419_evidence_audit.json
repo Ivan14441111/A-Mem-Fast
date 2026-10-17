@@ -1,0 +1,165 @@
+{
+  "audited_utc": "2026-10-17T19:16:12.756932+00:00",
+  "scope": "Original full419 baseline failure evidence plus completed exact continuation/self-replay and common-cache reference/Fast build verification. Original baseline timing, trace and full QA remain unavailable.",
+  "sources": {
+    "results/full419-default-observed-v1-20261018/turns419-sample0-upstream-r1/baseline-failure.json": "747b2224f40232cd02bdbcbb961c1d9e70658b9c59456b3770f7a83b8170358a",
+    "results/full419-default-observed-v1-20261018/suite.json": "47637e5cec024789e3ee5c1f86cdbb47444478ca7bc7cfa2bb60c7cb517b557f",
+    "results/full419-default-observed-v1-20261018/turns419-sample0-upstream-r1/manifest.json": "75eef1df6adcce4af606af8380ef64eb21c84b0409474aee33b0346caf5d30f0",
+    "results/full419-default-observed-v1-20261018/turns419-sample0-upstream-r1/subset.json": "49bd873017d688ee2945dd752a5e55372d1744fdd01803f775f719cbcc16fa6a",
+    "scripts/benchmark.py": "4d5769c1ccb921ce667de197f71730fba935c14b9f6e2e5344cb9969d8357ec3"
+  },
+  "baseline_failure": {
+    "mode": "baseline",
+    "exception_type": "ValueError",
+    "error": "LLM reached max_tokens; completion is truncated",
+    "failed_utc": "2026-10-17T19:10:18.908629+00:00",
+    "subset_fingerprint": "c1bd83e690ad4ba2721d2a73ad51bafa904d1fc6c1710eaee522ae1fee58e44b",
+    "evolution_policy": "upstream",
+    "note": "Incomplete arm; excluded from timing and quality aggregates. Inspect suite log and local response cache.",
+    "progress": {
+      "phase": "qa",
+      "question_index_0based": 34,
+      "source_qa_index": 69
+    },
+    "llm_diagnostic": {
+      "stage": "answer",
+      "request_key": "c2015c6964cb3b98a3d9712542ca4a424d68768d72dae35d0cc2040a16ce968a",
+      "finish_reason": "length",
+      "usage": {
+        "prompt_tokens": 6591,
+        "completion_tokens": 2000,
+        "total_tokens": 8591
+      },
+      "content_chars": 10748,
+      "content_sha256": "0c804835bf39e0b5f578fe22cc079a09be5aa04513414aef9fed8eb609fff23d",
+      "content_prefix": "Short answer: Empathy, understanding, courage, strength, inspiration, support, gratitude, creativity, expression, resilience, acceptance, love, guidance, kindness, friendship, emotional connection, community, storytelling, communication, dialogue, social interaction, experience, pride, inclusive, artist, expressive, expressive, self-care, self-acceptance, self-expression, self-portrait, emotional connection, LGBTQ support group, support network, conversation, gratitude, power, experience, empathy, understan",
+      "content_suffix": "port, gratitude, emotional connection, community, empathy, experience, power, dialogue, support, gratitude, emotional connection, community, empathy, experience, power, dialogue, support, gratitude, emotional connection, community, empathy, experience, power, dialogue, support, gratitude, emotional connection, community, empathy, experience, power, dialogue, support, gratitude, emotional connection, community, empathy, experience, power, dialogue, support, gratitude, emotional connection, community, empathy",
+      "tag_budget_policy": "observe"
+    }
+  },
+  "build_completion_log": "baseline: memory 419/419, HTTP=1286",
+  "build_log_source": "results/full419-default-observed-v1-20261018/suite.json",
+  "baseline_cache": {
+    "path": "results/full419-default-observed-v1-20261018/turns419-sample0-upstream-r1/baseline.sqlite",
+    "responses": 0,
+    "sha256": "fde3ecc16acbcfde398f42a35055134c7e2f3a53f8fc649469000be1a02f3f0c"
+  },
+  "unavailable": [
+    "original live baseline memory trace",
+    "original live baseline build timing",
+    "complete 48-question quality results",
+    "baseline response replay"
+  ],
+  "cause_of_evidence_loss": "Frozen benchmark flushes BufferedRecordingCache only after all QA complete. QA failure occurred before flush and full report write.",
+  "predeclared_exact_cache_verification": {
+    "availability": "Run once after exact process exits; no HTTP fallback on missing cache entries.",
+    "comparisons": [
+      "reference and Fast per-note canonical traces for all 419 notes",
+      "logical request sequence excluding prefetch events",
+      "final memory digest, evolution count and consolidation counts",
+      "original live exact trace/build keys/counters only if completed optimized.json exists"
+    ],
+    "claims_excluded": [
+      "replay of original live baseline",
+      "paired live speedup",
+      "completion of original 48 QA from build-only replay"
+    ]
+  },
+  "exact_followup": {
+    "audited_utc": "2026-10-17T19:35:46.800173+00:00",
+    "sources": {
+      "results/full419-default-observed-v1-20261018/turns419-sample0-upstream-r1/optimized.json": "41f9ac2d4bb72d642bbf9d5ad8299d26906ef472ea66d2dc25090c9a64b7ab2a",
+      "results/full419-default-observed-v1-20261018/turns419-sample0-upstream-r1/warm.json": "ba986dfaa2aafe399d397130c523d481c645d1672900c47149bc687009220de8",
+      "results/full419-default-observed-v1-20261018/turns419-sample0-upstream-r1/manifest.json": "75eef1df6adcce4af606af8380ef64eb21c84b0409474aee33b0346caf5d30f0",
+      "results/full419-default-observed-v1-20261018/turns419-sample0-upstream-r1/subset.json": "49bd873017d688ee2945dd752a5e55372d1744fdd01803f775f719cbcc16fa6a",
+      "results/full419-default-observed-v1-20261018/build_only_reconstruction.json": "1faa9c2bcec1611d2d184ae157187932c2d543e5b6739dab1e8d36bf92bc47b6",
+      "results/full419-default-observed-v1-20261018/build_only_reconstruction.source.py.txt": "ca27a1272656973799fdc56d062a67c2c863a7b40ce7e80b989f766bfd495a91",
+      "results/full419-default-observed-v1-20261018/continuation-gpu-monitor.json": "1461afe3783d80ab410cbdeee5828bdc2145e3ceecf0b19cdaf12c29860bbd58"
+    },
+    "checks": {
+      "memory_trace": true,
+      "memory_digest": true,
+      "upstream_request_keys": true,
+      "qa": true,
+      "metrics": true,
+      "memory_count": true,
+      "evolution_count": true,
+      "operation_counts": true,
+      "warm_zero_http_errors": true,
+      "complete419_48": true,
+      "qa_scores_recomputed": true,
+      "aggregate_qa_recomputed": true,
+      "reference_matches_live_all419": true,
+      "reference_keys_digest_counters": true,
+      "reference_zero_http_errors": true,
+      "fast_matches_live_all419": true,
+      "fast_keys_digest_counters": true,
+      "fast_zero_http_errors": true,
+      "consolidation_positions_equal": true,
+      "original_exact_hash": true,
+      "source_manifest_hash": true,
+      "helper_source_hash": true,
+      "measured_source_still_matches": true,
+      "cache_rows_digest": true,
+      "build_event_totals": true
+    },
+    "cold_exact": {
+      "build_seconds": 1067.1052666679025,
+      "qa_seconds": 67.6099125109613,
+      "total_seconds": 1134.7151791788638,
+      "metrics": {
+        "exact_match": 0.041666666666666664,
+        "token_f1": 0.3008594173706736
+      },
+      "memory_count": 419,
+      "evolution_count": 418,
+      "operation_counts": {
+        "find_related_memories": 419,
+        "process_memory": 419,
+        "consolidate_memories": 4
+      }
+    },
+    "build_stages_recomputed": {
+      "analysis": {
+        "http_requests": 419,
+        "prompt_tokens": 102522,
+        "completion_tokens": 17063,
+        "client_seconds": 266.2546726576984
+      },
+      "evolution_decision": {
+        "http_requests": 418,
+        "prompt_tokens": 491953,
+        "completion_tokens": 25602,
+        "client_seconds": 366.3713699243963
+      },
+      "strengthen": {
+        "http_requests": 418,
+        "prompt_tokens": 447827,
+        "completion_tokens": 24135,
+        "client_seconds": 343.3469247855246
+      },
+      "update_neighbors": {
+        "http_requests": 59,
+        "prompt_tokens": 74948,
+        "completion_tokens": 26930,
+        "client_seconds": 333.190862223506
+      }
+    },
+    "common_cache_verification": {
+      "response_rows": 1410,
+      "trace_steps_per_reconstruction": 419,
+      "consolidation_positions": [
+        101,
+        201,
+        301,
+        401
+      ],
+      "both_match_original_live_exact": true,
+      "HTTP": 0,
+      "baseline_trace_recovered": false
+    },
+    "resource_scope": "Dedicated continuation monitor starts 19:15:01 UTC, after build start19:11:51 UTC; initial interval missing, no whole-arm allocation-stable claim.",
+    "comparison_scope": "One complete exact cold arm with full QA/self-replay, plus common-exact-cache reference/Fast build reconstruction. Original baseline failed and remains unrecoverable; no paired live speed or quality delta."
+  },
+  "build_completion_log_preserved_in_public_json": true
+}

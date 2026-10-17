@@ -1,0 +1,288 @@
+{
+  "source_suite": "results/suite128-primary-observed-v1-20261018/suite.json",
+  "source_suite_sha256": "731b2807375bf1a715d19412d7e61e74ec2b24d87e4f935f44a6ed782e624073",
+  "created_utc": "2026-10-17T19:22:06.966971+00:00",
+  "analysis_script_sha256": "d04304be27e47ff077c0098a50e62995851209d6164df0f54f69757269c6f8bc",
+  "scope": "Unique cached response usage plus any uncached final failure diagnostic. A lower bound on observed attempt usage, not complete event/request/retry counts. Prefetched responses may extend beyond the last committed memory. No timing or QA estimate is inferred for incomplete arms.",
+  "cells": [
+    {
+      "cell": "turns128-sample0-upstream-r1",
+      "mode": "fused",
+      "progress": {
+        "phase": "build",
+        "last_completed_turn": 3,
+        "failed_turn_1based": 4,
+        "dia_id": "D1:4",
+        "memory_count_at_failure": 3
+      },
+      "failure_artifact_sha256": "ceaa19e68b76ade06f8b0600dab95605aa995306dd4aeb0d61dcae12cae33e43",
+      "saved_unique_response_count": 23,
+      "saved_usage_by_stage": {
+        "analysis": {
+          "saved_unique_responses": 20,
+          "prompt_tokens": 4683,
+          "completion_tokens": 785
+        },
+        "evolution_fused": {
+          "saved_unique_responses": 3,
+          "prompt_tokens": 1832,
+          "completion_tokens": 120
+        }
+      },
+      "uncached_final_diagnostic_usage": [],
+      "response_usage_lower_bound": {
+        "prompt_tokens": 6515,
+        "completion_tokens": 905
+      },
+      "empty_recording_note": null
+    },
+    {
+      "cell": "turns128-sample0-upstream-r2",
+      "mode": "fused",
+      "progress": {
+        "phase": "build",
+        "last_completed_turn": 3,
+        "failed_turn_1based": 4,
+        "dia_id": "D1:4",
+        "memory_count_at_failure": 3
+      },
+      "failure_artifact_sha256": "aa3c738fdf4a3259e938a089c89551c7c93f471c0634c5c52282a005784236fa",
+      "saved_unique_response_count": 23,
+      "saved_usage_by_stage": {
+        "analysis": {
+          "saved_unique_responses": 20,
+          "prompt_tokens": 4683,
+          "completion_tokens": 779
+        },
+        "evolution_fused": {
+          "saved_unique_responses": 3,
+          "prompt_tokens": 1844,
+          "completion_tokens": 123
+        }
+      },
+      "uncached_final_diagnostic_usage": [],
+      "response_usage_lower_bound": {
+        "prompt_tokens": 6527,
+        "completion_tokens": 902
+      },
+      "empty_recording_note": null
+    },
+    {
+      "cell": "turns128-sample0-upstream-r3",
+      "mode": "fused",
+      "progress": {
+        "phase": "build",
+        "last_completed_turn": 6,
+        "failed_turn_1based": 7,
+        "dia_id": "D1:7",
+        "memory_count_at_failure": 6
+      },
+      "failure_artifact_sha256": "91209a8855949c6d70f9d60e12a71e9ff1dc9d1e033da632f47c31f4cb33e70c",
+      "saved_unique_response_count": 29,
+      "saved_usage_by_stage": {
+        "analysis": {
+          "saved_unique_responses": 23,
+          "prompt_tokens": 5434,
+          "completion_tokens": 911
+        },
+        "evolution_fused": {
+          "saved_unique_responses": 6,
+          "prompt_tokens": 4644,
+          "completion_tokens": 433
+        }
+      },
+      "uncached_final_diagnostic_usage": [],
+      "response_usage_lower_bound": {
+        "prompt_tokens": 10078,
+        "completion_tokens": 1344
+      },
+      "empty_recording_note": null
+    },
+    {
+      "cell": "turns128-sample1-upstream-r1",
+      "mode": "fused",
+      "progress": {
+        "phase": "build",
+        "last_completed_turn": 9,
+        "failed_turn_1based": 10,
+        "dia_id": "D1:10",
+        "memory_count_at_failure": 9
+      },
+      "failure_artifact_sha256": "b99379f874df9192df9bc55c0e0182b09a52d98308ac8c68f1dcd0178ed2ee7a",
+      "saved_unique_response_count": 35,
+      "saved_usage_by_stage": {
+        "analysis": {
+          "saved_unique_responses": 26,
+          "prompt_tokens": 6142,
+          "completion_tokens": 1004
+        },
+        "evolution_fused": {
+          "saved_unique_responses": 9,
+          "prompt_tokens": 7762,
+          "completion_tokens": 690
+        }
+      },
+      "uncached_final_diagnostic_usage": [],
+      "response_usage_lower_bound": {
+        "prompt_tokens": 13904,
+        "completion_tokens": 1694
+      },
+      "empty_recording_note": null
+    },
+    {
+      "cell": "turns128-sample1-upstream-r2",
+      "mode": "fused",
+      "progress": {
+        "phase": "build",
+        "last_completed_turn": 9,
+        "failed_turn_1based": 10,
+        "dia_id": "D1:10",
+        "memory_count_at_failure": 9
+      },
+      "failure_artifact_sha256": "bfe96cdf511bf3125222864ed48ba0a4ff41d27d983422b8fcd1a3aea03b2c61",
+      "saved_unique_response_count": 35,
+      "saved_usage_by_stage": {
+        "analysis": {
+          "saved_unique_responses": 26,
+          "prompt_tokens": 6142,
+          "completion_tokens": 1007
+        },
+        "evolution_fused": {
+          "saved_unique_responses": 9,
+          "prompt_tokens": 7787,
+          "completion_tokens": 740
+        }
+      },
+      "uncached_final_diagnostic_usage": [],
+      "response_usage_lower_bound": {
+        "prompt_tokens": 13929,
+        "completion_tokens": 1747
+      },
+      "empty_recording_note": null
+    },
+    {
+      "cell": "turns128-sample1-upstream-r3",
+      "mode": "fused",
+      "progress": {
+        "phase": "build",
+        "last_completed_turn": 25,
+        "failed_turn_1based": 26,
+        "dia_id": "D1:26",
+        "memory_count_at_failure": 25
+      },
+      "failure_artifact_sha256": "02c4120d7471f18b8586c67805a22125065eca7beca9921348b0ab53aaf1dac2",
+      "saved_unique_response_count": 67,
+      "saved_usage_by_stage": {
+        "analysis": {
+          "saved_unique_responses": 42,
+          "prompt_tokens": 10067,
+          "completion_tokens": 1660
+        },
+        "evolution_fused": {
+          "saved_unique_responses": 25,
+          "prompt_tokens": 24431,
+          "completion_tokens": 2316
+        }
+      },
+      "uncached_final_diagnostic_usage": [],
+      "response_usage_lower_bound": {
+        "prompt_tokens": 34498,
+        "completion_tokens": 3976
+      },
+      "empty_recording_note": null
+    },
+    {
+      "cell": "turns128-sample2-upstream-r1",
+      "mode": "fused",
+      "progress": {
+        "phase": "build",
+        "last_completed_turn": 30,
+        "failed_turn_1based": 31,
+        "dia_id": "D2:15",
+        "memory_count_at_failure": 30
+      },
+      "failure_artifact_sha256": "fb69893ca4dd4ede02e8b70178a558732b46f0538279f8be5d522543c6b9b83e",
+      "saved_unique_response_count": 77,
+      "saved_usage_by_stage": {
+        "analysis": {
+          "saved_unique_responses": 47,
+          "prompt_tokens": 11236,
+          "completion_tokens": 1890
+        },
+        "evolution_fused": {
+          "saved_unique_responses": 30,
+          "prompt_tokens": 29081,
+          "completion_tokens": 2511
+        }
+      },
+      "uncached_final_diagnostic_usage": [],
+      "response_usage_lower_bound": {
+        "prompt_tokens": 40317,
+        "completion_tokens": 4401
+      },
+      "empty_recording_note": null
+    },
+    {
+      "cell": "turns128-sample2-upstream-r2",
+      "mode": "fused",
+      "progress": {
+        "phase": "build",
+        "last_completed_turn": 18,
+        "failed_turn_1based": 19,
+        "dia_id": "D2:3",
+        "memory_count_at_failure": 18
+      },
+      "failure_artifact_sha256": "cc5ca8f18a5bb6ab0013d57840eabb477b5e92bb69d57aee5cef239605fc8e2b",
+      "saved_unique_response_count": 53,
+      "saved_usage_by_stage": {
+        "analysis": {
+          "saved_unique_responses": 35,
+          "prompt_tokens": 8327,
+          "completion_tokens": 1394
+        },
+        "evolution_fused": {
+          "saved_unique_responses": 18,
+          "prompt_tokens": 16465,
+          "completion_tokens": 743
+        }
+      },
+      "uncached_final_diagnostic_usage": [],
+      "response_usage_lower_bound": {
+        "prompt_tokens": 24792,
+        "completion_tokens": 2137
+      },
+      "empty_recording_note": null
+    },
+    {
+      "cell": "turns128-sample2-upstream-r3",
+      "mode": "fused",
+      "progress": {
+        "phase": "build",
+        "last_completed_turn": 30,
+        "failed_turn_1based": 31,
+        "dia_id": "D2:15",
+        "memory_count_at_failure": 30
+      },
+      "failure_artifact_sha256": "27da173c78c0091724a6f976c97ec6e12edb96d11bd87318271b5daee6aa97c2",
+      "saved_unique_response_count": 77,
+      "saved_usage_by_stage": {
+        "analysis": {
+          "saved_unique_responses": 47,
+          "prompt_tokens": 11236,
+          "completion_tokens": 1890
+        },
+        "evolution_fused": {
+          "saved_unique_responses": 30,
+          "prompt_tokens": 29006,
+          "completion_tokens": 2187
+        }
+      },
+      "uncached_final_diagnostic_usage": [],
+      "response_usage_lower_bound": {
+        "prompt_tokens": 40242,
+        "completion_tokens": 4077
+      },
+      "empty_recording_note": null
+    }
+  ]
+}

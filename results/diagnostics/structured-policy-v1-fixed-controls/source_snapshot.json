@@ -1,0 +1,28 @@
+{
+  "project_commit": "21b5b23de2089e6b096a86242a7d51a67cc06d29",
+  "archived_utc": "2026-10-17T18:49:53.106534+00:00",
+  "source_fingerprint": "604e19a2aa7e2c145ff5636edb2064eb99d974fbc6744cebcd838abbf2ada8f0",
+  "source_sha256": {
+    "scripts/benchmark_suite.py": "454dab743edc9b618f28d0c8a630612fdde113e480d8914cdfdf9edf8544c67a",
+    "scripts/benchmark.py": "4d5769c1ccb921ce667de197f71730fba935c14b9f6e2e5344cb9969d8357ec3",
+    "memory_layer.py": "b9a5b5797881b25c5524b98a543b22a1bbbcc7f285437ca667a5673e7f293eba",
+    "memory_layer_robust.py": "1c5cd36b50c9113440db0523b1f3d781aebc3711ff9b86b72b20e0f9bc981aef",
+    "llm_text_parsers.py": "353b77f57ce081ee51789e953ae8604b0c57e6470a332adc0377cf48f76d3a90",
+    "fast_amem/__init__.py": "ddedf9ae40b93083fb18887337d211049fd28e7a4a878bfe61999424a634018d",
+    "fast_amem/client.py": "69b680608c5ea8d1548196724ceb25cedb25aee510026d489bb6be99b2587759",
+    "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+    "fast_amem/joint.py": "eb8ca78cbdc06732ad526a4c952a35ce46c62a541ebd043c1e71e6ef763fe2cd",
+    "fast_amem/retriever.py": "59f1e08a60470f447b5fd9c2a3df19b7a94bc2d0a541dea73e2e5a3fa8833e02",
+    "fast_amem/structured.py": "3bb6a23cb45efd37645f3a8f7c4e177f6b3787ce8e303cca271f085f83c9928b",
+    "fast_amem/system.py": "cb0c2d82ea8632acfe2ee45ed30a2ed2c6b61f134f1b573ed2b10d69157cac3f"
+  },
+  "archive_extra_sha256": {
+    "scripts/diagnose_structured_policy.py": "cb1a50d06b2c3c6f454993f8ef8cec9f982ca8df10889d5dd765e5461f28507f",
+    "scripts/benchmark_context.py": "8ba39b672c2cef43ea6f4c0d59b22ea01fb6eba3d18b6a679bd979ad894131eb",
+    "pyproject.toml": "da2e3176bb98d58f43282d9e3f1c79b74c065554a437b93b2d33a882283c891f",
+    "requirements-fast.txt": "74036da2dfbf109335d181ed0f2d21ad59b8f30c7962ff29266f4b6cc455119f",
+    "LICENSE": "025a4a7762131be135bc34c8916d82996844f4dce35c53a464149a672dab5001",
+    "NOTICE": "66cdc5642ce7492ffde5595f35ea1a9f3ecea252f40ab572873ab3c3003cae89"
+  },
+  "archive_sha256": "2103e2b7dcb0d29931a290007fb8cad07c0b88a1a5132f34b07eea7774b073c8"
+}

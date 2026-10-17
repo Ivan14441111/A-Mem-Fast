@@ -1,0 +1,51 @@
+{
+  "defined_utc": "2026-10-17T18:52:01.908855+00:00",
+  "preregistration": "docs/joint_pilot_protocol.md",
+  "source_project_commit": "21b5b23de2089e6b096a86242a7d51a67cc06d29",
+  "source_fingerprint": "604e19a2aa7e2c145ff5636edb2064eb99d974fbc6744cebcd838abbf2ada8f0",
+  "generation_profile": "observed-tags-v1",
+  "max_tokens": 2000,
+  "repetition_penalty": 1.05,
+  "tag_budget": 16,
+  "tag_budget_policy": "observe",
+  "structured_policy_outputs": true,
+  "context_policy": "upstream",
+  "planned_cells": 4,
+  "unique_selected_qa": 31,
+  "arm_orders": [
+    [
+      "baseline",
+      "optimized",
+      "joint",
+      "fused"
+    ],
+    [
+      "fused",
+      "joint",
+      "optimized",
+      "baseline"
+    ],
+    [
+      "optimized",
+      "fused",
+      "baseline",
+      "joint"
+    ],
+    [
+      "joint",
+      "baseline",
+      "fused",
+      "optimized"
+    ]
+  ],
+  "samples": [
+    3,
+    4
+  ],
+  "turns": 64,
+  "repeats": 2,
+  "timing_scope": "Model and fixed fused/joint schemas prewarmed by the preregistered three-control gate. Response caches are empty and prefix cache resets before each cold arm. Real inference/cache overhead included; no first schema compilation claim.",
+  "execution_gate": "After full419 default case",
+  "failure_policy": "Each cell attempted once; ordinary generation/execution failure retained and next independent cell attempted. Source/config/replay integrity failure stops globally. No repeat-until-success.",
+  "integrity_supervision": "External scripts/watch_suite_integrity.py checks frozen source hashes and failure JSON error fields (including nested llm_diagnostic errors) every1second. It never scans generated response bodies. Baseline response ambiguity, identity/source errors and any replay failure require global stop; only the verified own runner/descendants may be terminated. Ordinary policy JSON/domain failures retain original once-only continuation rules."
+}

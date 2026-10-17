@@ -1,0 +1,77 @@
+{
+  "source_suite": "results/joint64-heldout-structured-v1-20261018/suite.json",
+  "source_suite_sha256": "175e712e6e01dd51407be228265a23b3ec5375273ce1f26d21db23e31b334573",
+  "created_utc": "2026-10-17T20:08:34.897711+00:00",
+  "analysis_script_sha256": "d04304be27e47ff077c0098a50e62995851209d6164df0f54f69757269c6f8bc",
+  "scope": "Unique cached response usage plus any uncached final failure diagnostic. A lower bound on observed attempt usage, not complete event/request/retry counts. Prefetched responses may extend beyond the last committed memory. No timing or QA estimate is inferred for incomplete arms.",
+  "cells": [
+    {
+      "cell": "turns64-sample3-upstream-r1",
+      "mode": "joint",
+      "progress": {
+        "phase": "qa",
+        "question_index_0based": 0,
+        "source_qa_index": 5
+      },
+      "failure_artifact_sha256": "b764111eb8a8d6205b2b1512fb95714316d9d50ad281bd9ab948c107d4a7496e",
+      "saved_unique_response_count": 64,
+      "saved_usage_by_stage": {
+        "joint_note": {
+          "saved_unique_responses": 64,
+          "prompt_tokens": 66240,
+          "completion_tokens": 7269
+        }
+      },
+      "uncached_final_diagnostic_usage": [
+        {
+          "stage": "query_keywords",
+          "request_key": "c4cab759b64a7a70cbafc5036dabab0fffa071298dcf82260ae0a41dda6fef5f",
+          "usage": {
+            "prompt_tokens": 87,
+            "completion_tokens": 2000,
+            "total_tokens": 2087
+          }
+        }
+      ],
+      "response_usage_lower_bound": {
+        "prompt_tokens": 66327,
+        "completion_tokens": 9269
+      },
+      "empty_recording_note": null
+    },
+    {
+      "cell": "turns64-sample3-upstream-r2",
+      "mode": "joint",
+      "progress": {
+        "phase": "qa",
+        "question_index_0based": 0,
+        "source_qa_index": 5
+      },
+      "failure_artifact_sha256": "3dd1c140401550d7183a483eb3f09ea28be374168ee30abb370dfbe1acc6f7c0",
+      "saved_unique_response_count": 64,
+      "saved_usage_by_stage": {
+        "joint_note": {
+          "saved_unique_responses": 64,
+          "prompt_tokens": 66240,
+          "completion_tokens": 7269
+        }
+      },
+      "uncached_final_diagnostic_usage": [
+        {
+          "stage": "query_keywords",
+          "request_key": "c4cab759b64a7a70cbafc5036dabab0fffa071298dcf82260ae0a41dda6fef5f",
+          "usage": {
+            "prompt_tokens": 87,
+            "completion_tokens": 2000,
+            "total_tokens": 2087
+          }
+        }
+      ],
+      "response_usage_lower_bound": {
+        "prompt_tokens": 66327,
+        "completion_tokens": 9269
+      },
+      "empty_recording_note": null
+    }
+  ]
+}

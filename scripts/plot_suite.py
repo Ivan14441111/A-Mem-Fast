@@ -13,6 +13,7 @@ import json
 import math
 from pathlib import Path
 import statistics
+import sys
 
 from summarize_suite import saved_complete_runs
 
@@ -97,6 +98,12 @@ def main():
     if not rows:
         parser.error(f"No completed cold arms with {selected_turns} turns")
     samples = sorted({row["sample_index"] for row in rows})
+    selected_refs = {(row["origin"], row["cell"]) for row in rows}
+    unique_questions = {(cell["sample_index"], index) for cell in source_cells
+                        if (cell["origin"], cell["name"]) in selected_refs
+                        for index in cell["source_qa_indices"]}
+    selection_scope = {"independent_conversations": len(samples), "unique_selected_qa": len(unique_questions),
+                       "selected_cells": len(selected_refs), "paired_only": args.paired_only}
     json_guidance = bool(report.get("args", {}).get("structured_policy_outputs", False))
     arm_styles = [("baseline", "Configured robust", "#778899"),
                   ("optimized", {"upstream": "Exact pipeline", "fused": "Fused pipeline",
@@ -193,7 +200,11 @@ def main():
                   "supplemental_balanced_stable": "Sensitivity: supplemental balanced allocation-stable cells"}[args.view]
     if args.paired_only:
         view_label += "; complete selected-arm pairs only"
-    fig.text(0.5, 0.905, view_label, ha="center", fontsize=10, color="#424c55")
+    run_label = ("paired repeats" if len(samples) == 1 else "paired runs") if args.paired_only else "cells with completed arms"
+    scope_label = (f"{len(samples)} independent conversation{'s' if len(samples) != 1 else ''}; "
+                   f"{len(unique_questions)} unique QA; {len(selected_refs)} {run_label}.")
+    fig.text(0.5, 0.905, view_label + "\n" + scope_label, ha="center", fontsize=9,
+             linespacing=1.35, color="#424c55")
     config = report.get("args", {})
     matching_cells = [cell for cell in source_cells
                       if cell.get("actual_turns", cell.get("max_turns")) == selected_turns
@@ -235,10 +246,13 @@ def main():
     data_path.write_text(json.dumps({"source_suite": str(args.suite), "view": args.view,
                                      "confirmation_suite": str(args.confirmation_suite) if args.confirmation_suite else None,
                                      "source_sha256": hashlib.sha256(args.suite.read_bytes()).hexdigest(),
+                                     "command": [sys.executable, *sys.argv],
+                                     "analysis_input": {"path": str(args.analysis), "sha256": hashlib.sha256(args.analysis.read_bytes()).hexdigest()} if args.analysis else None,
+                                     "confirmation_suite_sha256": hashlib.sha256(args.confirmation_suite.read_bytes()).hexdigest() if args.confirmation_suite else None,
                                      "analysis_script": str(Path(__file__).resolve()),
                                      "analysis_script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                                      "analysis_dependencies_sha256": {"scripts/summarize_suite.py": hashlib.sha256(Path(__file__).with_name("summarize_suite.py").read_bytes()).hexdigest()},
-                                     "source_cell_counts": counts, "plotted_cells_with_complete_arms": pair_count,
+                                     "selection_scope": selection_scope, "source_cell_counts": counts, "plotted_cells_with_complete_arms": pair_count,
                                      "completed_arm_counts": arm_counts, "replay_note": replay_note,
                                      "paired_only": args.paired_only, "paired_annotations": pair_annotations,
                                      "tag_budget": tag_budget, "tag_budget_policy": tag_policy,

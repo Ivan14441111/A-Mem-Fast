@@ -328,6 +328,8 @@ class MeasuredClient:
             return content
         except Exception as exc:
             event["error"] = f"{type(exc).__name__}: {exc}"
+            event["error_type"] = type(exc).__name__
+            event["error_module"] = type(exc).__module__
             raise
         finally:
             event["seconds"] = time.perf_counter() - started

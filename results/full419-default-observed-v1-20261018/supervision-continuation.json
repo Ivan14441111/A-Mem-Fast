@@ -1,0 +1,46 @@
+{
+  "started_utc": "2026-10-17T19:11:52.267936+00:00",
+  "runner_pid": 1292537,
+  "runner_argv_sha256": "9ea8418bf090a5c69e1c6bbacf572b7e0a123c8609f40e7fc043d716a32a3c3a",
+  "source_suite": "results/full419-default-observed-v1-20261018/suite.json",
+  "poll_seconds": 1,
+  "supervisor_script_sha256": "519341a38fd0a236bcdeae86e05e5c1d85e5e37cd73930f822f024fe8dd9573c",
+  "patterns": [
+    "Same baseline request returned different text; exact cache replay is ambiguous",
+    "Replay cache miss:",
+    "Semantic replay mismatch:",
+    "Existing output belongs to a different subset or model configuration",
+    "Stored report has a different subset fingerprint",
+    "Benchmark sources changed during suite",
+    "Source files changed during cell"
+  ],
+  "expected_source_sha256": {
+    "scripts/benchmark_suite.py": "454dab743edc9b618f28d0c8a630612fdde113e480d8914cdfdf9edf8544c67a",
+    "scripts/benchmark.py": "4d5769c1ccb921ce667de197f71730fba935c14b9f6e2e5344cb9969d8357ec3",
+    "memory_layer.py": "b9a5b5797881b25c5524b98a543b22a1bbbcc7f285437ca667a5673e7f293eba",
+    "memory_layer_robust.py": "1c5cd36b50c9113440db0523b1f3d781aebc3711ff9b86b72b20e0f9bc981aef",
+    "llm_text_parsers.py": "353b77f57ce081ee51789e953ae8604b0c57e6470a332adc0377cf48f76d3a90",
+    "fast_amem/__init__.py": "ddedf9ae40b93083fb18887337d211049fd28e7a4a878bfe61999424a634018d",
+    "fast_amem/client.py": "69b680608c5ea8d1548196724ceb25cedb25aee510026d489bb6be99b2587759",
+    "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+    "fast_amem/joint.py": "eb8ca78cbdc06732ad526a4c952a35ce46c62a541ebd043c1e71e6ef763fe2cd",
+    "fast_amem/retriever.py": "59f1e08a60470f447b5fd9c2a3df19b7a94bc2d0a541dea73e2e5a3fa8833e02",
+    "fast_amem/structured.py": "3bb6a23cb45efd37645f3a8f7c4e177f6b3787ce8e303cca271f085f83c9928b",
+    "fast_amem/system.py": "cb0c2d82ea8632acfe2ee45ed30a2ed2c6b61f134f1b573ed2b10d69157cac3f"
+  },
+  "fatal_sqlite_exception_types": [
+    "DataError",
+    "DatabaseError",
+    "IntegrityError",
+    "InterfaceError",
+    "InternalError",
+    "NotSupportedError",
+    "OperationalError",
+    "ProgrammingError"
+  ],
+  "inspection_scope": "Failure JSON top-level error and nested llm_diagnostic[*].error fields only; generated content_prefix/content_suffix/body are never searched. Every replay-mode failure is fatal.",
+  "termination_scope": "Only verified benchmark runner PID and its same-user descendants; server and other GPU jobs are outside this tree.",
+  "global_stop_required": false,
+  "status": "runner_exited",
+  "finished_utc": "2026-10-17T19:31:07.033411+00:00"
+}

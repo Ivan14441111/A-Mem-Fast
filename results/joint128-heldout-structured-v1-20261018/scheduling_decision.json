@@ -1,0 +1,295 @@
+{
+  "available": true,
+  "can_start": false,
+  "reasons": [
+    "Projection exceeds remaining time minus40-minute finalization reserve"
+  ],
+  "observed_utc": "2026-10-17T20:07:19.770473+00:00",
+  "deadline_utc": "2026-10-17T22:42:00+00:00",
+  "remaining_seconds": 9280.229527,
+  "finalization_reserve_seconds": 2400,
+  "margin_multiplier": 1.2,
+  "projected_seconds": 7266.97584167655,
+  "maxima": {
+    "build64_seconds": 224.22068545594811,
+    "qa_seconds_per_question": 1.3861714990011282,
+    "cold_init_seconds": 0.11297093704342842,
+    "replay_elapsed64_seconds": 2.0192011035978794
+  },
+  "cells": [
+    {
+      "source_cell": "turns64-sample3-upstream-r1",
+      "target_cell": "turns128-sample3-upstream-r1",
+      "cold_arms": [
+        {
+          "arm": "baseline",
+          "used_complete_timing": true,
+          "build64_seconds": 134.761146761477,
+          "qa_seconds_per_question": 1.1936582997441292,
+          "init_seconds": 0.10079669579863548,
+          "projected128_seconds": 298.2708894126117
+        },
+        {
+          "arm": "optimized",
+          "used_complete_timing": true,
+          "build64_seconds": 121.32920407131314,
+          "qa_seconds_per_question": 1.288783635944128,
+          "init_seconds": 7.649138569831848e-05,
+          "projected128_seconds": 273.58929189667106
+        },
+        {
+          "arm": "fused",
+          "used_complete_timing": false,
+          "build64_seconds": 224.22068545594811,
+          "qa_seconds_per_question": 1.3861714990011282,
+          "init_seconds": 0.11297093704342842,
+          "projected128_seconds": 481.8224578249667
+        },
+        {
+          "arm": "joint",
+          "used_complete_timing": false,
+          "build64_seconds": 224.22068545594811,
+          "qa_seconds_per_question": 1.3861714990011282,
+          "init_seconds": 0.11297093704342842,
+          "projected128_seconds": 481.8224578249667
+        }
+      ],
+      "replays": [
+        {
+          "mode": "replay",
+          "used_complete_timing": true,
+          "elapsed64_seconds": 1.971430778503418,
+          "projected128_seconds": 3.942861557006836
+        },
+        {
+          "mode": "warm",
+          "used_complete_timing": true,
+          "elapsed64_seconds": 1.9338399060070515,
+          "projected128_seconds": 3.867679812014103
+        },
+        {
+          "mode": "fused_warm",
+          "used_complete_timing": false,
+          "elapsed64_seconds": 2.0192011035978794,
+          "projected128_seconds": 4.038402207195759
+        },
+        {
+          "mode": "joint_warm",
+          "used_complete_timing": false,
+          "elapsed64_seconds": 2.0192011035978794,
+          "projected128_seconds": 4.038402207195759
+        }
+      ],
+      "residual_process_seconds": 139.06980653479695,
+      "residual_note": "Conservatively retained; can include unreported failed-arm elapsed, not a speed estimate.",
+      "projected_seconds_before_margin": 1690.4622492774256
+    },
+    {
+      "source_cell": "turns64-sample3-upstream-r2",
+      "target_cell": "turns128-sample3-upstream-r2",
+      "cold_arms": [
+        {
+          "arm": "baseline",
+          "used_complete_timing": false,
+          "build64_seconds": 224.22068545594811,
+          "qa_seconds_per_question": 1.3861714990011282,
+          "init_seconds": 0.11297093704342842,
+          "projected128_seconds": 481.8224578249667
+        },
+        {
+          "arm": "optimized",
+          "used_complete_timing": false,
+          "build64_seconds": 224.22068545594811,
+          "qa_seconds_per_question": 1.3861714990011282,
+          "init_seconds": 0.11297093704342842,
+          "projected128_seconds": 481.8224578249667
+        },
+        {
+          "arm": "fused",
+          "used_complete_timing": true,
+          "build64_seconds": 88.63594645261765,
+          "qa_seconds_per_question": 1.0148798413574696,
+          "init_seconds": 4.3336302042007446e-05,
+          "projected128_seconds": 201.6290524341166
+        },
+        {
+          "arm": "joint",
+          "used_complete_timing": false,
+          "build64_seconds": 224.22068545594811,
+          "qa_seconds_per_question": 1.3861714990011282,
+          "init_seconds": 0.11297093704342842,
+          "projected128_seconds": 481.8224578249667
+        }
+      ],
+      "replays": [
+        {
+          "mode": "replay",
+          "used_complete_timing": false,
+          "elapsed64_seconds": 2.0192011035978794,
+          "projected128_seconds": 4.038402207195759
+        },
+        {
+          "mode": "warm",
+          "used_complete_timing": false,
+          "elapsed64_seconds": 2.0192011035978794,
+          "projected128_seconds": 4.038402207195759
+        },
+        {
+          "mode": "fused_warm",
+          "used_complete_timing": true,
+          "elapsed64_seconds": 1.864274863153696,
+          "projected128_seconds": 3.728549726307392
+        },
+        {
+          "mode": "joint_warm",
+          "used_complete_timing": false,
+          "elapsed64_seconds": 2.0192011035978794,
+          "projected128_seconds": 4.038402207195759
+        }
+      ],
+      "residual_process_seconds": 131.17953915521502,
+      "residual_note": "Conservatively retained; can include unreported failed-arm elapsed, not a speed estimate.",
+      "projected_seconds_before_margin": 1794.1197214121264
+    },
+    {
+      "source_cell": "turns64-sample4-upstream-r1",
+      "target_cell": "turns128-sample4-upstream-r1",
+      "cold_arms": [
+        {
+          "arm": "baseline",
+          "used_complete_timing": true,
+          "build64_seconds": 224.22068545594811,
+          "qa_seconds_per_question": 1.2942874439592873,
+          "init_seconds": 0.11297093704342842,
+          "projected128_seconds": 479.61724050396253
+        },
+        {
+          "arm": "optimized",
+          "used_complete_timing": true,
+          "build64_seconds": 106.90428052842617,
+          "qa_seconds_per_question": 1.3861714990011282,
+          "init_seconds": 3.742799162864685e-05,
+          "projected128_seconds": 247.07671446087105
+        },
+        {
+          "arm": "fused",
+          "used_complete_timing": true,
+          "build64_seconds": 107.78887821733952,
+          "qa_seconds_per_question": 1.2055087741464376,
+          "init_seconds": 6.344914436340332e-05,
+          "projected128_seconds": 244.5100304633379
+        },
+        {
+          "arm": "joint",
+          "used_complete_timing": true,
+          "build64_seconds": 97.40741952881217,
+          "qa_seconds_per_question": 1.067211627960205,
+          "init_seconds": 0.0010423548519611359,
+          "projected128_seconds": 220.42896048352122
+        }
+      ],
+      "replays": [
+        {
+          "mode": "replay",
+          "used_complete_timing": true,
+          "elapsed64_seconds": 2.0192011035978794,
+          "projected128_seconds": 4.038402207195759
+        },
+        {
+          "mode": "warm",
+          "used_complete_timing": true,
+          "elapsed64_seconds": 1.9295906014740467,
+          "projected128_seconds": 3.8591812029480934
+        },
+        {
+          "mode": "fused_warm",
+          "used_complete_timing": true,
+          "elapsed64_seconds": 1.8952678367495537,
+          "projected128_seconds": 3.7905356734991074
+        },
+        {
+          "mode": "joint_warm",
+          "used_complete_timing": true,
+          "elapsed64_seconds": 1.7621185332536697,
+          "projected128_seconds": 3.5242370665073395
+        }
+      ],
+      "residual_process_seconds": 17.556894194334745,
+      "residual_note": "Conservatively retained; can include unreported failed-arm elapsed, not a speed estimate.",
+      "projected_seconds_before_margin": 1224.4021962561778
+    },
+    {
+      "source_cell": "turns64-sample4-upstream-r2",
+      "target_cell": "turns128-sample4-upstream-r2",
+      "cold_arms": [
+        {
+          "arm": "baseline",
+          "used_complete_timing": true,
+          "build64_seconds": 223.26404306292534,
+          "qa_seconds_per_question": 1.292571034282446,
+          "init_seconds": 0.10122466087341309,
+          "projected128_seconds": 477.6510156095028
+        },
+        {
+          "arm": "optimized",
+          "used_complete_timing": true,
+          "build64_seconds": 157.7166768424213,
+          "qa_seconds_per_question": 1.3722534608095884,
+          "init_seconds": 4.625692963600159e-05,
+          "projected128_seconds": 348.36748300120234
+        },
+        {
+          "arm": "fused",
+          "used_complete_timing": true,
+          "build64_seconds": 119.65133332461119,
+          "qa_seconds_per_question": 1.2261577248573303,
+          "init_seconds": 8.234754204750061e-05,
+          "projected128_seconds": 268.73053439334035
+        },
+        {
+          "arm": "joint",
+          "used_complete_timing": true,
+          "build64_seconds": 97.06091172620654,
+          "qa_seconds_per_question": 1.0484236814081669,
+          "init_seconds": 0.00042970478534698486,
+          "projected128_seconds": 219.28442151099443
+        }
+      ],
+      "replays": [
+        {
+          "mode": "replay",
+          "used_complete_timing": true,
+          "elapsed64_seconds": 1.95345563814044,
+          "projected128_seconds": 3.90691127628088
+        },
+        {
+          "mode": "warm",
+          "used_complete_timing": true,
+          "elapsed64_seconds": 1.8765850402414799,
+          "projected128_seconds": 3.7531700804829597
+        },
+        {
+          "mode": "fused_warm",
+          "used_complete_timing": true,
+          "elapsed64_seconds": 1.8092404194176197,
+          "projected128_seconds": 3.6184808388352394
+        },
+        {
+          "mode": "joint_warm",
+          "used_complete_timing": true,
+          "elapsed64_seconds": 1.6745182313024998,
+          "projected128_seconds": 3.3490364626049995
+        }
+      ],
+      "residual_process_seconds": 18.167981278151274,
+      "residual_note": "Conservatively retained; can include unreported failed-arm elapsed, not a speed estimate.",
+      "projected_seconds_before_margin": 1346.8290344513953
+    }
+  ],
+  "preregistration": "docs/joint128_extension_protocol.md",
+  "input_sha256": {
+    "results/joint64-heldout-structured-v1-20261018/suite.json": "175e712e6e01dd51407be228265a23b3ec5375273ce1f26d21db23e31b334573",
+    "results/joint128-heldout-structured-v1-20261018/suite.json": "6402a7a9478c71dd20363fcf666272e58013bcf537d074ad152f1a205eb0158d"
+  },
+  "analysis_script_sha256": "4d856526952b7957f2b892f6bfa3b35ca158c77ef8397301913ad18c553db037"
+}

@@ -1,0 +1,3310 @@
+{
+  "mode": "joint",
+  "wall_utc": {
+    "run_start": "2026-10-17T19:55:13.764602+00:00",
+    "init_start": "2026-10-17T19:55:13.981825+00:00",
+    "init_end": "2026-10-17T19:55:13.982278+00:00",
+    "build_start": "2026-10-17T19:55:13.982306+00:00",
+    "build_end": "2026-10-17T19:56:51.043230+00:00",
+    "qa_start": "2026-10-17T19:56:51.043401+00:00",
+    "qa_end": "2026-10-17T19:57:05.721361+00:00"
+  },
+  "init_seconds": 0.00042970478534698486,
+  "build_seconds": 97.06091172620654,
+  "subset_fingerprint": "4b745aabc82e765f21a014ff13eefd648b7ca2d35d288871b898c193fc7be34b",
+  "evolution_policy": "joint",
+  "context_policy": "upstream",
+  "context_metrics": {
+    "queries": 0,
+    "rows_before": 0,
+    "rows_after": 0
+  },
+  "repetition_penalty": 1.05,
+  "tag_budget": 16,
+  "tag_budget_policy": "observe",
+  "structured_policy_outputs": true,
+  "prefix_cache_reset_seconds": 0.007829241454601288,
+  "recording_flush_seconds_excluded": 0.0,
+  "qa_seconds": 14.677931539714336,
+  "total_seconds": 111.73884326592088,
+  "build_llm": {
+    "logical_calls": 64,
+    "repetition_penalty": 1.05,
+    "structured_policy_outputs": true,
+    "tag_budget": 16,
+    "tag_budget_policy": "observe",
+    "generation_profile": "observed-tags-v1",
+    "tag_budget_overshoots": {
+      "logical_response_inspections": 64,
+      "live_response_inspections": 64,
+      "cache_response_inspections": 0,
+      "logical_tag_lists_inspected": 129,
+      "live_tag_lists_inspected": 129,
+      "cache_tag_lists_inspected": 0,
+      "logical_overshoot_responses": 0,
+      "live_overshoot_responses": 0,
+      "cache_overshoot_observations": 0,
+      "unique_overshoot_request_keys": 0,
+      "over_budget_lists_live": 0,
+      "max_actual_tags": 3
+    },
+    "upstream_calls": 64,
+    "prefetch_calls": 0,
+    "http_requests": 64,
+    "cache_hits": 0,
+    "errors": 0,
+    "http_seconds_sum": 92.58426969125867,
+    "cache_read_seconds_sum": 0.0031512342393398285,
+    "cache_write_seconds_sum": 2.257781855762005,
+    "prompt_tokens_live": 68619,
+    "completion_tokens_live": 7250,
+    "latency_seconds_p50": 1.5148978307843208,
+    "latency_seconds_p95": 1.6916599489748476,
+    "latency_seconds_max": 1.9575048871338367,
+    "by_stage": {
+      "joint_note": {
+        "logical_calls": 64,
+        "http_requests": 64,
+        "cache_hits": 0,
+        "seconds_sum": 94.86885393038392,
+        "prompt_tokens_live": 68619,
+        "completion_tokens_live": 7250,
+        "latency_seconds_p50": 1.5148978307843208,
+        "latency_seconds_p95": 1.6916599489748476,
+        "latency_seconds_max": 1.9575048871338367
+      }
+    }
+  },
+  "all_llm": {
+    "logical_calls": 92,
+    "repetition_penalty": 1.05,
+    "structured_policy_outputs": true,
+    "tag_budget": 16,
+    "tag_budget_policy": "observe",
+    "generation_profile": "observed-tags-v1",
+    "tag_budget_overshoots": {
+      "logical_response_inspections": 64,
+      "live_response_inspections": 64,
+      "cache_response_inspections": 0,
+      "logical_tag_lists_inspected": 129,
+      "live_tag_lists_inspected": 129,
+      "cache_tag_lists_inspected": 0,
+      "logical_overshoot_responses": 0,
+      "live_overshoot_responses": 0,
+      "cache_overshoot_observations": 0,
+      "unique_overshoot_request_keys": 0,
+      "over_budget_lists_live": 0,
+      "max_actual_tags": 3
+    },
+    "upstream_calls": 92,
+    "prefetch_calls": 0,
+    "http_requests": 92,
+    "cache_hits": 0,
+    "errors": 0,
+    "http_seconds_sum": 106.03488224744797,
+    "cache_read_seconds_sum": 0.004315175116062164,
+    "cache_write_seconds_sum": 3.1995816864073277,
+    "prompt_tokens_live": 125861,
+    "completion_tokens_live": 7953,
+    "latency_seconds_p50": 1.4595087449997663,
+    "latency_seconds_p95": 1.6524990445002914,
+    "latency_seconds_max": 1.9575048871338367,
+    "by_stage": {
+      "joint_note": {
+        "logical_calls": 64,
+        "http_requests": 64,
+        "cache_hits": 0,
+        "seconds_sum": 94.86885393038392,
+        "prompt_tokens_live": 68619,
+        "completion_tokens_live": 7250,
+        "latency_seconds_p50": 1.5148978307843208,
+        "latency_seconds_p95": 1.6916599489748476,
+        "latency_seconds_max": 1.9575048871338367
+      },
+      "query_keywords": {
+        "logical_calls": 14,
+        "http_requests": 14,
+        "cache_hits": 0,
+        "seconds_sum": 7.553410343825817,
+        "prompt_tokens_live": 1321,
+        "completion_tokens_live": 578,
+        "latency_seconds_p50": 0.5114478282630444,
+        "latency_seconds_p95": 0.7187846731394529,
+        "latency_seconds_max": 0.7408269569277763
+      },
+      "answer": {
+        "logical_calls": 14,
+        "http_requests": 14,
+        "cache_hits": 0,
+        "seconds_sum": 6.8424081690609455,
+        "prompt_tokens_live": 55921,
+        "completion_tokens_live": 125,
+        "latency_seconds_p50": 0.43169661052525043,
+        "latency_seconds_p95": 0.7172165136784314,
+        "latency_seconds_max": 0.8046049624681473
+      }
+    }
+  },
+  "inclusive_seconds": {
+    "find_related_memories": 0.761651236563921
+  },
+  "operation_counts": {
+    "find_related_memories": 64
+  },
+  "retriever_metrics": {
+    "encode_calls": 141,
+    "encode_texts": 141,
+    "document_encode_calls": 64,
+    "document_encode_texts": 64,
+    "query_encode_calls": 77,
+    "query_encode_texts": 77,
+    "document_cache_hits": 0,
+    "query_cache_hits": 0,
+    "query_cache_misses": 77,
+    "buffer_growths": 3,
+    "buffer_reallocations": 3,
+    "searches": 77,
+    "partial_topk_calls": 72,
+    "full_sort_fallbacks": 5
+  },
+  "encoder_metrics": {
+    "model_loads": 0,
+    "model_load_seconds": 0.0,
+    "encode_calls": 141,
+    "encode_texts": 141,
+    "encode_seconds": 2.315602347254753
+  },
+  "evolution_metrics": {
+    "fused_attempts": 0,
+    "fused_parse_failures": 0,
+    "fused_invalid_reference_failures": 0,
+    "fused_decisions": {},
+    "fused_connections": 0,
+    "fused_neighbor_updates": 0,
+    "joint_attempts": 64,
+    "joint_parse_failures": 0,
+    "joint_invalid_reference_failures": 0,
+    "joint_decisions": {
+      "NO_EVOLUTION": 5,
+      "STRENGTHEN": 58,
+      "UPDATE_NEIGHBOR": 1
+    },
+    "joint_connections": 164,
+    "joint_neighbor_updates": 1
+  },
+  "evolution_count": 59,
+  "memory_count": 64,
+  "memory_trace": [
+    "aa6fa906eb44b287a6dc073766da317146b6dcc5df88ed2b8f0f80dcd8c8acd9",
+    "25c84d312b8e751bb16afe508b851760895a60908af8cd1a4ecd91d8d4379a62",
+    "71393f36438f0b25694ed834b82fa529a2b2622ee00295b4b48b2a61bff8c2d5",
+    "0d59635688afed807ecdaa70c0b543b2b5f94f914a06c7d2c1089b7bd58528fe",
+    "e4d42e9882f1c742b09a0d9fbf7113c60f716864c2fb17356696ba4e1e36ea43",
+    "7c01fb22704090d102a0249ebc24195c3a818ab22f1760f90f6ed094fa84288c",
+    "a50782e7acf38124e244bc1706b057936f7e570cc495e14b00837512f8d707f2",
+    "5e1fa11a8d7c616cfa3af7b3b251d6da0fa42159ba149eed78d21ff89f4ec5cf",
+    "2cebf90811269510128a18236d9a4eb1402a7045e2812bfbf51e03f1633c4c66",
+    "88c7b8691b0107936e43686dd4278fa6c9226a0be30ee3bc67af45ba4b483182",
+    "12f27a07a004cc484b6a3083c3c031893cd621549699893a1de921f4324215f3",
+    "bcb70d9a2da1c3f7f183522fd00f5033ffda1e14bc46edfb7b4556b1e921bcd9",
+    "5d133f9aed929e91656812df38a51689296245bb4581383b1976d5326ded02e7",
+    "4be1c41be6eda6b759583ab91180a9435db02d509e4ea62c5f1d1f0cb364717a",
+    "f71370438798214933f6f07a0f718eac65e3eb14d69f1cabd8b2367ab2922ece",
+    "74d7b2c666794dff05b83ef26aa81799a916b05a20f0e92be85edf1baa603193",
+    "606458a79727fbda0b4b060ec6909e6355f01dbdfbd3f352e5038359e6a24fc6",
+    "693b6fd5d40d009a298ac4ad75187a03a19bc26a9f87e6d14d8088ac8edbb31b",
+    "239a4649619ea2b6d68dd75846fa00395d4c0f8065f19febd8170df2c2ee2a60",
+    "2fd14a18cd25434bd5bc66d2eb6bba93bfc3d40d0a9ce99c6125711e49f7f0bd",
+    "55bb9dcb68b6705028ad545df6eda88466a7041e157e89a60ec22aac95bce054",
+    "b59022008fea9017c7bed538fefcf726822565b64847a0c63f5eb99c4fac4e21",
+    "2cbf55e5793c0a218b10109cebddc903854103ae3125b161900e39e9709049e2",
+    "fb98bdcdfb903769fa22398ae8734826615e2d20c44a939d111bd3c481c13f5b",
+    "f4a896992288664424f0f7b2d276047f20bb742deff447e64159a46384f26a7f",
+    "303709df0fcf8e6675d3ae818a4ccfe7b4bc2916a3e448eadd087828272da458",
+    "5299efa1c58c17b211907f3a05e61f2d7de88be0888334bea9c4e33fa4551f45",
+    "63b664f1a1c76bace6387a5612ba30c1240941dd0967075b7e391a925bcc3d2a",
+    "e4a4c681afee6a42c1808be1f6a6f21ec37186635f5a00ed0196ec8f85585ee5",
+    "f39c541a51cd5f73d596d39095a4c9230a0aac512c0fc90b08d1015cdfeed536",
+    "6578cb301ac1e76e43378c9dceae0b51e9eb4f50f4980c47dd084f77153030c4",
+    "4861f4c7464b9d917df856864eedc00333ea11b7882b6585e2cb14dbd048d062",
+    "3e4738f0c9bfbf00227c0e7d800724f5c4185f2870b8fe73f2cbdc2c7030393c",
+    "920421997c4fa4a8042466f1d5bb6cb89f1e694e38ff32915a3586d963e63f74",
+    "2dc04f856117778685aa1a37edda8315be15f29545ecddde9b98670df59cb19f",
+    "d2da7aa4cb002e3e858d4cb23c45d4deb2f0484d5bd3370152c37c47f00c9b75",
+    "73293321e6dd838f5890969c5741689327a722dba9b39510cd96e1e01fdf6b9f",
+    "8b65ee33ffd77bf83b49322dee93920877fccf547b567db65489ce933bd381c0",
+    "137de1cf25424bcbcbf43ac9fe96898b0c43d46b7457a27661c19e702884884d",
+    "16bb1dac7b21b63500157ed85819d1250f0f0859702903ee1f345ed1a180ff30",
+    "63d6d68f5d2b4353b78ad22acf07aa7529703ab6d65014e3d39bf3d0580451c3",
+    "e234f6e8bd411c9da8be2db5d0cea63f0f4828e16a05c9b055e8efd6991a3082",
+    "7f2de6f584991956587d6cfe3a9ec26963ba20cacd14f9e04164354ac370b2a0",
+    "c6b62b709c1332b2ce8f6469574fe436fd3a738c9b4eb5938165592f19d2da25",
+    "f3928465883949518f4631480ebe15746d3428003f9141653ad79b69cb638e20",
+    "81ae35bf58f57ecbe8cc5934164881aabd1aa57ab3bd6a7d5fdcabbff230afa3",
+    "07168b3b52ccc58d2efeee7f9166ce700d310fad70abc270a13ed60888e0ea97",
+    "1e2d54cfe72870857ce55ae2b02839b5746f2b9d07f6c209c8ad09e46694b1e3",
+    "f7cb1364edc7e71cf798bc22cbb0b6074ea8989cb25c4399d479104adf82cc45",
+    "eed5e983b5305a97ba0f0c8bf07a93e1e92d4c70ec868fbaa3e65ced01e4a6dd",
+    "e0088907f9636181e823aec195e26b3a2a65536b6ce76518da0a0583525fe4bb",
+    "64208bc939e06504b554eb9e51af854afc3d955ef83c0e04f18760833349a2e2",
+    "04c1d2e572a7183410d23857fb1db2a52c77505f22f3ddb401a0131eae787689",
+    "410062911912f09c947049d41d535c5467bc7ed43985adaf002fc179c6788420",
+    "5f7a67f408fa47c015af5e81d85fa419d7c9fe90db21f8670b0209e208b51bdf",
+    "c03ef95a4491789eebea318b25cadd5f6c18c9f179c19287a2235e54a901f9ff",
+    "35d780205fa48c373d07acf445be4e905630d0c9d59c4435c6839e0a534e929b",
+    "17d5d748d7acf6d78a29471cbe777fb52823b643448725f9e8591b7581497de3",
+    "b527850821693cade5c342fe3270d16192252cff1a42e762693222b990828420",
+    "4d4cba985d20b2c8935527da0dbd2626c8ee94e2534d261a486b415fefbd9b8b",
+    "2b80562577ce7465d695e5d816d258c8006751c0f5c8287be8515a7c60432a73",
+    "0a82307ce8847082ea389f62143057d332db3a90014ba708142037750c8fb976",
+    "af364d65dac0ae75af2b31a0788c9d909dfbaf0fefa26beed373f1ef54674cb7",
+    "72b1593c55de9cacdf46d1d0591603e5f22643781108a3a05ebcb7fa08b353f1"
+  ],
+  "memory_digest": "72b1593c55de9cacdf46d1d0591603e5f22643781108a3a05ebcb7fa08b353f1",
+  "upstream_request_keys": [
+    "c0fa18716ae8f368d45736bba58e6f58ebb893d519a6a1be4c321e631fcd6b5a",
+    "eb1bf4b64b97f73a11e61e19cbcdb34b5b2a1d5559cdb752f4df59ae9eb7fd20",
+    "ea45acf669294b0fb25fa75b52c8fcf70b343df7b16232cfd523839bd5cb346b",
+    "b976939464ab0fd6cdcf40cab30a21dc3b4c96a19b7a1dff6420d8c46136435d",
+    "da4d2f9200e00641fe2e06ba99c223c96e267dc84d623b9b44df561e60942c26",
+    "2c0fc0b26946975d0c2b3eb12abcdc22b1bbd6c3ffa7b0f04233313ac4192c44",
+    "25a3aa283bc18c82f35d8a5a5fdcff8d0e785b472f5d65267ad0439917b941e8",
+    "9c6ce4afebba05267ce1c4e2185dc43ef31a469c23bd30f22dffb0141881841c",
+    "ed0fb400f5007f7029c7e1a1cca5715f5537ddb0dca9c916f612729936f2aaa5",
+    "0b392c225a955f50416fc1109733d5c6193b934a63167d9076bc385b44921cb5",
+    "75bd91c156a097defe2dcc1bfd67e7f3e687ee2fb66b464adaec0b99ddabcb75",
+    "5538ff1b43391c8a02bf570814fc24549946a3d7b7e1adfa258ca833603f7705",
+    "6dcd8bf14b572808e191240e8f17b5913b950931df6369d98d8ee06396a0ee55",
+    "b684b02bd5f3c05a07895fb4ec3968a0c50e73a026ae59c027234ea06c2bec5c",
+    "d67d01d01d8bce74fc62d57c0785b7b90a44a795eced6834c8c121418f1b4986",
+    "9fd112fa306d8a8709661d4b9eacb69a589d1a07c4e968e59a3d531a72659c12",
+    "9fc77c9c453face24c027b26b404ec4b3a80e925b502abeaa5a5a71699818795",
+    "e3e81c30750171d27d324de80d7bdb77eb5b2a0425a95009353008a4fa5c998c",
+    "f040d7b2675f44b75bbedb4d33266e637011e856d31b1b12ae645ee29783ea64",
+    "4375c8e211430393980cf7a5b4a8d0e84b69b06a93053b2e6f5543a8b472b8ea",
+    "fe7e35a9326fd5465620f6701e43bc365ad92bb04e5741438f5653cea271efd3",
+    "4178b2162087fed834694bbb0560ee14cd6a95407dba4bfe7effdb9720ca95bc",
+    "5ce65922ee1736927bf7acdbcaf82bc367e5ea8de874b30db68e6636569fec69",
+    "63d009ff91b50323857bd0244b3be19f466d97518b09e51f64e4beabd4abd7d0",
+    "d9d7e4321d277435fe6c8cbd509eeb0d18e0a63560a768a9472660b7e77ab8db",
+    "928fce0a3c6aff3631df0e9d029841322b69bf25db90c7d165e89b7ceccf3728",
+    "88fbfc5e0e1b83e78ccc35cf920b657a6cb26c9701c420a582b0354b4b46eb88",
+    "1fb22b851e6baad02d3fb7c82f200390bd0b238084f1e9ed7e6e056bb5e909b7",
+    "d0d6ad95100972358518808b1c52b0959545645bb91c241e21f8a1885e4cf47e",
+    "79fbf55aaddc4dcb3b55f0af4531aff14b71d4917d8ac4b93bc703a2c41f9790",
+    "3e5bbf9c0745c8b3b197372378fae90c72468d7b3cd22a535d0a6ea5e04b87d0",
+    "f004678be3f7ee7fad21013eb96ffa285302e41fe721b2c71c2b8d40d083171d",
+    "0a4e422773c345071cf6cf4c09581f682822d37c57c891e4b1625a40682a3365",
+    "bcfdf06f8fe891177f5adbc2a70823a300e30be24276426ffe7f01668fad1360",
+    "015f5756b41576ad85e8783d8102f873d981ca0161c7336f404b1315782ed9d6",
+    "b55178caa01038b0cb7e78622ae9ff2ca683eb16938862a2e90857b1865ecf11",
+    "f12cbdcd45d5356f3f85b7a9cbb26d3d50f7eefc22a70d5e21046071d1021cee",
+    "6cb024739029c5166f80e96783f6d417e3e276c0c2c24e93c07b3a78c142b6ea",
+    "02a3438a4adcd87f5ab1ceaf69be919a0d65322918c17f700a3c141e5b667e87",
+    "033f4b6da8f464103e4847c523441f5e1a2fb020cc6887669635ffdf66368687",
+    "0010495e9916c948824111499abb29b00979b26ee33c5372fc34a983d7714ec1",
+    "5756dd4f57485661588352dd8b296781e7f4d21f978f489e29392ec165806320",
+    "6a27cb442170828f4d8efdf96df7241970061d482ef8cd8bd481c7d989e94405",
+    "2340d7df8ae9c2d14255edd1e48ffdc008611a28e68dee3cf5177d310d8d3730",
+    "678edf3ea26596492d1de960f7d4011c2d9895dbf78515b64a1670723f3f98ab",
+    "757aad5dbdb0e03dd294c87f08ae98cac68532dccac3c651e2da1d4127a97f5b",
+    "22bd56311ef6af9a1a4e0e0c9787d9323224d0f8e51fc65aa4c94c9fd646c948",
+    "983715bdaa438f87a1bba7ac5e8f1f44f1b10e456bd5e4fad5503edb581837b7",
+    "43d0ae0672ea09d43ccb38ea71502216d65b85140c471518b77de8752cc05565",
+    "29a58e78b9b5c230e06784cb00150f9157043a6585bac154f507a8d97f6102fa",
+    "747965e7a80dfe1a282397e16e03d868716995c5977c73a415baa4bdc3603710",
+    "4679d2bddcfa103c4ac9142eed314e3a027fa36c3c3f19ace02f1bfd3d953b8a",
+    "384f453578a6c92eb5b9af0194f975d9287efe639046b1bc990e0625f2cedfe1",
+    "78757c14a2f9b75d8ab8f8b7dca80b58ba5c1652714861810aff94a940c1a4d8",
+    "92787c20494fbfcd83e0070e3564c877e1f80aa650df80926d5299b1a75ecd54",
+    "e1eca2d43433b9794412dcb12d0765813c596c401bd1c45d1e8c179211e166bb",
+    "2420c9f5f431b571e259014b70d8da21af4c323c477966f3cb4d800999b30600",
+    "dc55a7fdbf372ed4fa55e5f61775b87c4cac7deb9c884d0188cd28e4d37d5400",
+    "9d160c735db0dffac30814e2989cd2bda84d522dbb0531e9777d57c316fe33ed",
+    "c5ce786813674ee0d38307412efe33df68a0cc2cf8d16bcf0591f03f5e0c422e",
+    "6ec16d5392edfe6eb2ecdea54ed0f0c6a13c1fc75a6ba1c8926e994ccec7ae9f",
+    "a47f583d73f73e826b1c0af44923b39ce99c7504bcefb637c65d63df0973ecb3",
+    "82be97adb32965c6f4b60e8e12b171788501e10d733a5c42ebd7542acdf83833",
+    "a6022cc8b3cc238118e0d4bdb20cf8788379ac9edf0edb7d7c626e7265aa5543",
+    "681702c9d4bd7379aa119e727cd93babe4a45d638fbd7f3d5243247938fa03b6",
+    "dea09c38a4e7ff2896347d0949e7bb9fa47886e611171fa0b30cc6b3690da05c",
+    "378bbe40476458fd03cd6148b0f52f22c3359ea7c7384eaa76f27c542f19bf2c",
+    "d9b41ec64991054833b1b5295adf794d2b9895adfca815d28171c8df6589de95",
+    "42e09c368430ff3acf3a2c5b762adb2aa9e967b5b532349991c7bcf269c70c7b",
+    "93c3b509861f745c8a540830519c1e5a593a52a6e09041ef5601c58ad3f31cec",
+    "7cac2ace6fc2f2c55fbc93b24e0846e70d92a782dcd9ed35946de9cf05edfc31",
+    "616b23849d17a0108f0ba0bee17ced2adfed4c75ce6fa0efad9eaf52286647fe",
+    "8969ebfedb193d4747d8364ad393c920134d6e855d394ccc1b90e9a341df787a",
+    "e9bdf59cbdb779d992193be67e95ff3e1a12f38c4ec952a9164ae77b15c9a1e9",
+    "abf1ee9850155d93883390454af6fc2a5d3f8c69e6d5ab971ba1dd28a7f48a39",
+    "945a9f85549dded14e4d070fb54cbe748c59ce4aea4b2188015fe6759ce99461",
+    "41b0e916e5257fd758134e925986194e340fa820c5cd70ef235420ad047afa83",
+    "b928bef542e1bd0dc9dfebf4032f85774e3b370da743378c8fff783a3a4ce720",
+    "f3cee11063a941e616b630d3fc13140b987320e6b960b5014683db43d0e0070e",
+    "535e645daee12de81c9c2b8d6cbb6132ee82e126d0ba77b4c0ef3c47625e6e4e",
+    "bb5752a6a7f4c6b70ee5e820c977a4dc59fa4ebd43bc39b0de110c5a1dd610c7",
+    "afb698931b38f2a74e7bd744113a62a7f352d44401c1b171b3c5009f9cc9bce4",
+    "b12eeaaad51a27da3ea559d21a21638cde3029c5d4d91573fa2ccfede0e60f67",
+    "c80647e3e86d258be801a24c99b9ee5decec85fc3c6fb16a56761525dd9739a8",
+    "5d35a2001306bc9893b1c23513bbe5a0a9becbad36c1107a4545722d4fb1ed3c",
+    "fb78a5101c009b780035b85653efd97b5b2c089d51bf7caaee0b7eb305d75354",
+    "edb31333f24d53bd541563a3b56f84bb2da25c4c271c796897e399a297436ee8",
+    "899239a8e29c467bf36cd22f676a8fe39dd16fb4d37160279dd123f4b1751f8e",
+    "509f298eecaf1ae27d91dc2ef06d70d782dd89a64127c867d74b8fb0d0f52355",
+    "4ae82c97df04c29a624789e8c58ad1b0d473ad12ee543283adc53d807f384f1e",
+    "ddbd4b14267565f02fcacd2ebef014c1b8af7623ac5efa17140cd4608f783e4e",
+    "a38448c90e4a9e53466f6a4a597f322b67caad279cde0d0f51cf1ee7ab3b116c"
+  ],
+  "metrics": {
+    "exact_match": 0.42857142857142855,
+    "token_f1": 0.6095238095238095
+  },
+  "qa": [
+    {
+      "question": "What sports does John like besides basketball?",
+      "answer": "surfing",
+      "evidence": [
+        "D1:7",
+        "D2:14",
+        "D3:1",
+        "D3:25"
+      ],
+      "category": 1,
+      "source_qa_index": 11,
+      "prediction": "Surfing",
+      "metrics": {
+        "exact_match": 1.0,
+        "token_f1": 1.0
+      },
+      "context_digest": "ca246754d4e3fdd55fab5ccffec62fbb2440bed1fda3232f5bcda659cd78f5cf",
+      "prompt_digest": "005ca4b3e2a00f35e8f6bcaf6419ea3b20fa9f795998e2e06fca59a9c0bc0d0b",
+      "context_utf8_bytes": 15663,
+      "context_rows": 37,
+      "context_unique_rows": 23
+    },
+    {
+      "question": "In which month's game did John achieve a career-high score in points?",
+      "answer": "June 2023",
+      "evidence": [
+        "D3:1"
+      ],
+      "category": 2,
+      "source_qa_index": 6,
+      "prediction": "July",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "context_digest": "9002c7c877c5b28491f731b1cb24ab8a044e9e4cdc1fd518fc56e5597c9d31f2",
+      "prompt_digest": "e9d89fe73f226b3c5cf86f446c8a6a78e790dc7d6e062aa0209a1b25552ccd6c",
+      "context_utf8_bytes": 16516,
+      "context_rows": 40,
+      "context_unique_rows": 17
+    },
+    {
+      "question": "Would Tim enjoy reading books by C. S. Lewis or John Greene?",
+      "answer": "C. S.Lewis",
+      "evidence": [
+        "D1:14",
+        "D1:16",
+        "D1:18"
+      ],
+      "category": 3,
+      "source_qa_index": 3,
+      "prediction": "Yes, Tim would enjoy reading books by C. S. Lewis or John Greene.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.13333333333333333
+      },
+      "context_digest": "1c64b03b371c5786c667f92dbebb1b91a002d7ffabe67585d14c39c98b312345",
+      "prompt_digest": "c9c3e1c433a78f5ea9d20cca7b40740ccef0388763725f29182b954a1e824af4",
+      "context_utf8_bytes": 19482,
+      "context_rows": 41,
+      "context_unique_rows": 22
+    },
+    {
+      "question": "Which team did John sign with on 21 May, 2023?",
+      "answer": "The Minnesota Wolves",
+      "evidence": [
+        "D1:5"
+      ],
+      "category": 4,
+      "source_qa_index": 71,
+      "prediction": "The Minnesota Wolves!",
+      "metrics": {
+        "exact_match": 1.0,
+        "token_f1": 1.0
+      },
+      "context_digest": "dd965d289eb47ec29e43557e4e10cf939e1bc35dfbc539d82885b99bdd97e441",
+      "prompt_digest": "1769d2339e371ab8ed838c3d423e8bffc46f4d1959b0e7d51a0636ee9aa417f8",
+      "context_utf8_bytes": 13251,
+      "context_rows": 31,
+      "context_unique_rows": 16
+    },
+    {
+      "question": "Based on Tim's collections, what is a shop that he would enjoy visiting in New York city?",
+      "answer": "House of MinaLima",
+      "evidence": [
+        "D2:9"
+      ],
+      "category": 3,
+      "source_qa_index": 5,
+      "prediction": "A bookstore or a magical-themed shop.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "context_digest": "8ad4c6479b9cd9830e7e91620de71db81a9a3ade9d569976c147591699c72f16",
+      "prompt_digest": "7f0e45b1428554b38ec220fa4bd112d1182d9269357b844c91abbfacd5eb71cc",
+      "context_utf8_bytes": 19153,
+      "context_rows": 39,
+      "context_unique_rows": 23
+    },
+    {
+      "question": "What is John's position on the team he signed with?",
+      "answer": "shooting guard",
+      "evidence": [
+        "D1:7"
+      ],
+      "category": 4,
+      "source_qa_index": 72,
+      "prediction": "Shooting guard",
+      "metrics": {
+        "exact_match": 1.0,
+        "token_f1": 1.0
+      },
+      "context_digest": "452a6fc0285639ef8a51bec306db8333ae46a574c46aeee9cff5682c00d0129e",
+      "prompt_digest": "20e2c362ae37a9fe2fd40b873e4972cd6419717ae6fe306e5f36f260c91242d0",
+      "context_utf8_bytes": 12421,
+      "context_rows": 31,
+      "context_unique_rows": 16
+    },
+    {
+      "question": "What challenge did John encounter during pre-season training?",
+      "answer": "fitting into the new team's style of play",
+      "evidence": [
+        "D1:11"
+      ],
+      "category": 4,
+      "source_qa_index": 73,
+      "prediction": "Fitting into the new team's style of play was a challenge during pre-season.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.7777777777777778
+      },
+      "context_digest": "9c4e63865e3c092160ee32e7bbb08640d5fb1747ba32d86b58ce92a7b4b55d06",
+      "prompt_digest": "ce2120556809f9065ac4169cd90810cc1bc74838fbe142f4e016886b08b3b3c7",
+      "context_utf8_bytes": 12950,
+      "context_rows": 33,
+      "context_unique_rows": 16
+    },
+    {
+      "question": "What aspects of the Harry Potter universe will be discussed in John's fan project collaborations?",
+      "answer": "characters, spells, magical creatures",
+      "evidence": [
+        "D1:16"
+      ],
+      "category": 4,
+      "source_qa_index": 74,
+      "prediction": "characters, spells, and magical creatures",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.8888888888888888
+      },
+      "context_digest": "aad1cd6dc6b9989e048b20e6826b43b04c85b35bf31ce8512189341b293b6b1d",
+      "prompt_digest": "9e99e8b440eb4e3c1cd37cd486d301073d0dfe0f1406bb76e71c3f9693b2faf7",
+      "context_utf8_bytes": 17980,
+      "context_rows": 37,
+      "context_unique_rows": 16
+    },
+    {
+      "question": "What forum did Tim join recently?",
+      "answer": "fantasy literature forum",
+      "evidence": [
+        "D2:1"
+      ],
+      "category": 4,
+      "source_qa_index": 75,
+      "prediction": "Fantasy literature forum",
+      "metrics": {
+        "exact_match": 1.0,
+        "token_f1": 1.0
+      },
+      "context_digest": "6fa4816ec95694dbf1ee4e5fa077a5fde7d6a2010e8ce3c7d4f8e396870ada65",
+      "prompt_digest": "6a88e754002e70a2ef9eed13af2532e36fa2e524959a28bb52275f1c51ce5efb",
+      "context_utf8_bytes": 17713,
+      "context_rows": 36,
+      "context_unique_rows": 19
+    },
+    {
+      "question": "What kind of picture did Tim share as part of their Harry Potter book collection?",
+      "answer": "MinaLima's creation from the Harry Potter films",
+      "evidence": [
+        "D2:9"
+      ],
+      "category": 4,
+      "source_qa_index": 76,
+      "prediction": "A photo of a table with a bunch of books on it.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "context_digest": "229e7dca77b11ce74bf980730ec35602b2627d901b6c16822c9deb9a0fb3d386",
+      "prompt_digest": "66c39f873cb6134fe8d2720313fa7abfce9603c25a85e1237ffc151176a21326",
+      "context_utf8_bytes": 18434,
+      "context_rows": 38,
+      "context_unique_rows": 15
+    },
+    {
+      "question": "What was the highest number of points John scored in a game recently?",
+      "answer": "40 points",
+      "evidence": [
+        "D3:1"
+      ],
+      "category": 4,
+      "source_qa_index": 77,
+      "prediction": "40 points",
+      "metrics": {
+        "exact_match": 1.0,
+        "token_f1": 1.0
+      },
+      "context_digest": "fe8319132939e14035b061e28637716549a2e4e6a9960b014ad634b5ef76d902",
+      "prompt_digest": "37a13261fce5473857ca4c0c0027de362cdcd228042d605f0dbd994ab6d77654",
+      "context_utf8_bytes": 16530,
+      "context_rows": 40,
+      "context_unique_rows": 17
+    },
+    {
+      "question": "What did John celebrate at a restaurant with teammates?",
+      "answer": "a tough win",
+      "evidence": [
+        "D3:5"
+      ],
+      "category": 4,
+      "source_qa_index": 78,
+      "prediction": "The intense moments of a game.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0
+      },
+      "context_digest": "ae18437f4c228c70aac8e650882dc7b8c727db65efee26d4dc62405de51016c9",
+      "prompt_digest": "f53f078006c20009fc07ea8deced4d5c388c9a0d73d39bcb733863ae13149fb7",
+      "context_utf8_bytes": 13924,
+      "context_rows": 32,
+      "context_unique_rows": 21
+    },
+    {
+      "question": "What kind of deals did John sign with Nike and Gatorade?",
+      "answer": "basketball shoe and gear deal with Nike, potential sponsorship deal with Gatorade",
+      "evidence": [
+        "D3:13"
+      ],
+      "category": 4,
+      "source_qa_index": 79,
+      "prediction": "John signed a basketball shoe and gear deal with Nike and is in talks with Gatorade about a potential sponsorship.",
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.7333333333333333
+      },
+      "context_digest": "b6499cced2fb2913323dacb18cf54de4c67a54efc76e71179a1b69afdc69ef76",
+      "prompt_digest": "fff0101810aa4d8f6c76a68df578ebea9b01521a3ea2bfe74723121719d9df0f",
+      "context_utf8_bytes": 23445,
+      "context_rows": 43,
+      "context_unique_rows": 15
+    },
+    {
+      "question": "Which city is John excited to have a game at?",
+      "answer": "Seattle",
+      "evidence": [
+        "D3:19"
+      ],
+      "category": 4,
+      "source_qa_index": 80,
+      "prediction": "Seattle",
+      "metrics": {
+        "exact_match": 1.0,
+        "token_f1": 1.0
+      },
+      "context_digest": "f48c0afecf9610e611aeb54c433395dc7239c6f93b3a11ca2952e7210b663e5d",
+      "prompt_digest": "4aab78bc5ef21c5798bc7ada799fd49ea19c944921c69f85a8a4da182e0f4100",
+      "context_utf8_bytes": 13331,
+      "context_rows": 31,
+      "context_unique_rows": 21
+    }
+  ],
+  "llm_events": [
+    {
+      "stage": "joint_note",
+      "key": "c0fa18716ae8f368d45736bba58e6f58ebb893d519a6a1be4c321e631fcd6b5a",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.7241066619753838,
+      "cache_read_seconds": 0.0003548860549926758,
+      "cache_write_seconds": 0.04894036054611206,
+      "usage": {
+        "prompt_tokens": 486,
+        "completion_tokens": 57,
+        "total_tokens": 543
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "c0fa18716ae8f368d45736bba58e6f58ebb893d519a6a1be4c321e631fcd6b5a",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          0
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 0.7741518393158913
+    },
+    {
+      "stage": "joint_note",
+      "key": "eb1bf4b64b97f73a11e61e19cbcdb34b5b2a1d5559cdb752f4df59ae9eb7fd20",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.2123847976326942,
+      "cache_read_seconds": 4.373863339424133e-05,
+      "cache_write_seconds": 0.028584346175193787,
+      "usage": {
+        "prompt_tokens": 596,
+        "completion_tokens": 98,
+        "total_tokens": 694
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "eb1bf4b64b97f73a11e61e19cbcdb34b5b2a1d5559cdb752f4df59ae9eb7fd20",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          0
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.2413408122956753
+    },
+    {
+      "stage": "joint_note",
+      "key": "ea45acf669294b0fb25fa75b52c8fcf70b343df7b16232cfd523839bd5cb346b",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.8732739649713039,
+      "cache_read_seconds": 4.209578037261963e-05,
+      "cache_write_seconds": 0.03419661149382591,
+      "usage": {
+        "prompt_tokens": 700,
+        "completion_tokens": 69,
+        "total_tokens": 769
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "ea45acf669294b0fb25fa75b52c8fcf70b343df7b16232cfd523839bd5cb346b",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          0
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 0.907800704240799
+    },
+    {
+      "stage": "joint_note",
+      "key": "b976939464ab0fd6cdcf40cab30a21dc3b4c96a19b7a1dff6420d8c46136435d",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.9871793314814568,
+      "cache_read_seconds": 4.065409302711487e-05,
+      "cache_write_seconds": 0.04471322149038315,
+      "usage": {
+        "prompt_tokens": 807,
+        "completion_tokens": 77,
+        "total_tokens": 884
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "b976939464ab0fd6cdcf40cab30a21dc3b4c96a19b7a1dff6420d8c46136435d",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.0322894528508186
+    },
+    {
+      "stage": "joint_note",
+      "key": "da4d2f9200e00641fe2e06ba99c223c96e267dc84d623b9b44df561e60942c26",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.327410239726305,
+      "cache_read_seconds": 4.105269908905029e-05,
+      "cache_write_seconds": 0.033703215420246124,
+      "usage": {
+        "prompt_tokens": 905,
+        "completion_tokens": 105,
+        "total_tokens": 1010
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "da4d2f9200e00641fe2e06ba99c223c96e267dc84d623b9b44df561e60942c26",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.36152895539999
+    },
+    {
+      "stage": "joint_note",
+      "key": "2c0fc0b26946975d0c2b3eb12abcdc22b1bbd6c3ffa7b0f04233313ac4192c44",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4037439338862896,
+      "cache_read_seconds": 5.0164759159088135e-05,
+      "cache_write_seconds": 0.032441653311252594,
+      "usage": {
+        "prompt_tokens": 1004,
+        "completion_tokens": 110,
+        "total_tokens": 1114
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "2c0fc0b26946975d0c2b3eb12abcdc22b1bbd6c3ffa7b0f04233313ac4192c44",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4366093464195728
+    },
+    {
+      "stage": "joint_note",
+      "key": "25a3aa283bc18c82f35d8a5a5fdcff8d0e785b472f5d65267ad0439917b941e8",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4467817954719067,
+      "cache_read_seconds": 4.1175633668899536e-05,
+      "cache_write_seconds": 0.04344445839524269,
+      "usage": {
+        "prompt_tokens": 1005,
+        "completion_tokens": 114,
+        "total_tokens": 1119
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "25a3aa283bc18c82f35d8a5a5fdcff8d0e785b472f5d65267ad0439917b941e8",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.490613266825676
+    },
+    {
+      "stage": "joint_note",
+      "key": "9c6ce4afebba05267ce1c4e2185dc43ef31a469c23bd30f22dffb0141881841c",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4632261209189892,
+      "cache_read_seconds": 4.406273365020752e-05,
+      "cache_write_seconds": 0.09583154693245888,
+      "usage": {
+        "prompt_tokens": 1004,
+        "completion_tokens": 115,
+        "total_tokens": 1119
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "9c6ce4afebba05267ce1c4e2185dc43ef31a469c23bd30f22dffb0141881841c",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5595044679939747
+    },
+    {
+      "stage": "joint_note",
+      "key": "ed0fb400f5007f7029c7e1a1cca5715f5537ddb0dca9c916f612729936f2aaa5",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.3737213797867298,
+      "cache_read_seconds": 5.9757381677627563e-05,
+      "cache_write_seconds": 0.03334032744169235,
+      "usage": {
+        "prompt_tokens": 1015,
+        "completion_tokens": 107,
+        "total_tokens": 1122
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "ed0fb400f5007f7029c7e1a1cca5715f5537ddb0dca9c916f612729936f2aaa5",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4075469560921192
+    },
+    {
+      "stage": "joint_note",
+      "key": "0b392c225a955f50416fc1109733d5c6193b934a63167d9076bc385b44921cb5",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.0352883338928223,
+      "cache_read_seconds": 4.4055283069610596e-05,
+      "cache_write_seconds": 0.03940146788954735,
+      "usage": {
+        "prompt_tokens": 981,
+        "completion_tokens": 79,
+        "total_tokens": 1060
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "0b392c225a955f50416fc1109733d5c6193b934a63167d9076bc385b44921cb5",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.0751071460545063
+    },
+    {
+      "stage": "joint_note",
+      "key": "75bd91c156a097defe2dcc1bfd67e7f3e687ee2fb66b464adaec0b99ddabcb75",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.262098241597414,
+      "cache_read_seconds": 4.3414533138275146e-05,
+      "cache_write_seconds": 0.03480363264679909,
+      "usage": {
+        "prompt_tokens": 1003,
+        "completion_tokens": 98,
+        "total_tokens": 1101
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "75bd91c156a097defe2dcc1bfd67e7f3e687ee2fb66b464adaec0b99ddabcb75",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          0
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.2973381765186787
+    },
+    {
+      "stage": "joint_note",
+      "key": "5538ff1b43391c8a02bf570814fc24549946a3d7b7e1adfa258ca833603f7705",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.917585201561451,
+      "cache_read_seconds": 6.596744060516357e-05,
+      "cache_write_seconds": 0.0393771193921566,
+      "usage": {
+        "prompt_tokens": 994,
+        "completion_tokens": 153,
+        "total_tokens": 1147
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "5538ff1b43391c8a02bf570814fc24549946a3d7b7e1adfa258ca833603f7705",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          0,
+          3
+        ],
+        "list_count": 3,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.9575048871338367
+    },
+    {
+      "stage": "joint_note",
+      "key": "6dcd8bf14b572808e191240e8f17b5913b950931df6369d98d8ee06396a0ee55",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4755179323256016,
+      "cache_read_seconds": 4.6119093894958496e-05,
+      "cache_write_seconds": 0.04243278503417969,
+      "usage": {
+        "prompt_tokens": 1014,
+        "completion_tokens": 116,
+        "total_tokens": 1130
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "6dcd8bf14b572808e191240e8f17b5913b950931df6369d98d8ee06396a0ee55",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5183553919196129
+    },
+    {
+      "stage": "joint_note",
+      "key": "b684b02bd5f3c05a07895fb4ec3968a0c50e73a026ae59c027234ea06c2bec5c",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4770552702248096,
+      "cache_read_seconds": 6.823986768722534e-05,
+      "cache_write_seconds": 0.04016198590397835,
+      "usage": {
+        "prompt_tokens": 1044,
+        "completion_tokens": 116,
+        "total_tokens": 1160
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "b684b02bd5f3c05a07895fb4ec3968a0c50e73a026ae59c027234ea06c2bec5c",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5177130326628685
+    },
+    {
+      "stage": "joint_note",
+      "key": "d67d01d01d8bce74fc62d57c0785b7b90a44a795eced6834c8c121418f1b4986",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5856566838920116,
+      "cache_read_seconds": 4.222989082336426e-05,
+      "cache_write_seconds": 0.02492225170135498,
+      "usage": {
+        "prompt_tokens": 1094,
+        "completion_tokens": 125,
+        "total_tokens": 1219
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "d67d01d01d8bce74fc62d57c0785b7b90a44a795eced6834c8c121418f1b4986",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.6110016256570816
+    },
+    {
+      "stage": "joint_note",
+      "key": "9fd112fa306d8a8709661d4b9eacb69a589d1a07c4e968e59a3d531a72659c12",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5272641032934189,
+      "cache_read_seconds": 4.1350722312927246e-05,
+      "cache_write_seconds": 0.02517230436205864,
+      "usage": {
+        "prompt_tokens": 1132,
+        "completion_tokens": 120,
+        "total_tokens": 1252
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "9fd112fa306d8a8709661d4b9eacb69a589d1a07c4e968e59a3d531a72659c12",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5529071055352688
+    },
+    {
+      "stage": "joint_note",
+      "key": "9fc77c9c453face24c027b26b404ec4b3a80e925b502abeaa5a5a71699818795",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.455095324665308,
+      "cache_read_seconds": 4.238635301589966e-05,
+      "cache_write_seconds": 0.035620592534542084,
+      "usage": {
+        "prompt_tokens": 1102,
+        "completion_tokens": 114,
+        "total_tokens": 1216
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "9fc77c9c453face24c027b26b404ec4b3a80e925b502abeaa5a5a71699818795",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4911322370171547
+    },
+    {
+      "stage": "joint_note",
+      "key": "e3e81c30750171d27d324de80d7bdb77eb5b2a0425a95009353008a4fa5c998c",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5599745772778988,
+      "cache_read_seconds": 4.199519753456116e-05,
+      "cache_write_seconds": 0.023045364767313004,
+      "usage": {
+        "prompt_tokens": 1133,
+        "completion_tokens": 122,
+        "total_tokens": 1255
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "e3e81c30750171d27d324de80d7bdb77eb5b2a0425a95009353008a4fa5c998c",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5834343619644642
+    },
+    {
+      "stage": "joint_note",
+      "key": "f040d7b2675f44b75bbedb4d33266e637011e856d31b1b12ae645ee29783ea64",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4617085121572018,
+      "cache_read_seconds": 4.2635947465896606e-05,
+      "cache_write_seconds": 0.03637565299868584,
+      "usage": {
+        "prompt_tokens": 1105,
+        "completion_tokens": 114,
+        "total_tokens": 1219
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "f040d7b2675f44b75bbedb4d33266e637011e856d31b1b12ae645ee29783ea64",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4984768480062485
+    },
+    {
+      "stage": "joint_note",
+      "key": "4375c8e211430393980cf7a5b4a8d0e84b69b06a93053b2e6f5543a8b472b8ea",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.473927665501833,
+      "cache_read_seconds": 4.183128476142883e-05,
+      "cache_write_seconds": 0.033230189234018326,
+      "usage": {
+        "prompt_tokens": 1118,
+        "completion_tokens": 115,
+        "total_tokens": 1233
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "4375c8e211430393980cf7a5b4a8d0e84b69b06a93053b2e6f5543a8b472b8ea",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5075953304767609
+    },
+    {
+      "stage": "joint_note",
+      "key": "fe7e35a9326fd5465620f6701e43bc365ad92bb04e5741438f5653cea271efd3",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.7119245491921902,
+      "cache_read_seconds": 4.009902477264404e-05,
+      "cache_write_seconds": 0.02973492071032524,
+      "usage": {
+        "prompt_tokens": 1153,
+        "completion_tokens": 135,
+        "total_tokens": 1288
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "fe7e35a9326fd5465620f6701e43bc365ad92bb04e5741438f5653cea271efd3",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.7420966550707817
+    },
+    {
+      "stage": "joint_note",
+      "key": "4178b2162087fed834694bbb0560ee14cd6a95407dba4bfe7effdb9720ca95bc",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4121068269014359,
+      "cache_read_seconds": 4.0825456380844116e-05,
+      "cache_write_seconds": 0.03400498628616333,
+      "usage": {
+        "prompt_tokens": 1175,
+        "completion_tokens": 110,
+        "total_tokens": 1285
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "4178b2162087fed834694bbb0560ee14cd6a95407dba4bfe7effdb9720ca95bc",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.446526288986206
+    },
+    {
+      "stage": "joint_note",
+      "key": "5ce65922ee1736927bf7acdbcaf82bc367e5ea8de874b30db68e6636569fec69",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4699097946286201,
+      "cache_read_seconds": 5.4854899644851685e-05,
+      "cache_write_seconds": 0.03230704739689827,
+      "usage": {
+        "prompt_tokens": 1129,
+        "completion_tokens": 115,
+        "total_tokens": 1244
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "5ce65922ee1736927bf7acdbcaf82bc367e5ea8de874b30db68e6636569fec69",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.502651795744896
+    },
+    {
+      "stage": "joint_note",
+      "key": "63d009ff91b50323857bd0244b3be19f466d97518b09e51f64e4beabd4abd7d0",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.468491967767477,
+      "cache_read_seconds": 4.072114825248718e-05,
+      "cache_write_seconds": 0.03778422251343727,
+      "usage": {
+        "prompt_tokens": 1181,
+        "completion_tokens": 114,
+        "total_tokens": 1295
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "63d009ff91b50323857bd0244b3be19f466d97518b09e51f64e4beabd4abd7d0",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5067220069468021
+    },
+    {
+      "stage": "joint_note",
+      "key": "d9d7e4321d277435fe6c8cbd509eeb0d18e0a63560a768a9472660b7e77ab8db",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5633372887969017,
+      "cache_read_seconds": 4.079937934875488e-05,
+      "cache_write_seconds": 0.02718767151236534,
+      "usage": {
+        "prompt_tokens": 1173,
+        "completion_tokens": 122,
+        "total_tokens": 1295
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "d9d7e4321d277435fe6c8cbd509eeb0d18e0a63560a768a9472660b7e77ab8db",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.59096609801054
+    },
+    {
+      "stage": "joint_note",
+      "key": "928fce0a3c6aff3631df0e9d029841322b69bf25db90c7d165e89b7ceccf3728",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4280992969870567,
+      "cache_read_seconds": 4.2494386434555054e-05,
+      "cache_write_seconds": 0.036757778376340866,
+      "usage": {
+        "prompt_tokens": 1186,
+        "completion_tokens": 111,
+        "total_tokens": 1297
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "928fce0a3c6aff3631df0e9d029841322b69bf25db90c7d165e89b7ceccf3728",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.465274665504694
+    },
+    {
+      "stage": "joint_note",
+      "key": "88fbfc5e0e1b83e78ccc35cf920b657a6cb26c9701c420a582b0354b4b46eb88",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5339243821799755,
+      "cache_read_seconds": 4.038959741592407e-05,
+      "cache_write_seconds": 0.03836816921830177,
+      "usage": {
+        "prompt_tokens": 1156,
+        "completion_tokens": 120,
+        "total_tokens": 1276
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "88fbfc5e0e1b83e78ccc35cf920b657a6cb26c9701c420a582b0354b4b46eb88",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.572707287967205
+    },
+    {
+      "stage": "joint_note",
+      "key": "1fb22b851e6baad02d3fb7c82f200390bd0b238084f1e9ed7e6e056bb5e909b7",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5047703124582767,
+      "cache_read_seconds": 4.0803104639053345e-05,
+      "cache_write_seconds": 0.03366472199559212,
+      "usage": {
+        "prompt_tokens": 1117,
+        "completion_tokens": 118,
+        "total_tokens": 1235
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "1fb22b851e6baad02d3fb7c82f200390bd0b238084f1e9ed7e6e056bb5e909b7",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5388870127499104
+    },
+    {
+      "stage": "joint_note",
+      "key": "d0d6ad95100972358518808b1c52b0959545645bb91c241e21f8a1885e4cf47e",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.6266591474413872,
+      "cache_read_seconds": 4.217773675918579e-05,
+      "cache_write_seconds": 0.02917269617319107,
+      "usage": {
+        "prompt_tokens": 1131,
+        "completion_tokens": 128,
+        "total_tokens": 1259
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "d0d6ad95100972358518808b1c52b0959545645bb91c241e21f8a1885e4cf47e",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.6560938954353333
+    },
+    {
+      "stage": "joint_note",
+      "key": "79fbf55aaddc4dcb3b55f0af4531aff14b71d4917d8ac4b93bc703a2c41f9790",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4950001016259193,
+      "cache_read_seconds": 4.008784890174866e-05,
+      "cache_write_seconds": 0.05775194987654686,
+      "usage": {
+        "prompt_tokens": 1087,
+        "completion_tokens": 117,
+        "total_tokens": 1204
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "79fbf55aaddc4dcb3b55f0af4531aff14b71d4917d8ac4b93bc703a2c41f9790",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5531971268355846
+    },
+    {
+      "stage": "joint_note",
+      "key": "3e5bbf9c0745c8b3b197372378fae90c72468d7b3cd22a535d0a6ea5e04b87d0",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.2020138911902905,
+      "cache_read_seconds": 4.240497946739197e-05,
+      "cache_write_seconds": 0.029071222990751266,
+      "usage": {
+        "prompt_tokens": 1104,
+        "completion_tokens": 93,
+        "total_tokens": 1197
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "3e5bbf9c0745c8b3b197372378fae90c72468d7b3cd22a535d0a6ea5e04b87d0",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          0
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.2315071076154709
+    },
+    {
+      "stage": "joint_note",
+      "key": "f004678be3f7ee7fad21013eb96ffa285302e41fe721b2c71c2b8d40d083171d",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.61908620595932,
+      "cache_read_seconds": 4.0844082832336426e-05,
+      "cache_write_seconds": 0.0300150066614151,
+      "usage": {
+        "prompt_tokens": 1065,
+        "completion_tokens": 128,
+        "total_tokens": 1193
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "f004678be3f7ee7fad21013eb96ffa285302e41fe721b2c71c2b8d40d083171d",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.6495578028261662
+    },
+    {
+      "stage": "joint_note",
+      "key": "0a4e422773c345071cf6cf4c09581f682822d37c57c891e4b1625a40682a3365",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5396088287234306,
+      "cache_read_seconds": 4.017353057861328e-05,
+      "cache_write_seconds": 0.026143211871385574,
+      "usage": {
+        "prompt_tokens": 1101,
+        "completion_tokens": 121,
+        "total_tokens": 1222
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "0a4e422773c345071cf6cf4c09581f682822d37c57c891e4b1625a40682a3365",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5661086551845074
+    },
+    {
+      "stage": "joint_note",
+      "key": "bcfdf06f8fe891177f5adbc2a70823a300e30be24276426ffe7f01668fad1360",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5172682665288448,
+      "cache_read_seconds": 4.13842499256134e-05,
+      "cache_write_seconds": 0.03276968002319336,
+      "usage": {
+        "prompt_tokens": 1081,
+        "completion_tokens": 119,
+        "total_tokens": 1200
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "bcfdf06f8fe891177f5adbc2a70823a300e30be24276426ffe7f01668fad1360",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.550349798053503
+    },
+    {
+      "stage": "joint_note",
+      "key": "015f5756b41576ad85e8783d8102f873d981ca0161c7336f404b1315782ed9d6",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.40606152638793,
+      "cache_read_seconds": 4.210323095321655e-05,
+      "cache_write_seconds": 0.03407422825694084,
+      "usage": {
+        "prompt_tokens": 1013,
+        "completion_tokens": 110,
+        "total_tokens": 1123
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "015f5756b41576ad85e8783d8102f873d981ca0161c7336f404b1315782ed9d6",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4404247589409351
+    },
+    {
+      "stage": "joint_note",
+      "key": "b55178caa01038b0cb7e78622ae9ff2ca683eb16938862a2e90857b1865ecf11",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4318411611020565,
+      "cache_read_seconds": 4.1443854570388794e-05,
+      "cache_write_seconds": 0.02881218120455742,
+      "usage": {
+        "prompt_tokens": 1080,
+        "completion_tokens": 112,
+        "total_tokens": 1192
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "b55178caa01038b0cb7e78622ae9ff2ca683eb16938862a2e90857b1865ecf11",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4608885198831558
+    },
+    {
+      "stage": "joint_note",
+      "key": "f12cbdcd45d5356f3f85b7a9cbb26d3d50f7eefc22a70d5e21046071d1021cee",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5531548783183098,
+      "cache_read_seconds": 5.50001859664917e-05,
+      "cache_write_seconds": 0.032809335738420486,
+      "usage": {
+        "prompt_tokens": 1118,
+        "completion_tokens": 122,
+        "total_tokens": 1240
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "f12cbdcd45d5356f3f85b7a9cbb26d3d50f7eefc22a70d5e21046071d1021cee",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5861997827887535
+    },
+    {
+      "stage": "joint_note",
+      "key": "6cb024739029c5166f80e96783f6d417e3e276c0c2c24e93c07b3a78c142b6ea",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4522915035486221,
+      "cache_read_seconds": 4.0300190448760986e-05,
+      "cache_write_seconds": 0.03403271362185478,
+      "usage": {
+        "prompt_tokens": 1104,
+        "completion_tokens": 114,
+        "total_tokens": 1218
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "6cb024739029c5166f80e96783f6d417e3e276c0c2c24e93c07b3a78c142b6ea",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4866389855742455
+    },
+    {
+      "stage": "joint_note",
+      "key": "02a3438a4adcd87f5ab1ceaf69be919a0d65322918c17f700a3c141e5b667e87",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.2110900022089481,
+      "cache_read_seconds": 4.042685031890869e-05,
+      "cache_write_seconds": 0.03115430846810341,
+      "usage": {
+        "prompt_tokens": 1045,
+        "completion_tokens": 94,
+        "total_tokens": 1139
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "02a3438a4adcd87f5ab1ceaf69be919a0d65322918c17f700a3c141e5b667e87",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          0
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.2426115646958351
+    },
+    {
+      "stage": "joint_note",
+      "key": "033f4b6da8f464103e4847c523441f5e1a2fb020cc6887669635ffdf66368687",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4200007356703281,
+      "cache_read_seconds": 3.945082426071167e-05,
+      "cache_write_seconds": 0.037699174135923386,
+      "usage": {
+        "prompt_tokens": 1135,
+        "completion_tokens": 111,
+        "total_tokens": 1246
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "033f4b6da8f464103e4847c523441f5e1a2fb020cc6887669635ffdf66368687",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4581289701163769
+    },
+    {
+      "stage": "joint_note",
+      "key": "0010495e9916c948824111499abb29b00979b26ee33c5372fc34a983d7714ec1",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5549102537333965,
+      "cache_read_seconds": 5.049258470535278e-05,
+      "cache_write_seconds": 0.03192964568734169,
+      "usage": {
+        "prompt_tokens": 1196,
+        "completion_tokens": 122,
+        "total_tokens": 1318
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "0010495e9916c948824111499abb29b00979b26ee33c5372fc34a983d7714ec1",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5871400237083435
+    },
+    {
+      "stage": "joint_note",
+      "key": "5756dd4f57485661588352dd8b296781e7f4d21f978f489e29392ec165806320",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.546685442328453,
+      "cache_read_seconds": 4.240870475769043e-05,
+      "cache_write_seconds": 0.03107830509543419,
+      "usage": {
+        "prompt_tokens": 1176,
+        "completion_tokens": 121,
+        "total_tokens": 1297
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "5756dd4f57485661588352dd8b296781e7f4d21f978f489e29392ec165806320",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5781639777123928
+    },
+    {
+      "stage": "joint_note",
+      "key": "6a27cb442170828f4d8efdf96df7241970061d482ef8cd8bd481c7d989e94405",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4793672896921635,
+      "cache_read_seconds": 4.212185740470886e-05,
+      "cache_write_seconds": 0.03502611070871353,
+      "usage": {
+        "prompt_tokens": 1100,
+        "completion_tokens": 116,
+        "total_tokens": 1216
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "6a27cb442170828f4d8efdf96df7241970061d482ef8cd8bd481c7d989e94405",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5148218497633934
+    },
+    {
+      "stage": "joint_note",
+      "key": "2340d7df8ae9c2d14255edd1e48ffdc008611a28e68dee3cf5177d310d8d3730",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.6110436767339706,
+      "cache_read_seconds": 6.0383230447769165e-05,
+      "cache_write_seconds": 0.02637011557817459,
+      "usage": {
+        "prompt_tokens": 1096,
+        "completion_tokens": 127,
+        "total_tokens": 1223
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "2340d7df8ae9c2d14255edd1e48ffdc008611a28e68dee3cf5177d310d8d3730",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.6377638317644596
+    },
+    {
+      "stage": "joint_note",
+      "key": "678edf3ea26596492d1de960f7d4011c2d9895dbf78515b64a1670723f3f98ab",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5616538934409618,
+      "cache_read_seconds": 5.350634455680847e-05,
+      "cache_write_seconds": 0.03053908795118332,
+      "usage": {
+        "prompt_tokens": 1151,
+        "completion_tokens": 122,
+        "total_tokens": 1273
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "678edf3ea26596492d1de960f7d4011c2d9895dbf78515b64a1670723f3f98ab",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5925724655389786
+    },
+    {
+      "stage": "joint_note",
+      "key": "757aad5dbdb0e03dd294c87f08ae98cac68532dccac3c651e2da1d4127a97f5b",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5274237617850304,
+      "cache_read_seconds": 3.980100154876709e-05,
+      "cache_write_seconds": 0.03495755419135094,
+      "usage": {
+        "prompt_tokens": 1118,
+        "completion_tokens": 119,
+        "total_tokens": 1237
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "757aad5dbdb0e03dd294c87f08ae98cac68532dccac3c651e2da1d4127a97f5b",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.562798660248518
+    },
+    {
+      "stage": "joint_note",
+      "key": "22bd56311ef6af9a1a4e0e0c9787d9323224d0f8e51fc65aa4c94c9fd646c948",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4854406900703907,
+      "cache_read_seconds": 4.310905933380127e-05,
+      "cache_write_seconds": 0.029861412942409515,
+      "usage": {
+        "prompt_tokens": 1189,
+        "completion_tokens": 116,
+        "total_tokens": 1305
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "22bd56311ef6af9a1a4e0e0c9787d9323224d0f8e51fc65aa4c94c9fd646c948",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5157356560230255
+    },
+    {
+      "stage": "joint_note",
+      "key": "983715bdaa438f87a1bba7ac5e8f1f44f1b10e456bd5e4fad5503edb581837b7",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5280341170728207,
+      "cache_read_seconds": 4.2323023080825806e-05,
+      "cache_write_seconds": 0.03373526409268379,
+      "usage": {
+        "prompt_tokens": 1174,
+        "completion_tokens": 119,
+        "total_tokens": 1293
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "983715bdaa438f87a1bba7ac5e8f1f44f1b10e456bd5e4fad5503edb581837b7",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5621558390557766
+    },
+    {
+      "stage": "joint_note",
+      "key": "43d0ae0672ea09d43ccb38ea71502216d65b85140c471518b77de8752cc05565",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5337243005633354,
+      "cache_read_seconds": 4.1682273149490356e-05,
+      "cache_write_seconds": 0.031168468296527863,
+      "usage": {
+        "prompt_tokens": 1136,
+        "completion_tokens": 120,
+        "total_tokens": 1256
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "43d0ae0672ea09d43ccb38ea71502216d65b85140c471518b77de8752cc05565",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.565325289964676
+    },
+    {
+      "stage": "joint_note",
+      "key": "29a58e78b9b5c230e06784cb00150f9157043a6585bac154f507a8d97f6102fa",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.522763505578041,
+      "cache_read_seconds": 4.073604941368103e-05,
+      "cache_write_seconds": 0.0356610044836998,
+      "usage": {
+        "prompt_tokens": 1175,
+        "completion_tokens": 119,
+        "total_tokens": 1294
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "29a58e78b9b5c230e06784cb00150f9157043a6585bac154f507a8d97f6102fa",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5588625259697437
+    },
+    {
+      "stage": "joint_note",
+      "key": "747965e7a80dfe1a282397e16e03d868716995c5977c73a415baa4bdc3603710",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5389844700694084,
+      "cache_read_seconds": 4.803761839866638e-05,
+      "cache_write_seconds": 0.03352326527237892,
+      "usage": {
+        "prompt_tokens": 1112,
+        "completion_tokens": 121,
+        "total_tokens": 1233
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "747965e7a80dfe1a282397e16e03d868716995c5977c73a415baa4bdc3603710",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5729567557573318
+    },
+    {
+      "stage": "joint_note",
+      "key": "4679d2bddcfa103c4ac9142eed314e3a027fa36c3c3f19ace02f1bfd3d953b8a",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.690102405846119,
+      "cache_read_seconds": 3.9946287870407104e-05,
+      "cache_write_seconds": 0.03238454461097717,
+      "usage": {
+        "prompt_tokens": 1223,
+        "completion_tokens": 133,
+        "total_tokens": 1356
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "4679d2bddcfa103c4ac9142eed314e3a027fa36c3c3f19ace02f1bfd3d953b8a",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.7229165323078632
+    },
+    {
+      "stage": "joint_note",
+      "key": "384f453578a6c92eb5b9af0194f975d9287efe639046b1bc990e0625f2cedfe1",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.6662952229380608,
+      "cache_read_seconds": 4.034489393234253e-05,
+      "cache_write_seconds": 0.031212259083986282,
+      "usage": {
+        "prompt_tokens": 1206,
+        "completion_tokens": 131,
+        "total_tokens": 1337
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "384f453578a6c92eb5b9af0194f975d9287efe639046b1bc990e0625f2cedfe1",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.697936311364174
+    },
+    {
+      "stage": "joint_note",
+      "key": "78757c14a2f9b75d8ab8f8b7dca80b58ba5c1652714861810aff94a940c1a4d8",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.5633993558585644,
+      "cache_read_seconds": 4.2323023080825806e-05,
+      "cache_write_seconds": 0.03215184807777405,
+      "usage": {
+        "prompt_tokens": 1214,
+        "completion_tokens": 122,
+        "total_tokens": 1336
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "78757c14a2f9b75d8ab8f8b7dca80b58ba5c1652714861810aff94a940c1a4d8",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5959840789437294
+    },
+    {
+      "stage": "joint_note",
+      "key": "92787c20494fbfcd83e0070e3564c877e1f80aa650df80926d5299b1a75ecd54",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4279042184352875,
+      "cache_read_seconds": 5.394965410232544e-05,
+      "cache_write_seconds": 0.0349794365465641,
+      "usage": {
+        "prompt_tokens": 1044,
+        "completion_tokens": 111,
+        "total_tokens": 1155
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "92787c20494fbfcd83e0070e3564c877e1f80aa650df80926d5299b1a75ecd54",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4633253440260887
+    },
+    {
+      "stage": "joint_note",
+      "key": "e1eca2d43433b9794412dcb12d0765813c596c401bd1c45d1e8c179211e166bb",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4591945968568325,
+      "cache_read_seconds": 4.104897379875183e-05,
+      "cache_write_seconds": 0.03280680999159813,
+      "usage": {
+        "prompt_tokens": 1069,
+        "completion_tokens": 114,
+        "total_tokens": 1183
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "e1eca2d43433b9794412dcb12d0765813c596c401bd1c45d1e8c179211e166bb",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4924061596393585
+    },
+    {
+      "stage": "joint_note",
+      "key": "2420c9f5f431b571e259014b70d8da21af4c323c477966f3cb4d800999b30600",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.418197225779295,
+      "cache_read_seconds": 3.9886683225631714e-05,
+      "cache_write_seconds": 0.037886373698711395,
+      "usage": {
+        "prompt_tokens": 1032,
+        "completion_tokens": 111,
+        "total_tokens": 1143
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "2420c9f5f431b571e259014b70d8da21af4c323c477966f3cb4d800999b30600",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4564963318407536
+    },
+    {
+      "stage": "joint_note",
+      "key": "dc55a7fdbf372ed4fa55e5f61775b87c4cac7deb9c884d0188cd28e4d37d5400",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.2602133862674236,
+      "cache_read_seconds": 4.07882034778595e-05,
+      "cache_write_seconds": 0.03000234067440033,
+      "usage": {
+        "prompt_tokens": 1135,
+        "completion_tokens": 97,
+        "total_tokens": 1232
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "dc55a7fdbf372ed4fa55e5f61775b87c4cac7deb9c884d0188cd28e4d37d5400",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          0
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.2906165197491646
+    },
+    {
+      "stage": "joint_note",
+      "key": "9d160c735db0dffac30814e2989cd2bda84d522dbb0531e9777d57c316fe33ed",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.3477069921791553,
+      "cache_read_seconds": 4.208460450172424e-05,
+      "cache_write_seconds": 0.03562187775969505,
+      "usage": {
+        "prompt_tokens": 1059,
+        "completion_tokens": 105,
+        "total_tokens": 1164
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "9d160c735db0dffac30814e2989cd2bda84d522dbb0531e9777d57c316fe33ed",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.3838467970490456
+    },
+    {
+      "stage": "joint_note",
+      "key": "c5ce786813674ee0d38307412efe33df68a0cc2cf8d16bcf0591f03f5e0c422e",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4418140389025211,
+      "cache_read_seconds": 4.022568464279175e-05,
+      "cache_write_seconds": 0.04193488880991936,
+      "usage": {
+        "prompt_tokens": 1082,
+        "completion_tokens": 113,
+        "total_tokens": 1195
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "c5ce786813674ee0d38307412efe33df68a0cc2cf8d16bcf0591f03f5e0c422e",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4841615036129951
+    },
+    {
+      "stage": "joint_note",
+      "key": "6ec16d5392edfe6eb2ecdea54ed0f0c6a13c1fc75a6ba1c8926e994ccec7ae9f",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.414749190211296,
+      "cache_read_seconds": 4.363059997558594e-05,
+      "cache_write_seconds": 0.035052839666604996,
+      "usage": {
+        "prompt_tokens": 1055,
+        "completion_tokens": 110,
+        "total_tokens": 1165
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "6ec16d5392edfe6eb2ecdea54ed0f0c6a13c1fc75a6ba1c8926e994ccec7ae9f",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4502279534935951
+    },
+    {
+      "stage": "joint_note",
+      "key": "a47f583d73f73e826b1c0af44923b39ce99c7504bcefb637c65d63df0973ecb3",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4749368727207184,
+      "cache_read_seconds": 4.7635287046432495e-05,
+      "cache_write_seconds": 0.03962298482656479,
+      "usage": {
+        "prompt_tokens": 1114,
+        "completion_tokens": 115,
+        "total_tokens": 1229
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "a47f583d73f73e826b1c0af44923b39ce99c7504bcefb637c65d63df0973ecb3",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5149738118052483
+    },
+    {
+      "stage": "joint_note",
+      "key": "82be97adb32965c6f4b60e8e12b171788501e10d733a5c42ebd7542acdf83833",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.4432131722569466,
+      "cache_read_seconds": 4.18834388256073e-05,
+      "cache_write_seconds": 0.0383036844432354,
+      "usage": {
+        "prompt_tokens": 1052,
+        "completion_tokens": 113,
+        "total_tokens": 1165
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "82be97adb32965c6f4b60e8e12b171788501e10d733a5c42ebd7542acdf83833",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.4818935692310333
+    },
+    {
+      "stage": "joint_note",
+      "key": "a6022cc8b3cc238118e0d4bdb20cf8788379ac9edf0edb7d7c626e7265aa5543",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": true,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 1.476870872080326,
+      "cache_read_seconds": 4.828721284866333e-05,
+      "cache_write_seconds": 0.0389174185693264,
+      "usage": {
+        "prompt_tokens": 1135,
+        "completion_tokens": 115,
+        "total_tokens": 1250
+      },
+      "finish_reason": "stop",
+      "tag_budget_observation": {
+        "stage": "joint_note",
+        "request_key": "a6022cc8b3cc238118e0d4bdb20cf8788379ac9edf0edb7d7c626e7265aa5543",
+        "tag_budget": 16,
+        "policy": "observe",
+        "list_counts": [
+          3,
+          3
+        ],
+        "list_count": 2,
+        "max_actual_tags": 3,
+        "over_budget_list_count": 0
+      },
+      "seconds": 1.5162814185023308
+    },
+    {
+      "stage": "query_keywords",
+      "key": "681702c9d4bd7379aa119e727cd93babe4a45d638fbd7f3d5243247938fa03b6",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5060026794672012,
+      "cache_read_seconds": 4.047900438308716e-05,
+      "cache_write_seconds": 0.022419750690460205,
+      "usage": {
+        "prompt_tokens": 89,
+        "completion_tokens": 40,
+        "total_tokens": 129
+      },
+      "finish_reason": "stop",
+      "seconds": 0.52856070920825
+    },
+    {
+      "stage": "answer",
+      "key": "dea09c38a4e7ff2896347d0949e7bb9fa47886e611171fa0b30cc6b3690da05c",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.39250490814447403,
+      "cache_read_seconds": 3.784149885177612e-05,
+      "cache_write_seconds": 0.029802240431308746,
+      "usage": {
+        "prompt_tokens": 3878,
+        "completion_tokens": 4,
+        "total_tokens": 3882
+      },
+      "finish_reason": "stop",
+      "seconds": 0.4224478527903557
+    },
+    {
+      "stage": "query_keywords",
+      "key": "378bbe40476458fd03cd6148b0f52f22c3359ea7c7384eaa76f27c542f19bf2c",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.40741099417209625,
+      "cache_read_seconds": 4.536658525466919e-05,
+      "cache_write_seconds": 0.04903776943683624,
+      "usage": {
+        "prompt_tokens": 96,
+        "completion_tokens": 33,
+        "total_tokens": 129
+      },
+      "finish_reason": "stop",
+      "seconds": 0.45661407709121704
+    },
+    {
+      "stage": "answer",
+      "key": "d9b41ec64991054833b1b5295adf794d2b9895adfca815d28171c8df6589de95",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.39762774109840393,
+      "cache_read_seconds": 3.982335329055786e-05,
+      "cache_write_seconds": 0.03441119194030762,
+      "usage": {
+        "prompt_tokens": 4164,
+        "completion_tokens": 2,
+        "total_tokens": 4166
+      },
+      "finish_reason": "stop",
+      "seconds": 0.4321841709315777
+    },
+    {
+      "stage": "query_keywords",
+      "key": "42e09c368430ff3acf3a2c5b762adb2aa9e967b5b532349991c7bcf269c70c7b",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.6789862737059593,
+      "cache_read_seconds": 4.434213042259216e-05,
+      "cache_write_seconds": 0.027780447155237198,
+      "usage": {
+        "prompt_tokens": 96,
+        "completion_tokens": 56,
+        "total_tokens": 152
+      },
+      "finish_reason": "stop",
+      "seconds": 0.7069157510995865
+    },
+    {
+      "stage": "answer",
+      "key": "93c3b509861f745c8a540830519c1e5a593a52a6e09041ef5601c58ad3f31cec",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.6391075737774372,
+      "cache_read_seconds": 3.8739293813705444e-05,
+      "cache_write_seconds": 0.03090192750096321,
+      "usage": {
+        "prompt_tokens": 4643,
+        "completion_tokens": 18,
+        "total_tokens": 4661
+      },
+      "finish_reason": "stop",
+      "seconds": 0.6701611950993538
+    },
+    {
+      "stage": "query_keywords",
+      "key": "7cac2ace6fc2f2c55fbc93b24e0846e70d92a782dcd9ed35946de9cf05edfc31",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.48744967952370644,
+      "cache_read_seconds": 4.476681351661682e-05,
+      "cache_write_seconds": 0.02760104462504387,
+      "usage": {
+        "prompt_tokens": 99,
+        "completion_tokens": 39,
+        "total_tokens": 138
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5151842534542084
+    },
+    {
+      "stage": "answer",
+      "key": "616b23849d17a0108f0ba0bee17ced2adfed4c75ce6fa0efad9eaf52286647fe",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.32999778166413307,
+      "cache_read_seconds": 4.066154360771179e-05,
+      "cache_write_seconds": 0.04139254614710808,
+      "usage": {
+        "prompt_tokens": 3243,
+        "completion_tokens": 5,
+        "total_tokens": 3248
+      },
+      "finish_reason": "stop",
+      "seconds": 0.3714900314807892
+    },
+    {
+      "stage": "query_keywords",
+      "key": "8969ebfedb193d4747d8364ad393c920134d6e855d394ccc1b90e9a341df787a",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.709131944924593,
+      "cache_read_seconds": 2.931058406829834e-05,
+      "cache_write_seconds": 0.031598880887031555,
+      "usage": {
+        "prompt_tokens": 101,
+        "completion_tokens": 58,
+        "total_tokens": 159
+      },
+      "finish_reason": "stop",
+      "seconds": 0.7408269569277763
+    },
+    {
+      "stage": "answer",
+      "key": "e9bdf59cbdb779d992193be67e95ff3e1a12f38c4ec952a9164ae77b15c9a1e9",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.508300706744194,
+      "cache_read_seconds": 4.088506102561951e-05,
+      "cache_write_seconds": 0.04780363291501999,
+      "usage": {
+        "prompt_tokens": 4508,
+        "completion_tokens": 9,
+        "total_tokens": 4517
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5562014505267143
+    },
+    {
+      "stage": "query_keywords",
+      "key": "abf1ee9850155d93883390454af6fc2a5d3f8c69e6d5ab971ba1dd28a7f48a39",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.4270223379135132,
+      "cache_read_seconds": 5.0693750381469727e-05,
+      "cache_write_seconds": 0.029723118990659714,
+      "usage": {
+        "prompt_tokens": 93,
+        "completion_tokens": 35,
+        "total_tokens": 128
+      },
+      "finish_reason": "stop",
+      "seconds": 0.4569135904312134
+    },
+    {
+      "stage": "answer",
+      "key": "945a9f85549dded14e4d070fb54cbe748c59ce4aea4b2188015fe6759ce99461",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.31816183403134346,
+      "cache_read_seconds": 4.0687620639801025e-05,
+      "cache_write_seconds": 0.029201533645391464,
+      "usage": {
+        "prompt_tokens": 3166,
+        "completion_tokens": 4,
+        "total_tokens": 3170
+      },
+      "finish_reason": "stop",
+      "seconds": 0.34750884026288986
+    },
+    {
+      "stage": "query_keywords",
+      "key": "41b0e916e5257fd758134e925986194e340fa820c5cd70ef235420ad047afa83",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.4204900301992893,
+      "cache_read_seconds": 5.177035927772522e-05,
+      "cache_write_seconds": 0.044705092906951904,
+      "usage": {
+        "prompt_tokens": 91,
+        "completion_tokens": 34,
+        "total_tokens": 125
+      },
+      "finish_reason": "stop",
+      "seconds": 0.4653240665793419
+    },
+    {
+      "stage": "answer",
+      "key": "b928bef542e1bd0dc9dfebf4032f85774e3b370da743378c8fff783a3a4ce720",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5057176798582077,
+      "cache_read_seconds": 4.4368207454681396e-05,
+      "cache_write_seconds": 0.041094567626714706,
+      "usage": {
+        "prompt_tokens": 3288,
+        "completion_tokens": 18,
+        "total_tokens": 3306
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5469310767948627
+    },
+    {
+      "stage": "query_keywords",
+      "key": "f3cee11063a941e616b630d3fc13140b987320e6b960b5014683db43d0e0070e",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5932947248220444,
+      "cache_read_seconds": 4.6290457248687744e-05,
+      "cache_write_seconds": 0.030188024044036865,
+      "usage": {
+        "prompt_tokens": 98,
+        "completion_tokens": 48,
+        "total_tokens": 146
+      },
+      "finish_reason": "stop",
+      "seconds": 0.6235894970595837
+    },
+    {
+      "stage": "answer",
+      "key": "535e645daee12de81c9c2b8d6cbb6132ee82e126d0ba77b4c0ef3c47625e6e4e",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.4798118695616722,
+      "cache_read_seconds": 5.25154173374176e-05,
+      "cache_write_seconds": 0.0349201001226902,
+      "usage": {
+        "prompt_tokens": 4310,
+        "completion_tokens": 8,
+        "total_tokens": 4318
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5148461312055588
+    },
+    {
+      "stage": "query_keywords",
+      "key": "bb5752a6a7f4c6b70ee5e820c977a4dc59fa4ebd43bc39b0de110c5a1dd610c7",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.4715512581169605,
+      "cache_read_seconds": 2.6147812604904175e-05,
+      "cache_write_seconds": 0.03608040511608124,
+      "usage": {
+        "prompt_tokens": 88,
+        "completion_tokens": 39,
+        "total_tokens": 127
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5077114030718803
+    },
+    {
+      "stage": "answer",
+      "key": "afb698931b38f2a74e7bd744113a62a7f352d44401c1b171b3c5009f9cc9bce4",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.3659188561141491,
+      "cache_read_seconds": 3.607943654060364e-05,
+      "cache_write_seconds": 0.026506897062063217,
+      "usage": {
+        "prompt_tokens": 4167,
+        "completion_tokens": 5,
+        "total_tokens": 4172
+      },
+      "finish_reason": "stop",
+      "seconds": 0.39252765849232674
+    },
+    {
+      "stage": "query_keywords",
+      "key": "b12eeaaad51a27da3ea559d21a21638cde3029c5d4d91573fa2ccfede0e60f67",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5659736022353172,
+      "cache_read_seconds": 5.982443690299988e-05,
+      "cache_write_seconds": 0.024156242609024048,
+      "usage": {
+        "prompt_tokens": 97,
+        "completion_tokens": 46,
+        "total_tokens": 143
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5902595035731792
+    },
+    {
+      "stage": "answer",
+      "key": "c80647e3e86d258be801a24c99b9ee5decec85fc3c6fb16a56761525dd9739a8",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5579794645309448,
+      "cache_read_seconds": 3.777444362640381e-05,
+      "cache_write_seconds": 0.024292640388011932,
+      "usage": {
+        "prompt_tokens": 4407,
+        "completion_tokens": 14,
+        "total_tokens": 4421
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5823834203183651
+    },
+    {
+      "stage": "query_keywords",
+      "key": "5d35a2001306bc9893b1c23513bbe5a0a9becbad36c1107a4545722d4fb1ed3c",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.42589227110147476,
+      "cache_read_seconds": 4.3723732233047485e-05,
+      "cache_write_seconds": 0.047576580196619034,
+      "usage": {
+        "prompt_tokens": 95,
+        "completion_tokens": 35,
+        "total_tokens": 130
+      },
+      "finish_reason": "stop",
+      "seconds": 0.4736066795885563
+    },
+    {
+      "stage": "answer",
+      "key": "fb78a5101c009b780035b85653efd97b5b2c089d51bf7caaee0b7eb305d75354",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.4017633721232414,
+      "cache_read_seconds": 3.684684634208679e-05,
+      "cache_write_seconds": 0.029345359653234482,
+      "usage": {
+        "prompt_tokens": 4156,
+        "completion_tokens": 4,
+        "total_tokens": 4160
+      },
+      "finish_reason": "stop",
+      "seconds": 0.4312090501189232
+    },
+    {
+      "stage": "query_keywords",
+      "key": "edb31333f24d53bd541563a3b56f84bb2da25c4c271c796897e399a297436ee8",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.4125022850930691,
+      "cache_read_seconds": 2.1804124116897583e-05,
+      "cache_write_seconds": 0.028497327119112015,
+      "usage": {
+        "prompt_tokens": 91,
+        "completion_tokens": 34,
+        "total_tokens": 125
+      },
+      "finish_reason": "stop",
+      "seconds": 0.44108839705586433
+    },
+    {
+      "stage": "answer",
+      "key": "899239a8e29c467bf36cd22f676a8fe39dd16fb4d37160279dd123f4b1751f8e",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.3939824402332306,
+      "cache_read_seconds": 3.705546259880066e-05,
+      "cache_write_seconds": 0.028711695224046707,
+      "usage": {
+        "prompt_tokens": 3467,
+        "completion_tokens": 8,
+        "total_tokens": 3475
+      },
+      "finish_reason": "stop",
+      "seconds": 0.42280035465955734
+    },
+    {
+      "stage": "query_keywords",
+      "key": "509f298eecaf1ae27d91dc2ef06d70d782dd89a64127c867d74b8fb0d0f52355",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.5545274950563908,
+      "cache_read_seconds": 4.84958291053772e-05,
+      "cache_write_seconds": 0.027327533811330795,
+      "usage": {
+        "prompt_tokens": 95,
+        "completion_tokens": 46,
+        "total_tokens": 141
+      },
+      "finish_reason": "stop",
+      "seconds": 0.5819757990539074
+    },
+    {
+      "stage": "answer",
+      "key": "4ae82c97df04c29a624789e8c58ad1b0d473ad12ee543283adc53d807f384f1e",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.7694290354847908,
+      "cache_read_seconds": 4.09148633480072e-05,
+      "cache_write_seconds": 0.03506627306342125,
+      "usage": {
+        "prompt_tokens": 5225,
+        "completion_tokens": 24,
+        "total_tokens": 5249
+      },
+      "finish_reason": "stop",
+      "seconds": 0.8046049624681473
+    },
+    {
+      "stage": "query_keywords",
+      "key": "ddbd4b14267565f02fcacd2ebef014c1b8af7623ac5efa17140cd4608f783e4e",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.4263199754059315,
+      "cache_read_seconds": 4.906579852104187e-05,
+      "cache_write_seconds": 0.03840312734246254,
+      "usage": {
+        "prompt_tokens": 92,
+        "completion_tokens": 35,
+        "total_tokens": 127
+      },
+      "finish_reason": "stop",
+      "seconds": 0.4648396596312523
+    },
+    {
+      "stage": "answer",
+      "key": "a38448c90e4a9e53466f6a4a597f322b67caad279cde0d0f51cf1ee7ab3b116c",
+      "prefetch": false,
+      "cache_hit": false,
+      "tag_budget_policy": "observe",
+      "structured_output_applied": false,
+      "http_requests": 1,
+      "error": null,
+      "http_seconds": 0.3037537410855293,
+      "cache_read_seconds": 3.766641020774841e-05,
+      "cache_write_seconds": 0.043253879994153976,
+      "usage": {
+        "prompt_tokens": 3299,
+        "completion_tokens": 2,
+        "total_tokens": 3301
+      },
+      "finish_reason": "stop",
+      "seconds": 0.3471119739115238
+    }
+  ]
+}

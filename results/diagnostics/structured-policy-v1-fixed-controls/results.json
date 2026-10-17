@@ -1,0 +1,255 @@
+{
+  "passed": true,
+  "attempted": 3,
+  "http_requests": 3,
+  "controls": [
+    {
+      "name": "known_fused_failure",
+      "started_utc": "2026-10-17T18:50:01.783027+00:00",
+      "request_sha256": "4cd444e2cf3f3d8ebf569af18be87b40a87d7fa6c2e3e6e7994ef9b61febefca",
+      "http_requests": 1,
+      "passed": true,
+      "http_status": 200,
+      "response": {
+        "id": "chatcmpl-463bbf515723408893389033b9bb5ab5",
+        "object": "chat.completion",
+        "created": 1792263001,
+        "model": "Qwen3-8B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"decision\":\"STRENGTHEN_AND_UPDATE\",\"connections\":[0,1,2],\"tags\":[\"conversation\", \"storytelling\", \"inspiration\", \"social interaction\"],\"neighbor_updates\":[{\"memory_index\":0,\"context\":\"A brief exchange between two individuals discussing their current situations and setting up a storytelling conversation.\",\"tags\":[\"communication\", \"dialogue\", \"social interaction\", \"storytelling\"]},{\"memory_index\":1,\"context\":\"A friendly greeting between two individuals during a conversation, leading into a storytelling exchange.\",\"tags\":[\"communication\", \"dialogue\", \"social interaction\", \"storytelling\"]},{\"memory_index\":2,\"context\":\"The speaker shares a powerful experience from attending an LGBTQ support group, which becomes a source of inspiration for storytelling.\",\"tags\":[\"Social support\", \"Personal experience\", \"Mental health\", \"inspiration\"]}]}",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "tool_calls": [],
+              "reasoning": null,
+              "reasoning_content": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": null,
+        "usage": {
+          "prompt_tokens": 716,
+          "total_tokens": 886,
+          "completion_tokens": 170,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "kv_transfer_params": null
+      },
+      "parsed": {
+        "decision": "STRENGTHEN_AND_UPDATE",
+        "connections": [
+          0,
+          1,
+          2
+        ],
+        "tags": [
+          "conversation",
+          "storytelling",
+          "inspiration",
+          "social interaction"
+        ],
+        "neighbor_updates": [
+          {
+            "memory_index": 0,
+            "context": "A brief exchange between two individuals discussing their current situations and setting up a storytelling conversation.",
+            "tags": [
+              "communication",
+              "dialogue",
+              "social interaction",
+              "storytelling"
+            ]
+          },
+          {
+            "memory_index": 1,
+            "context": "A friendly greeting between two individuals during a conversation, leading into a storytelling exchange.",
+            "tags": [
+              "communication",
+              "dialogue",
+              "social interaction",
+              "storytelling"
+            ]
+          },
+          {
+            "memory_index": 2,
+            "context": "The speaker shares a powerful experience from attending an LGBTQ support group, which becomes a source of inspiration for storytelling.",
+            "tags": [
+              "Social support",
+              "Personal experience",
+              "Mental health",
+              "inspiration"
+            ]
+          }
+        ]
+      },
+      "tag_list_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "over_budget_lists": 0,
+      "wall_seconds": 2.155542016029358,
+      "finished_utc": "2026-10-17T18:50:03.938572+00:00"
+    },
+    {
+      "name": "joint_empty",
+      "started_utc": "2026-10-17T18:50:03.939496+00:00",
+      "request_sha256": "ef895a9a3dbe81afd8b3a8de56af03b2ef7a16e47238c170a32c4d29b0d9b50f",
+      "http_requests": 1,
+      "passed": true,
+      "http_status": 200,
+      "response": {
+        "id": "chatcmpl-e4c9088e28ae4f3d8ce0d37654e44e27",
+        "object": "chat.completion",
+        "created": 1792263003,
+        "model": "Qwen3-8B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\n  \"metadata\": {\n    \"keywords\": [\"greeting\", \"friendship\", \"conversation\"],\n    \"context\": \"A friendly greeting between friends discussing their well-being.\",\n    \"tags\": [\"social interaction\", \"personal relationships\", \"communication\"]\n  },\n  \"evolution\": {\n    \"decision\": \"NO_EVOLUTION\",\n    \"connections\": [],\n    \"tags\": [],\n    \"neighbor_updates\": []\n  }\n}",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "tool_calls": [],
+              "reasoning": null,
+              "reasoning_content": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": null,
+        "usage": {
+          "prompt_tokens": 484,
+          "total_tokens": 572,
+          "completion_tokens": 88,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "kv_transfer_params": null
+      },
+      "parsed": {
+        "metadata": {
+          "keywords": [
+            "greeting",
+            "friendship",
+            "conversation"
+          ],
+          "context": "A friendly greeting between friends discussing their well-being.",
+          "tags": [
+            "social interaction",
+            "personal relationships",
+            "communication"
+          ]
+        },
+        "evolution": {
+          "decision": "NO_EVOLUTION",
+          "connections": [],
+          "tags": [],
+          "neighbor_updates": []
+        }
+      },
+      "tag_list_counts": [
+        3,
+        0
+      ],
+      "over_budget_lists": 0,
+      "wall_seconds": 1.1334405951201916,
+      "finished_utc": "2026-10-17T18:50:05.072938+00:00"
+    },
+    {
+      "name": "joint_one_frozen_neighbor",
+      "started_utc": "2026-10-17T18:50:05.074033+00:00",
+      "request_sha256": "f4ae0eb8f14838cc25253d96681abd25d6f1ab3879004d8640cf1829aee28226",
+      "http_requests": 1,
+      "passed": true,
+      "http_status": 200,
+      "response": {
+        "id": "chatcmpl-f69f83d32be14d0f9e94b2b2af168620",
+        "object": "chat.completion",
+        "created": 1792263005,
+        "model": "Qwen3-8B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\n  \"metadata\": {\n    \"keywords\": [\"greeting\", \"friendship\", \"updates\"],\n    \"context\": \"A friendly exchange where one person shares their busy schedule and asks about the other's activities.\",\n    \"tags\": [\"personal communication\", \"social connection\", \"daily life\"]\n  },\n  \"evolution\": {\n    \"decision\": \"STRENGTHEN\",\n    \"connections\": [0],\n    \"tags\": [],\n    \"neighbor_updates\": []\n  }\n}",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "tool_calls": [],
+              "reasoning": null,
+              "reasoning_content": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": null,
+        "usage": {
+          "prompt_tokens": 592,
+          "total_tokens": 692,
+          "completion_tokens": 100,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "kv_transfer_params": null
+      },
+      "parsed": {
+        "metadata": {
+          "keywords": [
+            "greeting",
+            "friendship",
+            "updates"
+          ],
+          "context": "A friendly exchange where one person shares their busy schedule and asks about the other's activities.",
+          "tags": [
+            "personal communication",
+            "social connection",
+            "daily life"
+          ]
+        },
+        "evolution": {
+          "decision": "STRENGTHEN",
+          "connections": [
+            0
+          ],
+          "tags": [],
+          "neighbor_updates": []
+        }
+      },
+      "tag_list_counts": [
+        3,
+        0
+      ],
+      "over_budget_lists": 0,
+      "wall_seconds": 1.2285083048045635,
+      "finished_utc": "2026-10-17T18:50:06.302543+00:00"
+    }
+  ]
+}

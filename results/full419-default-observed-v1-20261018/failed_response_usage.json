@@ -1,0 +1,37 @@
+{
+  "source_suite": "results/full419-default-observed-v1-20261018/suite.json",
+  "source_suite_sha256": "47637e5cec024789e3ee5c1f86cdbb47444478ca7bc7cfa2bb60c7cb517b557f",
+  "created_utc": "2026-10-17T19:32:42.589530+00:00",
+  "analysis_script_sha256": "d04304be27e47ff077c0098a50e62995851209d6164df0f54f69757269c6f8bc",
+  "scope": "Unique cached response usage plus any uncached final failure diagnostic. A lower bound on observed attempt usage, not complete event/request/retry counts. Prefetched responses may extend beyond the last committed memory. No timing or QA estimate is inferred for incomplete arms.",
+  "cells": [
+    {
+      "cell": "turns419-sample0-upstream-r1",
+      "mode": "baseline",
+      "progress": {
+        "phase": "qa",
+        "question_index_0based": 34,
+        "source_qa_index": 69
+      },
+      "failure_artifact_sha256": "747b2224f40232cd02bdbcbb961c1d9e70658b9c59456b3770f7a83b8170358a",
+      "saved_unique_response_count": 0,
+      "saved_usage_by_stage": {},
+      "uncached_final_diagnostic_usage": [
+        {
+          "stage": "answer",
+          "request_key": "c2015c6964cb3b98a3d9712542ca4a424d68768d72dae35d0cc2040a16ce968a",
+          "usage": {
+            "prompt_tokens": 6591,
+            "completion_tokens": 2000,
+            "total_tokens": 8591
+          }
+        }
+      ],
+      "response_usage_lower_bound": {
+        "prompt_tokens": 6591,
+        "completion_tokens": 2000
+      },
+      "empty_recording_note": "Empty buffer-backed reference cache cannot recover prior live build usage."
+    }
+  ]
+}

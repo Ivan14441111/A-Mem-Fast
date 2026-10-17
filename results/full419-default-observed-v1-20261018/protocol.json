@@ -1,0 +1,30 @@
+{
+  "defined_utc": "2026-10-17T18:50:52.282488+00:00",
+  "preregistration": "docs/full_conversation_protocol.md",
+  "source_project_commit": "21b5b23de2089e6b096a86242a7d51a67cc06d29",
+  "source_fingerprint": "604e19a2aa7e2c145ff5636edb2064eb99d974fbc6744cebcd838abbf2ada8f0",
+  "scope": "One complete chronological conversation, baseline/exact only, one cold attempt per arm followed by strict replays; not pooled with128-turn primary.",
+  "turns": 419,
+  "selected_qa": 48,
+  "eligible_qa": 149,
+  "category_counts": {
+    "1": 13,
+    "2": 12,
+    "3": 11,
+    "4": 12
+  },
+  "generation_profile": "observed-tags-v1",
+  "max_tokens": 2000,
+  "repetition_penalty": 1.05,
+  "tag_budget": 16,
+  "tag_budget_policy": "observe",
+  "structured_policy_outputs": false,
+  "context_policy": "upstream",
+  "gpu_index": 2,
+  "gpu_timestamp_timezone": "Asia/Shanghai",
+  "allocation_transition_threshold_mib": 1024,
+  "timing_scope": "Model already loaded; fresh response caches and prefix reset per cold arm. Download/server startup/READY/encoder warmup excluded, real inference and fast cache overhead included.",
+  "independent_arm_arrangement_defined_utc": "2026-10-17T18:54:58.910703+00:00",
+  "independent_arm_continuation": "If baseline has an ordinary generation/execution failure before exact is attempted, preserve the original failed suite cell and execute its unchanged existing benchmark.py command with modes=optimized,warm only, once, in the same output/configuration with a fresh optimized cache. Record continuation separately; never retry baseline. If exact was already attempted, no further cold attempt. Source/config/replay integrity failures stop all work. Completed cold arms receive strict zero-HTTP replay where possible.",
+  "integrity_supervision": "External scripts/watch_suite_integrity.py checks frozen source hashes and failure JSON error fields (including nested llm_diagnostic errors) every1second. It never scans generated response bodies. Baseline response ambiguity, identity/source errors and any replay failure require global stop; only the verified own runner/descendants may be terminated. Ordinary policy JSON/domain failures retain original once-only continuation rules."
+}

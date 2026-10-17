@@ -1,6 +1,19 @@
 # A-Mem 为什么慢，以及下一步应该优化什么
 
-本文分析固定上游 `0c8039f28fdcc08189a23c07a3437d9d2482f9c2` 的 robust 路径。历史数据来自 [64-turn 最终基线](../results/locomo64-final/baseline.json)，新增的缓存内容审计来自 [派生证据](deep_analysis_evidence.json)。它解释实现和实验设计，不把推导当作新的实测结果。新的多 conversation 对照结果另见实验报告。
+本文分析固定上游 `0c8039f28fdcc08189a23c07a3437d9d2482f9c2` 的 robust 路径。主要瓶颈是连续 LLM 调用及条件更新的输出长度：有界预取能隐藏部分 metadata 等待，但不能取消串行演化，也不能保证实时输出工作量不变。索引优化解决重复编码和增长成本，在当前小规模负载中不是全部端到端加速的来源。
+
+已经验证的成果包括：默认路径在同一响应下逐条保持状态和请求语义，419 条案例覆盖四次 consolidation 和 48 QA 自回放；固定图 context 去重使 36 QA 的真实答案请求输入 tokens 减少 36.98%。实时速度、质量和完成率分别报告，不把缓存重放当冷推理，不把策略修改叫作无损。完整实测与失败分母见 [实验报告](experiments_v2.md)，详细证据留在链接的审计 JSON。
+
+| 选择 | 当前状态与适用目标 | 验证要求和边界 |
+| --- | --- | --- |
+| 默认工程路径 | 已实现有界 metadata 预取、原序提交、共享 encoder、增量精确索引、变化文本重建和持久响应缓存 | 固定响应逐步状态/请求/QA 重放；固定 encoder dtype；实时输出、GPU负载和分支可能变化，不保证每次更快 |
+| 可选 structured fused / joint | 已实现生成期 JSON schema 与领域校验；分别合并演化、联合 metadata 和演化，减少逻辑调用结构 | 属于新策略；固定三项格式门禁通过，长链与 held-out QA 实测独立报告；不能由格式合法推导质量正确 |
+| 可选 context 去重 | 已实现按记忆行保序去重；三个固定图、36 QA 输入 tokens −36.98% | 固定图/关键词对照，报告答案变化；不等同完整 QA 或构建加速，不承诺无损 |
+| 后续优先：解码与输出任务 | 推荐解码可靠性对照、关键词/答案任务输出边界、紧凑 decision 独立消融 | 保持对照条件，观察长尾、失败率、分支、tokens 与 QA；未实现收益不能计入当前结果 |
+| 后续优先：多会话调度与恢复 | 独立会话共享有界请求预算；真实图/旧向量 checkpoint | 吞吐与每用户 p95 分开；验证版本/索引一致性、崩溃恢复；异步演化另需 backlog 与滞后 QA |
+| 测量后再做：ANN / 小模型 | 精确检索或 metadata 成为主要可改善成本时再投入 | ANN需 recall与QA；小模型需事实/实体/时间保留和端到端对照，均不属于当前exact保证 |
+
+以下展开因果依据。历史细粒度 profile 来自 [64-turn 基线](../results/locomo64-final/baseline.json) 和 [缓存派生审计](deep_analysis_evidence.json)；历史、主实验及独立消融不混合成一个加速数字。
 
 ## 1. 当前主要付费项是连续生成，不是向量数据库
 
@@ -33,15 +46,16 @@ flowchart LR
     Q --> R
     M --> D[演化决策]
     R --> D
-    D --> S[strengthen]
-    D --> U[update neighbors]
-    S --> W[原序提交 note 和邻居更新]
+    D -->|按决策选择| S[strengthen]
+    D -->|按决策选择| U[update neighbors]
+    D -->|无需演化| W[原序提交 note 和邻居更新]
+    S --> W
     U --> W
     W --> E[文档 embedding / 必要时 consolidation]
     E --> N[下一 turn 的检索]
 ```
 
-metadata 只读当前文本，可以提前执行；query embedding 也只读文本，可以提前编码。候选检索读取演化后的历史状态，必须等待前一条提交。最终文档的 tags 可能被 strengthen 改变，所以不能直接把所有最终文档在开头一次编码。任意并发调用整个 `add_note()` 会改变可见历史、邻居和写入顺序。
+上图描述数据依赖，不表示所有可并行边均已实现。`memory_layer_robust.py` 的 `process_memory()` 实际调用 `find_related_memories(note.content, k=5)`；query 来自原始文本，未拼接本条 metadata。当前已实现 metadata 有界预取，query embedding 提前批量编码仍是后续选项。metadata 只读当前文本，可以提前执行；query embedding 也只读文本，可以提前编码。候选检索读取演化后的历史状态，必须等待前一条提交。最终文档的 tags 可能被 strengthen 改变，所以不能直接把所有最终文档在开头一次编码。任意并发调用整个 `add_note()` 会改变可见历史、邻居和写入顺序。
 
 当前代码中，decision 之后的 strengthen 与 update 请求使用相同的旧邻居快照；update prompt 不读取 strengthen 新生成的 tags/links。所以在成功路径上，这两个请求具备并行条件，只需按既定顺序应用结果。不过历史基线仅有 3/63 条需要 update，收益有限；错误时是否保留部分更新也必须明确。严格失败和事务式提交是更合理的工程约定，但它与上游吞掉异常后继续存储的行为有区别。
 
@@ -174,3 +188,28 @@ joint 接口分为 `metadata` 和 `evolution` 两个嵌套对象，先校验全�
 **结构约束要尽量发生在生成期间。** 严格 tag 上限检查会拒绝过长列表，却不能收回已经消耗的 tokens；新 observed 实验则把超限当作可观测的指令违例，仍保留硬 token 截断失败。后续可以对 fused/joint 使用 JSON schema 或 grammar 限定结构，再保留程序端候选 ID、重复引用和分支关系校验。vLLM 0.11.2 提供 choice、regex、JSON schema 与 grammar 接口；具体数组长度约束、动态候选 enum 的支持及编译开销应在当前 backend 实测，不能仅凭接口存在宣称已经消除格式失败。结构合法也不保证语义正确。[vLLM structured outputs](https://docs.vllm.ai/en/v0.11.2/features/structured_outputs/)
 
 **请求缓存之外，还需要可恢复的图状态。** SQLite 请求缓存节省再次推理，但重启后仍可能从头重演图更新和 embedding。未来 checkpoint 应包含输入序号、note/links、evo counter、已索引文本和向量、encoder/模板/模型版本，以及稳定 ID 到行号的映射。特别是上游允许 metadata 已变而旧向量尚未刷新，恢复时若直接按最新 metadata 重建向量，会悄悄改变后续检索；必须保存真实索引快照或可精确重放的刷新事件。图版本与向量版本需要一起核对，不能静默混用。SQLite WAL 允许并发读写，但同一时刻仍只有一个 writer，长读事务也会阻碍 checkpoint；它是持久化工具而不是自动解决应用状态一致性的保证。[SQLite WAL](https://sqlite.org/wal.html)
+
+
+## 12. 解码配置和证据持久化也是长链可靠性的一部分
+
+本轮 Qwen3-8B 非 thinking 使用 temperature=0。官方建议该模式采用 temperature=0.7、top_p=0.8、top_k=20、min_p=0；其明确的 greedy 重复警告写在 thinking 模式条目中。因此可以说当前配置偏离非 thinking 推荐，不能说官方已经证明本次重复由 greedy 导致。官方也提到 presence penalty 可减少重复，但较高值可能引入语言混杂和性能代价；它与本轮 repetition penalty 不是同一个参数。后续应预先固定推荐解码对照，同时观察答案质量、长尾 tokens、失败率和成本，不能只用一个已失败 prompt 调出能停止的参数。[Qwen3-8B 官方模型卡](https://huggingface.co/Qwen/Qwen3-8B#best-practices)
+
+419-turn baseline 已完成构建，却在第 35 道 QA 截断。冻结 harness 的 baseline 录制器全部缓存在内存，直到所有 QA 完成才写 SQLite；这次失败留下空响应表，无法恢复原构建 trace 或计时。故“有 SQLite 缓存”不等于“每个阶段证据都已持久保存”。全部测量结束后推广的修复在构建计时结束后先 flush 成功响应并原子保存 build checkpoint，再进入 QA；异常时保留成功回调前缀、明确标注的当前失败状态、原异常与独立 evidence_errors。若缓存写入也失败，必须同时报告并停止后续实验，而不能用生成错误掩盖基础设施错误。它是基准证据修复，不等同于支持生产图状态续跑；两种能力需分别验收。当前原始限制与离线验证范围见 [419 条证据审计](full419_evidence_audit.json)。
+
+
+结构约束还应覆盖完整应用链。held-out64 的一次 joint 构建完成后，在不含记忆上下文的关键词请求上截断；相同完整请求身份在 baseline/exact 正常停止于 41 tokens，在该次调用达到 2,000。见 [独立核对](heldout_keyword_failure_audit.json)。只约束记忆 JSON 无法保证整条 QA 链完成。后续可将关键词定义为有限个短字符串，答案定义为受任务预算约束的短文本，并验证结构后继续检查检索覆盖与答案质量。预算截断不能直接当成功答案，schema也不保证内容有用；改动应是新协议，不用于修补当前固定实验。
+
+
+## 最终 held-out 结果如何反过来约束优化结论
+
+独立 64-turn pilot 的 13 个实际尝试构建全部完成，包括 4 个 joint 构建；其中两个 joint 在不读取图的首题关键词请求截断，所以完整 build+QA 只有 11 个。完成构建说明本批输入的记忆 JSON/领域校验通过，不能当作完整应用可靠性。相同关键词 payload 在其他组正常返回，既不能归因于 joint 图，也没有隔离出服务、数值或调度原因。
+
+在唯一有 joint/baseline 完成配对的 sample4（14 题、两次重复）中，构建由约 224 秒降至 97 秒，配对几何速度比 2.301×，build+QA 为 2.159×；请求 206→64，输入 tokens 166,671→68,619，输出 17,199→7,250。它提供了一个明确范围的积极策略结果：把 metadata 与演化联合处理，确实可能减少实际生成工作，而不只是改变客户端调度。但任务、条件、分支与图都不同，不能套用保持剩余工作不变的 Amdahl 估算，也不能将这项收益归为默认 exact 路径。
+
+该子集 F1 0.5475→0.6095、EM 不变，同一 14 题仍有 1 题 F1 下降。另一 conversation 的两个 joint arm 均未完成 QA；因此它是一个 conversation 的完成条件下结果，不是所有会话的质量保持或全链成功。原样保留这两个失败，比只展示 2.30× 更能说明为什么生成约束必须覆盖记忆、关键词和答案的完整链路。固定三项格式门禁只验证其三个输入，不把不同样本/长度的新旧实验当成 schema 的受控可靠性消融。
+
+默认 128-turn 主协议只有三个完成配对，且全部 baseline-first，故原位置平衡已被失败/未到达破坏；1.143× 以及 stable 子集 1.075× 都需要附这一边界。64-turn exact 在三个完成配对、两个 conversation 上为 1.383× 构建速度，F1 0.4449→0.4367，进一步说明相同输入数量并不等于实时生成工作和质量固定。图与请求语义的工程证明仍应依赖共同响应重放，而不是实时均值接近。
+
+128-turn structured 扩展因预设时间投影超过保留收尾预算而未执行，不能补上更长 structured 链的可靠性结论。最终可独立引用的证据是：索引微测、固定图 QA token 消融、默认路径的逐步/多次重建回放，以及范围清楚的 64-turn 可选策略结果。原始表、完成分母与逐题核对见 [完整报告](experiments_v2.md#8-独立-64-turn-structured-pilot-与未执行的-128-turn-扩展) 和 [独立审计](heldout64_audit.json)。
+
+最终 harness 的 `total_seconds` 仍仅为 build+QA；`recording_flush_seconds_excluded` 仅累计 SQLite recorder flush。checkpoint/partial/final JSON 的序列化与 fsync 也在这两个计时之外，但未单列，不等于进程完整耗时。文件 fsync 加同目录原子替换可避免可见的半份 JSON，没有 fsync 父目录，因此不宣称断电级完整耐久性；也没有保存可直接生产续跑的真实向量索引。新失败路径由离线回归验证，不追溯改变原 21b5b23 运行的证据可用性。

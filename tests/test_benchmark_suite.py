@@ -82,8 +82,13 @@ def test_sensitivity_aggregation_gives_conversations_equal_weight():
     from analyze_suite_views import describe
 
     def cell(sample, repeat, speedup, f1):
-        baseline = {"build_seconds": 4, "qa_seconds": 0, "metrics": {"token_f1": 0.5}}
-        candidate = {"build_seconds": 4 / speedup, "qa_seconds": 0, "metrics": {"token_f1": f1}}
+        def resources(weight):
+            return {"http_requests": 10 * weight, "prompt_tokens_live": 100 * weight,
+                    "completion_tokens_live": 20 * weight}
+        baseline = {"build_seconds": 4, "qa_seconds": 0, "metrics": {"token_f1": 0.5},
+                    "build_llm": resources(sample + 1)}
+        candidate = {"build_seconds": 4 / speedup, "qa_seconds": 0, "metrics": {"token_f1": f1},
+                     "build_llm": resources(sample + 0.5)}
         return {"origin": "primary", "cell": {"name": f"s{sample}r{repeat}", "status": "complete",
                 "sample_index": sample, "actual_turns": 128, "source_qa_indices": [0, 1],
                 "summary": {"runs": {"baseline": baseline, "optimized": candidate}}}}
@@ -95,6 +100,10 @@ def test_sensitivity_aggregation_gives_conversations_equal_weight():
     assert math.isclose(metric["candidate_f1_equal_conversation_mean"], 0.5)
     assert metric["paired_runs"] == 4
     assert metric["independent_conversations"] == 2
+    assert metric["baseline_build_http_requests_equal_conversation_mean"] == 15
+    assert metric["candidate_build_http_requests_equal_conversation_mean"] == 10
+    assert metric["baseline_build_completion_tokens_equal_conversation_mean"] == 30
+    assert metric["candidate_build_completion_tokens_equal_conversation_mean"] == 20
     assert result["unique_selected_qa"] == 4
 
 

@@ -1,0 +1,280 @@
+{
+  "aggregation_unit": "Per-conversation rows use arithmetic means over completed cold arms, including those preceding another arm's failure. Paired ratios require both baseline and candidate to finish. Replay success is separate. For equal-conversation geometric speedup claims use analyze_suite_views.py. Repeated questions are not independent QA samples.",
+  "analysis_script_sha256": "57c51a5b3acfa8a60a8adca1091400413f8699b95812fe8c727e7d15e9773858",
+  "planned_cells": 1,
+  "cell_status_counts": {
+    "failed": 1
+  },
+  "cold_arm_outcomes": {
+    "baseline": {
+      "planned": 1,
+      "attempted_with_artifact": 1,
+      "completed": 0,
+      "failed": 1,
+      "not_completed_or_failed": 0,
+      "completed_baseline_pairs": 0
+    },
+    "optimized": {
+      "planned": 1,
+      "attempted_with_artifact": 1,
+      "completed": 1,
+      "failed": 0,
+      "not_completed_or_failed": 0,
+      "completed_baseline_pairs": 0
+    }
+  },
+  "cold_arm_failures": [
+    {
+      "cell": "turns419-sample0-upstream-r1",
+      "arm": "baseline",
+      "exception_type": "ValueError",
+      "error": "LLM reached max_tokens; completion is truncated",
+      "failed_utc": "2026-10-17T19:10:18.908629+00:00",
+      "progress": {
+        "phase": "qa",
+        "question_index_0based": 34,
+        "source_qa_index": 69
+      }
+    }
+  ],
+  "cells": [
+    {
+      "cell": "turns419-sample0-upstream-r1",
+      "sample_index": 0,
+      "sample_id": "conv-26",
+      "turns": 419,
+      "question_count": 48,
+      "repeat": 1,
+      "arm": "optimized",
+      "experiment_policy": "upstream",
+      "order": [
+        "baseline",
+        "optimized"
+      ],
+      "whole_cell_status": "failed",
+      "baseline_pair_complete": false,
+      "build_seconds": 1067.1052666679025,
+      "qa_seconds": 67.6099125109613,
+      "total_seconds": 1134.7151791788638,
+      "http_requests_build": 1314,
+      "http_requests_all": 1410,
+      "token_f1": 0.3008594173706736,
+      "exact_match": 0.041666666666666664,
+      "build_speedup": null,
+      "total_speedup": null,
+      "f1_delta": null,
+      "live_stage_latency": {
+        "analysis": {
+          "live_calls": 419,
+          "http_attempts": 419,
+          "call_http_seconds_p50": 0.5860645361244678,
+          "call_http_seconds_p95": 0.7032966814935206,
+          "call_http_seconds_max": 0.8605208247900009
+        },
+        "evolution_decision": {
+          "live_calls": 418,
+          "http_attempts": 418,
+          "call_http_seconds_p50": 0.8320915680378675,
+          "call_http_seconds_p95": 1.087311621941626,
+          "call_http_seconds_max": 1.5830205343663692
+        },
+        "strengthen": {
+          "live_calls": 418,
+          "http_attempts": 418,
+          "call_http_seconds_p50": 0.7838156130164862,
+          "call_http_seconds_p95": 0.8570531425997615,
+          "call_http_seconds_max": 0.9483501464128494
+        },
+        "update_neighbors": {
+          "live_calls": 59,
+          "http_attempts": 59,
+          "call_http_seconds_p50": 5.554828219115734,
+          "call_http_seconds_p95": 6.552598950639367,
+          "call_http_seconds_max": 7.587614551186562
+        },
+        "query_keywords": {
+          "live_calls": 48,
+          "http_attempts": 48,
+          "call_http_seconds_p50": 0.49334877729415894,
+          "call_http_seconds_p95": 0.6590943098068237,
+          "call_http_seconds_max": 0.7351959608495235
+        },
+        "answer": {
+          "live_calls": 48,
+          "http_attempts": 48,
+          "call_http_seconds_p50": 0.7811297588050365,
+          "call_http_seconds_p95": 1.0393178747966885,
+          "call_http_seconds_max": 1.0962156802415848
+        }
+      },
+      "live_stage_tag_observations": {
+        "analysis": {
+          "live_responses_inspected": 419,
+          "live_lists_inspected": 419,
+          "overshoot_responses": 0,
+          "overshoot_lists": 0,
+          "max_actual_tags": 3
+        },
+        "strengthen": {
+          "live_responses_inspected": 418,
+          "live_lists_inspected": 418,
+          "overshoot_responses": 2,
+          "overshoot_lists": 2,
+          "max_actual_tags": 17
+        },
+        "update_neighbors": {
+          "live_responses_inspected": 59,
+          "live_lists_inspected": 295,
+          "overshoot_responses": 1,
+          "overshoot_lists": 1,
+          "max_actual_tags": 18
+        }
+      },
+      "llm_errors": 0,
+      "evolution_count": 418,
+      "consolidation_count": 4,
+      "memory_count": 419,
+      "evolution_decisions": {},
+      "fused_attempts": 0,
+      "fused_parse_failures": 0,
+      "fused_invalid_reference_failures": 0,
+      "fused_connections": 0,
+      "fused_neighbor_updates": 0,
+      "joint_attempts": 0,
+      "joint_parse_failures": 0,
+      "joint_invalid_reference_failures": 0,
+      "joint_connections": 0,
+      "joint_neighbor_updates": 0,
+      "build_tag_budget_observations": {
+        "logical_response_inspections": 1315,
+        "live_response_inspections": 896,
+        "cache_response_inspections": 419,
+        "logical_tag_lists_inspected": 1551,
+        "live_tag_lists_inspected": 1132,
+        "cache_tag_lists_inspected": 419,
+        "logical_overshoot_responses": 3,
+        "live_overshoot_responses": 3,
+        "cache_overshoot_observations": 0,
+        "unique_overshoot_request_keys": 3,
+        "over_budget_lists_live": 3,
+        "max_actual_tags": 18
+      },
+      "build_tags_live_response_inspections": 896,
+      "build_tags_live_tag_lists_inspected": 1132,
+      "build_tags_live_overshoot_responses": 3,
+      "build_tags_over_budget_lists_live": 3,
+      "build_tags_max_actual_tags": 18,
+      "all_tag_budget_observations": {
+        "logical_response_inspections": 1315,
+        "live_response_inspections": 896,
+        "cache_response_inspections": 419,
+        "logical_tag_lists_inspected": 1551,
+        "live_tag_lists_inspected": 1132,
+        "cache_tag_lists_inspected": 419,
+        "logical_overshoot_responses": 3,
+        "live_overshoot_responses": 3,
+        "cache_overshoot_observations": 0,
+        "unique_overshoot_request_keys": 3,
+        "over_budget_lists_live": 3,
+        "max_actual_tags": 18
+      },
+      "all_tags_live_response_inspections": 896,
+      "all_tags_live_tag_lists_inspected": 1132,
+      "all_tags_live_overshoot_responses": 3,
+      "all_tags_over_budget_lists_live": 3,
+      "all_tags_max_actual_tags": 18,
+      "mean_context_rows": 40.3125,
+      "mean_context_unique_rows": 28.541666666666668,
+      "mean_context_utf8_bytes": 29725.833333333332,
+      "build_prompt_tokens_live": 1117250,
+      "qa_prompt_tokens_live": 344912,
+      "build_completion_tokens_live": 93730,
+      "qa_completion_tokens_live": 2589
+    }
+  ],
+  "conversations": [
+    {
+      "sample_index": 0,
+      "turns": 419,
+      "experiment_policy": "upstream",
+      "arm": "optimized",
+      "repeats": 1,
+      "question_count_per_repeat": 48,
+      "baseline_paired_repeats": 0,
+      "mean": {
+        "build_seconds": 1067.1052666679025,
+        "qa_seconds": 67.6099125109613,
+        "total_seconds": 1134.7151791788638,
+        "http_requests_build": 1314,
+        "http_requests_all": 1410,
+        "token_f1": 0.3008594173706736,
+        "exact_match": 0.041666666666666664,
+        "build_speedup": null,
+        "total_speedup": null,
+        "f1_delta": null,
+        "build_prompt_tokens_live": 1117250,
+        "build_completion_tokens_live": 93730,
+        "qa_prompt_tokens_live": 344912,
+        "qa_completion_tokens_live": 2589,
+        "llm_errors": 0,
+        "evolution_count": 418,
+        "consolidation_count": 4,
+        "memory_count": 419,
+        "fused_attempts": 0,
+        "fused_parse_failures": 0,
+        "fused_invalid_reference_failures": 0,
+        "fused_connections": 0,
+        "fused_neighbor_updates": 0,
+        "mean_context_rows": 40.3125,
+        "mean_context_unique_rows": 28.541666666666668,
+        "mean_context_utf8_bytes": 29725.833333333332,
+        "joint_attempts": 0,
+        "joint_parse_failures": 0,
+        "joint_invalid_reference_failures": 0,
+        "joint_connections": 0,
+        "joint_neighbor_updates": 0,
+        "build_tags_live_response_inspections": 896,
+        "build_tags_live_tag_lists_inspected": 1132,
+        "build_tags_live_overshoot_responses": 3,
+        "build_tags_over_budget_lists_live": 3,
+        "build_tags_max_actual_tags": 18,
+        "all_tags_live_response_inspections": 896,
+        "all_tags_live_tag_lists_inspected": 1132,
+        "all_tags_live_overshoot_responses": 3,
+        "all_tags_over_budget_lists_live": 3,
+        "all_tags_max_actual_tags": 18
+      },
+      "build_seconds_min": 1067.1052666679025,
+      "build_seconds_max": 1067.1052666679025,
+      "tag_observations_across_repeats": {
+        "build": {
+          "live_response_inspections": 896,
+          "live_tag_lists_inspected": 1132,
+          "live_overshoot_responses": 3,
+          "over_budget_lists_live": 3,
+          "max_actual_tags": 18
+        },
+        "all": {
+          "live_response_inspections": 896,
+          "live_tag_lists_inspected": 1132,
+          "live_overshoot_responses": 3,
+          "over_budget_lists_live": 3,
+          "max_actual_tags": 18
+        }
+      },
+      "evolution_decisions_per_repeat_mean": {}
+    }
+  ],
+  "noncomplete_cells": [
+    {
+      "name": "turns419-sample0-upstream-r1",
+      "status": "failed",
+      "returncode": 1,
+      "failure_category": "generation_or_execution",
+      "failure_artifacts": [
+        "turns419-sample0-upstream-r1/baseline-failure.json"
+      ],
+      "failure_reason": null
+    }
+  ]
+}

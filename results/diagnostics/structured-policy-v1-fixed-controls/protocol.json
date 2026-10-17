@@ -1,0 +1,436 @@
+{
+  "defined_utc": "2026-10-17T18:50:01.777583+00:00",
+  "source_run": "results/suite128-primary-observed-v1-20261018/turns128-sample0-upstream-r1",
+  "source_manifest_sha256": "0bb8fec6ef96c9a5ae78564e0185e0a97d0eb4e65e085465e35f53a882f6d07c",
+  "preregistration": "docs/structured_policy_gate_protocol.md",
+  "configuration": {
+    "dataset": "/data2/xyf25/A-Mem-Fast/data/locomo10.json",
+    "sample_index": 0,
+    "max_turns": 128,
+    "max_questions": 12,
+    "retrieve_k": 10,
+    "evo_threshold": 100,
+    "workers": 4,
+    "context_policy": "upstream",
+    "evolution_policy": "upstream",
+    "prefix_cache_reset": "required",
+    "skip_server_warmup": false,
+    "prefetch_window": 16,
+    "base_url": "http://127.0.0.1:21014/v1",
+    "model": "Qwen3-8B",
+    "model_revision": "qwen3-8b-config-f7c4eadf-index-f9fdbcb9-template-01de28f8",
+    "embedding_model": "/home/xyf25/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "max_tokens": 2000,
+    "tag_budget_policy": "observe",
+    "tag_budget": 16,
+    "repetition_penalty": 1.05,
+    "seed": 42,
+    "output": "results/suite128-primary-observed-v1-20261018/turns128-sample0-upstream-r1",
+    "modes": "baseline,optimized,fused,replay,warm,fused_warm"
+  },
+  "project_commit": "21b5b23de2089e6b096a86242a7d51a67cc06d29",
+  "structured_policy_outputs": true,
+  "structured_backend_configuration": {
+    "observed_utc": "2026-10-17T18:27:32.813528+00:00",
+    "server_processes": [
+      {
+        "pid": 938463,
+        "argv_sha256": "0863d0afa25033640d4a6ba27d48fc0fb8ec976bdb1edfa749f83b759af2629c",
+        "structured_backend_overrides": {}
+      }
+    ],
+    "installed_default_backend": "auto",
+    "configuration_source_sha256": "0b31027b552356416febfa1d4f0d3bf17fc16e2fdc8cbfd5b35bc9a765ce7991",
+    "selected_runtime_backend": "not asserted; gate verifies actual acceptance"
+  },
+  "source_sha256": {
+    "scripts/diagnose_structured_policy.py": "cb1a50d06b2c3c6f454993f8ef8cec9f982ca8df10889d5dd765e5461f28507f",
+    "fast_amem/__init__.py": "ddedf9ae40b93083fb18887337d211049fd28e7a4a878bfe61999424a634018d",
+    "fast_amem/client.py": "69b680608c5ea8d1548196724ceb25cedb25aee510026d489bb6be99b2587759",
+    "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+    "fast_amem/joint.py": "eb8ca78cbdc06732ad526a4c952a35ce46c62a541ebd043c1e71e6ef763fe2cd",
+    "fast_amem/retriever.py": "59f1e08a60470f447b5fd9c2a3df19b7a94bc2d0a541dea73e2e5a3fa8833e02",
+    "fast_amem/structured.py": "3bb6a23cb45efd37645f3a8f7c4e177f6b3787ce8e303cca271f085f83c9928b",
+    "fast_amem/system.py": "cb0c2d82ea8632acfe2ee45ed30a2ed2c6b61f134f1b573ed2b10d69157cac3f"
+  },
+  "http_policy": "Exactly one POST attempt per fixed control, no retries, no cache writes, no trimming or repair; no QA scoring. Counts describe client invocations, not guaranteed server receipt on connection failure.",
+  "timing_scope": "Any schema/backend compilation is included in the control wall time; schema caches are not forcibly cleared. The model is already loaded. A successful gate prewarms both fixed policy schemas for any later pilot.",
+  "controls": [
+    {
+      "name": "known_fused_failure",
+      "stage": "evolution_fused",
+      "source_key": "a216cfc4f1cf3f395e7692acbafdbe137a00d170797567ef2f1452721307801b",
+      "allowed_indices": [
+        1,
+        0,
+        2
+      ],
+      "request": {
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        },
+        "max_tokens": 2000,
+        "messages": [
+          {
+            "content": "Follow the format specified in the prompt exactly. Do not add extra commentary.\n\nReturn no more than 16 items in each TAGS/tags list, including lists for updated neighbors. Follow the requested format and stop after completing its required fields.",
+            "role": "system"
+          },
+          {
+            "content": "Evolve this new memory with its retrieved neighbors in one operation.\nChoose exactly one decision:\n- NO_EVOLUTION: this memory stands alone.\n- STRENGTHEN: connect the new memory to relevant neighbors and optionally replace its tags.\n- UPDATE_NEIGHBOR: revise relevant neighbors' context or tags using the new information.\n- STRENGTHEN_AND_UPDATE: do both.\n\nNew memory:\n- Content: Speaker Melaniesays : Wow, that's cool, Caroline! What happened that was so awesome? Did you hear any inspiring stories?\n- Context: The content involves a conversation where one person asks about an inspiring story shared by another.\n- Keywords: ['conversation', 'storytelling', 'inspiration']\n- Tags: ['conversation', 'storytelling', 'inspiration']\n\nRetrieved neighbors (each 'memory index' is a GLOBAL corpus row):\nmemory index:1\t talk start time:1:56 pm on 8 May, 2023\t memory content: Speaker Melaniesays : Hey Caroline! Good to see you! I'm swamped with the kids & work. What's up with you? Anything new?\t memory context: A brief exchange between two individuals discussing their current situations.\t memory keywords: ['speaker', 'conversation', 'communication']\t memory tags: ['interpersonal', 'dialogue', 'social interaction']\nmemory index:0\t talk start time:1:56 pm on 8 May, 2023\t memory content: Speaker Carolinesays : Hey Mel! Good to see you! How have you been?\t memory context: The content involves a friendly greeting between two individuals during a conversation.\t memory keywords: ['speaker', 'greeting', 'conversation']\t memory tags: ['communication', 'dialogue', 'social interaction']\nmemory index:2\t talk start time:1:56 pm on 8 May, 2023\t memory content: Speaker Carolinesays : I went to a LGBTQ support group yesterday and it was so powerful.\t memory context: The speaker shares a powerful experience from attending an LGBTQ support group.\t memory keywords: ['LGBTQ support group', 'power', 'experience']\t memory tags: ['Social support', 'Personal experience', 'Mental health']\n\n\nReturn only one JSON object, with exactly these fields:\n{\"decision\":\"NO_EVOLUTION\",\"connections\":[],\"tags\":[],\"neighbor_updates\":[]}\n\nRules:\n- connections contains integer GLOBAL memory index values from the retrieved neighbors, never local positions in this list.\n- tags is a list of strings replacing the NEW memory's tags. Empty means keep its current tags.\n- neighbor_updates contains only changed neighbors. Each entry has exactly these fields:\n  {\"memory_index\":0,\"context\":\"updated context\",\"tags\":[\"updated tag\"]}\n- Each memory_index must be a GLOBAL index appearing in the retrieved neighbors, used at most once.\n- In an update, an empty context or empty tags means preserve that field.\n- NO_EVOLUTION requires all three lists empty.\n- STRENGTHEN requires neighbor_updates empty.\n- UPDATE_NEIGHBOR requires connections and tags empty.\n- Do not add explanations or repeat unchanged neighbors.\n",
+            "role": "user"
+          }
+        ],
+        "model": "Qwen3-8B",
+        "repetition_penalty": 1.05,
+        "seed": 42,
+        "temperature": 0.0,
+        "response_format": {
+          "type": "json_schema",
+          "json_schema": {
+            "name": "amem_fused_evolution_v1",
+            "strict": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "decision": {
+                  "type": "string",
+                  "enum": [
+                    "NO_EVOLUTION",
+                    "STRENGTHEN",
+                    "UPDATE_NEIGHBOR",
+                    "STRENGTHEN_AND_UPDATE"
+                  ]
+                },
+                "connections": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "neighbor_updates": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "memory_index": {
+                        "type": "integer"
+                      },
+                      "context": {
+                        "type": "string"
+                      },
+                      "tags": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "required": [
+                      "memory_index",
+                      "context",
+                      "tags"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "decision",
+                "connections",
+                "tags",
+                "neighbor_updates"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "request_sha256": "4cd444e2cf3f3d8ebf569af18be87b40a87d7fa6c2e3e6e7994ef9b61febefca",
+      "cache_identity_sha256": "2b0b3f4448a910f02733d117e1bcdfe6a93906584821a178a824b6271f47348d",
+      "schema_sha256": "ae1f3104e022eeb4b6030f3c2dc1d19b7dd48493cbf63ce1361e5503bf6d152c"
+    },
+    {
+      "name": "joint_empty",
+      "stage": "joint_note",
+      "allowed_indices": [],
+      "request": {
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        },
+        "max_tokens": 2000,
+        "messages": [
+          {
+            "content": "Follow the format specified in the prompt exactly. Do not add extra commentary.\n\nReturn no more than 16 items in each TAGS/tags list, including lists for updated neighbors. Follow the requested format and stop after completing its required fields.",
+            "role": "system"
+          },
+          {
+            "content": "Create and evolve one memory note in one operation.\n\nFirst derive metadata about the NEW CONTENT ONLY:\n- keywords: at least three important keywords, most important first; exclude speaker names and time references.\n- context: one sentence summarizing the new content's main topic, key points, and purpose.\n- tags: at least three broad themes or categories.\nUse the retrieved neighbors only for evolution, not as new facts in the metadata.\n\nThen choose one evolution decision:\n- NO_EVOLUTION: this memory stands alone.\n- STRENGTHEN: link the new note to relevant neighbors and optionally replace its tags.\n- UPDATE_NEIGHBOR: revise relevant neighbors' context or tags using the new information.\n- STRENGTHEN_AND_UPDATE: do both.\n\nNEW CONTENT:\nSpeaker Carolinesays : Hey Mel! Good to see you! How have you been?\n\nRETRIEVED NEIGHBORS (memory index values are GLOBAL corpus rows):\n\n\nAllowed global row indices: []\n\nReturn ONLY one JSON object with exactly this structure:\n{\"metadata\":{\"keywords\":[\"keyword1\",\"keyword2\",\"keyword3\"],\"context\":\"One sentence.\",\"tags\":[\"theme1\",\"theme2\",\"theme3\"]},\"evolution\":{\"decision\":\"NO_EVOLUTION\",\"connections\":[],\"tags\":[],\"neighbor_updates\":[]}}\n\nEvolution rules:\n- connections is a list of integer GLOBAL row indices from the allowed indices; never use local positions.\n- evolution.tags replaces the NEW note's tags; an empty list preserves metadata.tags.\n- neighbor_updates includes only changed retrieved neighbors. Each entry has exactly memory_index (an allowed integer GLOBAL row), context (string), and tags (list of strings).\n- Use each memory_index at most once. An empty context or empty tags preserves the original field.\n- NO_EVOLUTION requires connections, evolution.tags, and neighbor_updates all empty.\n- STRENGTHEN requires neighbor_updates empty.\n- UPDATE_NEIGHBOR requires connections and evolution.tags empty.\n- With no retrieved neighbors, choose NO_EVOLUTION and leave all evolution lists empty.\n- Do not include a reason, explanations, or unchanged neighbor copies.\n",
+            "role": "user"
+          }
+        ],
+        "model": "Qwen3-8B",
+        "repetition_penalty": 1.05,
+        "seed": 42,
+        "temperature": 0.0,
+        "response_format": {
+          "type": "json_schema",
+          "json_schema": {
+            "name": "amem_joint_note_v1",
+            "strict": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "metadata": {
+                  "type": "object",
+                  "properties": {
+                    "keywords": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "context": {
+                      "type": "string"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "keywords",
+                    "context",
+                    "tags"
+                  ],
+                  "additionalProperties": false
+                },
+                "evolution": {
+                  "type": "object",
+                  "properties": {
+                    "decision": {
+                      "type": "string",
+                      "enum": [
+                        "NO_EVOLUTION",
+                        "STRENGTHEN",
+                        "UPDATE_NEIGHBOR",
+                        "STRENGTHEN_AND_UPDATE"
+                      ]
+                    },
+                    "connections": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "neighbor_updates": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "memory_index": {
+                            "type": "integer"
+                          },
+                          "context": {
+                            "type": "string"
+                          },
+                          "tags": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "required": [
+                          "memory_index",
+                          "context",
+                          "tags"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "decision",
+                    "connections",
+                    "tags",
+                    "neighbor_updates"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "metadata",
+                "evolution"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "request_sha256": "ef895a9a3dbe81afd8b3a8de56af03b2ef7a16e47238c170a32c4d29b0d9b50f",
+      "cache_identity_sha256": "48a4cf4338e0b6e4aa9a7f8c0495a907dfa8e302361e51fefd3e1b89e1c26e31",
+      "schema_sha256": "5ab0f82054c9949a36e4bc1bf6e6a1a87f73e128dbc1d84de81e1188e6eb879a"
+    },
+    {
+      "name": "joint_one_frozen_neighbor",
+      "stage": "joint_note",
+      "allowed_indices": [
+        0
+      ],
+      "source_analysis_key": "a89bd60c0dfc08090c9526c529aeb37d0dc23da0b3962758da68de6ce2410e50",
+      "fixed_neighbor_metadata": {
+        "keywords": [
+          "speaker",
+          "greeting",
+          "conversation"
+        ],
+        "context": "The content involves a friendly greeting between two individuals during a conversation.",
+        "tags": [
+          "communication",
+          "dialogue",
+          "social interaction"
+        ]
+      },
+      "fixed_neighbor_text": "memory index:0\t talk start time:1:56 pm on 8 May, 2023\t memory content: Speaker Carolinesays : Hey Mel! Good to see you! How have you been?\t memory context: The content involves a friendly greeting between two individuals during a conversation.\t memory keywords: ['speaker', 'greeting', 'conversation']\t memory tags: ['communication', 'dialogue', 'social interaction']\n",
+      "request": {
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        },
+        "max_tokens": 2000,
+        "messages": [
+          {
+            "content": "Follow the format specified in the prompt exactly. Do not add extra commentary.\n\nReturn no more than 16 items in each TAGS/tags list, including lists for updated neighbors. Follow the requested format and stop after completing its required fields.",
+            "role": "system"
+          },
+          {
+            "content": "Create and evolve one memory note in one operation.\n\nFirst derive metadata about the NEW CONTENT ONLY:\n- keywords: at least three important keywords, most important first; exclude speaker names and time references.\n- context: one sentence summarizing the new content's main topic, key points, and purpose.\n- tags: at least three broad themes or categories.\nUse the retrieved neighbors only for evolution, not as new facts in the metadata.\n\nThen choose one evolution decision:\n- NO_EVOLUTION: this memory stands alone.\n- STRENGTHEN: link the new note to relevant neighbors and optionally replace its tags.\n- UPDATE_NEIGHBOR: revise relevant neighbors' context or tags using the new information.\n- STRENGTHEN_AND_UPDATE: do both.\n\nNEW CONTENT:\nSpeaker Melaniesays : Hey Caroline! Good to see you! I'm swamped with the kids & work. What's up with you? Anything new?\n\nRETRIEVED NEIGHBORS (memory index values are GLOBAL corpus rows):\nmemory index:0\t talk start time:1:56 pm on 8 May, 2023\t memory content: Speaker Carolinesays : Hey Mel! Good to see you! How have you been?\t memory context: The content involves a friendly greeting between two individuals during a conversation.\t memory keywords: ['speaker', 'greeting', 'conversation']\t memory tags: ['communication', 'dialogue', 'social interaction']\n\n\nAllowed global row indices: [0]\n\nReturn ONLY one JSON object with exactly this structure:\n{\"metadata\":{\"keywords\":[\"keyword1\",\"keyword2\",\"keyword3\"],\"context\":\"One sentence.\",\"tags\":[\"theme1\",\"theme2\",\"theme3\"]},\"evolution\":{\"decision\":\"NO_EVOLUTION\",\"connections\":[],\"tags\":[],\"neighbor_updates\":[]}}\n\nEvolution rules:\n- connections is a list of integer GLOBAL row indices from the allowed indices; never use local positions.\n- evolution.tags replaces the NEW note's tags; an empty list preserves metadata.tags.\n- neighbor_updates includes only changed retrieved neighbors. Each entry has exactly memory_index (an allowed integer GLOBAL row), context (string), and tags (list of strings).\n- Use each memory_index at most once. An empty context or empty tags preserves the original field.\n- NO_EVOLUTION requires connections, evolution.tags, and neighbor_updates all empty.\n- STRENGTHEN requires neighbor_updates empty.\n- UPDATE_NEIGHBOR requires connections and evolution.tags empty.\n- With no retrieved neighbors, choose NO_EVOLUTION and leave all evolution lists empty.\n- Do not include a reason, explanations, or unchanged neighbor copies.\n",
+            "role": "user"
+          }
+        ],
+        "model": "Qwen3-8B",
+        "repetition_penalty": 1.05,
+        "seed": 42,
+        "temperature": 0.0,
+        "response_format": {
+          "type": "json_schema",
+          "json_schema": {
+            "name": "amem_joint_note_v1",
+            "strict": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "metadata": {
+                  "type": "object",
+                  "properties": {
+                    "keywords": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "context": {
+                      "type": "string"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "keywords",
+                    "context",
+                    "tags"
+                  ],
+                  "additionalProperties": false
+                },
+                "evolution": {
+                  "type": "object",
+                  "properties": {
+                    "decision": {
+                      "type": "string",
+                      "enum": [
+                        "NO_EVOLUTION",
+                        "STRENGTHEN",
+                        "UPDATE_NEIGHBOR",
+                        "STRENGTHEN_AND_UPDATE"
+                      ]
+                    },
+                    "connections": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "neighbor_updates": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "memory_index": {
+                            "type": "integer"
+                          },
+                          "context": {
+                            "type": "string"
+                          },
+                          "tags": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "required": [
+                          "memory_index",
+                          "context",
+                          "tags"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "decision",
+                    "connections",
+                    "tags",
+                    "neighbor_updates"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "metadata",
+                "evolution"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "request_sha256": "f4ae0eb8f14838cc25253d96681abd25d6f1ab3879004d8640cf1829aee28226",
+      "cache_identity_sha256": "decff760579ca29030bee00fc2c09f2a9209334f3f528577254f4386c2130140",
+      "schema_sha256": "5ab0f82054c9949a36e4bc1bf6e6a1a87f73e128dbc1d84de81e1188e6eb879a"
+    }
+  ]
+}

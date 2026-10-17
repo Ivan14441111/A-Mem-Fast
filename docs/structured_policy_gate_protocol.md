@@ -29,3 +29,11 @@
 不要求生成特定非空连接或触发特定演化分支；不检查末端 QA 分数，也不据此搜索提示词。记录每项请求/响应、usage、耗时、schema 身份、失败理由；不写入主实验缓存。三项通过只允许继续独立的 held-out structured pilot，不证明任意长链路格式可靠或质量保持。
 
 若任一项失败，保持失败并取消本轮 structured held-out pilot；继续可完成的默认 baseline/exact 长会话验证与报告，不另开一轮 schema/惩罚系数搜索。实现错误若在任何模型调用前被离线测试发现可修正，最终调用前冻结源码与协议。
+
+## 实际门禁结果（不修改上述预设标准）
+
+UTC2026-10-17 18:50:01–18:50:06 执行，源码 checkpoint `21b5b23de2089e6b096a86242a7d51a67cc06d29`。三个固定输入均通过，恰好三次直接 POST，无重试、缓存写入、修剪或 QA 评分。已知 fused 输入、joint 空邻居、joint 固定邻居分别使用170、88、100 output tokens，均为HTTP200/finish_reason=stop；记录wall为2.156、1.133、1.229秒。空邻居严格为NO_EVOLUTION，有邻居引用仅使用allowed row0。
+
+独立复核重新计算全部request/schema/source哈希，确认已知失败请求只增加response_format，joint固定邻居来自原baseline分析而非前一个控制输出；对完整正文执行JSON解析、JSON Schema校验和现有领域parser，全部通过。记录见 [原始结果](../results/diagnostics/structured-policy-v1-fixed-controls/results.json) 与 [独立审计](structured_gate_audit.json)。
+
+该结果允许继续预设pilot，不证明完整长链无失败或QA质量保持。已知fused输入的新输出为170tokens，原非法响应为84tokens，邻居更新也发生变化；schema会改变生成分布，不只是把旧文本修成合法格式。wall可能包含schema编译，但没有强制清空schema缓存，不能宣称首次编译成本已独立测量。

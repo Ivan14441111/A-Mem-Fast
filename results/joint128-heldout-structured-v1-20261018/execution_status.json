@@ -1,0 +1,10 @@
+{
+  "status": "not_executed",
+  "reason": "The preregistered conservative scheduling gate failed; no 128-turn cold arm or replay was attempted. No tuning, replacement run, or additional inference follows.",
+  "planned_cells": 4,
+  "attempted_cells": 0,
+  "decision": "scheduling_decision.json",
+  "decision_sha256": "bb2d4896b8b294178e7b33edb6b99f276f441361480458793acec38701ac1cd1",
+  "analysis_source_snapshot": "scheduling_decision.source.py.txt",
+  "recorded_utc": "2026-10-17T20:07:38.518725+00:00"
+}

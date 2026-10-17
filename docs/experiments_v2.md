@@ -1,6 +1,6 @@
 # A-Mem-Fast 多会话对照实验
 
-> 阶段报告：`observed-tags-v1` 已完成九次预设尝试。得到三个 baseline/exact 完成配对；九个无 schema 约束的 fused arm 均因 JSON/字段错误中止。默认路径数据与失败分母已核对，九个完成 arm 的零 HTTP 恢复验证全部通过；后续独立实验另行更新，不混入此前协议。
+> 最终分协议报告：128-turn 主协议得到三个 baseline/exact 完成配对，九个无 schema 约束 fused arm 均失败；固定图 context 实验完成三个会话、36 道 QA。419-turn 案例仅 exact 完整完成，baseline 在 QA 失败且历史证据缺失，不形成速度配对。独立 64-turn structured pilot 完成四次预设尝试：11 个完整冷 arm 均通过零 HTTP 重放，两个 joint arm 在关键词阶段失败；128-turn 扩展因预设时间门槛未执行。各协议单列分母与配对范围，不合并成总体加速。
 
 本轮研究当前上游 robust 实现的长记忆工程效率，比较顺序基线、保持成功路径请求语义的 exact 优化，以及改变演化任务的 fused 策略。范围为三个 LoCoMo conversation、每个前 128 turns、三次重复；不是原论文全量复现。固定上游版本为 `WujiangXu/A-mem@0c8039f28fdcc08189a23c07a3437d9d2482f9c2`。瓶颈推导、具体代码语义与后续设计见 [深度分析](deep_analysis.md)。
 
@@ -11,6 +11,8 @@
 > Return no more than 16 items in each TAGS/tags list, including lists for updated neighbors. Follow the requested format and stop after completing its required fields.
 
 这是显式配置后的 **configured-robust 基线**，不是上游默认 temperature=0.7 配置。共同重复惩罚和 system message 会改变模型输出，不能把它们的收益归给 exact 实现。上游 user prompt 模板保持原文；默认 API 不启用新增选项，只有实验显式设置时才改变请求。完整推理参数和 system message 进入缓存身份与 manifest。
+
+Qwen3-8B 官方模型卡对非 thinking 模式建议 temperature=0.7、top_p=0.8、top_k=20、min_p=0；本轮 temperature=0 是实验选择，并非采用厂商推荐解码。模型卡的明确 greedy 重复警告位于 thinking 模式条目，不能直接作为当前非 thinking 失败的因果证明。本轮不因长尾结果再调参，未来可预设推荐解码的可靠性对照，并同时衡量质量、tokens 和完成率。[官方模型卡](https://huggingface.co/Qwen/Qwen3-8B#best-practices)
 
 客户端在缓存写入前及读取后观察识别出的 tags 列表长度。超过 16 记录指令违例与实际长度，保留完整响应，不裁剪、不去重；它是生成偏好，不是强制 schema 上限。最大生成 tokens 仍由 2000 控制，触及截断、HTTP 错误或缺少正文仍明确失败；JSON 领域 schema 与候选引用仍严格校验。live 生成违例和缓存读取观察分别统计，避免同一响应预取后再次消费被算成两次模型违例。`observed-tags-v1` 与严格 `bounded-tags-v1` 的 HTTP payload 相同，但接受策略、缓存身份与实验身份不同。默认 API 仍保留严格策略，实验显式选择 observe。
 
@@ -55,6 +57,15 @@ MiniLM 使用固定 revision、CPU 4 线程；retrieve-k=10、evo-threshold=100�
 | 已完成 baseline/exact 配对 | 3 对 / 3 conversations | 1.143× / 1.131× | 无完成配对 | 0.3981 / 0.4039 / — |
 | 显存分配稳定的完成配对 | 2 对 / 2 conversations | 1.075× / 1.068× | 无完成配对 | 0.4129 / 0.3930 / — |
 
+三个保留下来的默认配对均为 baseline-first（sample0/r1、sample1/r3、sample2/r2），因此完成子集已不再保留原计划的位置平衡。上表 1.143× 与 stable 1.075× 都受这一顺序边界及共享资源影响，不能作为消除了顺序因素的因果估计。
+
+同一完成配对范围的构建资源均值如下；先在 conversation 内平均重复，再等权汇总，不能混入未配对的完整 arm：
+
+| 配对范围 | baseline → exact HTTP | input tokens | output tokens |
+| --- | ---: | ---: | ---: |
+| 全部三对 | 390.00 → 392.67 | 313,779 → 317,631 | 23,337.67 → 24,843.00 |
+| stable 两对 | 390.50 → 396.00 | 319,124.50 → 326,861.00 | 23,450.50 → 26,381.50 |
+
 速度首先按同一 cell 内 baseline/对应组的配对比值计算。汇总时先对同一 conversation 的 log speedup 取均值，再在 conversation 间等权平均并取指数。F1 先平均同一 conversation 的重复运行，再对 conversation 等权平均；次数不等时不隐式降低某个 conversation 的权重。逐 cell、逐 conversation、范围和失败均保留，不把少量重复测量当作总体置信区间。新协议的 9 个预设 cell 各尝试一次；普通冷运行推理/策略失败保留记录后继续下一独立 cell；源码、配置或重放完整性失败立即终止。不会按结果修改参数或补跑到成功。若有失败，速度和 QA 汇总明确为“完成配对条件下”的描述，同时列出 planned/attempted/completed/failed/not-run 分母及每个 conversation 的完成数；不能以完成子集冒充全部九次结果。
 
 配对分析按 arm 完成状态判断，而不是要求同一 cell 的三个 arm 全部成功：baseline 与 exact 完成而 fused 失败时，前两者仍构成一个已完成配对，fused 保留失败。这个分析口径在首个 fused 失败后明确，未改变实时运行或增加模型调用。每个比较单列有效配对数、失败与未尝试 arm；不把其他策略失败的记录删除。若失败发生在原计划重放之前，明确标记“未执行”，可在 suite 后仅使用已有缓存补做零 HTTP 验证，并单列其源码与执行身份。
@@ -87,7 +98,7 @@ sample0 的新增 5,635 output tokens 中，5,331 来自更多/更长的邻居 u
 
 实际资源审计中，sample0/r1 和 sample1/r3 的 GPU2 全 cell 显存均保持 44,483 MiB；sample2/r2 在 UTC18:29:10 至18:29:24 间短暂上升，峰值80,216 MiB后回到44,483 MiB，发生在 baseline 构建内部。按预设规则，该配对仍保留在全部完成配对结果，但不进入 stable 子集。不能由显存轨迹量化未测到的计算竞争开销。stable 结果因此只覆盖两个 conversation，不是原三个 conversation 的均衡重复估计；显存稳定本身也不保证计算独占。
 
-无 schema 约束的 fused 在第 4–31 条之间失败：4 次完整正文 JSON 解析发现一个多余末尾 `}`；5 次 JSON 可解析，但邻居更新项缺少必需的 `context` 字段。九次响应均正常 `stop`，不是 token 截断。当前协议允许用空字符串表示 context 不变，但不允许省略必需字段；没有事后补空值或剪括号以伪造成功。这说明 prompt-only JSON 在长链上的完成率需要作为一等指标。后续固定 JSON schema 同时约束正确语法和 required 字段，并继续保留全局 ID、分支与领域校验；它是独立的新实验身份，不是对这九次失败的追溯修复。
+无 schema 约束的 fused 在第 4–31 条之间失败：4 次完整正文 JSON 解析发现一个多余末尾 `}`；5 次 JSON 可解析，但邻居更新项缺少必需的 `context` 字段。九次响应均正常 `stop`，不是 token 截断。当前协议允许用空字符串表示 context 不变，但不允许省略必需字段；没有事后补空值或剪括号以伪造成功。这说明 prompt-only JSON 在长链上的完成率需要作为一等指标。后续固定 JSON schema 同时约束正确语法和 required 字段，并继续保留全局 ID、分支与领域校验；它是独立的新实验身份，不是对这九次失败的追溯修复。 九个失败 arm 的缓存还保留 419 个不同请求响应，usage 合计至少 190,802 input tokens、21,183 output tokens；独立只读复算一致。这个下界包括失败前已发出的 metadata 预取，不等于已提交记忆的工作量，也不包含所有可能重试，不能据此推算失败 arm 的完整速度或质量。见 [失败响应成本记录](../results/suite128-primary-observed-v1-20261018/failed_response_usage.json)。
 
 ## 5. Pilot 记录与共同配置的由来
 
@@ -122,6 +133,56 @@ context UTF-8 字节由 1,025,519 降至 636,340（−37.95%），渲染记忆�
 
 ## 7. 其他独立消融与项目结论
 
-QA 去重、structured fused/joint 及完整 419-turn 案例如开展，使用独立配置和结果目录，不混入三组主结果。完整案例已在调用前固定为 baseline/exact 两组，优先验证默认路径的多次 consolidation，见 [完整 conversation 协议](full_conversation_protocol.md)。可选 structured 策略须先通过 [固定三项格式门禁](structured_policy_gate_protocol.md)，不得修剪已有失败 JSON 来伪造成功。joint 会改变 metadata 的生成条件并取消独立预取，须用新的同轮 baseline 对照，不能借用数小时前的时间。联合策略的固定样本、顺序与比较口径见 [joint pilot 协议](joint_pilot_protocol.md)；另在任何 joint 输出前预设 [128-turn 扩展](joint128_extension_protocol.md)，只按固定时间/可用性门槛决定是否启动，不按64-turn质量挑选。
+QA 去重、structured fused/joint 及完整 419-turn 案例均使用独立配置和结果目录，不混入三组主结果。完整案例已在调用前固定为 baseline/exact 两组，优先验证默认路径的多次 consolidation，见 [完整 conversation 协议](full_conversation_protocol.md)。可选 structured 策略须先通过 [固定三项格式门禁](structured_policy_gate_protocol.md)，不得修剪已有失败 JSON 来伪造成功。joint 会改变 metadata 的生成条件并取消独立预取，须用新的同轮 baseline 对照，不能借用数小时前的时间。联合策略的固定样本、顺序与比较口径见 [joint pilot 协议](joint_pilot_protocol.md)；另在任何 joint 输出前预设 [128-turn 扩展](joint128_extension_protocol.md)，只按固定时间/可用性门槛决定是否启动，不按64-turn质量挑选。
 
-推荐配置和项目介绍中的实测数字将在有效主结果与资源审计完成后确定。项目贡献以长记忆处理的瓶颈定位、可验证调度与索引优化、缓存/失败可观测性、实验可复现性为核心；fused/joint 作为明确改变行为的策略研究，不预先宣称质量保持或原创记忆算法。
+固定三项 schema 门禁已于 UTC18:50 完成，三项全部通过，恰好三次 POST；完整正文 JSON、固定 schema、候选引用与首条语义均通过独立校验。output tokens 分别170/88/100，全部正常stop。原失败 fused 请求的system/user/payload仅增加response_format；joint有邻居控制使用冻结的原baseline metadata。具体来源与哈希见 [structured_gate_audit.json](structured_gate_audit.json)。该小门禁只验证固定输入的格式与领域约束，不能替代长链完成率和QA对照。原无schema九次失败仍单列保留。
+
+完整 419-turn 默认两组案例使用相同 observed 配置、关闭结构约束，预设 48 QA。baseline 日志确认完成 419/419 条构建、1,286 次 build HTTP，但在第 35 道 QA（原索引 69）的答案生成触及 2,000-token 上限；诊断显示重复短答案列表，响应被严格拒绝。冻结 harness 直到全部 QA 完成后才 flush baseline 录制缓存，因此 `baseline.sqlite` 为 0 条，原 live trace、build 计时和完整 QA 报告没有保存。不能据日志恢复这些指标，也不能宣称 baseline 零 HTTP 回放通过。已按预设规则独立尝试尚未运行的 exact arm；不重试 baseline、不更换参数。原始证据和可用性规则见 [full419_evidence_audit.json](full419_evidence_audit.json)。
+
+未尝试过的 exact arm 随后独立完成：419 条构建 1,067.105 秒，48 QA 67.610 秒，F1 0.30086、EM 0.04167；构建产生 1,314 次 HTTP、1,117,250 input tokens、93,730 output tokens，实际触发 4 次 consolidation。完整 exact 自身回放的逐条状态、逻辑请求序列和 48 个 QA 与原 live 报告全部一致，0 HTTP、0 client errors。这是一个完整默认路径规模案例，缺失完整 baseline，**没有配对速度或质量提升结论**。continuation GPU 监控在构建开始约 3 分钟后才启动，不能给整组分配稳定标签。
+
+预先固定的共同缓存验证也已完成：reference 与 Fast 均从 exact 的 1,410 条持久响应中重建全部 419 条，逐条状态、原序请求、最终图和演化次数一致；在第 101、201、301、401 条执行四次 consolidation，两次重建还都与原 live exact trace 一致，0 HTTP、0 errors。独立核对了原始报告、缓存 digest、全部 419 步、48 题评分及源码哈希，见 [审计](full419_evidence_audit.json)。这证明共同响应下的构建等价，**并未恢复丢失的原 baseline trace**；自回放的完整 QA 证明也仅属于 exact。全部实时与重放实验结束后，最终代码加入构建计时结束后的录制 flush 和原子 build checkpoint，以及失败时可用证据保存；原生成异常与持久化错误分别保留。该工程修复通过 [281 项离线测试](../results/clean-client-validation-final.json)，不追溯改变旧实验，也不等于生产向量索引恢复。
+
+项目贡献包括可核验的默认路径调度/索引优化、固定图 QA token 压缩和可选联合策略的有条件速度收益；同时保留失败分母、质量变化与共享资源边界。fused/joint 改变模型任务，不归入无损工程优化，也不声称原创 A-Mem 算法或论文全量复现。
+
+
+### held-out 的关键词长尾：完整应用链与图语义分开
+
+64-turn sample3/r1 的 joint 已完成全部构建，却在第一题关键词生成截断。该请求身份与同轮已完成 baseline、exact 的关键词请求完全相同：后二者均 87 input / 41 output tokens、正常停止且正文一致；joint 同一身份生成到 2,000 tokens，strict client 拒绝并未写缓存。问题为 Joanna 的 hobbies；关键词请求只含问题文本，在检索前发出，不携带 joint 图内容，也没有 schema。这个观察说明相同请求身份不保证实时返回相同，不能归因于 joint 图语义；具体服务/数值原因没有隔离。完整 payload、响应哈希与代码依赖见 [关键词失败审计](heldout_keyword_failure_audit.json)。原 cell 保留失败，后续预设 cell 继续，不改参数或补跑。
+同 conversation 的第二次重复也在 joint 的首个关键词请求失败：request key、87/2,000 tokens、8,949 字符及完整正文 hash 均与第一次一致。该轮 fused 的相同请求正常停止，41-token 正文又与首轮 baseline/exact 相同。因此当前记录中是三次同一正常正文、两次同一截断正文；这是可复核的重复模式，不是已隔离的原因。没有额外重发、prefix-reset 搜索或参数调整。
+
+
+## 8. 独立 64-turn structured pilot 与未执行的 128-turn 扩展
+
+sample3/conv-42 与 sample4/conv-43 各取前 64 turns、重复两次，分别有 17 和 14 道证据完整 QA，共 31 道独立题。四组采用预设 Williams 顺序；仅 fused/joint 的记忆 JSON 阶段启用固定通用 schema，其他模型、解码和 QA 上下文设置保持预设值。源码仍为测量 checkpoint `21b5b23`，完整记录见 [pilot](../results/joint64-heldout-structured-v1-20261018/suite.json)。
+
+四个 cell 全部尝试：两个完整、两个因 joint 首题关键词截断而失败。13 个实际尝试的构建均完成 64 条记忆，但只有 11 个 arm 完成构建与全部 QA，不能把两种完成率混用：
+
+| arm | 计划 | 尝试 | 构建完成 | 构建+QA 完成 | 失败 | 未到达 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| baseline | 4 | 3 | 3 | 3 | 0 | 1 |
+| exact | 4 | 3 | 3 | 3 | 0 | 1 |
+| structured fused | 4 | 3 | 3 | 3 | 0 | 1 |
+| structured joint | 4 | 4 | 4 | 2 | 2 | 0 |
+
+两个失败 joint 的 live 构建计时未保存，不从日志补造速度。其关键词请求没有读取图，并与 baseline/exact/fused 正常完成的请求身份相同；这仍是整条 joint arm 的失败，但不能归因于 joint 图。所有 11 个完整 arm 已逐条核对图、请求序列和完整 QA，自身/对照重放新增 HTTP 与 client errors 均为零，见 [恢复验证](../results/joint64-heldout-structured-v1-20261018/replay_recovery.json)。
+
+以下均只用同一 cell 的完成配对；先对 conversation 内重复取均值（速度用 log），再在 conversation 间等权平均。各行的 baseline、QA 与资源范围不同，不能横向当作共同全样本排名：
+
+| 对照 | 配对 / conversation / 独立 QA | 构建 / build+QA 速度比 | baseline → candidate F1 | baseline → candidate EM |
+| --- | --- | --- | --- | --- |
+| exact | 3 / 2 / 31 | 1.383× / 1.323× | 0.4449 → 0.4367 | 0.2143 → 0.1786 |
+| structured fused | 2 / 1 / 14 | 1.970× / 1.852× | 0.5475 → 0.5793 | 0.4286 → 0.3929 |
+| structured joint | 2 / 1 / 14 | 2.301× / 2.159× | 0.5475 → 0.6095 | 0.4286 → 0.4286 |
+
+| 同范围构建资源 | baseline → candidate HTTP | input tokens | output tokens |
+| --- | ---: | ---: | ---: |
+| exact | 198.50 → 194.25 | 151,700 → 144,832.75 | 13,636 → 11,439.75 |
+| structured fused | 206 → 127 | 166,671 → 81,758 | 17,199 → 11,056 |
+| structured joint | 206 → 64 | 166,671 → 68,619 | 17,199 → 7,250 |
+
+joint 的积极结果明确限于 sample4 的两个完成配对：baseline 构建 224.221/223.264 秒，joint 97.407/97.061 秒，配对几何速度比 2.301×，构建请求 206→64。平均 F1 提高，但同一 14 题中有 2 题提高、1 题下降、11 题不变，两次重复的变化计数相同；不是无损或统计非劣效证明。构建任务、输出 tokens、演化分支和图同时改变，不能把收益单独归因于减少 HTTP 或预取。64-turn 各 arm 均未触发 consolidation；多轮重建的正确性证据来自独立 419-turn 案例。
+
+原先四行平衡顺序因两个 cell 中止而未在完整子集保留；sample4 的两个完整顺序互逆仍不足以排除共享 GPU 竞争。更不能把 samples0–2、128 turns 的九次无约束失败与 samples3–4、64 turns 的 structured 构建完成作受控可靠性提升对照。固定三项门禁只在它的相同输入上隔离增加 response_format 的变化。原始计数、逐题重算、资源加总与官方配对汇总已独立核对，见 [heldout64_audit.json](heldout64_audit.json) 和 [机器分析](../results/joint64-heldout-structured-v1-20261018/analysis_views.json)。
+
+128-turn 扩展没有执行：预设公式得到 7,266.976 秒（121.12 分钟），当时剩余 9,280.230 秒，扣除 40 分钟收尾预算后仅有 6,880.230 秒，未满足启动门槛；四个计划 cell 均为零尝试。没有依据 64-turn 分数、策略速度或失败结果更换样本/参数，也没有追加模型调用。见 [固定排期决定](../results/joint128-heldout-structured-v1-20261018/scheduling_decision.json)。

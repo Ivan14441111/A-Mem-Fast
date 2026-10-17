@@ -1,0 +1,6 @@
+{
+  "runner_pid": 1292537,
+  "started_utc": "2026-10-17T19:15:01.933486+00:00",
+  "note": "Continuation GPU monitoring starts after launch; missing initial interval is not allocation-stable evidence.",
+  "finished_utc": "2026-10-17T19:31:08.400405+00:00"
+}

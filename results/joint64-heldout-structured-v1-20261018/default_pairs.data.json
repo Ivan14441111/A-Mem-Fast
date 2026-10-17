@@ -1,0 +1,217 @@
+{
+  "source_suite": "results/joint64-heldout-structured-v1-20261018/suite.json",
+  "view": "planned_all",
+  "confirmation_suite": null,
+  "source_sha256": "175e712e6e01dd51407be228265a23b3ec5375273ce1f26d21db23e31b334573",
+  "command": [
+    "/data2/xyf25/A-Mem-Fast/.venv-analysis/bin/python",
+    "scripts/plot_suite.py",
+    "results/joint64-heldout-structured-v1-20261018/suite.json",
+    "--analysis",
+    "results/joint64-heldout-structured-v1-20261018/analysis_views.json",
+    "--arms",
+    "baseline",
+    "optimized",
+    "--paired-only",
+    "--output",
+    "results/joint64-heldout-structured-v1-20261018/default_pairs.svg",
+    "--png"
+  ],
+  "analysis_input": {
+    "path": "results/joint64-heldout-structured-v1-20261018/analysis_views.json",
+    "sha256": "ec49758f139edf1a34f09ba27f8ed5c91a874777ee87e6a7022f5f1559392938"
+  },
+  "confirmation_suite_sha256": null,
+  "analysis_script": "/data2/xyf25/A-Mem-Fast/scripts/plot_suite.py",
+  "analysis_script_sha256": "e5b172f8607d150e003c9ebefeb7c4eaeabacb506c5483f3dcf4ce9906337b8d",
+  "analysis_dependencies_sha256": {
+    "scripts/summarize_suite.py": "57c51a5b3acfa8a60a8adca1091400413f8699b95812fe8c727e7d15e9773858"
+  },
+  "selection_scope": {
+    "independent_conversations": 2,
+    "unique_selected_qa": 31,
+    "selected_cells": 3,
+    "paired_only": true
+  },
+  "source_cell_counts": {
+    "planned": 4,
+    "completed": 2,
+    "failed": 2,
+    "pending_or_running": 0
+  },
+  "plotted_cells_with_complete_arms": 3,
+  "completed_arm_counts": {
+    "baseline": 3,
+    "optimized": 3
+  },
+  "replay_note": "Completed cold-arm build+QA outputs can precede another arm's failure; replay verification is separate.",
+  "paired_only": true,
+  "paired_annotations": [
+    {
+      "sample_index": 3,
+      "arm": "optimized",
+      "paired_runs": 1,
+      "build_speedup_geomean": 1.1107065919782102,
+      "f1_delta_mean": 0.0007864684335272543
+    },
+    {
+      "sample_index": 4,
+      "arm": "optimized",
+      "paired_runs": 2,
+      "build_speedup_geomean": 1.72310155397449,
+      "f1_delta_mean": -0.017047155513067402
+    }
+  ],
+  "tag_budget": 16,
+  "tag_budget_policy": "observe",
+  "structured_policy_outputs": true,
+  "arms": [
+    "baseline",
+    "optimized"
+  ],
+  "arm_offsets": {
+    "baseline": -0.19,
+    "optimized": 0.19
+  },
+  "bar_slot_width": 0.38,
+  "matplotlib_version": "3.10.9",
+  "rows": [
+    {
+      "origin": "primary",
+      "cell": "turns64-sample3-upstream-r1",
+      "sample_index": 3,
+      "sample_id": "conv-42",
+      "turns": 64,
+      "question_count": 17,
+      "repeat": 1,
+      "arm": "baseline",
+      "experiment_policy": "upstream",
+      "order": [
+        "baseline",
+        "optimized",
+        "joint",
+        "fused"
+      ],
+      "build_seconds": 134.761146761477,
+      "http_requests_build": 191,
+      "token_f1": 0.3422268907563025
+    },
+    {
+      "origin": "primary",
+      "cell": "turns64-sample3-upstream-r1",
+      "sample_index": 3,
+      "sample_id": "conv-42",
+      "turns": 64,
+      "question_count": 17,
+      "repeat": 1,
+      "arm": "optimized",
+      "experiment_policy": "upstream",
+      "order": [
+        "baseline",
+        "optimized",
+        "joint",
+        "fused"
+      ],
+      "build_seconds": 121.32920407131314,
+      "http_requests_build": 193,
+      "token_f1": 0.3430133591898298
+    },
+    {
+      "origin": "primary",
+      "cell": "turns64-sample4-upstream-r1",
+      "sample_index": 4,
+      "sample_id": "conv-43",
+      "turns": 64,
+      "question_count": 14,
+      "repeat": 1,
+      "arm": "baseline",
+      "experiment_policy": "upstream",
+      "order": [
+        "optimized",
+        "fused",
+        "baseline",
+        "joint"
+      ],
+      "build_seconds": 224.22068545594811,
+      "http_requests_build": 206,
+      "token_f1": 0.547483958122256
+    },
+    {
+      "origin": "primary",
+      "cell": "turns64-sample4-upstream-r1",
+      "sample_index": 4,
+      "sample_id": "conv-43",
+      "turns": 64,
+      "question_count": 14,
+      "repeat": 1,
+      "arm": "optimized",
+      "experiment_policy": "upstream",
+      "order": [
+        "optimized",
+        "fused",
+        "baseline",
+        "joint"
+      ],
+      "build_seconds": 106.90428052842617,
+      "http_requests_build": 191,
+      "token_f1": 0.5821857336733629
+    },
+    {
+      "origin": "primary",
+      "cell": "turns64-sample4-upstream-r2",
+      "sample_index": 4,
+      "sample_id": "conv-43",
+      "turns": 64,
+      "question_count": 14,
+      "repeat": 2,
+      "arm": "baseline",
+      "experiment_policy": "upstream",
+      "order": [
+        "joint",
+        "baseline",
+        "fused",
+        "optimized"
+      ],
+      "build_seconds": 223.26404306292534,
+      "http_requests_build": 206,
+      "token_f1": 0.547483958122256
+    },
+    {
+      "origin": "primary",
+      "cell": "turns64-sample4-upstream-r2",
+      "sample_index": 4,
+      "sample_id": "conv-43",
+      "turns": 64,
+      "question_count": 14,
+      "repeat": 2,
+      "arm": "optimized",
+      "experiment_policy": "upstream",
+      "order": [
+        "joint",
+        "baseline",
+        "fused",
+        "optimized"
+      ],
+      "build_seconds": 157.7166768424213,
+      "http_requests_build": 200,
+      "token_f1": 0.47868787154501435
+    }
+  ],
+  "metric_definitions": [
+    [
+      "build_seconds",
+      "Memory build time",
+      "Seconds"
+    ],
+    [
+      "http_requests_build",
+      "Live requests during build",
+      "HTTP requests"
+    ],
+    [
+      "token_f1",
+      "QA quality",
+      "Normalized token F1"
+    ]
+  ]
+}

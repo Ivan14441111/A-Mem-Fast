@@ -3,10 +3,37 @@
   "view": "planned_allocation_stable",
   "confirmation_suite": null,
   "source_sha256": "731b2807375bf1a715d19412d7e61e74ec2b24d87e4f935f44a6ed782e624073",
+  "command": [
+    "/data2/xyf25/A-Mem-Fast/.venv-analysis/bin/python",
+    "scripts/plot_suite.py",
+    "results/suite128-primary-observed-v1-20261018/suite.json",
+    "--analysis",
+    "results/suite128-primary-observed-v1-20261018/analysis_views.json",
+    "--view",
+    "planned_allocation_stable",
+    "--arms",
+    "baseline",
+    "optimized",
+    "--paired-only",
+    "--output",
+    "results/suite128-primary-observed-v1-20261018/default_pairs_stable.svg",
+    "--png"
+  ],
+  "analysis_input": {
+    "path": "results/suite128-primary-observed-v1-20261018/analysis_views.json",
+    "sha256": "464cfaeae936136b22d4baeffa7d143e85c7e374c2170a0a188f74ca7afe1e9b"
+  },
+  "confirmation_suite_sha256": null,
   "analysis_script": "/data2/xyf25/A-Mem-Fast/scripts/plot_suite.py",
-  "analysis_script_sha256": "a532284a08b847350ac27d8ce47459a11485949997f53d3d5628699b5dafcc5f",
+  "analysis_script_sha256": "e5b172f8607d150e003c9ebefeb7c4eaeabacb506c5483f3dcf4ce9906337b8d",
   "analysis_dependencies_sha256": {
     "scripts/summarize_suite.py": "57c51a5b3acfa8a60a8adca1091400413f8699b95812fe8c727e7d15e9773858"
+  },
+  "selection_scope": {
+    "independent_conversations": 2,
+    "unique_selected_qa": 24,
+    "selected_cells": 2,
+    "paired_only": true
   },
   "source_cell_counts": {
     "planned": 9,

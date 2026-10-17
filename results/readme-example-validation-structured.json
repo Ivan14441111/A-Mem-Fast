@@ -1,0 +1,24 @@
+{
+  "readme": "README_FAST.md",
+  "readme_sha256": "57fbdbcdce63157c04bf1c5585a444b25073e3a9ae451504998421c0dd3e4b2a",
+  "snippet_sha256": [
+    "70fd5493cca982450e1c0232970f2e382695a1614cfacac1056b0cdc30e68a14",
+    "5017a6549f43142b87a247866ff1ad47a4064fe8111c9e582b5cbe73bb2df9a8"
+  ],
+  "syntax_valid": true,
+  "actual_library_and_sqlite_used": true,
+  "ordered_iterator_ingested": true,
+  "default_false_confirmed": true,
+  "upstream_cold_mock_calls": 3,
+  "fused_cold_mock_calls": 3,
+  "joint_cold_mock_calls": 2,
+  "all_three_replay_http_requests": 0,
+  "all_three_ingestion_and_retrieval_passed": true,
+  "expected_schema_only_on_fused_joint": true,
+  "external_model_calls": 0,
+  "model_downloads": 0,
+  "full_pytest_rerun": false,
+  "scope_note": "Both README Python blocks executed unchanged. Only encoder construction and HTTP transport were replaced; SQLite and application code were real. Both optional systems were then ingested and replayed offline.",
+  "library_source_commit": "21b5b23de2089e6b096a86242a7d51a67cc06d29",
+  "readme_source_note": "Working-tree documentation update; final prose-only edits left executed Python blocks unchanged."
+}

@@ -1,12 +1,12 @@
 {
-  "aggregation": "Use completed baseline/candidate cold-arm pairs, independently of a later arm's failure or pending replay. Pair denominators are policy-specific; replay verification is reported separately. Mean log paired speedup within conversation, then equal-conversation mean and exponentiation. F1 averages repeats within conversation then conversations equally. Repeated QA and confirmation do not add independent conversations or questions.",
+  "aggregation": "Use completed baseline/candidate cold-arm pairs, independently of a later arm's failure or pending replay. Pair denominators are policy-specific; replay verification is reported separately. Mean log paired speedup within conversation, then equal-conversation mean and exponentiation. F1 averages repeats within conversation then conversations equally. Request and build-token means use the same policy-specific eligible pairs, averaging repeats within conversation then conversations equally. Repeated QA and confirmation do not add independent conversations or questions.",
   "sensitivity_limit": "Allocation-stable only classifies observed GPU memory allocation range, not all compute-load changes. Primary planned data is always retained.",
   "inputs": {
     "primary_suite": "results/suite128-primary-observed-v1-20261018/suite.json",
     "primary_suite_sha256": "731b2807375bf1a715d19412d7e61e74ec2b24d87e4f935f44a6ed782e624073",
     "primary_audit": "results/suite128-primary-observed-v1-20261018/gpu_audit.json"
   },
-  "analysis_script_sha256": "dce34c7cf47823beb88bdf5e811f4ba409698cd7e3fd3f9713ded06d3d0019cb",
+  "analysis_script_sha256": "33be804839e3864c91ae95d9513078f004cbe1e53028360bd566a71a84ffb6b6",
   "views": {
     "planned_all": {
       "cell_refs": [
@@ -78,6 +78,12 @@
           "baseline_f1_equal_conversation_mean": 0.39813250169468933,
           "candidate_f1_equal_conversation_mean": 0.40389416022940955,
           "f1_delta_equal_conversation_mean": 0.005761658534720215,
+          "baseline_build_http_requests_equal_conversation_mean": 390,
+          "baseline_build_prompt_tokens_equal_conversation_mean": 313779.3333333333,
+          "baseline_build_completion_tokens_equal_conversation_mean": 23337.666666666668,
+          "candidate_build_http_requests_equal_conversation_mean": 392.6666666666667,
+          "candidate_build_prompt_tokens_equal_conversation_mean": 317631,
+          "candidate_build_completion_tokens_equal_conversation_mean": 24843,
           "conversations": [
             {
               "sample_index": 0,
@@ -87,7 +93,13 @@
               "total_log_speedup": -0.04202569649895123,
               "baseline_f1": 0.4485958223445323,
               "candidate_f1": 0.4240587853074953,
-              "f1_delta": -0.024537037037037024
+              "f1_delta": -0.024537037037037024,
+              "baseline_build_http_requests": 395,
+              "baseline_build_prompt_tokens": 332834,
+              "baseline_build_completion_tokens": 25787,
+              "candidate_build_http_requests": 405,
+              "candidate_build_prompt_tokens": 347006,
+              "candidate_build_completion_tokens": 31422
             },
             {
               "sample_index": 1,
@@ -97,7 +109,13 @@
               "total_log_speedup": 0.17435947861682802,
               "baseline_f1": 0.37712683906469197,
               "candidate_f1": 0.3619687947258327,
-              "f1_delta": -0.015158044338859256
+              "f1_delta": -0.015158044338859256,
+              "baseline_build_http_requests": 386,
+              "baseline_build_prompt_tokens": 305415,
+              "baseline_build_completion_tokens": 21114,
+              "candidate_build_http_requests": 387,
+              "candidate_build_prompt_tokens": 306716,
+              "candidate_build_completion_tokens": 21341
             },
             {
               "sample_index": 2,
@@ -107,7 +125,13 @@
               "total_log_speedup": 0.2372982716444754,
               "baseline_f1": 0.3686748436748437,
               "candidate_f1": 0.42565490065490064,
-              "f1_delta": 0.056980056980056926
+              "f1_delta": 0.056980056980056926,
+              "baseline_build_http_requests": 389,
+              "baseline_build_prompt_tokens": 303089,
+              "baseline_build_completion_tokens": 23112,
+              "candidate_build_http_requests": 386,
+              "candidate_build_prompt_tokens": 299171,
+              "candidate_build_completion_tokens": 21766
             }
           ]
         }
@@ -179,6 +203,12 @@
           "baseline_f1_equal_conversation_mean": 0.4128613307046122,
           "candidate_f1_equal_conversation_mean": 0.39301379001666403,
           "f1_delta_equal_conversation_mean": -0.01984754068794814,
+          "baseline_build_http_requests_equal_conversation_mean": 390.5,
+          "baseline_build_prompt_tokens_equal_conversation_mean": 319124.5,
+          "baseline_build_completion_tokens_equal_conversation_mean": 23450.5,
+          "candidate_build_http_requests_equal_conversation_mean": 396,
+          "candidate_build_prompt_tokens_equal_conversation_mean": 326861,
+          "candidate_build_completion_tokens_equal_conversation_mean": 26381.5,
           "conversations": [
             {
               "sample_index": 0,
@@ -188,7 +218,13 @@
               "total_log_speedup": -0.04202569649895123,
               "baseline_f1": 0.4485958223445323,
               "candidate_f1": 0.4240587853074953,
-              "f1_delta": -0.024537037037037024
+              "f1_delta": -0.024537037037037024,
+              "baseline_build_http_requests": 395,
+              "baseline_build_prompt_tokens": 332834,
+              "baseline_build_completion_tokens": 25787,
+              "candidate_build_http_requests": 405,
+              "candidate_build_prompt_tokens": 347006,
+              "candidate_build_completion_tokens": 31422
             },
             {
               "sample_index": 1,
@@ -198,7 +234,13 @@
               "total_log_speedup": 0.17435947861682802,
               "baseline_f1": 0.37712683906469197,
               "candidate_f1": 0.3619687947258327,
-              "f1_delta": -0.015158044338859256
+              "f1_delta": -0.015158044338859256,
+              "baseline_build_http_requests": 386,
+              "baseline_build_prompt_tokens": 305415,
+              "baseline_build_completion_tokens": 21114,
+              "candidate_build_http_requests": 387,
+              "candidate_build_prompt_tokens": 306716,
+              "candidate_build_completion_tokens": 21341
             }
           ]
         }

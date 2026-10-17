@@ -1,0 +1,33 @@
+{
+  "source_suite": "results/full419-default-observed-v1-20261018/suite.json",
+  "source_suite_sha256": "47637e5cec024789e3ee5c1f86cdbb47444478ca7bc7cfa2bb60c7cb517b557f",
+  "analysis_script_sha256": "64e5b6c49300188f8f11611a356ab626aeaa830cc612128574ea6cb37ad6e748",
+  "started_utc": "2026-10-17T19:32:28.465127+00:00",
+  "note": "Post-suite strict zero-HTTP verification of completed cold arms; no failed generation is retried.",
+  "plan_only": false,
+  "cells": [
+    {
+      "name": "turns419-sample0-upstream-r1",
+      "original_cell_status": "failed",
+      "completed_cold_arms": [
+        "optimized"
+      ],
+      "missing_replay_modes": [],
+      "checks": [
+        {
+          "cold_arm": "optimized",
+          "replay_arm": "warm",
+          "passed": true,
+          "memory_trace_equal": true,
+          "request_sequence_equal": true,
+          "qa_equal": true,
+          "zero_http": true,
+          "zero_client_errors": true,
+          "replay_report_sha256": "ba986dfaa2aafe399d397130c523d481c645d1672900c47149bc687009220de8"
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "finished_utc": "2026-10-17T19:32:28.505098+00:00"
+}

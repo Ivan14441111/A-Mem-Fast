@@ -1,0 +1,21 @@
+fused_warm: memory 8/64, HTTP=0
+fused_warm: memory 16/64, HTTP=0
+fused_warm: memory 24/64, HTTP=0
+fused_warm: memory 32/64, HTTP=0
+fused_warm: memory 40/64, HTTP=0
+fused_warm: memory 48/64, HTTP=0
+fused_warm: memory 56/64, HTTP=0
+fused_warm: memory 64/64, HTTP=0
+fused_warm: build=1.650s QA=0.214s F1=0.314
+{
+  "fused_vs_fused_warm": {
+    "build_speedup": 53.7180074074447,
+    "total_speedup": 56.7995213186231,
+    "memory_trace_equal": true,
+    "upstream_requests_equal": true,
+    "qa_equal": true,
+    "f1_delta": 0.0,
+    "same_evolution_policy": true,
+    "same_context_policy": true
+  }
+}

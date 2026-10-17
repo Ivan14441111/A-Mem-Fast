@@ -1,0 +1,50 @@
+replay: memory 8/64, HTTP=0
+replay: memory 16/64, HTTP=0
+replay: memory 24/64, HTTP=0
+replay: memory 32/64, HTTP=0
+replay: memory 40/64, HTTP=0
+replay: memory 48/64, HTTP=0
+replay: memory 56/64, HTTP=0
+replay: memory 64/64, HTTP=0
+replay: build=1.760s QA=0.212s F1=0.342
+warm: memory 8/64, HTTP=0
+warm: memory 16/64, HTTP=0
+warm: memory 24/64, HTTP=0
+warm: memory 32/64, HTTP=0
+warm: memory 40/64, HTTP=0
+warm: memory 48/64, HTTP=0
+warm: memory 56/64, HTTP=0
+warm: memory 64/64, HTTP=0
+warm: build=1.725s QA=0.209s F1=0.343
+{
+  "baseline_vs_optimized": {
+    "build_speedup": 1.1107065919782102,
+    "total_speedup": 1.082483479231467,
+    "memory_trace_equal": false,
+    "upstream_requests_equal": false,
+    "qa_equal": false,
+    "f1_delta": 0.0007864684335272543,
+    "same_evolution_policy": true,
+    "same_context_policy": true
+  },
+  "baseline_vs_replay": {
+    "build_speedup": 76.57472367422758,
+    "total_speedup": 78.65082131670621,
+    "memory_trace_equal": true,
+    "upstream_requests_equal": true,
+    "qa_equal": true,
+    "f1_delta": 0.0,
+    "same_evolution_policy": true,
+    "same_context_policy": true
+  },
+  "optimized_vs_warm": {
+    "build_speedup": 70.34648256034026,
+    "total_speedup": 74.07024108209998,
+    "memory_trace_equal": true,
+    "upstream_requests_equal": true,
+    "qa_equal": true,
+    "f1_delta": 0.0,
+    "same_evolution_policy": true,
+    "same_context_policy": true
+  }
+}

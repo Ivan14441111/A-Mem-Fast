@@ -1,0 +1,466 @@
+{
+  "sample_id": "conv-43",
+  "turns": [
+    {
+      "content": "Speaker Johnsays : Hey Tim, nice to meet you! What's up? Anything new happening?",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:1"
+    },
+    {
+      "content": "Speaker Timsays : Hey John! Great to meet you. Been discussing collaborations for a Harry Potter fan project I am working on - super excited! Anything interesting happening for you?",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:2"
+    },
+    {
+      "content": "Speaker Johnsays : That's great! I just signed with a new team - excited for the season!",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:3"
+    },
+    {
+      "content": "Speaker Timsays : Woohoo! Congrats on the new team. Which team did you sign with?",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:4"
+    },
+    {
+      "content": "Speaker Johnsays : The Minnesota Wolves! I can't wait to play with them!",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:5"
+    },
+    {
+      "content": "Speaker Timsays : Cool! What position are you playing for the team? Any exciting games coming up?",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:6"
+    },
+    {
+      "content": "Speaker Johnsays : [Image: a photo of a bunch of basketball jerseys laying on a bed] I'm a shooting guard for the team and our season opener is next week - so excited!",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:7"
+    },
+    {
+      "content": "Speaker Timsays : Cool! Have any goals in mind?",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:8"
+    },
+    {
+      "content": "Speaker Johnsays : [Image: a photo of two men standing next to a basketball machine] Yeah, my goal is to improve my shooting percentage. Been practicing hard and gonna make it happen.",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:9"
+    },
+    {
+      "content": "Speaker Timsays : Sounds good! What challenges have you encountered during your pre-season training?",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:10"
+    },
+    {
+      "content": "Speaker Johnsays : Fitting into the new team's style of play was a challenge during pre-season.",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:11"
+    },
+    {
+      "content": "Speaker Timsays : That sounds rough. How are things going with the new team?",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:12"
+    },
+    {
+      "content": "Speaker Johnsays : Things are going well! The team has been really nice and I'm having fun. How's your fan project coming along?",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:13"
+    },
+    {
+      "content": "Speaker Timsays : [Image: a photo of a table with a bunch of books on it] It's been going well! Last week I talked to my friend who is a fan of Harry Potter and we're figuring out ideas, so it's been great to get lost in that magical world!",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:14"
+    },
+    {
+      "content": "Speaker Johnsays : That's great! Loving it when people are passionate about their work. What kind of collaborations are you involved in for the fan project? I love talking to people about my sneaker collection.",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:15"
+    },
+    {
+      "content": "Speaker Timsays : Thanks! We'll be discussing various aspects of the Harry Potter universe, like characters, spells, and magical creatures. It's great to see fans coming together for this.",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:16"
+    },
+    {
+      "content": "Speaker Johnsays : Wow! Have you been to any places related to it?",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:17"
+    },
+    {
+      "content": "Speaker Timsays : I went to a place in London a few years ago - it was like walking into a Harry Potter movie! I also went on a tour which was amazing. Have you been to any of the real Potter places? I'd love to explore them someday!",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:18"
+    },
+    {
+      "content": "Speaker Johnsays : No, but it sounds fun! Going to those places is definitely on my to-do list.",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:19"
+    },
+    {
+      "content": "Speaker Timsays : Definitely add it to your list! It's a really fun experience. Let me know if you need any tips for visiting. Bye!",
+      "timestamp": "7:48 pm on 21 May, 2023",
+      "dia_id": "D1:20"
+    },
+    {
+      "content": "Speaker Timsays : Last night I joined a fantasy literature forum and had a great talk about my fave books. It was so enriching!",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:1"
+    },
+    {
+      "content": "Speaker Johnsays : Wow, great to hear that you had a blast talking books! It's cool to connect with others who share your passion. On a different note, exciting things are happening--I'm exploring endorsement opportunities. Thinking about the possibilities pumps me up. It would be amazing to work with brands and do something special. It's so rewarding to have my hard work pay off like this.",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:2"
+    },
+    {
+      "content": "Speaker Timsays : Wow, that's awesome! Congrats - you must be so stoked! Which brands are you looking to link up with?",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:3"
+    },
+    {
+      "content": "Speaker Johnsays : Thanks! I'm really excited about this new journey! I'm currently considering sports brands like Nike and Under Armour. It would be great to collaborate with brands that are related to sports. However, I'm also open to exploring other brands that align with my values and interests. There are so many options out there, and I can't wait to see where this takes me!",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:4"
+    },
+    {
+      "content": "Speaker Timsays : That's awesome! It's gotta be a rush having all these options. Can't wait to see which brands you choose to work with - gonna be great!",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:5"
+    },
+    {
+      "content": "Speaker Johnsays : Thanks! Exciting times ahead! I'll keep you updated on which brands I choose. Can't wait to see where this journey leads me. Thanks for your support.",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:6"
+    },
+    {
+      "content": "Speaker Timsays : [Image: a photo of a book shelf with books and a picture on it] Yeah, John! Count on me for support. Can't wait to see what's up! This is my book collection so far.",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:7"
+    },
+    {
+      "content": "Speaker Johnsays : Wow, nice bookshelf! That picture is really interesting. What's up with it?",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:8"
+    },
+    {
+      "content": "Speaker Timsays : Thanks! That picture is from MinaLima. They created all the props for the Harry Potter films, and I love their work. It's like having a piece of the wizarding world at home!",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:9"
+    },
+    {
+      "content": "Speaker Johnsays : Wow, having that is so cool! Your enthusiasm for it is awesome. You really go for it!",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:10"
+    },
+    {
+      "content": "Speaker Timsays : Thanks! I have lots of reminders of it - kind of a way to escape reality.",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:11"
+    },
+    {
+      "content": "Speaker Johnsays : Do those reminders help you escape the daily grind? Any chance you'll visit more places related to that world soon?",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:12"
+    },
+    {
+      "content": "Speaker Timsays : Definitely, those reminders really help. And there's definitely a chance I'll be visiting more HP spots in the future. It feels like I'm stepping into the books!",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:13"
+    },
+    {
+      "content": "Speaker Johnsays : [Image: a photo of a basketball game being played in a gym] That sounds awesome! So cool that you get to immerse yourself in that world. So glad you found something that brings you so much joy. Keep diving in and enjoying it! Here's a pic from a recent game.",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:14"
+    },
+    {
+      "content": "Speaker Timsays : Wow! That's awesome! Were you playing or watching?",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:15"
+    },
+    {
+      "content": "Speaker Johnsays : Thanks! That was from a game I just played. I was in it! It was awesome being out there, doing what I love. Such an awesome feeling.",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:16"
+    },
+    {
+      "content": "Speaker Timsays : Wow! You look so into it in that pic – it must be so awesome playing at that level! Keep rockin' it!",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:17"
+    },
+    {
+      "content": "Speaker Johnsays : Thanks! It's a blast. Giving it my all every time I'm on the court. Really appreciate your support!",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:18"
+    },
+    {
+      "content": "Speaker Timsays : Yeah, keep going! Don't give up on your dreams. Talk to you later!",
+      "timestamp": "5:08 pm on 15 June, 2023",
+      "dia_id": "D2:19"
+    },
+    {
+      "content": "Speaker Johnsays : [Image: a photography of a score board with a clock and a phone] Hey Tim! Good to see you again. So much has happened in the last month - on and off the court. Last week I scored 40 points, my highest ever, and it feels like all my hard work's paying off.",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:1"
+    },
+    {
+      "content": "Speaker Timsays : [Image: a photography of a table with a bunch of books on it] Congrats on your achievement! I'm so proud of you. Last week, I had a nice chat with a Harry Potter fan in California. It was magical!",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:2"
+    },
+    {
+      "content": "Speaker Johnsays : [Image: a photo of a group of men sitting on top of a basketball court] Thank you! Scoring those points was an incredible experience. The atmosphere was electric, and my teammates and I were thrilled. We pulled off a tough win!",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:3"
+    },
+    {
+      "content": "Speaker Timsays : Wow, sounds awesome! Winning after that game must have felt amazing - what was it like? Did you celebrate afterward?",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:4"
+    },
+    {
+      "content": "Speaker Johnsays : We were all exhausted but so happy. After that, we celebrated at a restaurant, laughing and reliving the intense moments - it felt amazing!",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:5"
+    },
+    {
+      "content": "Speaker Timsays : Wow, sounds like a blast! I had an incredible time meeting with that fellow fan. You can really feel the love when you're surrounded by people who share the same passion. Does that happen with your sport too?",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:6"
+    },
+    {
+      "content": "Speaker Johnsays : Definitely! Being surrounded by teammates who are equally passionate creates a strong bond. We push each other to be our best and the love for the game is infectious. It's like having a second family.",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:7"
+    },
+    {
+      "content": "Speaker Timsays : That's awesome! Having a second family through sport must be such a great feeling. Glad you have that support. Oh, you mentioned exploring endorsements - have you made any progress?",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:8"
+    },
+    {
+      "content": "Speaker Johnsays : [Image: a photo of a handwritten letter with a black ink marker] Yeah, I'm getting somewhere with endorsements. I've talked to some big names, which looks promising. Exciting to see what's in store!",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:9"
+    },
+    {
+      "content": "Speaker Timsays : How did you manage to connect with these big companies?",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:10"
+    },
+    {
+      "content": "Speaker Johnsays : I used my contacts in the basketball industry and my marketing skills to make connections. Networking plays a big role in getting endorsements, and I'm grateful for the support I've received.",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:11"
+    },
+    {
+      "content": "Speaker Timsays : Wow, what endorsements have you managed to get through networking?",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:12"
+    },
+    {
+      "content": "Speaker Johnsays : I just signed up Nike for a basketball shoe and gear deal. I'm also in talks with Gatorade about a potential sponsorship. It's pretty cool to be working with such big brands!",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:13"
+    },
+    {
+      "content": "Speaker Timsays : Wow, Congrats on those deals with Nike and Gatorade! You're killing it! Any other brands you're dreaming of working with?",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:14"
+    },
+    {
+      "content": "Speaker Johnsays : [Image: a photo of a mannequin in a blue suit and a chair] Thanks! The Nike and Gatorade deals have me stoked! I've always liked Under Armour, working with them would be really cool.",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:15"
+    },
+    {
+      "content": "Speaker Timsays : Wow! What kind of stuff are you exploring? It looks like good things are coming your way.",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:16"
+    },
+    {
+      "content": "Speaker Johnsays : [Image: a photo of a city skyline at sunset with a body of water] Just checking out some exciting things that are happening. Really looking forward to what's coming next! This is where I'm headed.",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:17"
+    },
+    {
+      "content": "Speaker Timsays : Wow, amazing view! Where's that? What's got you so excited?",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:18"
+    },
+    {
+      "content": "Speaker Johnsays : [Image: a photo of a crowd of people watching a basketball game] It's Seattle, I'm stoked for my game there next month! It's one of my favorite cities to explore - super vibrant!",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:19"
+    },
+    {
+      "content": "Speaker Timsays : Cool! What do you love about Seattle?",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:20"
+    },
+    {
+      "content": "Speaker Johnsays : I love the energy, diversity, and awesome food of this city. Trying local seafood is a must! Plus, the support from the fans at games is incredible.",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:21"
+    },
+    {
+      "content": "Speaker Timsays : Sounds fab! Seattle is definitely a great and colorful city. I've always wanted to try the seafood there. Good luck with everything!",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:22"
+    },
+    {
+      "content": "Speaker Johnsays : [Image: a photo of a person walking on the beach with a surfboard] Thanks! Can't wait for the seafood too. I love the ocean.",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:23"
+    },
+    {
+      "content": "Speaker Timsays : That looks peaceful! Do you have a favorite beach memory?",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:24"
+    },
+    {
+      "content": "Speaker Johnsays : [Image: a photo of a man holding a surfboard on a beach] I had an awesome summer with my friends, surfing and riding the waves. The feeling was unreal!",
+      "timestamp": "4:21 pm on 16 July, 2023",
+      "dia_id": "D3:25"
+    }
+  ],
+  "questions": [
+    {
+      "question": "What sports does John like besides basketball?",
+      "answer": "surfing",
+      "evidence": [
+        "D1:7",
+        "D2:14",
+        "D3:1",
+        "D3:25"
+      ],
+      "category": 1,
+      "source_qa_index": 11
+    },
+    {
+      "question": "In which month's game did John achieve a career-high score in points?",
+      "answer": "June 2023",
+      "evidence": [
+        "D3:1"
+      ],
+      "category": 2,
+      "source_qa_index": 6
+    },
+    {
+      "question": "Would Tim enjoy reading books by C. S. Lewis or John Greene?",
+      "answer": "C. S.Lewis",
+      "evidence": [
+        "D1:14",
+        "D1:16",
+        "D1:18"
+      ],
+      "category": 3,
+      "source_qa_index": 3
+    },
+    {
+      "question": "Which team did John sign with on 21 May, 2023?",
+      "answer": "The Minnesota Wolves",
+      "evidence": [
+        "D1:5"
+      ],
+      "category": 4,
+      "source_qa_index": 71
+    },
+    {
+      "question": "Based on Tim's collections, what is a shop that he would enjoy visiting in New York city?",
+      "answer": "House of MinaLima",
+      "evidence": [
+        "D2:9"
+      ],
+      "category": 3,
+      "source_qa_index": 5
+    },
+    {
+      "question": "What is John's position on the team he signed with?",
+      "answer": "shooting guard",
+      "evidence": [
+        "D1:7"
+      ],
+      "category": 4,
+      "source_qa_index": 72
+    },
+    {
+      "question": "What challenge did John encounter during pre-season training?",
+      "answer": "fitting into the new team's style of play",
+      "evidence": [
+        "D1:11"
+      ],
+      "category": 4,
+      "source_qa_index": 73
+    },
+    {
+      "question": "What aspects of the Harry Potter universe will be discussed in John's fan project collaborations?",
+      "answer": "characters, spells, magical creatures",
+      "evidence": [
+        "D1:16"
+      ],
+      "category": 4,
+      "source_qa_index": 74
+    },
+    {
+      "question": "What forum did Tim join recently?",
+      "answer": "fantasy literature forum",
+      "evidence": [
+        "D2:1"
+      ],
+      "category": 4,
+      "source_qa_index": 75
+    },
+    {
+      "question": "What kind of picture did Tim share as part of their Harry Potter book collection?",
+      "answer": "MinaLima's creation from the Harry Potter films",
+      "evidence": [
+        "D2:9"
+      ],
+      "category": 4,
+      "source_qa_index": 76
+    },
+    {
+      "question": "What was the highest number of points John scored in a game recently?",
+      "answer": "40 points",
+      "evidence": [
+        "D3:1"
+      ],
+      "category": 4,
+      "source_qa_index": 77
+    },
+    {
+      "question": "What did John celebrate at a restaurant with teammates?",
+      "answer": "a tough win",
+      "evidence": [
+        "D3:5"
+      ],
+      "category": 4,
+      "source_qa_index": 78
+    },
+    {
+      "question": "What kind of deals did John sign with Nike and Gatorade?",
+      "answer": "basketball shoe and gear deal with Nike, potential sponsorship deal with Gatorade",
+      "evidence": [
+        "D3:13"
+      ],
+      "category": 4,
+      "source_qa_index": 79
+    },
+    {
+      "question": "Which city is John excited to have a game at?",
+      "answer": "Seattle",
+      "evidence": [
+        "D3:19"
+      ],
+      "category": 4,
+      "source_qa_index": 80
+    }
+  ],
+  "eligible_qa": 14,
+  "category_counts": {
+    "1": 1,
+    "2": 1,
+    "3": 2,
+    "4": 10
+  },
+  "fingerprint": "4b745aabc82e765f21a014ff13eefd648b7ca2d35d288871b898c193fc7be34b"
+}

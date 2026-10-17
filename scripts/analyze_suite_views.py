@@ -17,6 +17,9 @@ from pathlib import Path
 import statistics
 from summarize_suite import saved_complete_runs
 
+PAIRED_RESOURCE_FIELDS = tuple(f"{arm}_build_{metric}" for arm in ("baseline", "candidate")
+                               for metric in ("http_requests", "prompt_tokens", "completion_tokens"))
+
 
 def read(path):
     return json.loads(path.read_text())
@@ -39,7 +42,11 @@ def describe(cells):
                 "total_log_speedup": math.log((baseline["build_seconds"] + baseline["qa_seconds"]) /
                                              (candidate["build_seconds"] + candidate["qa_seconds"])),
                 "baseline_f1": baseline["metrics"]["token_f1"], "candidate_f1": candidate["metrics"]["token_f1"],
-                "f1_delta": candidate["metrics"]["token_f1"] - baseline["metrics"]["token_f1"]})
+                "f1_delta": candidate["metrics"]["token_f1"] - baseline["metrics"]["token_f1"],
+                **{f"{label}_build_{metric}": run["build_llm"][source]
+                   for label, run in (("baseline", baseline), ("candidate", candidate))
+                   for metric, source in (("http_requests", "http_requests"), ("prompt_tokens", "prompt_tokens_live"),
+                                          ("completion_tokens", "completion_tokens_live"))}})
         conversations = [{"sample_index": sample, "turns": turns, "repeats": len(rows),
                           **{key: statistics.mean(row[key] for row in rows) for key in rows[0]}}
                          for (sample, turns), rows in sorted(grouped.items())]
@@ -53,7 +60,7 @@ def describe(cells):
                             "build_speedup_equal_conversation_geomean": math.exp(statistics.mean(row["build_log_speedup"] for row in conversations)),
                             "total_speedup_equal_conversation_geomean": math.exp(statistics.mean(row["total_log_speedup"] for row in conversations)),
                             **{key + "_equal_conversation_mean": statistics.mean(row[key] for row in conversations)
-                               for key in ("baseline_f1", "candidate_f1", "f1_delta")},
+                               for key in ("baseline_f1", "candidate_f1", "f1_delta", *PAIRED_RESOURCE_FIELDS)},
                             "conversations": conversations}
     unique_qa = {(entry["cell"]["sample_index"], index) for entry in cells
                  if entry["cell"].get("summary", {}).get("runs") for index in entry["cell"]["source_qa_indices"]}
@@ -128,7 +135,7 @@ def main():
             views["supplemental_balanced_stable"] = {"available": True, **describe(others + confirmations)}
         else:
             views["supplemental_balanced_stable"] = {"available": False, "reason": reason}
-    result = {"aggregation": "Use completed baseline/candidate cold-arm pairs, independently of a later arm's failure or pending replay. Pair denominators are policy-specific; replay verification is reported separately. Mean log paired speedup within conversation, then equal-conversation mean and exponentiation. F1 averages repeats within conversation then conversations equally. Repeated QA and confirmation do not add independent conversations or questions.",
+    result = {"aggregation": "Use completed baseline/candidate cold-arm pairs, independently of a later arm's failure or pending replay. Pair denominators are policy-specific; replay verification is reported separately. Mean log paired speedup within conversation, then equal-conversation mean and exponentiation. F1 averages repeats within conversation then conversations equally. Request and build-token means use the same policy-specific eligible pairs, averaging repeats within conversation then conversations equally. Repeated QA and confirmation do not add independent conversations or questions.",
               "sensitivity_limit": "Allocation-stable only classifies observed GPU memory allocation range, not all compute-load changes. Primary planned data is always retained.",
               "inputs": {"primary_suite": str(args.suite), "primary_suite_sha256": hashlib.sha256(args.suite.read_bytes()).hexdigest(),
                          "primary_audit": str(args.audit)},

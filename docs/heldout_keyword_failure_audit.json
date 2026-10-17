@@ -1,0 +1,172 @@
+{
+  "audited_utc": "2026-10-17T19:42:14.602307+00:00",
+  "scope": "First held-out64 cell keyword-generation failure; no rerun or inference. Not a complete held-out aggregate.",
+  "source_sha256": {
+    "results/joint64-heldout-structured-v1-20261018/turns64-sample3-upstream-r1/joint-failure.json": "b764111eb8a8d6205b2b1512fb95714316d9d50ad281bd9ab948c107d4a7496e",
+    "results/joint64-heldout-structured-v1-20261018/turns64-sample3-upstream-r1/baseline.json": "4b41f1276b8db9d7bb053813b22e9528a210690baf79ca55dd3615d8d7ebf8b9",
+    "results/joint64-heldout-structured-v1-20261018/turns64-sample3-upstream-r1/optimized.json": "d5f6ee0b08df09de2c52683b326bd6ac0d5ab5851cbb9394f2fd222fbdcabce8"
+  },
+  "request_key": "c4cab759b64a7a70cbafc5036dabab0fffa071298dcf82260ae0a41dda6fef5f",
+  "completed_arm_saved_responses": {
+    "baseline": {
+      "identity": {
+        "base_url": "http://127.0.0.1:21014/v1",
+        "request": {
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          },
+          "max_tokens": 2000,
+          "messages": [
+            {
+              "content": "Follow the format specified in the prompt exactly. Do not add extra commentary.\n\nReturn no more than 16 items in each TAGS/tags list, including lists for updated neighbors. Follow the requested format and stop after completing its required fields.",
+              "role": "system"
+            },
+            {
+              "content": "Given the following question, generate several keywords separated by commas.\n\nQuestion: What are Joanna's hobbies?\n\nKeywords:",
+              "role": "user"
+            }
+          ],
+          "model": "Qwen3-8B",
+          "repetition_penalty": 1.05,
+          "seed": 42,
+          "temperature": 0.0
+        },
+        "revision": "qwen3-8b-config-f7c4eadf-index-f9fdbcb9-template-01de28f8",
+        "tag_budget_policy": "observe"
+      },
+      "body": "hobbies, Joanna, interests, activities, pastimes, favorite things, leisure activities, personal interests, entertainment, relaxation, creative pursuits, outdoor activities, indoor activities, social activities, reading, sports",
+      "body_sha256": "ce3d553d9c4167bb89ffffa310ef7505d77f529f20ff8d9596b90a0d1d50b2c6",
+      "usage": {
+        "prompt_tokens": 87,
+        "total_tokens": 128,
+        "completion_tokens": 41,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    },
+    "optimized": {
+      "identity": {
+        "base_url": "http://127.0.0.1:21014/v1",
+        "request": {
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          },
+          "max_tokens": 2000,
+          "messages": [
+            {
+              "content": "Follow the format specified in the prompt exactly. Do not add extra commentary.\n\nReturn no more than 16 items in each TAGS/tags list, including lists for updated neighbors. Follow the requested format and stop after completing its required fields.",
+              "role": "system"
+            },
+            {
+              "content": "Given the following question, generate several keywords separated by commas.\n\nQuestion: What are Joanna's hobbies?\n\nKeywords:",
+              "role": "user"
+            }
+          ],
+          "model": "Qwen3-8B",
+          "repetition_penalty": 1.05,
+          "seed": 42,
+          "temperature": 0.0
+        },
+        "revision": "qwen3-8b-config-f7c4eadf-index-f9fdbcb9-template-01de28f8",
+        "tag_budget_policy": "observe"
+      },
+      "body": "hobbies, Joanna, interests, activities, pastimes, favorite things, leisure activities, personal interests, entertainment, relaxation, creative pursuits, outdoor activities, indoor activities, social activities, reading, sports",
+      "body_sha256": "ce3d553d9c4167bb89ffffa310ef7505d77f529f20ff8d9596b90a0d1d50b2c6",
+      "usage": {
+        "prompt_tokens": 87,
+        "total_tokens": 128,
+        "completion_tokens": 41,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    }
+  },
+  "joint_failure": {
+    "mode": "joint",
+    "exception_type": "ValueError",
+    "error": "LLM reached max_tokens; completion is truncated",
+    "failed_utc": "2026-10-17T19:40:36.775317+00:00",
+    "subset_fingerprint": "b140892169e92e95a0801c9a4ae0373a0aec0b295257da288d331bf362cec88f",
+    "evolution_policy": "joint",
+    "note": "Incomplete arm; excluded from timing and quality aggregates. Inspect suite log and local response cache.",
+    "progress": {
+      "phase": "qa",
+      "question_index_0based": 0,
+      "source_qa_index": 5
+    },
+    "llm_diagnostic": {
+      "stage": "query_keywords",
+      "request_key": "c4cab759b64a7a70cbafc5036dabab0fffa071298dcf82260ae0a41dda6fef5f",
+      "finish_reason": "length",
+      "usage": {
+        "prompt_tokens": 87,
+        "completion_tokens": 2000,
+        "total_tokens": 2087
+      },
+      "content_chars": 8949,
+      "content_sha256": "060e87a96e2ac40209596781f19cacb20489d691c2cdd116d04caebd2bf9d622",
+      "content_prefix": "hobbies, Joanna, interests, activities, pastimes, favorite things, leisure activities, personal interests, entertainment, relaxation, creative pursuits, outdoor activities, indoor activities, sports, reading, music, art, cooking, gardening, traveling, fitness, socializing, technology, photography, writing, volunteering, shopping, gaming, collecting, crafting, dancing, swimming, hiking, cycling, painting, drawing, singing, acting, filmmaking, photography, sports, fitness, travel, books, movies, music, art, c",
+      "content_suffix": "es, music, art, cooking, gardening, shopping, gaming, collecting, crafting, dancing, swimming, hiking, cycling, painting, drawing, singing, acting, filmmaking, photography, sports, fitness, travel, books, movies, music, art, cooking, gardening, shopping, gaming, collecting, crafting, dancing, swimming, hiking, cycling, painting, drawing, singing, acting, filmmaking, photography, sports, fitness, travel, books, movies, music, art, cooking, gardening, shopping, gaming, collecting, crafting, dancing, swimming,",
+      "tag_budget_policy": "observe"
+    }
+  },
+  "checks": {
+    "baseline_exact_payload_equal": true,
+    "baseline_exact_content_equal": true,
+    "canonical_payload_hash_equals_joint_failure_request_key": true,
+    "truncated_joint_response_absent_from_cache": true,
+    "no_response_format_on_keyword_request": true
+  },
+  "code_dependency": "benchmark.answer_question generates keyword prompt using only qa.question before invoking system.find_related_memories_raw. Graph/context is absent from this request.",
+  "inference": "The recorded full request identity produced differing live completion behavior. This does not identify the serving/numerical/resource cause, and does not attribute the failure to joint memory semantics.",
+  "future_only": "Predeclare recommended decoding plus bounded/structured keyword and concise-answer contracts; measure completion, quality and cost jointly. No configuration or source change during frozen64/128 experiments.",
+  "second_repeat_followup": {
+    "audited_utc": "2026-10-17T19:46:37.242234+00:00",
+    "source_failure_sha256": "3dd1c140401550d7183a483eb3f09ea28be374168ee30abb370dfbe1acc6f7c0",
+    "joint_failure": {
+      "mode": "joint",
+      "exception_type": "ValueError",
+      "error": "LLM reached max_tokens; completion is truncated",
+      "failed_utc": "2026-10-17T19:44:33.830980+00:00",
+      "subset_fingerprint": "b140892169e92e95a0801c9a4ae0373a0aec0b295257da288d331bf362cec88f",
+      "evolution_policy": "joint",
+      "note": "Incomplete arm; excluded from timing and quality aggregates. Inspect suite log and local response cache.",
+      "progress": {
+        "phase": "qa",
+        "question_index_0based": 0,
+        "source_qa_index": 5
+      },
+      "llm_diagnostic": {
+        "stage": "query_keywords",
+        "request_key": "c4cab759b64a7a70cbafc5036dabab0fffa071298dcf82260ae0a41dda6fef5f",
+        "finish_reason": "length",
+        "usage": {
+          "prompt_tokens": 87,
+          "completion_tokens": 2000,
+          "total_tokens": 2087
+        },
+        "content_chars": 8949,
+        "content_sha256": "060e87a96e2ac40209596781f19cacb20489d691c2cdd116d04caebd2bf9d622",
+        "content_prefix": "hobbies, Joanna, interests, activities, pastimes, favorite things, leisure activities, personal interests, entertainment, relaxation, creative pursuits, outdoor activities, indoor activities, sports, reading, music, art, cooking, gardening, traveling, fitness, socializing, technology, photography, writing, volunteering, shopping, gaming, collecting, crafting, dancing, swimming, hiking, cycling, painting, drawing, singing, acting, filmmaking, photography, sports, fitness, travel, books, movies, music, art, c",
+        "content_suffix": "es, music, art, cooking, gardening, shopping, gaming, collecting, crafting, dancing, swimming, hiking, cycling, painting, drawing, singing, acting, filmmaking, photography, sports, fitness, travel, books, movies, music, art, cooking, gardening, shopping, gaming, collecting, crafting, dancing, swimming, hiking, cycling, painting, drawing, singing, acting, filmmaking, photography, sports, fitness, travel, books, movies, music, art, cooking, gardening, shopping, gaming, collecting, crafting, dancing, swimming,",
+        "tag_budget_policy": "observe"
+      }
+    },
+    "fused_same_request": {
+      "canonical_payload_sha256": "c4cab759b64a7a70cbafc5036dabab0fffa071298dcf82260ae0a41dda6fef5f",
+      "body_sha256": "ce3d553d9c4167bb89ffffa310ef7505d77f529f20ff8d9596b90a0d1d50b2c6",
+      "usage": {
+        "prompt_tokens": 87,
+        "total_tokens": 128,
+        "completion_tokens": 41,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    },
+    "checks": {
+      "both_joint_full_body_hashes_equal": true,
+      "fused_body_equals_r1_baseline_exact": true
+    },
+    "interpretation": "Three completed controls share one41-token body; two joint-phase requests share one2000-token truncated body. Observed repeatability does not isolate history/prefix-cache/batch/numerical causes. No new live diagnostic."
+  }
+}

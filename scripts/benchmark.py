@@ -44,19 +44,104 @@ class BufferedRecordingCache:
     def __init__(self, cache):
         self.cache = cache
         self.rows = {}
+        self.contents = {}
 
     def put(self, key, payload, response):
-        if key in self.rows:
-            previous = self.rows[key][1]["choices"][0]["message"]["content"]
-            current = response["choices"][0]["message"]["content"]
-            if previous != current:
-                raise RuntimeError("Same baseline request returned different text; exact cache replay is ambiguous")
+        current = response["choices"][0]["message"]["content"]
+        if key in self.contents and self.contents[key] != current:
+            raise RuntimeError("Same baseline request returned different text; exact cache replay is ambiguous")
+        self.contents[key] = current
         self.rows[key] = (payload, response)
 
     def flush(self):
         for key, (payload, response) in self.rows.items():
             self.cache.put(key, payload, response)
         self.rows.clear()
+
+
+def write_json_atomic(path, value):
+    temporary = path.with_name("." + path.name + ".tmp")
+    try:
+        with temporary.open("w") as stream:
+            json.dump(value, stream, indent=2, ensure_ascii=False)
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        temporary.replace(path)
+    finally:
+        try:
+            temporary.unlink(missing_ok=True)
+        except OSError:
+            pass
+
+
+def _flush_recording(evidence):
+    if evidence.get("mode") == "baseline" and "cache" in evidence:
+        started = time.perf_counter()
+        try:
+            evidence["cache"].flush()
+        except Exception as exc:
+            exc.benchmark_evidence_operation = "flush_response_cache"
+            raise
+        finally:
+            evidence["recording_flush_seconds"] += time.perf_counter() - started
+
+
+def _write_evidence_json(path, value, operation):
+    try:
+        write_json_atomic(path, value)
+    except Exception as exc:
+        exc.benchmark_evidence_operation = operation
+        raise
+
+
+def _evidence_snapshot(evidence, status, exception=None):
+    system, client = evidence["system"], evidence["client"]
+    memories = canonical_memories(system)
+    result = {"schema_version": 1, "report_type": "build_checkpoint" if status == "build_complete" else "partial_evidence",
+              "status": status, "mode": evidence["mode"], "phase": evidence["phase"],
+              "purpose": "Diagnostic/replay evidence; vector index is not serialized for direct production resume",
+              "recording_pending_responses": len(getattr(evidence.get("cache"), "rows", {})),
+              "build_complete": evidence.get("build_complete", False), "qa_complete": evidence.get("qa_complete", False),
+              "subset_fingerprint": evidence["subset"]["fingerprint"], "source_identity": evidence["source_identity"],
+              "wall_utc": dict(evidence["wall_utc"]), "init_seconds": evidence["init_seconds"],
+              "build_seconds": evidence.get("build_seconds"), "build_seconds_partial": evidence.get("build_seconds_partial"),
+              "qa_seconds": evidence.get("qa_seconds"), "qa_seconds_partial": evidence.get("qa_seconds_partial"),
+              "recording_flush_seconds_excluded": evidence["recording_flush_seconds"],
+              "last_completed_turn": evidence["last_completed"][0], "memory_count": len(system.memories),
+              "memory_trace": list(evidence["trace"]), "memory_digest": digest(memories), "memories": memories,
+              "memory_state_status": "completed_build_state" if evidence.get("build_complete") else "current_state_at_failure",
+              "build_llm": evidence.get("build_summary"), "all_llm": client.summary(),
+              "upstream_request_keys": [event["key"] for event in client.events if not event["prefetch"]],
+              "llm_events": list(client.events), "qa": list(evidence["qa_results"]),
+              "inclusive_seconds": dict(evidence["timings"]), "operation_counts": dict(evidence["counts"]),
+              "retriever_metrics": getattr(system.retriever, "metrics", {}),
+              "encoder_metrics": {key: ENCODER_METRICS[key] - evidence["encoder_before"].get(key, 0) for key in ENCODER_METRICS},
+              "evolution_count": system.evo_cnt, "evolution_metrics": getattr(system, "evolution_metrics", {}),
+              "evidence_errors": list(evidence.get("evidence_errors", []))}
+    if exception is not None:
+        result["primary_failure"] = {"exception_type": type(exception).__name__,
+                                     "exception_module": type(exception).__module__, "error": str(exception)}
+    return result
+
+
+def _preserve_failed_evidence(evidence, exception):
+    errors = evidence.setdefault("evidence_errors", [])
+    if evidence.get("phase") == "build":
+        evidence["build_seconds_partial"] = time.perf_counter() - evidence["phase_started"]
+    elif evidence.get("phase") == "qa":
+        evidence["qa_seconds_partial"] = time.perf_counter() - evidence["phase_started"]
+    for operation, action in [
+            ("flush_response_cache", lambda: _flush_recording(evidence)),
+            ("write_partial_checkpoint", lambda: write_json_atomic(
+                evidence["output"] / f"{evidence['mode']}-partial.json",
+                _evidence_snapshot(evidence, "incomplete", exception)) if "system" in evidence else None)]:
+        try:
+            action()
+        except Exception as secondary:
+            errors.append({"operation": operation, "error_origin": "benchmark_evidence", "exception_type": type(secondary).__name__,
+                           "exception_module": type(secondary).__module__, "error": str(secondary)})
+    return errors
 
 
 def select_subset(path, sample_index, max_turns, max_questions):
@@ -148,10 +233,13 @@ def policy_for(args, mode):
 
 
 def run_mode(args, subset, mode, shared_model):
+    evidence = {"mode": mode, "output": Path(args.output), "recording_flush_seconds": 0.0}
     try:
-        return _run_mode(args, subset, mode, shared_model)
+        return _run_mode(args, subset, mode, shared_model, evidence)
     except Exception as exc:
-        failure = {"mode": mode, "exception_type": type(exc).__name__, "error": str(exc),
+        evidence_errors = _preserve_failed_evidence(evidence, exc)
+        failure = {"mode": mode, "exception_type": type(exc).__name__,
+                   "exception_module": type(exc).__module__, "error": str(exc),
                    "failed_utc": datetime.now(timezone.utc).isoformat(),
                    "subset_fingerprint": subset["fingerprint"],
                    "evolution_policy": policy_for(args, mode),
@@ -162,17 +250,31 @@ def run_mode(args, subset, mode, shared_model):
         diagnostic = getattr(exc, "llm_diagnostic", None)
         if diagnostic is not None:
             failure["llm_diagnostic"] = diagnostic
-        (Path(args.output) / f"{mode}-failure.json").write_text(json.dumps(failure, indent=2) + "\n")
+        operation = getattr(exc, "benchmark_evidence_operation", None)
+        if operation is not None:
+            failure.update({"error_origin": "benchmark_evidence", "operation": operation})
+        if evidence_errors:
+            failure["evidence_errors"] = evidence_errors
+        try:
+            write_json_atomic(Path(args.output) / f"{mode}-failure.json", failure)
+        except Exception as secondary:
+            evidence_errors.append({"operation": "write_failure_artifact", "error_origin": "benchmark_evidence",
+                                    "exception_type": type(secondary).__name__,
+                                    "exception_module": type(secondary).__module__, "error": str(secondary)})
+            print(f"Could not preserve {mode} failure artifact: {secondary}", file=sys.stderr)
+        exc.evidence_errors = evidence_errors
         raise
 
 
-def _run_mode(args, subset, mode, shared_model):
+def _run_mode(args, subset, mode, shared_model, evidence=None):
     import memory_layer
     from memory_layer import SimpleEmbeddingRetriever
     from memory_layer_robust import RobustAgenticMemorySystem
     from fast_amem.client import MeasuredClient, SQLiteResponseCache
     from fast_amem.system import FastAgenticMemorySystem
     output = Path(args.output)
+    if evidence is None:
+        evidence = {"mode": mode, "output": output, "recording_flush_seconds": 0.0}
     wall_utc = {"run_start": datetime.now(timezone.utc).isoformat()}
     reset_seconds = None
     if mode in {"baseline", "optimized", "fused", "joint"} and args.prefix_cache_reset == "required":
@@ -190,6 +292,7 @@ def _run_mode(args, subset, mode, shared_model):
     cache = SQLiteResponseCache(cache_path)
     if mode == "baseline":
         cache = BufferedRecordingCache(cache)
+    evidence["cache"] = cache
     client = MeasuredClient(args.base_url, args.model,
                             cache=cache,
                             cache_mode={"baseline": "write", "optimized": "readwrite",
@@ -200,6 +303,7 @@ def _run_mode(args, subset, mode, shared_model):
                             repetition_penalty=args.repetition_penalty, tag_budget=args.tag_budget,
                             tag_budget_policy=args.tag_budget_policy,
                             structured_policy_outputs=args.structured_policy_outputs)
+    evidence["client"] = client
     wall_utc["init_start"] = datetime.now(timezone.utc).isoformat()
     init_start = time.perf_counter()
     if mode == "baseline":
@@ -219,6 +323,7 @@ def _run_mode(args, subset, mode, shared_model):
             shared_model, client, evo_threshold=args.evo_threshold,
             evolution_policy=policy_for(args, mode),
             context_policy=args.context_policy if mode in {"optimized", "warm", "fused", "fused_warm", "joint", "joint_warm"} else "upstream")
+    evidence["system"] = system
     init_seconds = time.perf_counter() - init_start
     wall_utc["init_end"] = datetime.now(timezone.utc).isoformat()
     # Every baseline consolidation may create a new model. Track each through
@@ -249,15 +354,30 @@ def _run_mode(args, subset, mode, shared_model):
             errors = [event for event in events if event["error"]]
             if errors:
                 error = RuntimeError("Configured robust arm encountered an LLM error; fallback is excluded")
-                error.llm_diagnostic = [event.get("llm_diagnostic", {"stage": event["stage"], "error": event["error"]})
+                error.llm_diagnostic = [{**event.get("llm_diagnostic", {"stage": event["stage"], "error": event["error"]}),
+                                         "error_type": event.get("error_type"),
+                                         "error_module": event.get("error_module")}
                                         for event in errors]
                 raise error
         trace.append(digest(canonical_memories(system)))
         if n % 8 == 0 or n == len(subset["turns"]):
             print(f"{mode}: memory {n}/{len(subset['turns'])}, HTTP={client.summary()['http_requests']}", flush=True)
         last_completed[0] = n
+    identity_paths = [Path(__file__).resolve(), ROOT / "memory_layer.py", ROOT / "memory_layer_robust.py",
+                      ROOT / "llm_text_parsers.py", *sorted((ROOT / "fast_amem").glob("*.py"))]
+    evidence.update({"subset": subset, "wall_utc": wall_utc, "init_seconds": init_seconds,
+                     "last_completed": last_completed, "trace": trace, "timings": timings,
+                     "counts": counts, "encoder_before": encoder_before, "qa_results": [], "phase": "build",
+                     "source_identity": {"project_commit": project_revision(),
+                         "configuration": {name: getattr(args, name, None) for name in (
+                             "base_url", "model", "model_revision", "embedding_model", "seed", "max_tokens",
+                             "evo_threshold", "retrieve_k", "workers", "prefetch_window", "context_policy",
+                             "evolution_policy", "repetition_penalty", "tag_budget", "tag_budget_policy", "structured_policy_outputs")},
+                         "source_sha256": {str(path.relative_to(ROOT)): hashlib.sha256(path.read_bytes()).hexdigest()
+                                           for path in identity_paths}}})
     wall_utc["build_start"] = datetime.now(timezone.utc).isoformat()
     started = time.perf_counter()
+    evidence["phase_started"] = started
     try:
         if mode == "baseline":
             for n, turn in enumerate(subset["turns"], 1):
@@ -276,9 +396,15 @@ def _run_mode(args, subset, mode, shared_model):
     build_seconds = time.perf_counter() - started
     wall_utc["build_end"] = datetime.now(timezone.utc).isoformat()
     build_summary = client.summary()
+    evidence.update({"build_complete": True, "build_seconds": build_seconds,
+                     "build_summary": build_summary, "phase": "build_checkpoint"})
+    _flush_recording(evidence)
+    _write_evidence_json(output / f"{mode}-build-checkpoint.json", _evidence_snapshot(evidence, "build_complete"), "write_build_checkpoint")
+    evidence["phase"] = "qa"
     wall_utc["qa_start"] = datetime.now(timezone.utc).isoformat()
     started = time.perf_counter()
-    qa_results = []
+    evidence["phase_started"] = started
+    qa_results = evidence["qa_results"]
     for index, question in enumerate(subset["questions"]):
         try:
             qa_results.append(answer_question(system, client, question, args.retrieve_k))
@@ -288,11 +414,9 @@ def _run_mode(args, subset, mode, shared_model):
             raise
     qa_seconds = time.perf_counter() - started
     wall_utc["qa_end"] = datetime.now(timezone.utc).isoformat()
-    recording_flush_seconds = 0.0
-    if mode == "baseline":
-        started = time.perf_counter()
-        cache.flush()
-        recording_flush_seconds = time.perf_counter() - started
+    evidence.update({"qa_complete": True, "qa_seconds": qa_seconds, "phase": "report"})
+    _flush_recording(evidence)
+    recording_flush_seconds = evidence["recording_flush_seconds"]
     report = {"mode": mode, "wall_utc": wall_utc, "init_seconds": init_seconds, "build_seconds": build_seconds,
               "subset_fingerprint": subset["fingerprint"],
               "evolution_policy": policy_for(args, mode),
@@ -317,10 +441,12 @@ def _run_mode(args, subset, mode, shared_model):
               "metrics": {k: sum(q["metrics"][k] for q in qa_results) / len(qa_results)
                           for k in ("exact_match", "token_f1")},
               "qa": qa_results, "llm_events": client.events}
-    (output / f"{mode}.json").write_text(json.dumps(report, indent=2, ensure_ascii=False))
+    _write_evidence_json(output / f"{mode}.json", report, "write_final_report")
     if report["all_llm"]["errors"]:
         error = RuntimeError(f"{mode}: errors detected; see {output / (mode + '.json')}")
-        error.llm_diagnostic = [event.get("llm_diagnostic", {"stage": event["stage"], "error": event["error"]})
+        error.llm_diagnostic = [{**event.get("llm_diagnostic", {"stage": event["stage"], "error": event["error"]}),
+                                         "error_type": event.get("error_type"),
+                                         "error_module": event.get("error_module")}
                                 for event in client.events if event["error"]]
         raise error
     print(f"{mode}: build={build_seconds:.3f}s QA={qa_seconds:.3f}s F1={report['metrics']['token_f1']:.3f}", flush=True)
