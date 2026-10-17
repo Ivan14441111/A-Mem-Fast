@@ -197,7 +197,8 @@ def _run_mode(args, subset, mode, shared_model):
                                         "fused": "readwrite", "fused_warm": "replay",
                                         "joint": "readwrite", "joint_warm": "replay"}[mode],
                             revision=args.model_revision, max_tokens=args.max_tokens, seed=args.seed,
-                            repetition_penalty=args.repetition_penalty, tag_budget=args.tag_budget)
+                            repetition_penalty=args.repetition_penalty, tag_budget=args.tag_budget,
+                            tag_budget_policy=args.tag_budget_policy)
     wall_utc["init_start"] = datetime.now(timezone.utc).isoformat()
     init_start = time.perf_counter()
     if mode == "baseline":
@@ -298,6 +299,7 @@ def _run_mode(args, subset, mode, shared_model):
               "context_metrics": getattr(system, "context_metrics", {}),
               "repetition_penalty": args.repetition_penalty,
               "tag_budget": args.tag_budget,
+              "tag_budget_policy": args.tag_budget_policy,
               "prefix_cache_reset_seconds": reset_seconds,
               "recording_flush_seconds_excluded": recording_flush_seconds,
               "qa_seconds": qa_seconds, "total_seconds": build_seconds + qa_seconds,
@@ -347,6 +349,7 @@ def main():
     p.add_argument("--model-revision", required=True)
     p.add_argument("--embedding-model", required=True)
     p.add_argument("--max-tokens", type=int, default=1000)
+    p.add_argument("--tag-budget-policy", choices=("error", "observe"), default="error")
     p.add_argument("--tag-budget", type=int, help="Optional common system-message tag-list bound; configured protocol bounded-tags-v1")
     p.add_argument("--repetition-penalty", type=float, help="Optional deterministic vLLM decoding parameter; common to all live/replay arms")
     p.add_argument("--seed", type=int, default=42)
@@ -414,9 +417,9 @@ def main():
     if manifest_path.exists():
         old = json.loads(manifest_path.read_text())
         keys = ("model", "model_revision", "base_url", "embedding_model", "max_tokens",
-                "seed", "retrieve_k", "evo_threshold", "evolution_policy", "context_policy", "prefix_cache_reset", "repetition_penalty", "tag_budget")
+                "seed", "retrieve_k", "evo_threshold", "evolution_policy", "context_policy", "prefix_cache_reset", "repetition_penalty", "tag_budget", "tag_budget_policy")
         if (old["subset_fingerprint"] != subset["fingerprint"] or
-                any(old["args"].get(k) != getattr(args, k) for k in keys)):
+                any(old["args"].get(k, "error" if k == "tag_budget_policy" else None) != getattr(args, k) for k in keys)):
             raise ValueError("Existing output belongs to a different subset or model configuration")
     (output / "subset.json").write_text(json.dumps(subset, indent=2, ensure_ascii=False))
     versions = {}
@@ -436,8 +439,9 @@ def main():
                 "timing_note": "Model download/server startup/model loading/warmup excluded; real live inference and fast-cache overhead included. Init reported separately. Nested timing is inclusive.",
                 "decoding": {"temperature": 0, "seed": args.seed, "enable_thinking": False,
                              "max_tokens": args.max_tokens, "repetition_penalty": args.repetition_penalty,
-                             "tag_budget": args.tag_budget,
-                             "prompt_protocol": "bounded-tags-v1" if args.tag_budget is not None else "upstream-system",
+                             "tag_budget": args.tag_budget, "tag_budget_policy": args.tag_budget_policy,
+                             "prompt_protocol": (("observed-tags-v1" if args.tag_budget_policy == "observe" else "bounded-tags-v1")
+                                                 if args.tag_budget is not None else "upstream-system"),
                              "note": "Common configured decoding in all arms; differs from upstream default temperature."},
                 "source_sha256": {str(path.relative_to(ROOT)): hashlib.sha256(path.read_bytes()).hexdigest()
                                   for path in [ROOT / "scripts/benchmark.py", ROOT / "memory_layer.py",
@@ -454,7 +458,8 @@ def main():
     from fast_amem.client import MeasuredClient
     if not args.skip_server_warmup and any(mode in {"baseline", "optimized", "fused", "joint"} for mode in modes):
         MeasuredClient(args.base_url, args.model, max_tokens=args.max_tokens, seed=args.seed,
-                       repetition_penalty=args.repetition_penalty, tag_budget=args.tag_budget).get_completion(
+                       repetition_penalty=args.repetition_penalty, tag_budget=args.tag_budget,
+                            tag_budget_policy=args.tag_budget_policy).get_completion(
                            "Reply with exactly one word: READY")
     manifest["shared_encoder_and_warmup_seconds"] = time.perf_counter() - started
     manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False))

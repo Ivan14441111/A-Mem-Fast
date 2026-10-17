@@ -2,7 +2,7 @@
 
 A measured performance engineering project built on [A-Mem](https://github.com/WujiangXu/A-mem). It provides a bounded ingestion pipeline, an incremental exact vector index, a persistent response cache, and an opt-in fused memory evolution policy. The benchmark harness separates live inference, response replay, and index microbenchmarks so their speedups can be assessed independently.
 
-The reference implementation is the upstream **robust** memory layer at commit `0c8039f28fdcc08189a23c07a3437d9d2482f9c2`. The upstream source files and prompts remain in the repository. The fast implementation follows the upstream successful execution path with stricter error propagation; fused evolution and context deduplication are explicit policy changes. See [engineering details](README_FAST.md), [source audit](docs/audit.md), and [experiment report](docs/experiments.md).
+The reference implementation is the upstream **robust** memory layer at commit `0c8039f28fdcc08189a23c07a3437d9d2482f9c2`. The upstream source files and prompts remain in the repository. The fast implementation follows the upstream successful execution path with stricter error propagation; fused evolution and context deduplication are explicit policy changes. See [engineering details](README_FAST.md), [source audit](docs/audit.md), and [current experiment report](docs/experiments_v2.md).
 
 ```mermaid
 flowchart LR
@@ -24,11 +24,12 @@ flowchart LR
 | Exact incremental index | Reuse encoder, grow vector storage, batch changed documents at consolidation | Retains cosine ranking, row indices, consolidation schedule and stale-vector behavior |
 | SQLite WAL response cache | Reuse complete deterministic requests and audit replay | Includes model revision, endpoint and decoding settings in identity; HTTP failures and truncated outputs are rejected |
 | Fused evolution | Replace conditional decision/strengthen/update requests with one structured request | Changes prompts and potentially memory/QA outcomes; opt-in |
+| Joint note construction | Combine metadata and evolution in one ordered request | Changes conditioning and retrieval inputs; experimental opt-in |
 | Context deduplication | Remove duplicate graph rows from QA context | Changes QA prompts; separate opt-in ablation |
 
 ## Evidence and limits
 
-Real Qwen3-8B / MiniLM / LoCoMo measurements, including negative results and per-question outputs, are documented in [the experiment report](docs/experiments.md). The early 64-turn run achieved **1.34× build speedup**, while normalized token F1 changed from **0.490 to 0.401** in separately inferred live arms. Fixed-response replay matched the reference memory trace, original request sequence, and complete QA outputs. This validates replay equivalence; it does not establish identical live outputs under concurrent model serving.
+Real Qwen3-8B / MiniLM / LoCoMo measurements, per-question outputs and negative results are documented in [the current experiment report](docs/experiments_v2.md). [The technical analysis](docs/deep_analysis.md) explains where inference time goes and why request fusion changes graph decisions. Fixed-response replay checks the reference memory trace, chronological request sequence and complete QA outputs; it does not guarantee identical independently inferred live outputs. Earlier 64-turn measurements remain in [the historical report](docs/experiments.md).
 
 The suite supports multiple conversations, repeated paired runs, three rotated arm orders, evidence-complete QA selection, token counts, stage latencies, parser/error counters, and GPU load logs. Repeats of the same questions are not independent new samples. Measurements on shared hardware and this small LoCoMo subset do not establish a general speed or accuracy guarantee. Cache replay and index-only speedups are reported separately from live end-to-end inference. This project does not reproduce the paper's full evaluation.
 
@@ -67,6 +68,7 @@ Inspect coverage and the three-arm order without loading models or contacting a 
 ```bash
 python scripts/benchmark_suite.py --plan-only --include-fused \
   --samples 0 1 2 --turns 128 --repeats 3 --max-questions 12 \
+  --max-tokens 2000 --repetition-penalty 1.05 --tag-budget 16 --tag-budget-policy observe \
   --output results/my-plan
 ```
 
@@ -80,6 +82,7 @@ export MODEL_REVISION=your-model-and-template-revision
 .venv-client/bin/python scripts/benchmark.py \
   --embedding-model "$EMBEDDING_MODEL" --model-revision "$MODEL_REVISION" \
   --max-turns 64 --max-questions 12 \
+  --max-tokens 2000 --repetition-penalty 1.05 --tag-budget 16 --tag-budget-policy observe \
   --modes baseline,optimized,fused,replay,warm,fused_warm \
   --output results/my-smoke
 ```
@@ -90,8 +93,13 @@ Run the repeated suite:
 .venv-client/bin/python scripts/benchmark_suite.py --include-fused \
   --embedding-model "$EMBEDDING_MODEL" --model-revision "$MODEL_REVISION" \
   --samples 0 1 2 --turns 128 --repeats 3 --max-questions 12 \
-  --output results/my-suite
+  --max-tokens 2000 --repetition-penalty 1.05 --tag-budget 16 --tag-budget-policy observe \
+  --continue-on-error --output results/my-suite
 ```
+
+These commands use the explicit `observed-tags-v1` profile: deterministic decoding, repetition penalty 1.05, and a common system instruction requesting tag lists of at most 16 items. Oversized complete lists are recorded without clipping; malformed HTTP responses and truncation remain errors. This contract was introduced after an unbounded strengthen response repeated until truncation; the original failed attempt, fixed diagnostic controls and subsequent strict tag-budget abort are retained. It changes the generator contract equally for configured arms and is separate from the untouched upstream prompts. Omitting the optional flags preserves historical request identities.
+
+The suite attempts each planned cell once. `--continue-on-error` preserves and counts generation/execution failures while attempting remaining independent cells; source, configuration and replay integrity failures stop the suite. Timing/QA summaries are conditional on successful paired cells, and the full planned denominator remains in `suite.json`.
 
 Use a fresh output directory for each cold run. `--resume` skips completed suite cells only when source and configuration hashes match; partial failed cells are preserved for inspection and require a new suite output. `--context-policy deduplicated` changes QA context for fast arms; the default is `upstream`. If a server does not support prefix-cache reset, `--prefix-cache-reset off` runs with that limitation recorded in the manifest.
 

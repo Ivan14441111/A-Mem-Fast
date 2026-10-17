@@ -1,0 +1,30 @@
+{
+  "mode": "optimized",
+  "exception_type": "ValueError",
+  "error": "LLM tag list exceeds tag_budget=16: 18 items",
+  "failed_utc": "2026-10-17T17:43:34.264697+00:00",
+  "subset_fingerprint": "a04a4135825e2c5ad26ca9d5e2a2e85f3b82a0456f9cc7dd341461c5141a09dd",
+  "evolution_policy": "upstream",
+  "note": "Incomplete arm; excluded from timing and quality aggregates. Inspect suite log and local response cache.",
+  "progress": {
+    "phase": "build",
+    "last_completed_turn": 82,
+    "failed_turn_1based": 83,
+    "dia_id": "D5:7",
+    "memory_count_at_failure": 82
+  },
+  "llm_diagnostic": {
+    "stage": "strengthen",
+    "request_key": "adbae0c115e830978d1a969ebafa68990b0dcf9f07dfda4782f063443904071e",
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 1093,
+      "completion_tokens": 68,
+      "total_tokens": 1161
+    },
+    "content_chars": 271,
+    "content_sha256": "04fc0ad9f5a937885f9cd71a0564f875bef369810ed388870e06d33d23a93890",
+    "content_prefix": "CONNECTIONS: 62, 81, 80\nTAGS: bowl, design, fancy, hand-painted bowl, art and self-expression, emotional connection, dialogue, communication, social interaction, Melanie, Carolinesays, LGBTQ support group, storytelling, community, support, personal growth, speaker, power",
+    "content_suffix": ""
+  }
+}

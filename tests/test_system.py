@@ -289,8 +289,10 @@ def test_fused_policy_one_call_per_evolution_and_strict_replay(tmp_path, decisio
     assert replay_client.summary()["http_requests"] == 0
 
 
-def test_invalid_fused_response_does_not_apply_any_mutations(tmp_path):
-    client = make_client(tmp_path / "fused.sqlite", "readwrite", FusedService(invalid=True))
+@pytest.mark.parametrize("tag_budget_policy", ["error", "observe"])
+def test_invalid_fused_response_does_not_apply_any_mutations(tmp_path, tag_budget_policy):
+    client = make_client(tmp_path / "fused.sqlite", "readwrite", FusedService(invalid=True),
+                         tag_budget=16, tag_budget_policy=tag_budget_policy)
     system = FastAgenticMemorySystem(DeterministicEncoder(), client, evolution_policy="fused")
     system.add_note("First topic", time="2024-01-01")
     before = deepcopy(canonical_memories(system))
@@ -343,13 +345,14 @@ def test_consolidation_failure_is_visible_after_the_note_commits(tmp_path):
     assert system.evo_cnt == 1
 
 
-@pytest.mark.parametrize("repetition_penalty,tag_budget", [(None, None), (1.05, 16)])
-def test_context_ablation_reconstructs_recorded_graph_and_keywords_without_http(tmp_path, repetition_penalty, tag_budget):
+@pytest.mark.parametrize("repetition_penalty,tag_budget,tag_budget_policy", [(None, None, "error"), (1.05, 16, "error"), (1.05, 16, "observe")])
+def test_context_ablation_reconstructs_recorded_graph_and_keywords_without_http(tmp_path, repetition_penalty, tag_budget, tag_budget_policy):
     from scripts.benchmark_context import reconstruct_graph, query_prompt
 
     service = DeterministicService()
     client = make_client(tmp_path / "optimized.sqlite", "readwrite", service,
-                         repetition_penalty=repetition_penalty, tag_budget=tag_budget)
+                         repetition_penalty=repetition_penalty, tag_budget=tag_budget,
+                         tag_budget_policy=tag_budget_policy)
     system = FastAgenticMemorySystem(DeterministicEncoder(), client, evo_threshold=2)
     turns = [{"content": f"Topic {i}", "timestamp": "2024-01-01"} for i in range(5)]
     questions = [{"question": "A test question?", "answer": "deterministic answer", "category": 4}]
@@ -362,7 +365,8 @@ def test_context_ablation_reconstructs_recorded_graph_and_keywords_without_http(
         "base_url": client.base_url, "model": client.model, "model_revision": client.revision,
         "seed": client.seed, "max_tokens": client.max_tokens, "evo_threshold": 2,
         "workers": 2, "prefetch_window": 2, "retrieve_k": 5,
-        "repetition_penalty": repetition_penalty, "tag_budget": tag_budget}}))
+        "repetition_penalty": repetition_penalty, "tag_budget": tag_budget,
+        "tag_budget_policy": tag_budget_policy}}))
     (tmp_path / "subset.json").write_text(json_module.dumps(subset))
     (tmp_path / "optimized.json").write_text(json_module.dumps({
         "subset_fingerprint": subset["fingerprint"], "memory_trace": trace,

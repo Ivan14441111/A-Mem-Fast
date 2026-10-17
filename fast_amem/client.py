@@ -79,7 +79,7 @@ class MeasuredClient:
 
     def __init__(self, base_url, model, *, cache=None, cache_mode="off", revision="",
                  temperature=0.0, seed=42, max_tokens=1000, timeout=180,
-                 repetition_penalty=None, tag_budget=None):
+                 repetition_penalty=None, tag_budget=None, tag_budget_policy="error"):
         if cache_mode not in {"off", "write", "readwrite", "replay"}:
             raise ValueError("Invalid cache mode")
         if cache_mode != "off" and cache is None:
@@ -94,6 +94,8 @@ class MeasuredClient:
             tag_budget = index(tag_budget)
             if tag_budget <= 0:
                 raise ValueError("tag_budget must be a positive integer")
+        if tag_budget_policy not in {"error", "observe"}:
+            raise ValueError("tag_budget_policy must be 'error' or 'observe'")
         self.base_url = base_url.rstrip("/")
         self.model = model
         self.cache = cache
@@ -107,6 +109,7 @@ class MeasuredClient:
         # Explicit penalties affect decoding and belong in every arm's protocol.
         self.repetition_penalty = repetition_penalty
         self.tag_budget = tag_budget
+        self.tag_budget_policy = tag_budget_policy
         self._local = threading.local()
         self._lock = threading.Lock()
         self._inflight = {}
@@ -141,8 +144,8 @@ class MeasuredClient:
                     raise ValueError("LLM token usage must be a nonnegative integer")
         return content
 
-    def _validate_tag_budget(self, content, stage, prompt):
-        """Check the tags that the known successful parser would use; never clip.
+    def _validate_tag_budget(self, content, stage, prompt, event):
+        """Check or observe the tags that the known parser would use; never clip.
 
         This opt-in generation profile changes the common system instruction.
         It does not interpret QA prose or repair malformed policy JSON.
@@ -184,11 +187,21 @@ class MeasuredClient:
                         yield from nested_tags(child)
 
             tag_lists = nested_tags(data)
+        list_counts = []
         for tags in tag_lists:
             if isinstance(tags, str):
                 tags = _parse_list_items(tags)
-            if isinstance(tags, list) and len(tags) > self.tag_budget:
-                raise ValueError(f"LLM tag list exceeds tag_budget={self.tag_budget}: {len(tags)} items")
+            if isinstance(tags, list):
+                list_counts.append(len(tags))
+        overshoots = [count for count in list_counts if count > self.tag_budget]
+        event["tag_budget_observation"] = {
+            "stage": stage, "request_key": event["key"], "tag_budget": self.tag_budget,
+            "policy": self.tag_budget_policy, "list_counts": list_counts,
+            "list_count": len(list_counts), "max_actual_tags": max(list_counts, default=0),
+            "over_budget_list_count": len(overshoots),
+        }
+        if overshoots and self.tag_budget_policy == "error":
+            raise ValueError(f"LLM tag list exceeds tag_budget={self.tag_budget}: {overshoots[0]} items")
 
     def _validated_completion(self, result, event, prompt):
         """Retain bounded failure evidence and usage before rejecting output.
@@ -210,7 +223,7 @@ class MeasuredClient:
         event["finish_reason"] = choice.get("finish_reason") if choice is not None else None
         try:
             content = self._validate_response(result)
-            self._validate_tag_budget(content, event["stage"], prompt)
+            self._validate_tag_budget(content, event["stage"], prompt, event)
             return content
         except Exception as exc:
             message = choice.get("message") if choice is not None else None
@@ -222,6 +235,9 @@ class MeasuredClient:
                           "content_sha256": hashlib.sha256(content.encode("utf-8")).hexdigest(),
                           "content_prefix": content[:512],
                           "content_suffix": content[-512:] if len(content) > 512 else ""}
+            if "tag_budget_observation" in event:
+                diagnostic["tag_budget_observation"] = event["tag_budget_observation"]
+            diagnostic["tag_budget_policy"] = self.tag_budget_policy
             event["llm_diagnostic"] = diagnostic
             exc.llm_diagnostic = diagnostic
             raise
@@ -241,11 +257,16 @@ class MeasuredClient:
         }
         if self.repetition_penalty is not None:
             payload["repetition_penalty"] = self.repetition_penalty
-        identity = json.dumps({"revision": self.revision, "base_url": self.base_url,
-                               "request": payload},
+        identity_data = {"revision": self.revision, "base_url": self.base_url, "request": payload}
+        if self.tag_budget_policy == "observe":
+            # Acceptance semantics differ although the server payload is identical.
+            # Keep historical default/error identities exactly unchanged.
+            identity_data["tag_budget_policy"] = "observe"
+        identity = json.dumps(identity_data,
                               sort_keys=True, ensure_ascii=False, separators=(",", ":"))
         key = hashlib.sha256(identity.encode()).hexdigest()
         event = {"stage": stage_for(prompt), "key": key, "prefetch": _prefetch, "cache_hit": False,
+                 "tag_budget_policy": self.tag_budget_policy,
                  "http_requests": 0, "error": None, "http_seconds": 0.0,
                  "cache_read_seconds": 0.0, "cache_write_seconds": 0.0}
         started = time.perf_counter()
@@ -339,10 +360,38 @@ class MeasuredClient:
                     "latency_seconds_max": ordered[-1]}
         for stage, summary in by_stage.items():
             summary.update(latency(e["seconds"] for e in events if e["stage"] == stage))
+        observations = [(event, event["tag_budget_observation"]) for event in events
+                        if "tag_budget_observation" in event]
+        live_observations = [(event, observed) for event, observed in observations
+                             if not event["cache_hit"] and event["http_requests"] > 0]
+        cache_observations = [(event, observed) for event, observed in observations if event["cache_hit"]]
+        overshoots = [(event, observed) for event, observed in observations if observed["over_budget_list_count"]]
+        live_overshoots = [(event, observed) for event, observed in overshoots
+                           if not event["cache_hit"] and event["http_requests"] > 0]
+        overshoot_summary = {
+            "logical_response_inspections": len(observations),
+            "live_response_inspections": len(live_observations),
+            "cache_response_inspections": len(cache_observations),
+            "logical_tag_lists_inspected": sum(observed["list_count"] for _, observed in observations),
+            "live_tag_lists_inspected": sum(observed["list_count"] for _, observed in live_observations),
+            "cache_tag_lists_inspected": sum(observed["list_count"] for _, observed in cache_observations),
+            "logical_overshoot_responses": len(overshoots),
+            "live_overshoot_responses": len(live_overshoots),
+            "cache_overshoot_observations": sum(event["cache_hit"] for event, _ in overshoots),
+            "unique_overshoot_request_keys": len({event["key"] for event, _ in overshoots}),
+            "over_budget_lists_live": sum(observed["over_budget_list_count"] for _, observed in live_overshoots),
+            "max_actual_tags": max((observed["max_actual_tags"] for _, observed in observations), default=0),
+        }
+        if self.tag_budget is None:
+            generation_profile = None
+        else:
+            generation_profile = "observed-tags-v1" if self.tag_budget_policy == "observe" else "bounded-tags-v1"
         return {"logical_calls": len(events),
                 "repetition_penalty": self.repetition_penalty,
                 "tag_budget": self.tag_budget,
-                "generation_profile": "bounded-tags-v1" if self.tag_budget is not None else None,
+                "tag_budget_policy": self.tag_budget_policy,
+                "generation_profile": generation_profile,
+                "tag_budget_overshoots": overshoot_summary,
                 "upstream_calls": sum(not e["prefetch"] for e in events),
                 "prefetch_calls": sum(e["prefetch"] for e in events),
                 "http_requests": sum(e["http_requests"] for e in events),

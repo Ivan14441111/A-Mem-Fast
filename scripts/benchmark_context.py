@@ -83,7 +83,8 @@ def reconstruct_graph(run_dir, graph_mode, model):
                             revision=config["model_revision"], seed=config["seed"],
                             max_tokens=config["max_tokens"],
                             repetition_penalty=config.get("repetition_penalty"),
-                            tag_budget=config.get("tag_budget"))
+                            tag_budget=config.get("tag_budget"),
+                            tag_budget_policy=config.get("tag_budget_policy", "error"))
     system = FastAgenticMemorySystem(model, client, evo_threshold=config["evo_threshold"],
                                      evolution_policy=report.get("evolution_policy", "upstream"))
     trace = []
@@ -130,7 +131,8 @@ def evaluate_arm(system, query_responses, config, subset, policy, output,
                                    cache_mode="write", revision=config["model_revision"],
                                    max_tokens=config["max_tokens"], seed=config["seed"],
                                    repetition_penalty=config.get("repetition_penalty"),
-                                   tag_budget=config.get("tag_budget"))
+                                   tag_budget=config.get("tag_budget"),
+                                   tag_budget_policy=config.get("tag_budget_policy", "error"))
     proxy = FrozenQueryClient(query_responses, answer_client)
     before = digest(canonical_memories(system))
     started = time.perf_counter()
@@ -200,7 +202,8 @@ def main():
     base_url = args.base_url or config["base_url"]
     from fast_amem.client import MeasuredClient
     MeasuredClient(base_url, config["model"], repetition_penalty=config.get("repetition_penalty"),
-                   tag_budget=config.get("tag_budget")).get_completion(
+                   tag_budget=config.get("tag_budget"),
+                   tag_budget_policy=config.get("tag_budget_policy", "error")).get_completion(
         "Reply with exactly one word: READY")
     results = {policy: evaluate_arm(system, queries, config, subset, policy, output,
                                     base_url, args.prefix_cache_reset)

@@ -104,7 +104,7 @@ def main():
             reason = "Confirmation source hashes differ from primary suite"
         else:
             keys = ("model", "model_revision", "base_url", "embedding_model", "max_tokens", "seed",
-                    "retrieve_k", "evo_threshold", "workers", "prefetch_window", "context_policy", "prefix_cache_reset", "repetition_penalty", "tag_budget")
+                    "retrieve_k", "evo_threshold", "workers", "prefetch_window", "context_policy", "prefix_cache_reset", "repetition_penalty", "tag_budget", "tag_budget_policy")
             if any(primary["args"].get(key) != confirmation["args"].get(key) for key in keys):
                 reason = "Confirmation model or inference configuration differs"
         if reason is None:

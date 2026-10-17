@@ -118,9 +118,10 @@ def test_qa_text_is_not_interpreted_as_metadata_tags(tmp_path, prompt):
     assert c.get_completion(prompt) == content
 
 
-def test_malformed_fused_json_is_returned_unchanged_for_the_policy_parser(tmp_path):
+@pytest.mark.parametrize("policy", ["error", "observe"])
+def test_malformed_fused_json_is_returned_unchanged_for_the_policy_parser(tmp_path, policy):
     content = '{"tags": ["unfinished"'
-    c = client(tmp_path, tag_budget=16)
+    c = client(tmp_path, tag_budget=16, tag_budget_policy=policy)
     c._local.session = Session(response(content))
     assert c.get_completion(FUSED) == content
     with pytest.raises(ValueError, match="JSON object"):
@@ -134,6 +135,98 @@ def test_parser_type_failure_also_retains_bounded_diagnostic(tmp_path):
         c.get_completion(ANALYSIS)
     assert caught.value.llm_diagnostic["stage"] == "analysis"
     assert c.events[-1]["llm_diagnostic"] == caught.value.llm_diagnostic
+
+
+def test_observe_returns_all_tags_and_separates_live_from_cached_observations(tmp_path):
+    content = json.dumps({"keywords": ["topic"], "context": "Summary", "tags": [f"tag-{i}" for i in range(18)]})
+    c = client(tmp_path, tag_budget=16, tag_budget_policy="observe")
+    session = Session(response(content))
+    c._local.session = session
+    assert c.get_completion(ANALYSIS, _prefetch=True) == content
+    assert c.get_completion(ANALYSIS) == content
+    assert len(session.calls) == 1
+    for event in c.events:
+        observed = event["tag_budget_observation"]
+        assert observed == {"stage": "analysis", "request_key": event["key"], "tag_budget": 16,
+                            "policy": "observe", "list_counts": [18], "list_count": 1,
+                            "max_actual_tags": 18, "over_budget_list_count": 1}
+        assert event["error"] is None
+    summary = c.summary()
+    assert summary["generation_profile"] == "observed-tags-v1"
+    assert summary["tag_budget_policy"] == "observe"
+    assert summary["tag_budget_overshoots"] == {
+        "logical_response_inspections": 2, "live_response_inspections": 1, "cache_response_inspections": 1,
+        "logical_tag_lists_inspected": 2, "live_tag_lists_inspected": 1, "cache_tag_lists_inspected": 1,
+        "logical_overshoot_responses": 2, "live_overshoot_responses": 1, "cache_overshoot_observations": 1,
+        "unique_overshoot_request_keys": 1, "over_budget_lists_live": 1, "max_actual_tags": 18,
+    }
+    replay = client(tmp_path, tag_budget=16, tag_budget_policy="observe")
+    replay.cache_mode = "replay"
+    assert replay.get_completion(ANALYSIS) == content
+    replay_summary = replay.summary()["tag_budget_overshoots"]
+    assert replay.summary()["http_requests"] == 0
+    assert replay_summary["live_overshoot_responses"] == replay_summary["live_tag_lists_inspected"] == 0
+    assert replay_summary["cache_overshoot_observations"] == replay_summary["cache_tag_lists_inspected"] == 1
+
+
+def test_observe_counts_every_nested_tag_list_without_clipping(tmp_path):
+    result = {"metadata": {"keywords": ["topic"], "context": "Summary", "tags": ["metadata"] * 18},
+              "evolution": fused(["neighbor"] * 20, nested=True)}
+    content = json.dumps(result)
+    c = client(tmp_path, tag_budget=16, tag_budget_policy="observe")
+    c._local.session = Session(response(content))
+    assert c.get_completion(JOINT) == content
+    observed = c.events[-1]["tag_budget_observation"]
+    assert observed["list_counts"] == [18, 0, 20]
+    assert observed["over_budget_list_count"] == 2
+    assert observed["max_actual_tags"] == 20
+    summary = c.summary()["tag_budget_overshoots"]
+    assert summary["live_response_inspections"] == 1
+    assert summary["live_tag_lists_inspected"] == 3
+    assert summary["over_budget_lists_live"] == 2
+
+
+def test_strict_default_key_is_preserved_and_observe_has_its_own_identity(tmp_path):
+    content = "KEYWORDS: topic\nCONTEXT: Summary\nTAGS: topic"
+    strict = client(tmp_path, tag_budget=16)
+    strict_session = Session(response(content))
+    strict._local.session = strict_session
+    strict.get_completion(ANALYSIS)
+    explicit_error = client(tmp_path, tag_budget=16, tag_budget_policy="error")
+    explicit_error.cache_mode = "replay"
+    assert explicit_error.get_completion(ANALYSIS) == content
+    assert explicit_error.events[-1]["key"] == strict.events[-1]["key"]
+    observed = client(tmp_path, tag_budget=16, tag_budget_policy="observe")
+    observed.cache_mode = "replay"
+    with pytest.raises(RuntimeError, match="Replay cache miss"):
+        observed.get_completion(ANALYSIS)
+    observed.cache_mode = "readwrite"
+    observed_session = Session(response(content))
+    observed._local.session = observed_session
+    assert observed.get_completion(ANALYSIS) == content
+    assert observed_session.calls[0][1]["json"] == strict_session.calls[0][1]["json"]
+    assert observed.events[-1]["key"] != strict.events[-1]["key"]
+    identity = json.loads(observed.cache.connection().execute(
+        "SELECT payload FROM responses WHERE key=?", (observed.events[-1]["key"],)).fetchone()[0])
+    assert identity["tag_budget_policy"] == "observe"
+    assert "tag_budget_policy" not in identity["request"]
+
+
+@pytest.mark.parametrize("result", [response("truncated", "length"), response(None), {"choices": []}])
+def test_observe_still_rejects_truncated_or_structurally_invalid_http_responses(tmp_path, result):
+    c = client(tmp_path, tag_budget=16, tag_budget_policy="observe")
+    c._local.session = Session(result)
+    with pytest.raises(ValueError) as caught:
+        c.get_completion(ANALYSIS)
+    assert caught.value.llm_diagnostic["tag_budget_policy"] == "observe"
+    c.cache_mode = "replay"
+    with pytest.raises(RuntimeError, match="Replay cache miss"):
+        c.get_completion(ANALYSIS)
+
+
+def test_unknown_tag_budget_policy_is_rejected(tmp_path):
+    with pytest.raises(ValueError, match="tag_budget_policy"):
+        client(tmp_path, tag_budget=16, tag_budget_policy="silent-clip")
 
 
 @pytest.mark.parametrize("budget", [0, -1, 1.5, "16"])

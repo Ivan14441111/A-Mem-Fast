@@ -1,0 +1,18 @@
+{
+  "project_commit": "81fcb979867b034111250b19edbd3023fa94476e",
+  "source_fingerprint": "baf028cb7c09be98e695fb806777da46ed0de5d534e0c4a3a3505a6d2b18e27c",
+  "source_sha256": {
+    "scripts/benchmark_suite.py": "35418fe70dd63e8b83d4fada1acb0935bd6de7624d5cee4c82d8fb2369143494",
+    "scripts/benchmark.py": "4ff4cfb3e913bfabd1c9c7dffb1a10f540b6c1b157e8cf21193c9895daf55ee5",
+    "memory_layer.py": "b9a5b5797881b25c5524b98a543b22a1bbbcc7f285437ca667a5673e7f293eba",
+    "memory_layer_robust.py": "1c5cd36b50c9113440db0523b1f3d781aebc3711ff9b86b72b20e0f9bc981aef",
+    "llm_text_parsers.py": "353b77f57ce081ee51789e953ae8604b0c57e6470a332adc0377cf48f76d3a90",
+    "fast_amem/__init__.py": "ddedf9ae40b93083fb18887337d211049fd28e7a4a878bfe61999424a634018d",
+    "fast_amem/client.py": "81203d80d23000f3f894222501043b8dc93f1ab2995280eaa04fe1c5ac6fb1eb",
+    "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+    "fast_amem/joint.py": "eb8ca78cbdc06732ad526a4c952a35ce46c62a541ebd043c1e71e6ef763fe2cd",
+    "fast_amem/retriever.py": "59f1e08a60470f447b5fd9c2a3df19b7a94bc2d0a541dea73e2e5a3fa8833e02",
+    "fast_amem/system.py": "cb0c2d82ea8632acfe2ee45ed30a2ed2c6b61f134f1b573ed2b10d69157cac3f"
+  },
+  "archive_sha256": "ee17d6631e4f2fc152c712b5e6f231a2d75ee8923c2bc2bd3bb9f23b7ecfe85a"
+}

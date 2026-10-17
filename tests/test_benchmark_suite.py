@@ -116,3 +116,30 @@ def test_failed_arm_artifact_preserves_bounded_llm_diagnostic_and_progress(tmp_p
     saved = json.loads((tmp_path / "optimized-failure.json").read_text())
     assert saved["llm_diagnostic"]["usage"]["completion_tokens"] == 2000
     assert saved["progress"]["failed_turn_1based"] == 116
+
+
+def test_continue_on_error_cannot_hide_replay_or_configuration_failures():
+    from benchmark_suite import is_integrity_failure
+
+    assert not is_integrity_failure([{"mode": "optimized", "exception_type": "ValueError",
+                                      "error": "LLM reached max_tokens; increase budget"}])
+    assert is_integrity_failure([])
+    assert is_integrity_failure([{"mode": "warm", "exception_type": "RuntimeError",
+                                  "error": "Replay cache miss"}])
+    assert is_integrity_failure([{"mode": "baseline", "exception_type": "TypeError",
+                                  "error": "unexpected keyword argument 'tag_budget_policy'"}])
+
+
+def test_completion_report_keeps_failed_and_pending_planned_denominator(tmp_path):
+    import json
+    from benchmark_suite import write_report
+
+    report = {"cells": [{"status": "failed"}, {"status": "failed"}, {"status": "pending"}]}
+    path = tmp_path / "suite.json"
+    write_report(path, report)
+    saved = json.loads(path.read_text())
+    assert saved["completion"]["planned_cells"] == 3
+    assert saved["completion"]["failed_cells"] == 2
+    assert saved["completion"]["attempted_cells"] == 2
+    assert saved["completion"]["all_attempted"] is False
+    assert saved["aggregate"] == {}

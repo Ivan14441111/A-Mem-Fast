@@ -1,0 +1,71 @@
+{
+  "defined_utc": "2026-10-17T17:37:24.408005+00:00",
+  "purpose": "Fixed-graph, fixed-keyword answer-only context deduplication ablation",
+  "source_project_commit": "81fcb979867b034111250b19edbd3023fa94476e",
+  "context_helper_sha256": "795bf5e800c6ef787dfbc8a6f007a845838c5eb0fba22abd6c180a5d562cf334",
+  "cases": [
+    {
+      "sample_index": 0,
+      "source_run": "results/suite128-primary-bounded-v1-20261018/turns128-sample0-upstream-r1",
+      "graph_mode": "baseline",
+      "order": "upstream,deduplicated",
+      "command": [
+        ".venv/bin/python",
+        "scripts/benchmark_context.py",
+        "--run-dir",
+        "results/suite128-primary-bounded-v1-20261018/turns128-sample0-upstream-r1",
+        "--graph-mode",
+        "baseline",
+        "--order",
+        "upstream,deduplicated",
+        "--output",
+        "results/context128-bounded-v1-20261018/sample0"
+      ]
+    },
+    {
+      "sample_index": 1,
+      "source_run": "results/suite128-primary-bounded-v1-20261018/turns128-sample1-upstream-r1",
+      "graph_mode": "baseline",
+      "order": "deduplicated,upstream",
+      "command": [
+        ".venv/bin/python",
+        "scripts/benchmark_context.py",
+        "--run-dir",
+        "results/suite128-primary-bounded-v1-20261018/turns128-sample1-upstream-r1",
+        "--graph-mode",
+        "baseline",
+        "--order",
+        "deduplicated,upstream",
+        "--output",
+        "results/context128-bounded-v1-20261018/sample1"
+      ]
+    },
+    {
+      "sample_index": 2,
+      "source_run": "results/suite128-primary-bounded-v1-20261018/turns128-sample2-upstream-r1",
+      "graph_mode": "baseline",
+      "order": "upstream,deduplicated",
+      "command": [
+        ".venv/bin/python",
+        "scripts/benchmark_context.py",
+        "--run-dir",
+        "results/suite128-primary-bounded-v1-20261018/turns128-sample2-upstream-r1",
+        "--graph-mode",
+        "baseline",
+        "--order",
+        "upstream,deduplicated",
+        "--output",
+        "results/context128-bounded-v1-20261018/sample2"
+      ]
+    }
+  ],
+  "questions_per_case": 12,
+  "context_arms": [
+    "upstream",
+    "deduplicated"
+  ],
+  "graph_and_keyword_calls": "strict offline response replay; no live graph/keyword inference",
+  "decoding": "Inherited source config: temperature0/seed42/max2000/RP1.05/tag_budget16",
+  "execution_gate": "Do not make live answer calls until all nine primary cells have completed",
+  "quality_policy": "Use all selected source QA; no score-based prompt selection, no retries to improve quality"
+}

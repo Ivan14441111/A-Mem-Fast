@@ -1,0 +1,100 @@
+{
+  "scope": "Descriptive profile of the first completed configured-robust baseline in the subsequently aborted strict bounded-tags-v1 protocol. Its paired exact arm failed on an 18-tag response. Not a valid completed primary cell, not pooled with observed-tags-v1.",
+  "source": "results/suite128-primary-bounded-v1-20261018/turns128-sample0-upstream-r1/baseline.json",
+  "source_sha256": "af32c12479e4284c29d9e7962f1f94d6dc18da4b4b09069fbf56b534c3b25d19",
+  "source_checkpoint": "81fcb979867b034111250b19edbd3023fa94476e",
+  "profile": "bounded-tags-v1",
+  "wall_utc": {
+    "run_start": "2026-10-17T17:34:08.566610+00:00",
+    "init_start": "2026-10-17T17:34:08.731352+00:00",
+    "init_end": "2026-10-17T17:34:08.833972+00:00",
+    "build_start": "2026-10-17T17:34:08.834010+00:00",
+    "build_end": "2026-10-17T17:39:52.848517+00:00",
+    "qa_start": "2026-10-17T17:39:52.849310+00:00",
+    "qa_end": "2026-10-17T17:40:09.468314+00:00"
+  },
+  "turns": 128,
+  "build_seconds": 344.0144942626357,
+  "build_http_seconds_sum": 336.7389889918268,
+  "serial_http_wait_share": 0.978851166470752,
+  "build_http_requests": 395,
+  "build_prompt_tokens": 332834,
+  "build_completion_tokens": 25787,
+  "stages": [
+    {
+      "stage": "analysis",
+      "http_requests": 128,
+      "client_seconds_sum": 65.33898901566863,
+      "share_of_build_wall": 0.18993091891583494,
+      "prompt_tokens": 31497,
+      "completion_tokens": 5254,
+      "share_of_build_output_tokens": 0.20374607360297825,
+      "mean_output_tokens_per_call": 41.046875,
+      "mean_prompt_tokens_per_call": 246.0703125,
+      "p50_client_seconds": 0.49995475821197033,
+      "p95_client_seconds": 0.6426566725596783
+    },
+    {
+      "stage": "evolution_decision",
+      "http_requests": 127,
+      "client_seconds_sum": 104.29594657197595,
+      "share_of_build_wall": 0.3031731171546274,
+      "prompt_tokens": 148758,
+      "completion_tokens": 7679,
+      "share_of_build_output_tokens": 0.29778570597587933,
+      "mean_output_tokens_per_call": 60.46456692913386,
+      "mean_prompt_tokens_per_call": 1171.3228346456692,
+      "p50_client_seconds": 0.8270359821617603,
+      "p95_client_seconds": 1.0904728580266236
+    },
+    {
+      "stage": "strengthen",
+      "http_requests": 127,
+      "client_seconds_sum": 94.89394738525152,
+      "share_of_build_wall": 0.27584287571559507,
+      "prompt_tokens": 135327,
+      "completion_tokens": 6968,
+      "share_of_build_output_tokens": 0.27021367355644316,
+      "mean_output_tokens_per_call": 54.86614173228347,
+      "mean_prompt_tokens_per_call": 1065.5669291338584,
+      "p50_client_seconds": 0.7558524310588837,
+      "p95_client_seconds": 0.8022072225809097
+    },
+    {
+      "stage": "update_neighbors",
+      "http_requests": 13,
+      "client_seconds_sum": 72.35850261896849,
+      "share_of_build_wall": 0.21033562197448238,
+      "prompt_tokens": 17252,
+      "completion_tokens": 5886,
+      "share_of_build_output_tokens": 0.22825454686469926,
+      "mean_output_tokens_per_call": 452.7692307692308,
+      "mean_prompt_tokens_per_call": 1327.076923076923,
+      "p50_client_seconds": 5.424155510962009,
+      "p95_client_seconds": 6.500703818351029
+    }
+  ],
+  "metadata_ideal_hide_all": {
+    "formula": "T / (T - analysis_client_seconds_sum)",
+    "value": 1.2344626197331698,
+    "assumptions": "Other stage durations fixed; all metadata hidden; ignores GPU contention induced by overlap. This is an illustrative bound from this trace, not a hardware-independent bound or observed speedup."
+  },
+  "consolidation": {
+    "count": 1,
+    "inclusive_seconds": 1.4479935504496098,
+    "share_of_build": 0.004209106228367658
+  },
+  "cautions": [
+    "HTTP wait includes queue/network/prefill/decode; no server phase decomposition.",
+    "Client stage durations include small instrumentation/cache overhead and differ slightly from http_seconds.",
+    "Inclusive timers overlap; do not add process_memory, retrieval, encoding and consolidation.",
+    "encoder_metrics cover full run including QA, so no claim that all reported encoder time belongs to build.",
+    "Prior 64-turn profile uses different generation settings and resource state; comparison is workload composition, not a controlled trend or proof of scaling."
+  ],
+  "observations": {
+    "all_nonfirst_turns_strengthen": true,
+    "update_call_fraction_of_build_calls": 0.03291139240506329,
+    "update_wall_share": 0.21033562197448238,
+    "decision_plus_strengthen_prompt_share": 0.8535335933227975
+  }
+}

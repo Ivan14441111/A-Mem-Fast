@@ -2,6 +2,49 @@
 
 The [project README](README.md) contains portable setup and benchmark commands. Detailed measurements and limits live in [docs/experiments.md](docs/experiments.md); the [source audit](docs/audit.md) explains the original bottlenecks.
 
+## Library example
+
+After setup, point the encoder at downloaded local weights and configure the running vLLM OpenAI-compatible endpoint. Set the revision to identify the actual weights, tokenizer and chat template.
+
+```bash
+export AMEM_EMBEDDING_MODEL=/path/to/all-MiniLM-L6-v2
+export AMEM_BASE_URL=http://127.0.0.1:21014/v1
+export AMEM_LLM_MODEL=Qwen3-8B
+export AMEM_MODEL_REVISION=my-weights-tokenizer-template-v1
+export AMEM_RESPONSE_CACHE=/path/to/responses.sqlite
+export AMEM_CACHE_MODE=readwrite
+```
+
+```python
+import os
+from sentence_transformers import SentenceTransformer
+from fast_amem.client import MeasuredClient, SQLiteResponseCache
+from fast_amem.system import FastAgenticMemorySystem
+
+encoder = SentenceTransformer(os.environ["AMEM_EMBEDDING_MODEL"], device="cpu")
+client = MeasuredClient(
+    os.environ["AMEM_BASE_URL"], os.environ["AMEM_LLM_MODEL"],
+    cache=SQLiteResponseCache(os.environ["AMEM_RESPONSE_CACHE"]),
+    cache_mode=os.environ.get("AMEM_CACHE_MODE", "readwrite"),
+    revision=os.environ["AMEM_MODEL_REVISION"],
+    max_tokens=2000, repetition_penalty=1.05, tag_budget=16,
+)
+memory = FastAgenticMemorySystem(encoder, client)
+turns = iter([
+    {"content": "Maya started a robotics course in October.",
+     "timestamp": "2026-10-01T09:00:00+08:00"},
+    {"content": "Maya plans to demonstrate the robot in December.",
+     "timestamp": "2026-10-02T09:00:00+08:00"},
+])
+memory.ingest(turns, analysis_workers=4, prefetch_window=16)
+context, row_indices = memory.find_related_memories("Maya's robotics plans", k=2)
+print(context)
+```
+
+For fused evolution, add `evolution_policy="fused"` to the constructor. For joint metadata/evolution, import `JointAgenticMemorySystem` from `fast_amem.joint` and use `JointAgenticMemorySystem(encoder, client)`; its writes are sequential. These optional policies can change quality; use separate response caches when comparing them.
+
+The graph and vector index live in memory; SQLite persists LLM responses. To reconstruct a graph, rerun the same ordered turns with `AMEM_CACHE_MODE=replay` and unchanged encoder, endpoint, revision, decoding and policy. Strict replay makes no live LLM calls and raises on a missing response; the local encoder is still required.
+
 ## Default execution path
 
 `FastAgenticMemorySystem` reuses the shared CPU encoder and `FastEmbeddingRetriever`. Independent metadata requests run in a rolling, bounded thread pool. Graph mutation, neighbor retrieval, conditional upstream evolution, and note insertion run chronologically. Prefetch responses enter an exact-request cache and are consumed through the same parser. The successful path follows the robust reference; inference/cache errors propagate in the default strict mode instead of producing a silent benchmark fallback.
@@ -14,7 +57,7 @@ The exact retriever uses normalized vectors, growing contiguous storage, an embe
 
 `MeasuredClient` hashes the complete request, endpoint and explicit model revision. Only complete successful HTTP text responses are persisted in SQLite WAL mode. Semantic/schema validation occurs afterward; a schema-invalid response can be recorded, and policy failures remain visible in counters or raised exceptions. Concurrent identical requests share one live request. `write` records the reference while bypassing reads; `readwrite` enables the optimized pipeline; `replay` raises on every miss and never contacts the server.
 
-The benchmark uses separate reference, optimized and fused databases. Cold-arm prefix caches are reset, and initialization/warmup is reported separately. The reference's write-only recording is buffered in memory and flushed outside timing; optimized cache overhead remains timed. Reported nested stage timings are inclusive and must not be summed into wall time. Per-call latency percentiles also include overlapping requests and are not end-to-end latency.
+The benchmark uses separate configured-reference, optimized, fused and optional joint databases. The measured `bounded-tags-v1` profile passes max_tokens=2000, repetition_penalty=1.05 and tag_budget=16 uniformly. The tag budget adds a common system instruction and validates recognized tag lists before cache writes and on reads; it rejects excess items instead of clipping. User prompt templates remain unchanged. Historical omitted optional parameters retain their cache identities. The unbounded 1000-token pilot and the failed RP-only diagnostic are retained separately, never pooled with the bounded-profile primary. Cold-arm prefix caches are reset, and initialization/warmup is reported separately. The reference's write-only recording is buffered in memory and flushed outside timing; optimized cache overhead remains timed. Reported nested stage timings are inclusive and must not be summed into wall time. Per-call latency percentiles also include overlapping requests and are not end-to-end latency.
 
 Three different comparisons serve different purposes:
 

@@ -1,0 +1,15 @@
+{
+  "status": "aborted_hard_tag_profile",
+  "planned_cells": 9,
+  "complete_pairs": 0,
+  "failed_cells": 1,
+  "unrun_cells": 8,
+  "source_project_commit": "81fcb979867b034111250b19edbd3023fa94476e",
+  "failure_artifact": "turns128-sample0-upstream-r1/optimized-failure.json",
+  "failed_turn_1based": 83,
+  "dia_id": "D5:7",
+  "stage": "strengthen",
+  "model_response": "Complete stop response,68completiontokens,18tags; exceeded strict16-item validation bound without repetition",
+  "interpretation": "No paired speed/quality aggregate. Completed configured-robust baseline remains descriptive evidence only. New observed profile is separately registered; this run is never resumed or pooled.",
+  "log_sha256": "ac739a6f4529e05dc1d39262352cf4b07949db0406bf39ce02820d19951fd775"
+}

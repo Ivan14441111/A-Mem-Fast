@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "args": {
+    "dataset": "/data2/xyf25/A-Mem-Fast/data/locomo10.json",
+    "samples": [
+      3,
+      4
+    ],
+    "turns": [
+      64
+    ],
+    "repeats": 2,
+    "policies": [
+      "upstream"
+    ],
+    "context_policy": "upstream",
+    "include_joint": true,
+    "include_fused": true,
+    "order": "counterbalanced",
+    "order_seed": 20261018,
+    "max_questions": 24,
+    "retrieve_k": 10,
+    "evo_threshold": 100,
+    "workers": 4,
+    "prefetch_window": 16,
+    "base_url": "http://127.0.0.1:21014/v1",
+    "model": "Qwen3-8B",
+    "model_revision": "qwen3-8b-config-f7c4eadf-index-f9fdbcb9-template-01de28f8",
+    "embedding_model": "/home/xyf25/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "max_tokens": 2000,
+    "tag_budget": 16,
+    "repetition_penalty": 1.05,
+    "seed": 42,
+    "prefix_cache_reset": "required",
+    "output": "results/joint64-heldout-bounded-v1-20261018",
+    "plan_only": true,
+    "resume": false,
+    "keep_going": false
+  },
+  "cells": [
+    {
+      "name": "turns64-sample3-upstream-r1",
+      "sample_index": 3,
+      "sample_id": "conv-42",
+      "max_turns": 64,
+      "actual_turns": 64,
+      "question_count": 17,
+      "eligible_qa": 17,
+      "category_counts": {
+        "1": 2,
+        "2": 6,
+        "3": 2,
+        "4": 7
+      },
+      "source_qa_indices": [
+        5,
+        2,
+        0,
+        96,
+        10,
+        3,
+        4,
+        97,
+        6,
+        98,
+        7,
+        99,
+        8,
+        100,
+        9,
+        101,
+        102
+      ],
+      "subset_fingerprint": "b140892169e92e95a0801c9a4ae0373a0aec0b295257da288d331bf362cec88f",
+      "evolution_policy": "upstream",
+      "repeat": 1,
+      "modes": "baseline,optimized,joint,fused,replay,warm,fused_warm,joint_warm",
+      "status": "pending"
+    },
+    {
+      "name": "turns64-sample3-upstream-r2",
+      "sample_index": 3,
+      "sample_id": "conv-42",
+      "max_turns": 64,
+      "actual_turns": 64,
+      "question_count": 17,
+      "eligible_qa": 17,
+      "category_counts": {
+        "1": 2,
+        "2": 6,
+        "3": 2,
+        "4": 7
+      },
+      "source_qa_indices": [
+        5,
+        2,
+        0,
+        96,
+        10,
+        3,
+        4,
+        97,
+        6,
+        98,
+        7,
+        99,
+        8,
+        100,
+        9,
+        101,
+        102
+      ],
+      "subset_fingerprint": "b140892169e92e95a0801c9a4ae0373a0aec0b295257da288d331bf362cec88f",
+      "evolution_policy": "upstream",
+      "repeat": 2,
+      "modes": "fused,joint,optimized,baseline,replay,warm,fused_warm,joint_warm",
+      "status": "pending"
+    },
+    {
+      "name": "turns64-sample4-upstream-r1",
+      "sample_index": 4,
+      "sample_id": "conv-43",
+      "max_turns": 64,
+      "actual_turns": 64,
+      "question_count": 14,
+      "eligible_qa": 14,
+      "category_counts": {
+        "1": 1,
+        "2": 1,
+        "3": 2,
+        "4": 10
+      },
+      "source_qa_indices": [
+        11,
+        6,
+        3,
+        71,
+        5,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80
+      ],
+      "subset_fingerprint": "4b745aabc82e765f21a014ff13eefd648b7ca2d35d288871b898c193fc7be34b",
+      "evolution_policy": "upstream",
+      "repeat": 1,
+      "modes": "optimized,fused,baseline,joint,replay,warm,fused_warm,joint_warm",
+      "status": "pending"
+    },
+    {
+      "name": "turns64-sample4-upstream-r2",
+      "sample_index": 4,
+      "sample_id": "conv-43",
+      "max_turns": 64,
+      "actual_turns": 64,
+      "question_count": 14,
+      "eligible_qa": 14,
+      "category_counts": {
+        "1": 1,
+        "2": 1,
+        "3": 2,
+        "4": 10
+      },
+      "source_qa_indices": [
+        11,
+        6,
+        3,
+        71,
+        5,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80
+      ],
+      "subset_fingerprint": "4b745aabc82e765f21a014ff13eefd648b7ca2d35d288871b898c193fc7be34b",
+      "evolution_policy": "upstream",
+      "repeat": 2,
+      "modes": "joint,baseline,fused,optimized,replay,warm,fused_warm,joint_warm",
+      "status": "pending"
+    }
+  ],
+  "skipped_subsets": [],
+  "interpretation": "Each speedup is a within-cell live baseline/optimized ratio. Repeats reuse questions and are not independent conversations. Fused changes prompts; live equality is diagnostic, not guaranteed. Replay compares each policy against its own responses. Shared GPU load can affect timings; small suites do not establish a population confidence interval.",
+  "configuration_fingerprint": "f67650e6cb8dcfa7d9d3e7d6c483cf9955bb89c69c67b9e89e2f29ef403c2127",
+  "project_commit": "81fcb979867b034111250b19edbd3023fa94476e",
+  "source_sha256": {
+    "scripts/benchmark_suite.py": "35418fe70dd63e8b83d4fada1acb0935bd6de7624d5cee4c82d8fb2369143494",
+    "scripts/benchmark.py": "4ff4cfb3e913bfabd1c9c7dffb1a10f540b6c1b157e8cf21193c9895daf55ee5",
+    "memory_layer.py": "b9a5b5797881b25c5524b98a543b22a1bbbcc7f285437ca667a5673e7f293eba",
+    "memory_layer_robust.py": "1c5cd36b50c9113440db0523b1f3d781aebc3711ff9b86b72b20e0f9bc981aef",
+    "llm_text_parsers.py": "353b77f57ce081ee51789e953ae8604b0c57e6470a332adc0377cf48f76d3a90",
+    "fast_amem/__init__.py": "ddedf9ae40b93083fb18887337d211049fd28e7a4a878bfe61999424a634018d",
+    "fast_amem/client.py": "81203d80d23000f3f894222501043b8dc93f1ab2995280eaa04fe1c5ac6fb1eb",
+    "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+    "fast_amem/joint.py": "eb8ca78cbdc06732ad526a4c952a35ce46c62a541ebd043c1e71e6ef763fe2cd",
+    "fast_amem/retriever.py": "59f1e08a60470f447b5fd9c2a3df19b7a94bc2d0a541dea73e2e5a3fa8833e02",
+    "fast_amem/system.py": "cb0c2d82ea8632acfe2ee45ed30a2ed2c6b61f134f1b573ed2b10d69157cac3f"
+  },
+  "aggregate": {},
+  "status_counts": {
+    "pending": 4
+  }
+}

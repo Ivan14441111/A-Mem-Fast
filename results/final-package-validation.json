@@ -1,0 +1,98 @@
+{
+  "validated_utc": "2026-10-17T17:34:58.426076+00:00",
+  "source_commit": "81fcb979867b034111250b19edbd3023fa94476e",
+  "wheel_path": ".private/artifacts/a_mem_fast-0.1.0-py3-none-any.whl",
+  "wheel_bytes": 44937,
+  "wheel_sha256": "92bac51c69cc9da3fb38993affe77b864c4daeda64f1192d0cca88d40f8f7d72",
+  "source_sha256": {
+    "fast_amem/__init__.py": "ddedf9ae40b93083fb18887337d211049fd28e7a4a878bfe61999424a634018d",
+    "fast_amem/client.py": "81203d80d23000f3f894222501043b8dc93f1ab2995280eaa04fe1c5ac6fb1eb",
+    "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+    "fast_amem/joint.py": "eb8ca78cbdc06732ad526a4c952a35ce46c62a541ebd043c1e71e6ef763fe2cd",
+    "fast_amem/retriever.py": "59f1e08a60470f447b5fd9c2a3df19b7a94bc2d0a541dea73e2e5a3fa8833e02",
+    "fast_amem/system.py": "cb0c2d82ea8632acfe2ee45ed30a2ed2c6b61f134f1b573ed2b10d69157cac3f",
+    "memory_layer.py": "b9a5b5797881b25c5524b98a543b22a1bbbcc7f285437ca667a5673e7f293eba",
+    "memory_layer_robust.py": "1c5cd36b50c9113440db0523b1f3d781aebc3711ff9b86b72b20e0f9bc981aef",
+    "llm_text_parsers.py": "353b77f57ce081ee51789e953ae8604b0c57e6470a332adc0377cf48f76d3a90"
+  },
+  "metadata": {
+    "name": "a-mem-fast",
+    "version": "0.1.0",
+    "requires_python": "<3.14,>=3.10",
+    "license_expression": "MIT",
+    "license_files": [
+      "LICENSE",
+      "NOTICE"
+    ],
+    "requires_dist": [
+      "numpy>=1.24",
+      "sentence-transformers>=3",
+      "scikit-learn>=1.3",
+      "torch>=2",
+      "transformers>=4.45",
+      "nltk>=3.9",
+      "rank-bm25>=0.2.2",
+      "litellm>=1.40",
+      "openai>=1.40",
+      "requests>=2.31",
+      "pytest>=8; extra == \"test\"",
+      "matplotlib>=3.8; extra == \"analysis\"",
+      "ollama; extra == \"upstream-evaluation\"",
+      "rouge-score; extra == \"upstream-evaluation\"",
+      "bert-score; extra == \"upstream-evaluation\"",
+      "pandas; extra == \"upstream-evaluation\"",
+      "python-dotenv; extra == \"upstream-evaluation\""
+    ],
+    "wheel_members": [
+      "llm_text_parsers.py",
+      "memory_layer.py",
+      "memory_layer_robust.py",
+      "a_mem_fast-0.1.0.dist-info/licenses/LICENSE",
+      "a_mem_fast-0.1.0.dist-info/licenses/NOTICE",
+      "fast_amem/__init__.py",
+      "fast_amem/client.py",
+      "fast_amem/evolution.py",
+      "fast_amem/joint.py",
+      "fast_amem/retriever.py",
+      "fast_amem/system.py",
+      "a_mem_fast-0.1.0.dist-info/METADATA",
+      "a_mem_fast-0.1.0.dist-info/WHEEL",
+      "a_mem_fast-0.1.0.dist-info/top_level.txt",
+      "a_mem_fast-0.1.0.dist-info/RECORD"
+    ]
+  },
+  "installation": {
+    "python": "3.12.13",
+    "environment": "/tmp/amem-fast-clean-client-20261018",
+    "system_site_packages": false,
+    "torch": "2.9.0+cpu",
+    "cuda_runtime": null,
+    "install_target": "/tmp/amem-fast-final-wheel-81fcb979",
+    "execution_directory": "/tmp",
+    "no_dependency_install": true,
+    "imported_module_paths": {
+      "fast_amem": "/tmp/amem-fast-final-wheel-81fcb979/fast_amem/__init__.py",
+      "fast_amem.client": "/tmp/amem-fast-final-wheel-81fcb979/fast_amem/client.py",
+      "fast_amem.system": "/tmp/amem-fast-final-wheel-81fcb979/fast_amem/system.py",
+      "fast_amem.joint": "/tmp/amem-fast-final-wheel-81fcb979/fast_amem/joint.py",
+      "fast_amem.retriever": "/tmp/amem-fast-final-wheel-81fcb979/fast_amem/retriever.py",
+      "fast_amem.evolution": "/tmp/amem-fast-final-wheel-81fcb979/fast_amem/evolution.py",
+      "memory_layer": "/tmp/amem-fast-final-wheel-81fcb979/memory_layer.py",
+      "memory_layer_robust": "/tmp/amem-fast-final-wheel-81fcb979/memory_layer_robust.py",
+      "llm_text_parsers": "/tmp/amem-fast-final-wheel-81fcb979/llm_text_parsers.py"
+    }
+  },
+  "checks": {
+    "all_core_files_match_source_commit": true,
+    "license_contents_match": true,
+    "fast_default_policy_and_retrieval": true,
+    "default_request_unchanged": true,
+    "joint_one_call_ingestion_and_retrieval": true,
+    "profile_payload_and_summary": true,
+    "profile_rejects_seventeen_tags": true
+  },
+  "external_llm_http_requests": 0,
+  "mock_transport_calls": 3,
+  "full_pytest_rerun": false,
+  "scope_note": "Wheel import and behavior smoke uses deterministic embedding and HTTP test doubles. No live inference, assets, or benchmark source changes."
+}

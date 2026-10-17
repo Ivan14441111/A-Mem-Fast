@@ -146,16 +146,41 @@ def command_for(args, cell):
                "--evolution-policy", cell["evolution_policy"], "--modes", cell["modes"],
                "--output", str(Path(args.output) / cell["name"])]
     for flag in ("base_url", "model", "model_revision", "embedding_model", "max_tokens", "seed",
-                 "retrieve_k", "evo_threshold", "workers", "prefetch_window", "prefix_cache_reset", "context_policy", "repetition_penalty", "tag_budget"):
+                 "retrieve_k", "evo_threshold", "workers", "prefetch_window", "prefix_cache_reset", "context_policy", "repetition_penalty", "tag_budget", "tag_budget_policy"):
         value = getattr(args, flag)
         if value is not None:
             command.extend(["--" + flag.replace("_", "-"), str(value)])
     return command
 
 
+def is_integrity_failure(details):
+    if not details:
+        return True
+    fatal_types = {"FileExistsError", "FileNotFoundError", "ImportError", "ModuleNotFoundError",
+                   "AttributeError", "NameError", "KeyError", "DatabaseError", "IntegrityError"}
+    for detail in details:
+        if detail.get("mode") in {"replay", "warm", "fused_warm", "joint_warm"}:
+            return True
+        if detail.get("exception_type") in fatal_types:
+            return True
+        message = detail.get("error", "")
+        if "Replay cache miss" in message:
+            return True
+        if detail.get("exception_type") == "TypeError" and any(
+                text in message for text in ("unexpected keyword argument", "required positional argument")):
+            return True
+    return False
+
+
 def write_report(path, report):
     report["aggregate"] = aggregate(report["cells"])
     report["status_counts"] = dict(Counter(cell["status"] for cell in report["cells"]))
+    report["completion"] = {"planned_cells": len(report["cells"]),
+                            "attempted_cells": sum(cell["status"] in {"complete", "failed"} for cell in report["cells"]),
+                            "complete_pairs": report["status_counts"].get("complete", 0),
+                            "failed_cells": report["status_counts"].get("failed", 0),
+                            "all_attempted": all(cell["status"] in {"complete", "failed"} for cell in report["cells"]),
+                            "aggregate_scope": "Successful paired cells only; completion and failure counts retain the full planned denominator."}
     temporary = path.with_suffix(".tmp")
     temporary.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n")
     temporary.replace(path)
@@ -183,6 +208,7 @@ def main():
     parser.add_argument("--model-revision", default="")
     parser.add_argument("--embedding-model", default="")
     parser.add_argument("--max-tokens", type=int, default=1000)
+    parser.add_argument("--tag-budget-policy", choices=("error", "observe"), default="error")
     parser.add_argument("--tag-budget", type=int)
     parser.add_argument("--repetition-penalty", type=float)
     parser.add_argument("--seed", type=int, default=42)
@@ -190,7 +216,8 @@ def main():
     parser.add_argument("--output", required=True)
     parser.add_argument("--plan-only", action="store_true")
     parser.add_argument("--resume", action="store_true", help="Skip validated complete cells; failed partial directories require a fresh suite")
-    parser.add_argument("--keep-going", action="store_true")
+    parser.add_argument("--continue-on-error", "--keep-going", dest="continue_on_error", action="store_true",
+                        help="Attempt remaining independent cells after generation/execution failures; never bypass source/config/replay integrity failures")
     args = parser.parse_args()
     args.include_fused = args.include_fused or args.include_joint
     if args.tag_budget is not None and args.tag_budget <= 0:
@@ -211,7 +238,7 @@ def main():
     output = Path(args.output)
     path = output / "suite.json"
     identity_args = {key: value for key, value in vars(args).items()
-                     if key not in {"resume", "keep_going", "plan_only"}}
+                     if key not in {"resume", "keep_going", "continue_on_error", "plan_only"}}
     report["configuration_fingerprint"] = digest(identity_args)
     report["project_commit"] = project_revision()
     report["source_sha256"] = {str(file.relative_to(ROOT)): hashlib.sha256(file.read_bytes()).hexdigest()
@@ -284,9 +311,18 @@ def main():
         else:
             lines = (output / f"{cell['name']}.log").read_text(errors="replace").splitlines()
             cell["failure_log_tail"] = lines[-30:]
+            artifacts = sorted(cell_output.glob("*-failure.json"))
+            details = [json.loads(artifact.read_text()) for artifact in artifacts]
+            cell["failure_artifacts"] = [str(artifact.relative_to(output)) for artifact in artifacts]
+            # Startup/config errors produce no arm artifact. Strict replay and
+            # cache consistency failures invalidate the experiment globally.
+            integrity = is_integrity_failure(details)
+            cell["failure_category"] = "configuration_or_integrity" if integrity else "generation_or_execution"
         write_report(path, report)
         print(f"{cell['name']}: {cell['status']} ({cell['process_seconds']:.1f}s)", flush=True)
-        if process.returncode and not args.keep_going:
+        if process.returncode and cell.get("failure_category") == "configuration_or_integrity":
+            raise RuntimeError("Suite configuration/replay integrity failed; remaining cells were not attempted")
+        if process.returncode and not args.continue_on_error:
             raise SystemExit(process.returncode)
     if report["skipped_subsets"]:
         print("Some requested subsets had no evidence-complete QA; see suite.json.", flush=True)

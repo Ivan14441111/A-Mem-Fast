@@ -1,0 +1,16 @@
+{
+  "defined_utc": "2026-10-17T17:33:50.452913+00:00",
+  "primary_cells": 9,
+  "generation_profile": "bounded-tags-v1",
+  "max_tokens": 2000,
+  "repetition_penalty": 1.05,
+  "tag_budget": 16,
+  "source_project_commit": "81fcb979867b034111250b19edbd3023fa94476e",
+  "source_fingerprint": "baf028cb7c09be98e695fb806777da46ed0de5d534e0c4a3a3505a6d2b18e27c",
+  "old_attempt": "results/suite128-three-arm-20261018 is an aborted1000-token pilot; never pooled with this primary",
+  "gpu_index": 2,
+  "gpu_timestamp_timezone": "Asia/Shanghai",
+  "allocation_transition_threshold_mib": 1024,
+  "sensitivity": "All9planned cells retained. Secondary descriptive subset excludes cells whose observed target GPU allocation range is >1024MiB; allocation stability does not establish constant compute load.",
+  "diagnostic_prerequisite": "All10 fixed controls pass in results/diagnostics/bounded-tags-v1-fixed-controls/results.json"
+}
