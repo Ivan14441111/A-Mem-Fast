@@ -1,0 +1,529 @@
+{
+  "protocol": {
+    "defined_utc": "2026-10-17T17:31:08.138346+00:00",
+    "prompt_protocol": "bounded-tags-v1",
+    "repetition_penalty": 1.05,
+    "tag_budget": 16,
+    "max_tokens": 2000,
+    "temperature": 0,
+    "seed": 42,
+    "system_append": "Return no more than 16 items in each TAGS/tags list, including lists for updated neighbors. Follow the requested format and stop after completing its required fields.",
+    "criteria": "Exactly the same ten selected prompts and structural criteria as RP-only diagnostic. Known failure <=256 completion tokens and <=16 tags; all normal controls terminate and parse explicit fields; both five-neighbor controls return all five blocks. Client tag-limit guard must pass. No QA scoring, penalty sweep, truncation acceptance or cache insertion.",
+    "selected_requests_sha256": "66008bcc82e18ca1b746aebca69a4a8b07ed263d720951591371a9edc412bacf",
+    "selections": [
+      {
+        "index": 0,
+        "stage": "strengthen",
+        "recorded_key": "c67c626e040ade152be951be68178af2246efe114ea6139f0cd2b674d233ebba",
+        "selection_rule": "exact reconstructed failing turn 116 / D7:8 prompt",
+        "prompt_sha256": "0ca08fcb63ee063b75e50953172eacc66418c64b19d29f8b4b57ac5bd51de040"
+      },
+      {
+        "index": 1,
+        "stage": "analysis",
+        "recorded_key": "1a17646d48bc2a0139c9c9ec4ca4dbe6f131c9498022d7d88f619d97940ebd11",
+        "selection_rule": "first recorded baseline analysis",
+        "prompt_sha256": "f66b641c6ad545cbf8e8386321620ac6bdb32282ea2ff764af2fb4fe43a76495"
+      },
+      {
+        "index": 2,
+        "stage": "analysis",
+        "recorded_key": "8ddd76eff38b64e7dbeb8c73ba131c11ada3c53388a18085df625b3963ef2ecf",
+        "selection_rule": "middle recorded baseline analysis",
+        "prompt_sha256": "6dde96067c2e3a67e77da3e5792554180f8705a565608199ef455d8d0d5c2eaf"
+      },
+      {
+        "index": 3,
+        "stage": "evolution_decision",
+        "recorded_key": "7510f7a6849e64ff2f4354d68bcec9d02cbf5aeef3a854e3703adb8c83412bdf",
+        "selection_rule": "first recorded baseline decision",
+        "prompt_sha256": "e2c3ef80c03f91908c80018138cb64600e1e37f534afdedc488c0642c5541789"
+      },
+      {
+        "index": 4,
+        "stage": "strengthen",
+        "recorded_key": "a9253daa38702fafa0a96644501d229de78d872a319ba34936a8714955ae1309",
+        "selection_rule": "first recorded baseline strengthen",
+        "prompt_sha256": "295adce31416cc8389a7ca55e93a7ea8162fc6b2e9cb68d1d23b45a9e779cde0"
+      },
+      {
+        "index": 5,
+        "stage": "strengthen",
+        "recorded_key": "029ef96bb318095b28d69c6487bdaa82720c5e2b1c5a02b97337ccd940792adf",
+        "selection_rule": "largest recorded prompt-token baseline strengthen, excluding first",
+        "prompt_sha256": "c839a27da03c056e64dd94777a50ecd3bae189f6c868dce1e8b0962f146b5225"
+      },
+      {
+        "index": 6,
+        "stage": "update_neighbors",
+        "recorded_key": "4efb31a980c0405a6470c188a2bdf0d074ba96b19a82fd430ba88e38e8f6cce9",
+        "selection_rule": "first recorded update with exactly five retrieved neighbors",
+        "prompt_sha256": "471f9556532c40493d4ee1df731a271da99dc1f5d0a92288b73d1916a8493c96"
+      },
+      {
+        "index": 7,
+        "stage": "update_neighbors",
+        "recorded_key": "c9fbb29bef2b16ff72b605b4f0e46b6aed8fa12788385381d43072583e0146d8",
+        "selection_rule": "largest recorded prompt-token five-neighbor update, excluding first",
+        "prompt_sha256": "a3b47085b32047065395861bd278cd8f7964a84ce69852255c57f6f391eec42f"
+      },
+      {
+        "index": 8,
+        "stage": "query_keywords",
+        "recorded_key": "9301ba15d83e5d88b53525693c108924cbfc6d7d7cffc8853f0efbc5611c081d",
+        "selection_rule": "first recorded baseline QA keyword request",
+        "prompt_sha256": "ca44c7887c99c643e8f6e8ed09771c37183975b916d424261ba41a88e3f82dbc"
+      },
+      {
+        "index": 9,
+        "stage": "answer",
+        "recorded_key": "8abe5d27896b0111b2c497bd1b8cd953d092c1989f9bc1ba9164ce87baffc7fe",
+        "selection_rule": "first recorded baseline QA answer; structural check only, no quality scoring",
+        "prompt_sha256": "0c00f194331aef74f4c4f4d8621ee218262c3dc9924707e9fd257039d0cf01d4"
+      }
+    ]
+  },
+  "all_passed": true,
+  "completed_requests": 10,
+  "actual_http_requests": 10,
+  "results": [
+    {
+      "index": 0,
+      "stage": "strengthen",
+      "selection_rule": "exact reconstructed failing turn 116 / D7:8 prompt",
+      "request_key": "5c1867eca9f053865449ef7240e28a2b12edb39162fbb39c42c95833b6a6bb52",
+      "started_utc": "2026-10-17T17:31:08.138977+00:00",
+      "seconds": 0.8079750053584576,
+      "http_status": 200,
+      "actual_http_attempts": 1,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 1127,
+        "total_tokens": 1185,
+        "completion_tokens": 58,
+        "prompt_tokens_details": null
+      },
+      "passed": true,
+      "parsed_structure": {
+        "connections": [
+          75,
+          39,
+          73
+        ],
+        "tags": [
+          "Support",
+          "Emotional Experience",
+          "Inspiration",
+          "Community",
+          "Stories",
+          "Dreams",
+          "Books",
+          "Positive Reinforcement",
+          "LGBTQ Support",
+          "Social Interaction",
+          "Courage",
+          "Understanding",
+          "Hope",
+          "Achievement",
+          "Learning",
+          "Inclusivity"
+        ]
+      },
+      "client_error": null,
+      "content_sha256": "b53d0570d8e95037c1661f793ceade341f2424d2b9c2abee5a0b24699f945255",
+      "content_chars": 232,
+      "content_prefix": "CONNECTIONS: 75, 39, 73\nTAGS: Support, Emotional Experience, Inspiration, Community, Stories, Dreams, Books, Positive Reinforcement, LGBTQ Support, Social Interaction, Courage, Understanding, Hope, Achievement, Learning, Inclusivity",
+      "content_suffix": "CONNECTIONS: 75, 39, 73\nTAGS: Support, Emotional Experience, Inspiration, Community, Stories, Dreams, Books, Positive Reinforcement, LGBTQ Support, Social Interaction, Courage, Understanding, Hope, Achievement, Learning, Inclusivity"
+    },
+    {
+      "index": 1,
+      "stage": "analysis",
+      "selection_rule": "first recorded baseline analysis",
+      "request_key": "f18003748c2ff86e110a50d0f123234d4a98b5a08694933aba6ce92c1a35a6c9",
+      "started_utc": "2026-10-17T17:31:08.948184+00:00",
+      "seconds": 0.4414915107190609,
+      "http_status": 200,
+      "actual_http_attempts": 1,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 223,
+        "total_tokens": 258,
+        "completion_tokens": 35,
+        "prompt_tokens_details": null
+      },
+      "passed": true,
+      "parsed_structure": {
+        "keywords": [
+          "speaker",
+          "greeting",
+          "conversation"
+        ],
+        "context": "The content involves a friendly greeting between two individuals during a conversation.",
+        "tags": [
+          "communication",
+          "dialogue",
+          "social interaction"
+        ]
+      },
+      "client_error": null,
+      "content_sha256": "a381ee8a90aea0d2e2d044c3fbe9e8fbab52c446072a33f00cb9e028286eced0",
+      "content_chars": 192,
+      "content_prefix": "KEYWORDS: speaker, greeting, conversation  \nCONTEXT: The content involves a friendly greeting between two individuals during a conversation.  \nTAGS: communication, dialogue, social interaction",
+      "content_suffix": "KEYWORDS: speaker, greeting, conversation  \nCONTEXT: The content involves a friendly greeting between two individuals during a conversation.  \nTAGS: communication, dialogue, social interaction"
+    },
+    {
+      "index": 2,
+      "stage": "analysis",
+      "selection_rule": "middle recorded baseline analysis",
+      "request_key": "87565551786b65f20c80d449a02106ebefd1205ab47af546d4143c1aeaeed5ca",
+      "started_utc": "2026-10-17T17:31:09.390560+00:00",
+      "seconds": 0.4252764880657196,
+      "http_status": 200,
+      "actual_http_attempts": 1,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 231,
+        "total_tokens": 265,
+        "completion_tokens": 34,
+        "prompt_tokens_details": null
+      },
+      "passed": true,
+      "parsed_structure": {
+        "keywords": [
+          "family",
+          "new",
+          "fun"
+        ],
+        "context": "The conversation discusses making new family members and experiencing fun activities.",
+        "tags": [
+          "Family",
+          "Conversation",
+          "Social Interaction"
+        ]
+      },
+      "client_error": null,
+      "content_sha256": "b1fc4f164db4e2f58cc9e12b5d09714f19c0b37762d97f565eaeac16cb933650",
+      "content_chars": 172,
+      "content_prefix": "KEYWORDS: family, new, fun  \nCONTEXT: The conversation discusses making new family members and experiencing fun activities.  \nTAGS: Family, Conversation, Social Interaction",
+      "content_suffix": "KEYWORDS: family, new, fun  \nCONTEXT: The conversation discusses making new family members and experiencing fun activities.  \nTAGS: Family, Conversation, Social Interaction"
+    },
+    {
+      "index": 3,
+      "stage": "evolution_decision",
+      "selection_rule": "first recorded baseline decision",
+      "request_key": "92562d91f592993cca9ce8804ea5748b1a23cba8256b21186187345bae28ecfe",
+      "started_utc": "2026-10-17T17:31:09.817042+00:00",
+      "seconds": 0.633315697312355,
+      "http_status": 200,
+      "actual_http_attempts": 1,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 376,
+        "total_tokens": 427,
+        "completion_tokens": 51,
+        "prompt_tokens_details": null
+      },
+      "passed": true,
+      "parsed_structure": {
+        "decision": "STRENGTHEN",
+        "reason": "The new memory shares similar keywords and context with the nearest neighbor, indicating a potential link in the conversation flow. Strengthening the connection by updating tags will enhance the coherence of the memory network."
+      },
+      "client_error": null,
+      "content_sha256": "60ae7892d92368641a5988fdd46b088fbeed37ff9a2d2aa983ec529fade60f14",
+      "content_chars": 256,
+      "content_prefix": "DECISION: STRENGTHEN\nREASON: The new memory shares similar keywords and context with the nearest neighbor, indicating a potential link in the conversation flow. Strengthening the connection by updating tags will enhance the coherence of the memory network.",
+      "content_suffix": "DECISION: STRENGTHEN\nREASON: The new memory shares similar keywords and context with the nearest neighbor, indicating a potential link in the conversation flow. Strengthening the connection by updating tags will enhance the coherence of the memory network."
+    },
+    {
+      "index": 4,
+      "stage": "strengthen",
+      "selection_rule": "first recorded baseline strengthen",
+      "request_key": "b902a25d64951b15d8a7393b31e27dac8c8cb843b2cfa8bcb0b605924564b601",
+      "started_utc": "2026-10-17T17:31:10.452337+00:00",
+      "seconds": 0.28705253452062607,
+      "http_status": 200,
+      "actual_http_attempts": 1,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 274,
+        "total_tokens": 296,
+        "completion_tokens": 22,
+        "prompt_tokens_details": null
+      },
+      "passed": true,
+      "parsed_structure": {
+        "connections": [
+          0
+        ],
+        "tags": [
+          "Communication",
+          "Dialogue",
+          "Social Interaction",
+          "Greeting",
+          "Conversation"
+        ]
+      },
+      "client_error": null,
+      "content_sha256": "7be4ab8eb27a19b1eeb0c02b345c8ea99af2fe0d2f621c34d925229624ac641d",
+      "content_chars": 88,
+      "content_prefix": "CONNECTIONS: 0\nTAGS: Communication, Dialogue, Social Interaction, Greeting, Conversation",
+      "content_suffix": "CONNECTIONS: 0\nTAGS: Communication, Dialogue, Social Interaction, Greeting, Conversation"
+    },
+    {
+      "index": 5,
+      "stage": "strengthen",
+      "selection_rule": "largest recorded prompt-token baseline strengthen, excluding first",
+      "request_key": "a477fb7aea8593712a1bf09d737a0ff418384d6cf64c238ea44eb40725d75739",
+      "started_utc": "2026-10-17T17:31:10.740629+00:00",
+      "seconds": 0.7498263455927372,
+      "http_status": 200,
+      "actual_http_attempts": 1,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 1279,
+        "total_tokens": 1333,
+        "completion_tokens": 54,
+        "prompt_tokens_details": null
+      },
+      "passed": true,
+      "parsed_structure": {
+        "connections": [
+          35,
+          36,
+          37
+        ],
+        "tags": [
+          "LGBTQ Support",
+          "Transgender Conference",
+          "Advocacy",
+          "Community",
+          "Social Interaction",
+          "Inspiration",
+          "Mental Health",
+          "Career Development",
+          "Emotional Experience",
+          "Stories",
+          "Inclusivity",
+          "Acceptance"
+        ]
+      },
+      "client_error": null,
+      "content_sha256": "d226f7abc0c7e56d89e25e88707bd43139d27ef6364b4098e5c08d299cc31105",
+      "content_chars": 212,
+      "content_prefix": "CONNECTIONS: 35, 36, 37\nTAGS: LGBTQ Support, Transgender Conference, Advocacy, Community, Social Interaction, Inspiration, Mental Health, Career Development, Emotional Experience, Stories, Inclusivity, Acceptance",
+      "content_suffix": "CONNECTIONS: 35, 36, 37\nTAGS: LGBTQ Support, Transgender Conference, Advocacy, Community, Social Interaction, Inspiration, Mental Health, Career Development, Emotional Experience, Stories, Inclusivity, Acceptance"
+    },
+    {
+      "index": 6,
+      "stage": "update_neighbors",
+      "selection_rule": "first recorded update with exactly five retrieved neighbors",
+      "request_key": "f5bf1f248cf11b9d8e945bc165580d4af73ec49d415c94b3489caeedf523c86a",
+      "started_utc": "2026-10-17T17:31:11.491831+00:00",
+      "seconds": 3.9756965152919292,
+      "http_status": 200,
+      "actual_http_attempts": 1,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 1100,
+        "total_tokens": 1426,
+        "completion_tokens": 326,
+        "prompt_tokens_details": null
+      },
+      "passed": true,
+      "parsed_structure": [
+        {
+          "context": "The speaker reflects on the impact of her talk about gender identity and inclusion, emphasizing the importance of sharing personal experiences to inspire allies and support the trans community, while also highlighting the positive feedback and encouragement from Mel.",
+          "tags": [
+            "LGBTQ Support",
+            "Stories",
+            "Inspiration",
+            "Social Interaction",
+            "Emotional Experience",
+            "Transgender Journey"
+          ]
+        },
+        {
+          "context": "The speaker shares their experience at a school event where they discussed their transgender journey and promoted involvement in the LGBTQ community, with additional emphasis on the supportive feedback and recognition from Mel.",
+          "tags": [
+            "LGBTQ Support",
+            "Stories",
+            "Inspiration",
+            "Social Interaction",
+            "Emotional Experience",
+            "Transgender Journey"
+          ]
+        },
+        {
+          "context": "The content celebrates an individual's efforts in spreading awareness and supporting the LGBTQ community through personal transition and involvement, with added acknowledgment of the ongoing support and inspiration from Caroline's journey.",
+          "tags": [
+            "LGBTQ Support",
+            "Stories",
+            "Inspiration",
+            "Social Interaction",
+            "Emotional Experience",
+            "Transgender Journey"
+          ]
+        },
+        {
+          "context": "The content highlights inspiring transgender stories and expresses gratitude for the support received, with additional context of the ongoing dialogue and mutual encouragement between Caroline and Mel regarding inclusivity and advocacy.",
+          "tags": [
+            "LGBTQ Support",
+            "Stories",
+            "Inspiration",
+            "Social Interaction",
+            "Emotional Experience"
+          ]
+        },
+        {
+          "context": "The speaker chose an organization for its support and inclusivity for LGBTQ+ individuals in the adoption process, with added context of the broader conversation around advocacy, inclusivity, and the importance of community support as highlighted by Caroline and Mel.",
+          "tags": [
+            "LGBTQ Support",
+            "Adoption",
+            "Inclusivity",
+            "Emotional Experience",
+            "Social Interaction"
+          ]
+        }
+      ],
+      "client_error": null,
+      "content_sha256": "6717fb5fb5ad07430b988d4d04c4656192b5d79368e2a864b261266735ca45ac",
+      "content_chars": 1832,
+      "content_prefix": "NEIGHBOR 0:\nCONTEXT: The speaker reflects on the impact of her talk about gender identity and inclusion, emphasizing the importance of sharing personal experiences to inspire allies and support the trans community, while also highlighting the positive feedback and encouragement from Mel.\nTAGS: LGBTQ Support, Stories, Inspiration, Social Interaction, Emotional Experience, Transgender Journey\n\nNEIGHBOR 1:\nCONTEXT: The speaker shares their experience at a school event where they discussed their transgender jou",
+      "content_suffix": "n Caroline and Mel regarding inclusivity and advocacy.\nTAGS: LGBTQ Support, Stories, Inspiration, Social Interaction, Emotional Experience\n\nNEIGHBOR 4:\nCONTEXT: The speaker chose an organization for its support and inclusivity for LGBTQ+ individuals in the adoption process, with added context of the broader conversation around advocacy, inclusivity, and the importance of community support as highlighted by Caroline and Mel.\nTAGS: LGBTQ Support, Adoption, Inclusivity, Emotional Experience, Social Interaction"
+    },
+    {
+      "index": 7,
+      "stage": "update_neighbors",
+      "selection_rule": "largest recorded prompt-token five-neighbor update, excluding first",
+      "request_key": "64e695516e5d87210c3f2e7d2e42a88cc994118097127c730e9156164dbcdabd",
+      "started_utc": "2026-10-17T17:31:15.469259+00:00",
+      "seconds": 4.784930530935526,
+      "http_status": 200,
+      "actual_http_attempts": 1,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 1296,
+        "total_tokens": 1687,
+        "completion_tokens": 391,
+        "prompt_tokens_details": null
+      },
+      "passed": true,
+      "parsed_structure": [
+        {
+          "context": "The speaker expresses excitement about attending a transgender conference, highlighting the opportunity to meet community members and engage in advocacy, with a renewed emphasis on the importance of community support and trans rights.",
+          "tags": [
+            "LGBTQ Support",
+            "Transgender Journey",
+            "Advocacy",
+            "Community",
+            "Social Interaction",
+            "Inspiration"
+          ]
+        },
+        {
+          "context": "The content celebrates an individual's efforts in spreading awareness and supporting the LGBTQ community through personal transition and involvement, while also acknowledging the ongoing support and inspiration from others like Caroline, and their growing interest in mental health support for trans individuals.",
+          "tags": [
+            "LGBTQ Support",
+            "Stories",
+            "Inspiration",
+            "Social Interaction",
+            "Emotional Experience",
+            "Transgender Journey",
+            "Mental Health",
+            "Career Development"
+          ]
+        },
+        {
+          "context": "The speaker reflects on the impact of her talk about gender identity and inclusion, emphasizing the importance of sharing personal experiences to inspire allies and support the trans community, while also highlighting the mutual encouragement between her and Mel, and her growing interest in mental health support for trans individuals.",
+          "tags": [
+            "LGBTQ Support",
+            "Stories",
+            "Inspiration",
+            "Social Interaction",
+            "Emotional Experience",
+            "Transgender Journey",
+            "Mental Health",
+            "Career Development"
+          ]
+        },
+        {
+          "context": "The speaker shares their experience at a school event where they discussed their transgender journey and promoted involvement in the LGBTQ community, with a focus on the positive impact of their personal story and the support from others like Mel, and their growing interest in mental health support for trans individuals.",
+          "tags": [
+            "LGBTQ Support",
+            "Stories",
+            "Inspiration",
+            "Social Interaction",
+            "Emotional Experience",
+            "Transgender Journey",
+            "Mental Health",
+            "Career Development"
+          ]
+        },
+        {
+          "context": "The content emphasizes the importance of sharing personal stories to foster understanding and connection, with a focus on mutual encouragement and the power of vulnerability in building community, while also reflecting on the broader significance of trans rights and advocacy.",
+          "tags": [
+            "LGBTQ Support",
+            "Stories",
+            "Inspiration",
+            "Social Interaction",
+            "Emotional Experience",
+            "Transgender Journey"
+          ]
+        }
+      ],
+      "client_error": null,
+      "content_sha256": "08b45e49e29c83c3707e592ccb2ee2db8f265e2d14e3c5d2754551202321c577",
+      "content_chars": 2213,
+      "content_prefix": "NEIGHBOR 0:\nCONTEXT: The speaker expresses excitement about attending a transgender conference, highlighting the opportunity to meet community members and engage in advocacy, with a renewed emphasis on the importance of community support and trans rights.\nTAGS: LGBTQ Support, Transgender Journey, Advocacy, Community, Social Interaction, Inspiration\n\nNEIGHBOR 1:\nCONTEXT: The content celebrates an individual's efforts in spreading awareness and supporting the LGBTQ community through personal transition and in",
+      "content_suffix": "nspiration, Social Interaction, Emotional Experience, Transgender Journey, Mental Health, Career Development\n\nNEIGHBOR 4:\nCONTEXT: The content emphasizes the importance of sharing personal stories to foster understanding and connection, with a focus on mutual encouragement and the power of vulnerability in building community, while also reflecting on the broader significance of trans rights and advocacy.\nTAGS: LGBTQ Support, Stories, Inspiration, Social Interaction, Emotional Experience, Transgender Journey"
+    },
+    {
+      "index": 8,
+      "stage": "query_keywords",
+      "selection_rule": "first recorded baseline QA keyword request",
+      "request_key": "6607e59f701041290fce2ab437d0d96367980901944a6e4714b4e801a7f86e90",
+      "started_utc": "2026-10-17T17:31:20.256183+00:00",
+      "seconds": 0.40312276780605316,
+      "http_status": 200,
+      "actual_http_attempts": 1,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 86,
+        "total_tokens": 118,
+        "completion_tokens": 32,
+        "prompt_tokens_details": null
+      },
+      "passed": true,
+      "parsed_structure": "research, Caroline, subject, study, topic, investigation, findings, academic, analysis, exploration, methodology, literature, data, conclusion, discovery, contribution",
+      "client_error": null,
+      "content_sha256": "878068fb317bd363e00cb0b0bbf7b129372ac1df28de423854b948008df3cd30",
+      "content_chars": 167,
+      "content_prefix": "research, Caroline, subject, study, topic, investigation, findings, academic, analysis, exploration, methodology, literature, data, conclusion, discovery, contribution",
+      "content_suffix": "research, Caroline, subject, study, topic, investigation, findings, academic, analysis, exploration, methodology, literature, data, conclusion, discovery, contribution"
+    },
+    {
+      "index": 9,
+      "stage": "answer",
+      "selection_rule": "first recorded baseline QA answer; structural check only, no quality scoring",
+      "request_key": "767ff105f86602d7d6cefa8f81509aeb14af9b40318e7cfb835416debbd796a2",
+      "started_utc": "2026-10-17T17:31:20.661107+00:00",
+      "seconds": 0.5305266007781029,
+      "http_status": 200,
+      "actual_http_attempts": 1,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 5078,
+        "total_tokens": 5084,
+        "completion_tokens": 6,
+        "prompt_tokens_details": null
+      },
+      "passed": true,
+      "parsed_structure": "Research on career options.",
+      "client_error": null,
+      "content_sha256": "e57fcc2ae0600222ddba467a0db1ec6204d3d2478e4ec2f2310f623a9dd60ca5",
+      "content_chars": 27,
+      "content_prefix": "Research on career options.",
+      "content_suffix": "Research on career options."
+    }
+  ]
+}

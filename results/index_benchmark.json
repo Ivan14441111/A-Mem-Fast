@@ -1,0 +1,1635 @@
+{
+  "scope": "embedding index microbenchmark only; excludes LLM calls, memory evolution, and QA quality",
+  "document_format": "LoCoMo turns plus session timestamp in upstream consolidation format; no LLM metadata",
+  "embedding_model": "/data2/xyf25/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "embedding_device": "cpu",
+  "cpu_threads": 4,
+  "shared_model_initial_load_seconds": 0.12252996861934662,
+  "shared_model_warmup_seconds": 0.11393406614661217,
+  "dataset": "/data2/xyf25/A-Mem-Fast/data/locomo10.json",
+  "dataset_sha256": "79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+  "git_revision": "0c8039f28fdcc08189a23c07a3437d9d2482f9c2",
+  "versions": {
+    "python": "3.12.13",
+    "numpy": "2.2.6",
+    "sklearn": "1.7.2",
+    "torch": "2.9.0+cu129",
+    "sentence_transformers": "5.1.2"
+  },
+  "query_count": 8,
+  "query_repeats": 3,
+  "k": 10,
+  "cases": [
+    {
+      "documents": 128,
+      "document_sha256": "2f4d14e85961fd46d68d011806cd1324431a96f5f353d15536c93d199105fa04",
+      "unique_documents": 128,
+      "baseline_single_document_rebuild": {
+        "seconds": 1.7008170410990715,
+        "encode_calls": 128,
+        "encode_texts": 128,
+        "encode_seconds": 1.6946578845381737,
+        "model_reload_seconds": 0.1918337121605873,
+        "with_model_reload_seconds": 1.8926507532596588
+      },
+      "fast_batched_rebuild": {
+        "seconds": 0.664373379200697,
+        "encode_calls": 2,
+        "encode_texts": 128,
+        "encode_seconds": 0.6627074256539345
+      },
+      "fast_unchanged_rebuild": {
+        "seconds": 5.120784044265747e-05,
+        "encode_calls": 0,
+        "encode_texts": 0,
+        "encode_seconds": 0.0
+      },
+      "fast_changed_rebuild": {
+        "seconds": 0.016817308962345123,
+        "encode_calls": 1,
+        "encode_texts": 2,
+        "encode_seconds": 0.016376912593841553,
+        "changed_documents": 2
+      },
+      "baseline_queries_without_cache": {
+        "seconds": 0.20789572969079018,
+        "encode_calls": 24,
+        "encode_texts": 24,
+        "encode_seconds": 0.19455303624272346
+      },
+      "fast_queries_without_cache": {
+        "seconds": 0.20399266853928566,
+        "encode_calls": 24,
+        "encode_texts": 24,
+        "encode_seconds": 0.19500872492790222
+      },
+      "fast_query_cache_fill": {
+        "seconds": 0.0779171958565712,
+        "encode_calls": 8,
+        "encode_texts": 8,
+        "encode_seconds": 0.07465396448969841
+      },
+      "fast_queries_with_warm_cache": {
+        "seconds": 0.0005913414061069489,
+        "encode_calls": 0,
+        "encode_texts": 0,
+        "encode_seconds": 0.0
+      },
+      "ranking_equivalence": {
+        "all_equal": true,
+        "queries": [
+          {
+            "question": "When did Caroline go to the LGBTQ support group?",
+            "equal": true,
+            "baseline_indices": [
+              2,
+              29,
+              77,
+              36,
+              108,
+              110,
+              76,
+              35,
+              70,
+              6
+            ],
+            "fast_indices": [
+              2,
+              29,
+              77,
+              36,
+              108,
+              110,
+              76,
+              35,
+              70,
+              6
+            ]
+          },
+          {
+            "question": "When did Melanie paint a sunrise?",
+            "equal": true,
+            "baseline_indices": [
+              13,
+              14,
+              12,
+              5,
+              96,
+              15,
+              80,
+              66,
+              81,
+              62
+            ],
+            "fast_indices": [
+              13,
+              14,
+              12,
+              5,
+              96,
+              15,
+              80,
+              66,
+              81,
+              62
+            ]
+          },
+          {
+            "question": "What fields would Caroline be likely to pursue in her educaton?",
+            "equal": true,
+            "baseline_indices": [
+              8,
+              9,
+              34,
+              17,
+              117,
+              3,
+              95,
+              26,
+              30,
+              93
+            ],
+            "fast_indices": [
+              8,
+              9,
+              34,
+              17,
+              117,
+              3,
+              95,
+              26,
+              30,
+              93
+            ]
+          },
+          {
+            "question": "What did Caroline research?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              3,
+              117,
+              17,
+              95,
+              30,
+              65,
+              9,
+              107,
+              56
+            ],
+            "fast_indices": [
+              34,
+              3,
+              117,
+              17,
+              95,
+              30,
+              65,
+              9,
+              107,
+              56
+            ]
+          },
+          {
+            "question": "What is Caroline's identity?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              59,
+              17,
+              56,
+              3,
+              107,
+              95,
+              61,
+              93,
+              30
+            ],
+            "fast_indices": [
+              34,
+              59,
+              17,
+              56,
+              3,
+              107,
+              95,
+              61,
+              93,
+              30
+            ]
+          },
+          {
+            "question": "When did Melanie run a charity race?",
+            "equal": true,
+            "baseline_indices": [
+              19,
+              66,
+              18,
+              96,
+              3,
+              48,
+              35,
+              54,
+              20,
+              127
+            ],
+            "fast_indices": [
+              19,
+              66,
+              18,
+              96,
+              3,
+              48,
+              35,
+              54,
+              20,
+              127
+            ]
+          },
+          {
+            "question": "When is Melanie planning on going camping?",
+            "equal": true,
+            "baseline_indices": [
+              24,
+              54,
+              63,
+              66,
+              48,
+              65,
+              107,
+              121,
+              33,
+              91
+            ],
+            "fast_indices": [
+              24,
+              54,
+              63,
+              66,
+              48,
+              65,
+              107,
+              121,
+              33,
+              91
+            ]
+          },
+          {
+            "question": "What is Caroline's relationship status?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              17,
+              30,
+              56,
+              107,
+              93,
+              75,
+              91,
+              67,
+              49
+            ],
+            "fast_indices": [
+              34,
+              17,
+              30,
+              56,
+              107,
+              93,
+              75,
+              91,
+              67,
+              49
+            ]
+          }
+        ]
+      },
+      "changed_ranking_equivalence": {
+        "all_equal": true,
+        "queries": [
+          {
+            "question": "When did Caroline go to the LGBTQ support group?",
+            "equal": true,
+            "baseline_indices": [
+              2,
+              29,
+              77,
+              36,
+              108,
+              110,
+              76,
+              35,
+              70,
+              6
+            ],
+            "fast_indices": [
+              2,
+              29,
+              77,
+              36,
+              108,
+              110,
+              76,
+              35,
+              70,
+              6
+            ]
+          },
+          {
+            "question": "When did Melanie paint a sunrise?",
+            "equal": true,
+            "baseline_indices": [
+              13,
+              14,
+              12,
+              5,
+              96,
+              15,
+              80,
+              66,
+              81,
+              62
+            ],
+            "fast_indices": [
+              13,
+              14,
+              12,
+              5,
+              96,
+              15,
+              80,
+              66,
+              81,
+              62
+            ]
+          },
+          {
+            "question": "What fields would Caroline be likely to pursue in her educaton?",
+            "equal": true,
+            "baseline_indices": [
+              8,
+              9,
+              34,
+              17,
+              117,
+              3,
+              95,
+              26,
+              30,
+              93
+            ],
+            "fast_indices": [
+              8,
+              9,
+              34,
+              17,
+              117,
+              3,
+              95,
+              26,
+              30,
+              93
+            ]
+          },
+          {
+            "question": "What did Caroline research?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              3,
+              117,
+              17,
+              95,
+              30,
+              65,
+              9,
+              107,
+              56
+            ],
+            "fast_indices": [
+              34,
+              3,
+              117,
+              17,
+              95,
+              30,
+              65,
+              9,
+              107,
+              56
+            ]
+          },
+          {
+            "question": "What is Caroline's identity?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              59,
+              17,
+              56,
+              3,
+              107,
+              95,
+              61,
+              93,
+              30
+            ],
+            "fast_indices": [
+              34,
+              59,
+              17,
+              56,
+              3,
+              107,
+              95,
+              61,
+              93,
+              30
+            ]
+          },
+          {
+            "question": "When did Melanie run a charity race?",
+            "equal": true,
+            "baseline_indices": [
+              19,
+              66,
+              18,
+              96,
+              3,
+              48,
+              35,
+              54,
+              20,
+              127
+            ],
+            "fast_indices": [
+              19,
+              66,
+              18,
+              96,
+              3,
+              48,
+              35,
+              54,
+              20,
+              127
+            ]
+          },
+          {
+            "question": "When is Melanie planning on going camping?",
+            "equal": true,
+            "baseline_indices": [
+              24,
+              54,
+              63,
+              66,
+              48,
+              65,
+              107,
+              121,
+              33,
+              91
+            ],
+            "fast_indices": [
+              24,
+              54,
+              63,
+              66,
+              48,
+              65,
+              107,
+              121,
+              33,
+              91
+            ]
+          },
+          {
+            "question": "What is Caroline's relationship status?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              17,
+              30,
+              56,
+              107,
+              93,
+              75,
+              91,
+              67,
+              49
+            ],
+            "fast_indices": [
+              34,
+              17,
+              30,
+              56,
+              107,
+              93,
+              75,
+              91,
+              67,
+              49
+            ]
+          }
+        ]
+      },
+      "extra_validation_encoding": {
+        "encode_calls": 9,
+        "encode_texts": 136,
+        "encode_seconds": 0.5755526684224606
+      },
+      "fast_metrics_cumulative": {
+        "encode_calls": 43,
+        "encode_texts": 170,
+        "document_encode_calls": 3,
+        "document_encode_texts": 130,
+        "query_encode_calls": 40,
+        "query_encode_texts": 40,
+        "document_cache_hits": 254,
+        "query_cache_hits": 32,
+        "query_cache_misses": 40,
+        "buffer_growths": 1,
+        "buffer_reallocations": 1,
+        "searches": 72,
+        "partial_topk_calls": 72,
+        "full_sort_fallbacks": 0
+      },
+      "rebuild_speedup_without_model_load": 2.5600318952353462,
+      "rebuild_speedup_with_upstream_model_reload": 2.848775722375713
+    },
+    {
+      "documents": 512,
+      "document_sha256": "b99a6af5b72fee74bd9782c60ac4b206e11b67dbc171a6a69cbc3cb6332a7e87",
+      "unique_documents": 512,
+      "baseline_single_document_rebuild": {
+        "seconds": 6.697100553661585,
+        "encode_calls": 512,
+        "encode_texts": 512,
+        "encode_seconds": 6.6392641589045525,
+        "model_reload_seconds": 0.05593908205628395,
+        "with_model_reload_seconds": 6.753039635717869
+      },
+      "fast_batched_rebuild": {
+        "seconds": 2.4378299601376057,
+        "encode_calls": 8,
+        "encode_texts": 512,
+        "encode_seconds": 2.431588727980852
+      },
+      "fast_unchanged_rebuild": {
+        "seconds": 0.00013833865523338318,
+        "encode_calls": 0,
+        "encode_texts": 0,
+        "encode_seconds": 0.0
+      },
+      "fast_changed_rebuild": {
+        "seconds": 0.03358783572912216,
+        "encode_calls": 1,
+        "encode_texts": 6,
+        "encode_seconds": 0.03299025073647499,
+        "changed_documents": 6
+      },
+      "baseline_queries_without_cache": {
+        "seconds": 0.20180746167898178,
+        "encode_calls": 24,
+        "encode_texts": 24,
+        "encode_seconds": 0.18209586665034294
+      },
+      "fast_queries_without_cache": {
+        "seconds": 0.1806958243250847,
+        "encode_calls": 24,
+        "encode_texts": 24,
+        "encode_seconds": 0.1717861369252205
+      },
+      "fast_query_cache_fill": {
+        "seconds": 0.0663120411336422,
+        "encode_calls": 8,
+        "encode_texts": 8,
+        "encode_seconds": 0.06297318264842033
+      },
+      "fast_queries_with_warm_cache": {
+        "seconds": 0.001044679433107376,
+        "encode_calls": 0,
+        "encode_texts": 0,
+        "encode_seconds": 0.0
+      },
+      "ranking_equivalence": {
+        "all_equal": true,
+        "queries": [
+          {
+            "question": "When did Caroline go to the LGBTQ support group?",
+            "equal": true,
+            "baseline_indices": [
+              2,
+              184,
+              29,
+              195,
+              77,
+              304,
+              36,
+              179,
+              108,
+              110
+            ],
+            "fast_indices": [
+              2,
+              184,
+              29,
+              195,
+              77,
+              304,
+              36,
+              179,
+              108,
+              110
+            ]
+          },
+          {
+            "question": "When did Melanie paint a sunrise?",
+            "equal": true,
+            "baseline_indices": [
+              13,
+              140,
+              14,
+              12,
+              365,
+              276,
+              366,
+              300,
+              277,
+              212
+            ],
+            "fast_indices": [
+              13,
+              140,
+              14,
+              12,
+              365,
+              276,
+              366,
+              300,
+              277,
+              212
+            ]
+          },
+          {
+            "question": "What fields would Caroline be likely to pursue in her educaton?",
+            "equal": true,
+            "baseline_indices": [
+              379,
+              8,
+              9,
+              34,
+              251,
+              17,
+              117,
+              156,
+              294,
+              3
+            ],
+            "fast_indices": [
+              379,
+              8,
+              9,
+              34,
+              251,
+              17,
+              117,
+              156,
+              294,
+              3
+            ]
+          },
+          {
+            "question": "What did Caroline research?",
+            "equal": true,
+            "baseline_indices": [
+              379,
+              34,
+              288,
+              3,
+              166,
+              117,
+              17,
+              95,
+              156,
+              190
+            ],
+            "fast_indices": [
+              379,
+              34,
+              288,
+              3,
+              166,
+              117,
+              17,
+              95,
+              156,
+              190
+            ]
+          },
+          {
+            "question": "What is Caroline's identity?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              190,
+              290,
+              59,
+              288,
+              17,
+              375,
+              379,
+              56,
+              384
+            ],
+            "fast_indices": [
+              34,
+              190,
+              290,
+              59,
+              288,
+              17,
+              375,
+              379,
+              56,
+              384
+            ]
+          },
+          {
+            "question": "When did Melanie run a charity race?",
+            "equal": true,
+            "baseline_indices": [
+              130,
+              19,
+              66,
+              378,
+              247,
+              18,
+              393,
+              196,
+              213,
+              132
+            ],
+            "fast_indices": [
+              130,
+              19,
+              66,
+              378,
+              247,
+              18,
+              393,
+              196,
+              213,
+              132
+            ]
+          },
+          {
+            "question": "When is Melanie planning on going camping?",
+            "equal": true,
+            "baseline_indices": [
+              202,
+              24,
+              132,
+              54,
+              400,
+              247,
+              401,
+              378,
+              63,
+              130
+            ],
+            "fast_indices": [
+              202,
+              24,
+              132,
+              54,
+              400,
+              247,
+              401,
+              378,
+              63,
+              130
+            ]
+          },
+          {
+            "question": "What is Caroline's relationship status?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              180,
+              156,
+              17,
+              30,
+              56,
+              379,
+              107,
+              166,
+              190
+            ],
+            "fast_indices": [
+              34,
+              180,
+              156,
+              17,
+              30,
+              56,
+              379,
+              107,
+              166,
+              190
+            ]
+          }
+        ]
+      },
+      "changed_ranking_equivalence": {
+        "all_equal": true,
+        "queries": [
+          {
+            "question": "When did Caroline go to the LGBTQ support group?",
+            "equal": true,
+            "baseline_indices": [
+              184,
+              29,
+              195,
+              77,
+              304,
+              2,
+              36,
+              179,
+              108,
+              110
+            ],
+            "fast_indices": [
+              184,
+              29,
+              195,
+              77,
+              304,
+              2,
+              36,
+              179,
+              108,
+              110
+            ]
+          },
+          {
+            "question": "When did Melanie paint a sunrise?",
+            "equal": true,
+            "baseline_indices": [
+              13,
+              140,
+              14,
+              12,
+              365,
+              276,
+              366,
+              300,
+              277,
+              212
+            ],
+            "fast_indices": [
+              13,
+              140,
+              14,
+              12,
+              365,
+              276,
+              366,
+              300,
+              277,
+              212
+            ]
+          },
+          {
+            "question": "What fields would Caroline be likely to pursue in her educaton?",
+            "equal": true,
+            "baseline_indices": [
+              379,
+              8,
+              9,
+              34,
+              251,
+              17,
+              117,
+              156,
+              294,
+              95
+            ],
+            "fast_indices": [
+              379,
+              8,
+              9,
+              34,
+              251,
+              17,
+              117,
+              156,
+              294,
+              95
+            ]
+          },
+          {
+            "question": "What did Caroline research?",
+            "equal": true,
+            "baseline_indices": [
+              3,
+              379,
+              34,
+              288,
+              166,
+              117,
+              17,
+              95,
+              156,
+              190
+            ],
+            "fast_indices": [
+              3,
+              379,
+              34,
+              288,
+              166,
+              117,
+              17,
+              95,
+              156,
+              190
+            ]
+          },
+          {
+            "question": "What is Caroline's identity?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              190,
+              290,
+              59,
+              288,
+              17,
+              375,
+              379,
+              56,
+              384
+            ],
+            "fast_indices": [
+              34,
+              190,
+              290,
+              59,
+              288,
+              17,
+              375,
+              379,
+              56,
+              384
+            ]
+          },
+          {
+            "question": "When did Melanie run a charity race?",
+            "equal": true,
+            "baseline_indices": [
+              130,
+              19,
+              66,
+              378,
+              247,
+              18,
+              393,
+              196,
+              213,
+              132
+            ],
+            "fast_indices": [
+              130,
+              19,
+              66,
+              378,
+              247,
+              18,
+              393,
+              196,
+              213,
+              132
+            ]
+          },
+          {
+            "question": "When is Melanie planning on going camping?",
+            "equal": true,
+            "baseline_indices": [
+              202,
+              24,
+              132,
+              54,
+              400,
+              247,
+              401,
+              378,
+              63,
+              130
+            ],
+            "fast_indices": [
+              202,
+              24,
+              132,
+              54,
+              400,
+              247,
+              401,
+              378,
+              63,
+              130
+            ]
+          },
+          {
+            "question": "What is Caroline's relationship status?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              180,
+              156,
+              17,
+              30,
+              56,
+              379,
+              107,
+              166,
+              190
+            ],
+            "fast_indices": [
+              34,
+              180,
+              156,
+              17,
+              30,
+              56,
+              379,
+              107,
+              166,
+              190
+            ]
+          }
+        ]
+      },
+      "extra_validation_encoding": {
+        "encode_calls": 9,
+        "encode_texts": 520,
+        "encode_seconds": 1.9986483938992023
+      },
+      "fast_metrics_cumulative": {
+        "encode_calls": 49,
+        "encode_texts": 558,
+        "document_encode_calls": 9,
+        "document_encode_texts": 518,
+        "query_encode_calls": 40,
+        "query_encode_texts": 40,
+        "document_cache_hits": 1018,
+        "query_cache_hits": 32,
+        "query_cache_misses": 40,
+        "buffer_growths": 1,
+        "buffer_reallocations": 1,
+        "searches": 72,
+        "partial_topk_calls": 72,
+        "full_sort_fallbacks": 0
+      },
+      "rebuild_speedup_without_model_load": 2.7471565544643486,
+      "rebuild_speedup_with_upstream_model_reload": 2.770102815266364
+    },
+    {
+      "documents": 1024,
+      "document_sha256": "a6d299fef9cd769c15151b2ce41798becefd6cdf9cfdc9705e9876ffdfc1b40a",
+      "unique_documents": 1024,
+      "baseline_single_document_rebuild": {
+        "seconds": 12.086547881364822,
+        "encode_calls": 1024,
+        "encode_texts": 1024,
+        "encode_seconds": 11.881368432193995,
+        "model_reload_seconds": 0.05667232349514961,
+        "with_model_reload_seconds": 12.143220204859972
+      },
+      "fast_batched_rebuild": {
+        "seconds": 4.799637958407402,
+        "encode_calls": 16,
+        "encode_texts": 1024,
+        "encode_seconds": 4.786502569913864
+      },
+      "fast_unchanged_rebuild": {
+        "seconds": 0.00026419758796691895,
+        "encode_calls": 0,
+        "encode_texts": 0,
+        "encode_seconds": 0.0
+      },
+      "fast_changed_rebuild": {
+        "seconds": 0.049393970519304276,
+        "encode_calls": 1,
+        "encode_texts": 11,
+        "encode_seconds": 0.04847906529903412,
+        "changed_documents": 11
+      },
+      "baseline_queries_without_cache": {
+        "seconds": 0.22759568691253662,
+        "encode_calls": 24,
+        "encode_texts": 24,
+        "encode_seconds": 0.18938633427023888
+      },
+      "fast_queries_without_cache": {
+        "seconds": 0.193379458039999,
+        "encode_calls": 24,
+        "encode_texts": 24,
+        "encode_seconds": 0.18091188371181488
+      },
+      "fast_query_cache_fill": {
+        "seconds": 0.06874750554561615,
+        "encode_calls": 8,
+        "encode_texts": 8,
+        "encode_seconds": 0.06427018716931343
+      },
+      "fast_queries_with_warm_cache": {
+        "seconds": 0.0022297650575637817,
+        "encode_calls": 0,
+        "encode_texts": 0,
+        "encode_seconds": 0.0
+      },
+      "ranking_equivalence": {
+        "all_equal": true,
+        "queries": [
+          {
+            "question": "When did Caroline go to the LGBTQ support group?",
+            "equal": true,
+            "baseline_indices": [
+              2,
+              184,
+              29,
+              195,
+              77,
+              304,
+              36,
+              179,
+              108,
+              110
+            ],
+            "fast_indices": [
+              2,
+              184,
+              29,
+              195,
+              77,
+              304,
+              36,
+              179,
+              108,
+              110
+            ]
+          },
+          {
+            "question": "When did Melanie paint a sunrise?",
+            "equal": true,
+            "baseline_indices": [
+              13,
+              140,
+              14,
+              12,
+              365,
+              276,
+              366,
+              300,
+              277,
+              212
+            ],
+            "fast_indices": [
+              13,
+              140,
+              14,
+              12,
+              365,
+              276,
+              366,
+              300,
+              277,
+              212
+            ]
+          },
+          {
+            "question": "What fields would Caroline be likely to pursue in her educaton?",
+            "equal": true,
+            "baseline_indices": [
+              379,
+              8,
+              9,
+              34,
+              251,
+              17,
+              117,
+              156,
+              294,
+              3
+            ],
+            "fast_indices": [
+              379,
+              8,
+              9,
+              34,
+              251,
+              17,
+              117,
+              156,
+              294,
+              3
+            ]
+          },
+          {
+            "question": "What did Caroline research?",
+            "equal": true,
+            "baseline_indices": [
+              379,
+              34,
+              288,
+              3,
+              166,
+              117,
+              17,
+              95,
+              156,
+              190
+            ],
+            "fast_indices": [
+              379,
+              34,
+              288,
+              3,
+              166,
+              117,
+              17,
+              95,
+              156,
+              190
+            ]
+          },
+          {
+            "question": "What is Caroline's identity?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              190,
+              290,
+              59,
+              288,
+              17,
+              375,
+              379,
+              56,
+              384
+            ],
+            "fast_indices": [
+              34,
+              190,
+              290,
+              59,
+              288,
+              17,
+              375,
+              379,
+              56,
+              384
+            ]
+          },
+          {
+            "question": "When did Melanie run a charity race?",
+            "equal": true,
+            "baseline_indices": [
+              130,
+              19,
+              66,
+              378,
+              247,
+              18,
+              393,
+              196,
+              983,
+              213
+            ],
+            "fast_indices": [
+              130,
+              19,
+              66,
+              378,
+              247,
+              18,
+              393,
+              196,
+              983,
+              213
+            ]
+          },
+          {
+            "question": "When is Melanie planning on going camping?",
+            "equal": true,
+            "baseline_indices": [
+              202,
+              24,
+              132,
+              54,
+              400,
+              247,
+              401,
+              378,
+              63,
+              130
+            ],
+            "fast_indices": [
+              202,
+              24,
+              132,
+              54,
+              400,
+              247,
+              401,
+              378,
+              63,
+              130
+            ]
+          },
+          {
+            "question": "What is Caroline's relationship status?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              180,
+              156,
+              17,
+              30,
+              56,
+              379,
+              107,
+              166,
+              190
+            ],
+            "fast_indices": [
+              34,
+              180,
+              156,
+              17,
+              30,
+              56,
+              379,
+              107,
+              166,
+              190
+            ]
+          }
+        ]
+      },
+      "changed_ranking_equivalence": {
+        "all_equal": true,
+        "queries": [
+          {
+            "question": "When did Caroline go to the LGBTQ support group?",
+            "equal": true,
+            "baseline_indices": [
+              184,
+              29,
+              195,
+              77,
+              304,
+              2,
+              36,
+              179,
+              108,
+              110
+            ],
+            "fast_indices": [
+              184,
+              29,
+              195,
+              77,
+              304,
+              2,
+              36,
+              179,
+              108,
+              110
+            ]
+          },
+          {
+            "question": "When did Melanie paint a sunrise?",
+            "equal": true,
+            "baseline_indices": [
+              13,
+              140,
+              14,
+              12,
+              365,
+              276,
+              366,
+              300,
+              277,
+              212
+            ],
+            "fast_indices": [
+              13,
+              140,
+              14,
+              12,
+              365,
+              276,
+              366,
+              300,
+              277,
+              212
+            ]
+          },
+          {
+            "question": "What fields would Caroline be likely to pursue in her educaton?",
+            "equal": true,
+            "baseline_indices": [
+              379,
+              34,
+              251,
+              17,
+              117,
+              9,
+              8,
+              156,
+              294,
+              95
+            ],
+            "fast_indices": [
+              379,
+              34,
+              251,
+              17,
+              117,
+              9,
+              8,
+              156,
+              294,
+              95
+            ]
+          },
+          {
+            "question": "What did Caroline research?",
+            "equal": true,
+            "baseline_indices": [
+              3,
+              379,
+              34,
+              288,
+              166,
+              117,
+              17,
+              95,
+              156,
+              190
+            ],
+            "fast_indices": [
+              3,
+              379,
+              34,
+              288,
+              166,
+              117,
+              17,
+              95,
+              156,
+              190
+            ]
+          },
+          {
+            "question": "What is Caroline's identity?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              190,
+              290,
+              59,
+              288,
+              17,
+              375,
+              379,
+              56,
+              384
+            ],
+            "fast_indices": [
+              34,
+              190,
+              290,
+              59,
+              288,
+              17,
+              375,
+              379,
+              56,
+              384
+            ]
+          },
+          {
+            "question": "When did Melanie run a charity race?",
+            "equal": true,
+            "baseline_indices": [
+              130,
+              19,
+              66,
+              378,
+              247,
+              18,
+              393,
+              196,
+              983,
+              213
+            ],
+            "fast_indices": [
+              130,
+              19,
+              66,
+              378,
+              247,
+              18,
+              393,
+              196,
+              983,
+              213
+            ]
+          },
+          {
+            "question": "When is Melanie planning on going camping?",
+            "equal": true,
+            "baseline_indices": [
+              202,
+              24,
+              132,
+              54,
+              400,
+              247,
+              401,
+              378,
+              63,
+              130
+            ],
+            "fast_indices": [
+              202,
+              24,
+              132,
+              54,
+              400,
+              247,
+              401,
+              378,
+              63,
+              130
+            ]
+          },
+          {
+            "question": "What is Caroline's relationship status?",
+            "equal": true,
+            "baseline_indices": [
+              34,
+              180,
+              156,
+              17,
+              30,
+              56,
+              379,
+              107,
+              166,
+              190
+            ],
+            "fast_indices": [
+              34,
+              180,
+              156,
+              17,
+              30,
+              56,
+              379,
+              107,
+              166,
+              190
+            ]
+          }
+        ]
+      },
+      "extra_validation_encoding": {
+        "encode_calls": 9,
+        "encode_texts": 1032,
+        "encode_seconds": 3.545807432383299
+      },
+      "fast_metrics_cumulative": {
+        "encode_calls": 57,
+        "encode_texts": 1075,
+        "document_encode_calls": 17,
+        "document_encode_texts": 1035,
+        "query_encode_calls": 40,
+        "query_encode_texts": 40,
+        "document_cache_hits": 2037,
+        "query_cache_hits": 32,
+        "query_cache_misses": 40,
+        "buffer_growths": 1,
+        "buffer_reallocations": 1,
+        "searches": 72,
+        "partial_topk_calls": 72,
+        "full_sort_fallbacks": 0
+      },
+      "rebuild_speedup_without_model_load": 2.518220746252981,
+      "rebuild_speedup_with_upstream_model_reload": 2.530028370908478
+    }
+  ]
+}

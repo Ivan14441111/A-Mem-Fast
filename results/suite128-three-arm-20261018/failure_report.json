@@ -1,0 +1,19 @@
+{
+  "status": "failed_protocol_attempt",
+  "completed_cells": 1,
+  "failed_cells": 1,
+  "unrun_cells": 7,
+  "failed_cell": "turns128-sample0-upstream-r2",
+  "failed_arm": "optimized",
+  "failed_stage": "strengthen",
+  "exception_type": "ValueError",
+  "error": "LLM reached max_tokens; increase budget",
+  "max_tokens": 1000,
+  "last_reported_progress": "optimized: memory 112/128, HTTP=358",
+  "interpretation": "Incomplete arm is excluded from speed/quality summaries. Truncated response was rejected before caching. First completed cell is also resource-transition-confounded and remains visible.",
+  "log_sha256": "b64a609dc9c2049d0383bd025ab02336999a2ceb7ca15a0e7681390713ec8263",
+  "failed_turn_1based": 116,
+  "dia_id": "D7:8",
+  "failed_request_key": "c67c626e040ade152be951be68178af2246efe114ea6139f0cd2b674d233ebba",
+  "verification": "Independent cache-template key reconstruction and strict old-source graph replay reach the same first-missing request."
+}

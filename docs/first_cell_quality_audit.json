@@ -1,0 +1,644 @@
+{
+  "scope": "Post-hoc first-cell diagnosis only; no new model inference, no source modifications, no causal attribution to an individual fused prompt change.",
+  "method": "Read original cached answer requests; extract context and verify SHA256 equals checked-in QA context_digest. Match each annotated evidence turn by exact original timestamp+content against rendered memory rows. Identical content repeated at same session timestamp cannot be distinguished, and answer facts may also be supported by evolved metadata or other turns, so this is a context evidence-coverage diagnostic, not an official retrieval metric or proof of answer correctness.",
+  "sources_sha256": {
+    "results/suite128-three-arm-20261018/turns128-sample0-upstream-r1/baseline.json": "78fd3777d5334dcb7ea5e2c44293f2cc754b95b0f5d48e4b377afb858f692206",
+    "results/suite128-three-arm-20261018/turns128-sample0-upstream-r1/baseline.sqlite": "1e59a93def8b974691697b330dd0310a37d2b08b7d5ac70eda6247bde14cca79",
+    "results/suite128-three-arm-20261018/turns128-sample0-upstream-r1/optimized.json": "fcf39e212e0d77eb4e6269d4911bebc71ba056d184c8e479a0bbaff0dcbd2159",
+    "results/suite128-three-arm-20261018/turns128-sample0-upstream-r1/optimized.sqlite": "582dad963c872c84881094cb0b96165ecac02b56b829d9f526de6ce2fede8dfb",
+    "results/suite128-three-arm-20261018/turns128-sample0-upstream-r1/fused.json": "42803843e9e442b6748bacf27079ac4867b5cf25ecfaabbdc895a44e1d910923",
+    "results/suite128-three-arm-20261018/turns128-sample0-upstream-r1/fused.sqlite": "3aca02317789967d7f9ad1d16aaf548bca4db935f253e0f582441a45a9f0dbad"
+  },
+  "summary": {
+    "baseline": {
+      "question_count": 12,
+      "complete_evidence_questions": 8,
+      "mean_evidence_recall": 0.75
+    },
+    "optimized": {
+      "question_count": 12,
+      "complete_evidence_questions": 9,
+      "mean_evidence_recall": 0.7916666666666666
+    },
+    "fused": {
+      "question_count": 12,
+      "complete_evidence_questions": 6,
+      "mean_evidence_recall": 0.5416666666666666
+    }
+  },
+  "qa_by_arm": {
+    "baseline": [
+      {
+        "source_qa_index": 3,
+        "request_key": "8abe5d27896b0111b2c497bd1b8cd953d092c1989f9bc1ba9164ce87baffc7fe",
+        "category": 1,
+        "evidence": [
+          "D2:8"
+        ],
+        "included_evidence": [],
+        "evidence_recall": 0.0,
+        "all_evidence_in_context": false,
+        "prediction": "Research on career options and education.",
+        "answer": "Adoption agencies",
+        "f1": 0.0,
+        "unique_rendered_timestamp_content_pairs": 28
+      },
+      {
+        "source_qa_index": 0,
+        "request_key": "670cf0c99f9c0a1240e756d874c5040fa89ded27274a77644b02c0559583f1b1",
+        "category": 2,
+        "evidence": [
+          "D1:3"
+        ],
+        "included_evidence": [
+          "D1:3"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "8 May 2023",
+        "answer": "7 May 2023",
+        "f1": 0.6666666666666666,
+        "unique_rendered_timestamp_content_pairs": 20
+      },
+      {
+        "source_qa_index": 2,
+        "request_key": "6623ddf30959075d8051b1983f8707c1f2e64d25e787bf4a67b87414ff9b78c1",
+        "category": 3,
+        "evidence": [
+          "D1:9",
+          "D1:11"
+        ],
+        "included_evidence": [
+          "D1:9",
+          "D1:11"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Counseling and mental health.",
+        "answer": "Psychology, counseling certification",
+        "f1": 0.2857142857142857,
+        "unique_rendered_timestamp_content_pairs": 24
+      },
+      {
+        "source_qa_index": 82,
+        "request_key": "102fb344024442419ad3b74706cec8e644e7f76a6cf1ebafc6fbaf9d866d2f11",
+        "category": 4,
+        "evidence": [
+          "D2:2"
+        ],
+        "included_evidence": [
+          "D2:2"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Mental health.",
+        "answer": "mental health",
+        "f1": 1.0,
+        "unique_rendered_timestamp_content_pairs": 28
+      },
+      {
+        "source_qa_index": 4,
+        "request_key": "6d726951917db9675fb7916377fc830c04562ddf3beb1a77c2a14f04c9e6e1e8",
+        "category": 1,
+        "evidence": [
+          "D1:5"
+        ],
+        "included_evidence": [],
+        "evidence_recall": 0.0,
+        "all_evidence_in_context": false,
+        "prediction": "Caroline is an LGBTQ individual.",
+        "answer": "Transgender woman",
+        "f1": 0.0,
+        "unique_rendered_timestamp_content_pairs": 34
+      },
+      {
+        "source_qa_index": 1,
+        "request_key": "5184a0549e1be0bba0ab26fadbc276adbc0756f51d7709dd8229cf103f035387",
+        "category": 2,
+        "evidence": [
+          "D1:12"
+        ],
+        "included_evidence": [
+          "D1:12"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "8 May 2023",
+        "answer": 2022,
+        "f1": 0.0,
+        "unique_rendered_timestamp_content_pairs": 20
+      },
+      {
+        "source_qa_index": 14,
+        "request_key": "1e25cfb65dbadc7476b7c5fa00b0114772957617d5bdef1e4755f600dcdc6722",
+        "category": 3,
+        "evidence": [
+          "D4:15",
+          "D3:5"
+        ],
+        "included_evidence": [
+          "D4:15"
+        ],
+        "evidence_recall": 0.5,
+        "all_evidence_in_context": false,
+        "prediction": "Based on the context, the answer is: \"I struggled with mental health, and support I got was really helpful.\"",
+        "answer": "Likely no",
+        "f1": 0.0,
+        "unique_rendered_timestamp_content_pairs": 22
+      },
+      {
+        "source_qa_index": 83,
+        "request_key": "cb7e26b1d7b31101ad51b2d25c2da67383564039c78ad331d1e80cbae7b5e322",
+        "category": 4,
+        "evidence": [
+          "D2:3"
+        ],
+        "included_evidence": [
+          "D2:3"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Melanie realized that self-care is really important.",
+        "answer": "self-care is important",
+        "f1": 0.6,
+        "unique_rendered_timestamp_content_pairs": 28
+      },
+      {
+        "source_qa_index": 7,
+        "request_key": "5c752eeefe05c2a23d20d8fda0683cfe62466aa954371668946a4aba145cc77e",
+        "category": 1,
+        "evidence": [
+          "D3:13",
+          "D2:14"
+        ],
+        "included_evidence": [
+          "D3:13"
+        ],
+        "evidence_recall": 0.5,
+        "all_evidence_in_context": false,
+        "prediction": "Single.",
+        "answer": "Single",
+        "f1": 1.0,
+        "unique_rendered_timestamp_content_pairs": 28
+      },
+      {
+        "source_qa_index": 5,
+        "request_key": "d1d36e4ee14a0527c0bcc48969852bba0a49156aa5c037568821fe271c016edc",
+        "category": 2,
+        "evidence": [
+          "D2:1"
+        ],
+        "included_evidence": [
+          "D2:1"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "25 May 2023",
+        "answer": "The sunday before 25 May 2023",
+        "f1": 0.75,
+        "unique_rendered_timestamp_content_pairs": 30
+      },
+      {
+        "source_qa_index": 22,
+        "request_key": "f05f026872b5c387e97bf6be50fde43cbbef1a876a3906435eaadc1b36260189",
+        "category": 3,
+        "evidence": [
+          "D6:9"
+        ],
+        "included_evidence": [
+          "D6:9"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Yes, Caroline likely has Dr. Seuss books on her bookshelf.",
+        "answer": "Yes, since she collects classic children's books",
+        "f1": 0.23529411764705882,
+        "unique_rendered_timestamp_content_pairs": 28
+      },
+      {
+        "source_qa_index": 84,
+        "request_key": "c004d7683dd3341f48a24d9af1f792e2cce1a3627160c950598ee9ad76319ae0",
+        "category": 4,
+        "evidence": [
+          "D2:5"
+        ],
+        "included_evidence": [
+          "D2:5"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Melanie prioritizes self-care by carving out me-time each day through activities like running, reading, or playing her violin.",
+        "answer": "by carving out some me-time each day for activities like running, reading, or playing the violin",
+        "f1": 0.7878787878787878,
+        "unique_rendered_timestamp_content_pairs": 28
+      }
+    ],
+    "optimized": [
+      {
+        "source_qa_index": 3,
+        "request_key": "868d8fc38c93c0b6730760f8f3bd9ee12b178b645ba422dc81d6f813850ee26d",
+        "category": 1,
+        "evidence": [
+          "D2:8"
+        ],
+        "included_evidence": [],
+        "evidence_recall": 0.0,
+        "all_evidence_in_context": false,
+        "prediction": "Research on adoption agencies.",
+        "answer": "Adoption agencies",
+        "f1": 0.6666666666666666,
+        "unique_rendered_timestamp_content_pairs": 30
+      },
+      {
+        "source_qa_index": 0,
+        "request_key": "bdd0000841e7f24cdad5a9bb024a9536002185ef7ae9fa389b495ef1e78482a7",
+        "category": 2,
+        "evidence": [
+          "D1:3"
+        ],
+        "included_evidence": [
+          "D1:3"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "8 May 2023",
+        "answer": "7 May 2023",
+        "f1": 0.6666666666666666,
+        "unique_rendered_timestamp_content_pairs": 19
+      },
+      {
+        "source_qa_index": 2,
+        "request_key": "98290b3b80236d0a8cc1d7837a5d410ca21b32798d6f62bfc7c762de1c582e24",
+        "category": 3,
+        "evidence": [
+          "D1:9",
+          "D1:11"
+        ],
+        "included_evidence": [
+          "D1:9",
+          "D1:11"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Counseling and mental health.",
+        "answer": "Psychology, counseling certification",
+        "f1": 0.2857142857142857,
+        "unique_rendered_timestamp_content_pairs": 25
+      },
+      {
+        "source_qa_index": 82,
+        "request_key": "b48b07d0b5676c29b606a79440fed6596e3340a991cbe3c3533046b1cf8b0a62",
+        "category": 4,
+        "evidence": [
+          "D2:2"
+        ],
+        "included_evidence": [
+          "D2:2"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Mental health.",
+        "answer": "mental health",
+        "f1": 1.0,
+        "unique_rendered_timestamp_content_pairs": 31
+      },
+      {
+        "source_qa_index": 4,
+        "request_key": "095429226c49d4d6b8795a35c63ed7be97ac602a1941875b6c7ace01c939c21d",
+        "category": 1,
+        "evidence": [
+          "D1:5"
+        ],
+        "included_evidence": [],
+        "evidence_recall": 0.0,
+        "all_evidence_in_context": false,
+        "prediction": "Caroline is an LGBTQ individual seeking to provide a loving home for children through adoption.",
+        "answer": "Transgender woman",
+        "f1": 0.0,
+        "unique_rendered_timestamp_content_pairs": 34
+      },
+      {
+        "source_qa_index": 1,
+        "request_key": "d807c06c9b4855d3821cbcec887c597e903b91006ced7186cf350420e2c4e863",
+        "category": 2,
+        "evidence": [
+          "D1:12"
+        ],
+        "included_evidence": [
+          "D1:12"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "8 May 2023",
+        "answer": 2022,
+        "f1": 0.0,
+        "unique_rendered_timestamp_content_pairs": 22
+      },
+      {
+        "source_qa_index": 14,
+        "request_key": "34fe0330a8479dcaaa1ebe47f9da6a095e46b7fb40f9e47095829c3e8f80a16b",
+        "category": 3,
+        "evidence": [
+          "D4:15",
+          "D3:5"
+        ],
+        "included_evidence": [
+          "D4:15",
+          "D3:5"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "No, Caroline's desire to pursue counseling as a career is deeply rooted in the support she received, which inspired her to help others. Without that support, her passion for counseling might not have developed. Therefore, it's likely she would not still want to pursue counseling as a career if she hadn't received support growing up.",
+        "answer": "Likely no",
+        "f1": 0.07407407407407407,
+        "unique_rendered_timestamp_content_pairs": 23
+      },
+      {
+        "source_qa_index": 83,
+        "request_key": "4bf651b248700fceecb804f8ea0e8368a2f457f8e45fa97c844aae8b2409c295",
+        "category": 4,
+        "evidence": [
+          "D2:3"
+        ],
+        "included_evidence": [
+          "D2:3"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Melanie realized that self-care is really important.",
+        "answer": "self-care is important",
+        "f1": 0.6,
+        "unique_rendered_timestamp_content_pairs": 28
+      },
+      {
+        "source_qa_index": 7,
+        "request_key": "e6843c5dafe5351967d5e43c0cd12cdf3c2825538e01bf77083c34a303e32e85",
+        "category": 1,
+        "evidence": [
+          "D3:13",
+          "D2:14"
+        ],
+        "included_evidence": [
+          "D3:13"
+        ],
+        "evidence_recall": 0.5,
+        "all_evidence_in_context": false,
+        "prediction": "Caroline is married.",
+        "answer": "Single",
+        "f1": 0.0,
+        "unique_rendered_timestamp_content_pairs": 33
+      },
+      {
+        "source_qa_index": 5,
+        "request_key": "b1bf580fcf805170b9f2cde2c9df83711750714b47472c3a3970e375c6c3bda7",
+        "category": 2,
+        "evidence": [
+          "D2:1"
+        ],
+        "included_evidence": [
+          "D2:1"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "25 May 2023",
+        "answer": "The sunday before 25 May 2023",
+        "f1": 0.75,
+        "unique_rendered_timestamp_content_pairs": 32
+      },
+      {
+        "source_qa_index": 22,
+        "request_key": "ecdf629d17a60c335c7692fa291bfc3b5c45e42b3a2c0cf979bc20faf77b4df1",
+        "category": 3,
+        "evidence": [
+          "D6:9"
+        ],
+        "included_evidence": [
+          "D6:9"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Yes, Caroline likely has Dr. Seuss books on her bookshelf.",
+        "answer": "Yes, since she collects classic children's books",
+        "f1": 0.23529411764705882,
+        "unique_rendered_timestamp_content_pairs": 27
+      },
+      {
+        "source_qa_index": 84,
+        "request_key": "5b328933f0434af88d71ee38924e48118622062bed3fffc7efcbc704914d6a52",
+        "category": 4,
+        "evidence": [
+          "D2:5"
+        ],
+        "included_evidence": [
+          "D2:5"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Melanie prioritizes self-care by carving out some me-time each day - running, reading, or playing her violin.",
+        "answer": "by carving out some me-time each day for activities like running, reading, or playing the violin",
+        "f1": 0.7741935483870968,
+        "unique_rendered_timestamp_content_pairs": 24
+      }
+    ],
+    "fused": [
+      {
+        "source_qa_index": 3,
+        "request_key": "cab5c6cad867440d3792646d03f6149b77e90e9a4061e703872244f2be016144",
+        "category": 1,
+        "evidence": [
+          "D2:8"
+        ],
+        "included_evidence": [],
+        "evidence_recall": 0.0,
+        "all_evidence_in_context": false,
+        "prediction": "Research on career options.",
+        "answer": "Adoption agencies",
+        "f1": 0.0,
+        "unique_rendered_timestamp_content_pairs": 15
+      },
+      {
+        "source_qa_index": 0,
+        "request_key": "6652c7c7bbda74eab7253273693e1a8bc8e4bf825651a956ffdee391f1fa0eb1",
+        "category": 2,
+        "evidence": [
+          "D1:3"
+        ],
+        "included_evidence": [
+          "D1:3"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "8 May 2023",
+        "answer": "7 May 2023",
+        "f1": 0.6666666666666666,
+        "unique_rendered_timestamp_content_pairs": 10
+      },
+      {
+        "source_qa_index": 2,
+        "request_key": "af249df6379b8566313fb088e26d5bfa43c7a1bc952ab99f767fd050c9510e22",
+        "category": 3,
+        "evidence": [
+          "D1:9",
+          "D1:11"
+        ],
+        "included_evidence": [
+          "D1:11"
+        ],
+        "evidence_recall": 0.5,
+        "all_evidence_in_context": false,
+        "prediction": "Counseling and mental health fields.",
+        "answer": "Psychology, counseling certification",
+        "f1": 0.25,
+        "unique_rendered_timestamp_content_pairs": 21
+      },
+      {
+        "source_qa_index": 82,
+        "request_key": "2f51ed81cd6182f68277b45fc1c256ac95ea54e0da01b1a8919cb074cf5ef0cd",
+        "category": 4,
+        "evidence": [
+          "D2:2"
+        ],
+        "included_evidence": [
+          "D2:2"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Mental health.",
+        "answer": "mental health",
+        "f1": 1.0,
+        "unique_rendered_timestamp_content_pairs": 14
+      },
+      {
+        "source_qa_index": 4,
+        "request_key": "3197bf5e2a2b4155c15d7611879a22e9460825a414d1db32157bc99b8fbb2e4c",
+        "category": 1,
+        "evidence": [
+          "D1:5"
+        ],
+        "included_evidence": [],
+        "evidence_recall": 0.0,
+        "all_evidence_in_context": false,
+        "prediction": "Caroline's identity is her true self.",
+        "answer": "Transgender woman",
+        "f1": 0.0,
+        "unique_rendered_timestamp_content_pairs": 10
+      },
+      {
+        "source_qa_index": 1,
+        "request_key": "ffdc7ed710032f4d9a3c9244acd8b610f8e76f3d85e9d633eb3a2dce57881dc7",
+        "category": 2,
+        "evidence": [
+          "D1:12"
+        ],
+        "included_evidence": [],
+        "evidence_recall": 0.0,
+        "all_evidence_in_context": false,
+        "prediction": "8 May 2023",
+        "answer": 2022,
+        "f1": 0.0,
+        "unique_rendered_timestamp_content_pairs": 13
+      },
+      {
+        "source_qa_index": 14,
+        "request_key": "9e2e9ab615461d202e2ccfd03605f2efc8a3068062712192b3ffd4c607719b42",
+        "category": 3,
+        "evidence": [
+          "D4:15",
+          "D3:5"
+        ],
+        "included_evidence": [
+          "D4:15",
+          "D3:5"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Short answer: I want to help people go through it too.",
+        "answer": "Likely no",
+        "f1": 0.0,
+        "unique_rendered_timestamp_content_pairs": 19
+      },
+      {
+        "source_qa_index": 83,
+        "request_key": "f592145fcaaa5d42d1a0864f989c80129380e6fad3f0e97e24a2b456339aeb67",
+        "category": 4,
+        "evidence": [
+          "D2:3"
+        ],
+        "included_evidence": [
+          "D2:3"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Melanie realized that self-care is really important.",
+        "answer": "self-care is important",
+        "f1": 0.6,
+        "unique_rendered_timestamp_content_pairs": 13
+      },
+      {
+        "source_qa_index": 7,
+        "request_key": "84cbe0ebb48bdb2407e61b7c75125a05790daa8426e50b5ac1b261c3519e84f9",
+        "category": 1,
+        "evidence": [
+          "D3:13",
+          "D2:14"
+        ],
+        "included_evidence": [],
+        "evidence_recall": 0.0,
+        "all_evidence_in_context": false,
+        "prediction": "Married",
+        "answer": "Single",
+        "f1": 0.0,
+        "unique_rendered_timestamp_content_pairs": 14
+      },
+      {
+        "source_qa_index": 5,
+        "request_key": "134a7887499a411ec62dae50a67c84459a1fe969d10a623493e726e011864e83",
+        "category": 2,
+        "evidence": [
+          "D2:1"
+        ],
+        "included_evidence": [
+          "D2:1"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "25 May 2023",
+        "answer": "The sunday before 25 May 2023",
+        "f1": 0.75,
+        "unique_rendered_timestamp_content_pairs": 10
+      },
+      {
+        "source_qa_index": 22,
+        "request_key": "6ee001d54e9328479e15aa4d189d2dce63cff0b1307a21b9b1e34395a6341174",
+        "category": 3,
+        "evidence": [
+          "D6:9"
+        ],
+        "included_evidence": [
+          "D6:9"
+        ],
+        "evidence_recall": 1.0,
+        "all_evidence_in_context": true,
+        "prediction": "Yes, Caroline likely has Dr. Seuss books on her bookshelf.",
+        "answer": "Yes, since she collects classic children's books",
+        "f1": 0.23529411764705882,
+        "unique_rendered_timestamp_content_pairs": 13
+      },
+      {
+        "source_qa_index": 84,
+        "request_key": "06adb46def9b949670c87ac480efa8a9e75fb0bcdf86668b8d2e1446f84e9a3b",
+        "category": 4,
+        "evidence": [
+          "D2:5"
+        ],
+        "included_evidence": [],
+        "evidence_recall": 0.0,
+        "all_evidence_in_context": false,
+        "prediction": "Melanie prioritizes self-care by taking time for herself and looking after her family.",
+        "answer": "by carving out some me-time each day for activities like running, reading, or playing the violin",
+        "f1": 0.14285714285714285,
+        "unique_rendered_timestamp_content_pairs": 19
+      }
+    ]
+  }
+}

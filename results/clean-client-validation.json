@@ -1,0 +1,65 @@
+{
+  "validation_phase": "three-arm core before joint-policy promotion",
+  "python": "3.12.13",
+  "isolated_environment": "/tmp/amem-fast-clean-client-20261018",
+  "include_system_site_packages": false,
+  "torch_build": "2.9.0+cpu",
+  "cuda_runtime": null,
+  "setup_command": "scripts/setup_environment.sh --venv /tmp/amem-fast-clean-client-20261018 --python /data2/xyf25/qingcheng/.conda/envs/vllm-py312/bin/python --skip-assets",
+  "editable_install_command": "uv pip install --python /tmp/amem-fast-clean-client-20261018/bin/python -e '.[test]'",
+  "dependency_check": {
+    "command": "uv pip check --python /tmp/amem-fast-clean-client-20261018/bin/python",
+    "packages_checked": 70,
+    "compatible": true
+  },
+  "tests": {
+    "passed": 130,
+    "seconds": 22.59,
+    "warnings": 1,
+    "warning": "Untouched upstream memory_layer.py imports deprecated ast.Str.",
+    "environment": {
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1",
+      "NLTK_DATA": "/tmp/amem-fast-no-nltk-assets"
+    },
+    "assets_downloaded": false
+  },
+  "wheel_smoke": {
+    "installed_module_directory": "/tmp/amem-fast-installed",
+    "execution_directory": "/tmp",
+    "used_isolated_dependencies": true,
+    "checks": [
+      "installed module path",
+      "add note with explicit metadata",
+      "exact retrieval",
+      "SQLite put/get (initial wheel smoke)"
+    ],
+    "passed": true
+  },
+  "environment_manifest": {
+    "python": "3.12.13",
+    "versions": {
+      "torch": "2.9.0+cpu",
+      "transformers": "4.57.6",
+      "sentence-transformers": "5.1.2",
+      "numpy": "2.2.6",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.7.2",
+      "nltk": "3.9.2",
+      "rank-bm25": "0.2.2",
+      "litellm": "1.82.6",
+      "openai": "2.41.1",
+      "requests": "2.34.2",
+      "pytest": "9.0.2"
+    },
+    "embedding_device": "cpu"
+  },
+  "source_sha256": {
+    "fast_amem/__init__.py": "b65405eac2cc5a5b488b000dba6d8b582d432fdb3b9d9a149d915e74b1c9932b",
+    "fast_amem/client.py": "96f025a2b1df5d023e11eb16e4778c5e72cff8fd00dbd980e5649b092c8d7327",
+    "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+    "fast_amem/retriever.py": "11dba8ce9b95579666740b2ad4b48b53353614e89589d0ef20d80e662463dd97",
+    "fast_amem/system.py": "88900a771e25b2806043658bf8d99e622ee4461cad3fa39b05b366f6c2ea881a"
+  },
+  "scope_note": "Uses an existing CPython interpreter for the standard library, with isolated fresh site-packages and CPU PyTorch. Optional heavyweight upstream evaluation extras and live model quality are outside this installation check."
+}

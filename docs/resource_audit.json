@@ -1,0 +1,172 @@
+{
+  "scope": "First-cell resource-transition audit; captured during ongoing suite. This artifact preserves observed file timestamps, which Git does not preserve. No model inference and no benchmark source edits.",
+  "gpu_index": 2,
+  "timezone_note": "nvidia-smi CSV local timestamps are UTC+08:00; report-derived times below are UTC.",
+  "gpu_csv_path": "results/suite128-three-arm-20261018/turns128-sample0-upstream-r1-gpu.csv",
+  "audited_prefix_bytes": 298959,
+  "audited_prefix_sha256": "c877c3d8e5bc78979eacb7c62b9b39353d75fb1776b15953098da75db91c63e1",
+  "gpu_memory_segments": [
+    {
+      "first_local": "2026/10/18 00:49:03.656",
+      "last_local": "2026/10/18 01:00:08.676",
+      "memory_mib": 60476,
+      "sample_count": 331
+    },
+    {
+      "first_local": "2026/10/18 01:00:10.695",
+      "last_local": "2026/10/18 01:06:47.715",
+      "memory_mib": 44481,
+      "sample_count": 198
+    }
+  ],
+  "arms": {
+    "baseline": {
+      "report_path": "results/suite128-three-arm-20261018/turns128-sample0-upstream-r1/baseline.json",
+      "sha256": "78fd3777d5334dcb7ea5e2c44293f2cc754b95b0f5d48e4b377afb858f692206",
+      "observed_report_mtime_unix": 1792256434.364321,
+      "observed_report_mtime_utc": "2026-10-17T17:00:34.364321+00:00",
+      "approx_build_start_utc": "2026-10-17T16:49:17.500528+00:00",
+      "approx_build_end_utc": "2026-10-17T17:00:07.784637+00:00",
+      "build_seconds": 650.2841087803245,
+      "qa_seconds": 12.481791384518147,
+      "recording_flush_seconds_excluded": 14.097892310470343,
+      "build_http_requests": 394,
+      "build_by_stage": {
+        "analysis": {
+          "logical_calls": 128,
+          "http_requests": 128,
+          "cache_hits": 0,
+          "seconds_sum": 141.0027823075652,
+          "prompt_tokens_live": 27273,
+          "completion_tokens_live": 5369,
+          "latency_seconds_p50": 1.0757556445896626,
+          "latency_seconds_p95": 1.3651479974389076,
+          "latency_seconds_max": 1.606568492949009
+        },
+        "evolution_decision": {
+          "logical_calls": 127,
+          "http_requests": 127,
+          "cache_hits": 0,
+          "seconds_sum": 243.34953071922064,
+          "prompt_tokens_live": 122319,
+          "completion_tokens_live": 8649,
+          "latency_seconds_p50": 1.8945615217089653,
+          "latency_seconds_p95": 2.4722157921642056,
+          "latency_seconds_max": 3.250954158604145
+        },
+        "strengthen": {
+          "logical_calls": 127,
+          "http_requests": 127,
+          "cache_hits": 0,
+          "seconds_sum": 140.8738520294428,
+          "prompt_tokens_live": 108817,
+          "completion_tokens_live": 4787,
+          "latency_seconds_p50": 1.115184310823679,
+          "latency_seconds_p95": 1.3498805489391088,
+          "latency_seconds_max": 1.4393196739256382
+        },
+        "update_neighbors": {
+          "logical_calls": 12,
+          "http_requests": 12,
+          "cache_hits": 0,
+          "seconds_sum": 117.55138264223933,
+          "prompt_tokens_live": 13060,
+          "completion_tokens_live": 4459,
+          "latency_seconds_p50": 10.210108241066337,
+          "latency_seconds_p95": 12.12677889112383,
+          "latency_seconds_max": 13.166117332875729
+        }
+      }
+    },
+    "optimized": {
+      "report_path": "results/suite128-three-arm-20261018/turns128-sample0-upstream-r1/optimized.json",
+      "sha256": "fcf39e212e0d77eb4e6269d4911bebc71ba056d184c8e479a0bbaff0dcbd2159",
+      "observed_report_mtime_unix": 1792256683.976159,
+      "observed_report_mtime_utc": "2026-10-17T17:04:43.976159+00:00",
+      "approx_build_start_utc": "2026-10-17T17:00:34.525171+00:00",
+      "approx_build_end_utc": "2026-10-17T17:04:29.813710+00:00",
+      "build_seconds": 235.2885393165052,
+      "qa_seconds": 14.162448540329933,
+      "recording_flush_seconds_excluded": 0.0,
+      "build_http_requests": 390,
+      "build_by_stage": {
+        "analysis": {
+          "logical_calls": 256,
+          "http_requests": 128,
+          "cache_hits": 128,
+          "seconds_sum": 81.49221791699529,
+          "prompt_tokens_live": 27273,
+          "completion_tokens_live": 5391,
+          "latency_seconds_p50": 0.24551391415297985,
+          "latency_seconds_p95": 0.7454141192138195,
+          "latency_seconds_max": 0.998497124761343
+        },
+        "evolution_decision": {
+          "logical_calls": 127,
+          "http_requests": 127,
+          "cache_hits": 0,
+          "seconds_sum": 119.02378259599209,
+          "prompt_tokens_live": 123533,
+          "completion_tokens_live": 8546,
+          "latency_seconds_p50": 0.9179025702178478,
+          "latency_seconds_p95": 1.3014263391494747,
+          "latency_seconds_max": 1.5252146646380424
+        },
+        "strengthen": {
+          "logical_calls": 127,
+          "http_requests": 127,
+          "cache_hits": 0,
+          "seconds_sum": 73.67187356203794,
+          "prompt_tokens_live": 110013,
+          "completion_tokens_live": 4929,
+          "latency_seconds_p50": 0.5921297259628773,
+          "latency_seconds_p95": 0.7161687843501567,
+          "latency_seconds_max": 0.9160187244415283
+        },
+        "update_neighbors": {
+          "logical_calls": 8,
+          "http_requests": 8,
+          "cache_hits": 0,
+          "seconds_sum": 35.8183471634984,
+          "prompt_tokens_live": 9135,
+          "completion_tokens_live": 2892,
+          "latency_seconds_p50": 4.439216032624245,
+          "latency_seconds_p95": 5.3526303611695765,
+          "latency_seconds_max": 5.494450759142637
+        }
+      }
+    }
+  },
+  "timing_method": "Approximate build end = observed report file mtime minus explicitly excluded baseline recording flush minus QA duration; start subtracts build duration. Report formatting/writing and post-timing book-keeping are not separately timestamped, so these are approximate reconstructed boundaries, not original event wall timestamps.",
+  "conclusion": "GPU allocation dropped by15995MiB just after reconstructed baseline build end and before optimized build. Similar serial evolution calls became roughly twice as fast. First-cell live speedup is confounded by this resource transition; memory monitoring alone does not identify the exiting process or prove causality.",
+  "prospective_sensitivity_rule": {
+    "fixed_after_observing_first_cell": true,
+    "primary_report": "Retain all requested cells and outcomes, including this confounded cell.",
+    "sensitivity_label": "allocation-stable cells, not guaranteed compute-isolated cells",
+    "gpu_memory_range_max_mib": 1024,
+    "minimum_gpu_samples": 10,
+    "maximum_sample_gap_seconds": 10,
+    "missing_or_inadequate_monitoring": "Keep in full report; do not include in allocation-stable sensitivity.",
+    "interpretation": "Apply one mechanical resource-only rule to every cell; show per-conversation membership and descriptive ratios; no population confidence claim. Constant GPU memory allocation does not exclude competing compute activity.",
+    "threshold_authority": "Root fixed the final threshold at1GiB before subsequent-cell outcomes; the initial research suggestion was2GiB, superseded before sensitivity analysis."
+  },
+  "confirmation_plan": {
+    "sample_index": 0,
+    "max_turns": 128,
+    "cold_arms": [
+      "baseline",
+      "optimized",
+      "fused"
+    ],
+    "source_requirement": "Same frozen benchmark source snapshot and model/configuration as main suite",
+    "count": 1,
+    "timing": "Immediately after main suite, before unfreezing sources",
+    "reporting": "Keep original9 main cells and confirmation visible. If confirmation and other8 cells meet resource rule, report optional balanced allocation-stable9 descriptive analysis using2 original stable sample0 repeats plus confirmation and3 original repeats for each other conversation. If further cells fail resource rule, do not silently fill or repeatedly rerun until passing; report available counts and equal-conversation aggregates.",
+    "independent_units": "Same3 conversations and same QA sets; confirmation is another timing/decoding repetition, not a fourth conversation or new independent QA sample."
+  },
+  "protocol_status": {
+    "original_suite": "Aborted at secondcell due max_tokens1000 strengthen truncation:1complete,1failed,7pending. Preserve as pilot; no completed original9 aggregate exists.",
+    "confirmation_plan_status": "Previous plan retained as historical protocol note; cannot substitute any2000token primarycell.",
+    "recovery": "Fresh complete all-arm max_tokens2000 protocol; no pooling of pilot timings/quality. Resource rule fixed before newprimary."
+  }
+}

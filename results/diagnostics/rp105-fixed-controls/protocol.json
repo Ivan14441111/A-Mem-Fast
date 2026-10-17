@@ -1,0 +1,81 @@
+{
+  "defined_utc": "2026-10-17T17:22:44.793545+00:00",
+  "repetition_penalty": 1.05,
+  "max_tokens": 2000,
+  "temperature": 0,
+  "seed": 42,
+  "requests": 10,
+  "criteria": "Known failure must terminate, use <=256 completion tokens and <=16 parsed tags. Every control must terminate, contain explicit expected fields/headers, and parse. Both update controls have five retrieved neighbors and must return all five neighbor blocks. No QA scoring, penalty sweep, or cache insertion.",
+  "selections": [
+    {
+      "index": 0,
+      "stage": "strengthen",
+      "recorded_key": "c67c626e040ade152be951be68178af2246efe114ea6139f0cd2b674d233ebba",
+      "selection_rule": "exact reconstructed failing turn 116 / D7:8 prompt",
+      "prompt_sha256": "0ca08fcb63ee063b75e50953172eacc66418c64b19d29f8b4b57ac5bd51de040"
+    },
+    {
+      "index": 1,
+      "stage": "analysis",
+      "recorded_key": "1a17646d48bc2a0139c9c9ec4ca4dbe6f131c9498022d7d88f619d97940ebd11",
+      "selection_rule": "first recorded baseline analysis",
+      "prompt_sha256": "f66b641c6ad545cbf8e8386321620ac6bdb32282ea2ff764af2fb4fe43a76495"
+    },
+    {
+      "index": 2,
+      "stage": "analysis",
+      "recorded_key": "8ddd76eff38b64e7dbeb8c73ba131c11ada3c53388a18085df625b3963ef2ecf",
+      "selection_rule": "middle recorded baseline analysis",
+      "prompt_sha256": "6dde96067c2e3a67e77da3e5792554180f8705a565608199ef455d8d0d5c2eaf"
+    },
+    {
+      "index": 3,
+      "stage": "evolution_decision",
+      "recorded_key": "7510f7a6849e64ff2f4354d68bcec9d02cbf5aeef3a854e3703adb8c83412bdf",
+      "selection_rule": "first recorded baseline decision",
+      "prompt_sha256": "e2c3ef80c03f91908c80018138cb64600e1e37f534afdedc488c0642c5541789"
+    },
+    {
+      "index": 4,
+      "stage": "strengthen",
+      "recorded_key": "a9253daa38702fafa0a96644501d229de78d872a319ba34936a8714955ae1309",
+      "selection_rule": "first recorded baseline strengthen",
+      "prompt_sha256": "295adce31416cc8389a7ca55e93a7ea8162fc6b2e9cb68d1d23b45a9e779cde0"
+    },
+    {
+      "index": 5,
+      "stage": "strengthen",
+      "recorded_key": "029ef96bb318095b28d69c6487bdaa82720c5e2b1c5a02b97337ccd940792adf",
+      "selection_rule": "largest recorded prompt-token baseline strengthen, excluding first",
+      "prompt_sha256": "c839a27da03c056e64dd94777a50ecd3bae189f6c868dce1e8b0962f146b5225"
+    },
+    {
+      "index": 6,
+      "stage": "update_neighbors",
+      "recorded_key": "4efb31a980c0405a6470c188a2bdf0d074ba96b19a82fd430ba88e38e8f6cce9",
+      "selection_rule": "first recorded update with exactly five retrieved neighbors",
+      "prompt_sha256": "471f9556532c40493d4ee1df731a271da99dc1f5d0a92288b73d1916a8493c96"
+    },
+    {
+      "index": 7,
+      "stage": "update_neighbors",
+      "recorded_key": "c9fbb29bef2b16ff72b605b4f0e46b6aed8fa12788385381d43072583e0146d8",
+      "selection_rule": "largest recorded prompt-token five-neighbor update, excluding first",
+      "prompt_sha256": "a3b47085b32047065395861bd278cd8f7964a84ce69852255c57f6f391eec42f"
+    },
+    {
+      "index": 8,
+      "stage": "query_keywords",
+      "recorded_key": "9301ba15d83e5d88b53525693c108924cbfc6d7d7cffc8853f0efbc5611c081d",
+      "selection_rule": "first recorded baseline QA keyword request",
+      "prompt_sha256": "ca44c7887c99c643e8f6e8ed09771c37183975b916d424261ba41a88e3f82dbc"
+    },
+    {
+      "index": 9,
+      "stage": "answer",
+      "recorded_key": "8abe5d27896b0111b2c497bd1b8cd953d092c1989f9bc1ba9164ce87baffc7fe",
+      "selection_rule": "first recorded baseline QA answer; structural check only, no quality scoring",
+      "prompt_sha256": "0c00f194331aef74f4c4f4d8621ee218262c3dc9924707e9fd257039d0cf01d4"
+    }
+  ]
+}

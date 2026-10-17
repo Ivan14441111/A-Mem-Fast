@@ -1,0 +1,67 @@
+{
+  "python": "3.12.13",
+  "inherited_environment": "/data2/xyf25/qingcheng/.conda/envs/vllm-py312",
+  "weights": "/data2/xyf25/qingcheng/models/Qwen3-8B",
+  "served_model": "Qwen3-8B",
+  "base_url": "http://127.0.0.1:21014/v1",
+  "gpu_index": 2,
+  "gpu_name": "NVIDIA A100-SXM4-80GB",
+  "dtype": "bfloat16",
+  "max_model_len": 16384,
+  "max_num_seqs": 16,
+  "gpu_memory_utilization": 0.55,
+  "enable_prefix_caching": true,
+  "thinking": false,
+  "cpu_threads": 4,
+  "versions": {
+    "torch": "2.9.0+cu129",
+    "transformers": "4.57.6",
+    "vllm": "0.11.2",
+    "openai": "2.41.1",
+    "sentence-transformers": "5.1.2",
+    "numpy": "2.2.6",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.7.2",
+    "nltk": "3.9.2",
+    "rank-bm25": "0.2.2",
+    "litellm": "1.82.6",
+    "requests": "2.34.2",
+    "pytest": "9.0.2"
+  },
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "embedding_path": "/home/xyf25/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "non_thinking_template": "scripts/qwen3_non_thinking.jinja",
+  "non_thinking_template_provenance": "Qwen3-8B tokenizer_config.json chat_template with enable_thinking explicitly false",
+  "model_revision_fingerprints_sha256": {
+    "/data2/xyf25/qingcheng/models/Qwen3-8B/config.json": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+    "/data2/xyf25/qingcheng/models/Qwen3-8B/model.safetensors.index.json": "f9fdbcb91c23971c13ec5d5f2573d2349e8f61f2f049371ec699281748fdb1bc",
+    "/data2/xyf25/qingcheng/models/Qwen3-8B/tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+    "scripts/qwen3_non_thinking.jinja": "01de28f89d9ea9e97911535dca4564cf6041befc13e2f5d08187fca2349758f6"
+  },
+  "model_revision_fingerprint_note": "Configuration/index/tokenizer/template fingerprints; weight shard contents have not been hashed.",
+  "nltk_data": "/data2/xyf25/A-Mem-Fast/.cache/nltk_data",
+  "VLLM_SERVER_DEV_MODE": 1,
+  "prefix_cache_reset": "POST http://127.0.0.1:21014/reset_prefix_cache (no body or parameters)",
+  "nltk_english_sha256": {
+    "sent_starters.txt": "f3f8535483e1dba487241b764945168123bca3209a9645e59acd1225dc76edac",
+    "ortho_context.tab": "4bbcca25ed3d3f06c02402abf8419b9f033b8adc06e7b482eca4e45f81a5dc4c",
+    "collocations.tab": "8e2da1225e4dd2cc9dba261ee231ccb134859e21b46006e7f472c5ee269af0cf",
+    "abbrev_types.txt": "92a3e070f43d9b4c5534758ca40ad7343b04e7e29bfe0c2eb658a39445a4f779"
+  },
+  "readiness": "Validated HTTP health 200, non-thinking JSON object completion 200, reset_prefix_cache 200 with EngineCore success log, memory_layer import, English tokenization, CPU MiniLM output shape (1,384).",
+  "smoke_completion": {
+    "content": "{\"ready\": true}",
+    "prompt_tokens": 21,
+    "completion_tokens": 6,
+    "wall_seconds": 1.1865942291915417
+  },
+  "smoke_embedding": {
+    "device": "cpu",
+    "shape": [
+      1,
+      384
+    ],
+    "load_and_encode_seconds": 0.701
+  }
+}

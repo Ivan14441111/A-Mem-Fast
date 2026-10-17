@@ -1,0 +1,161 @@
+{
+  "aggregation": "Mean log paired speedup within conversation, then equal-conversation mean and exponentiation. F1 averages repeats within conversation then conversations equally. Repeated QA and confirmation do not add independent conversations or questions.",
+  "sensitivity_limit": "Allocation-stable only classifies observed GPU memory allocation range, not all compute-load changes. Primary planned data is always retained.",
+  "inputs": {
+    "primary_suite": "results/suite128-three-arm-20261018/suite.json",
+    "primary_suite_sha256": "91fb0b5971db3151eee76435f7ad54d9373159af0f49cca72aca82b6a22f075d",
+    "primary_audit": "results/suite128-three-arm-20261018/gpu_audit.json"
+  },
+  "views": {
+    "planned_all": {
+      "cell_refs": [
+        {
+          "origin": "primary",
+          "name": "turns128-sample0-upstream-r1"
+        },
+        {
+          "origin": "primary",
+          "name": "turns128-sample0-upstream-r2"
+        },
+        {
+          "origin": "primary",
+          "name": "turns128-sample0-upstream-r3"
+        },
+        {
+          "origin": "primary",
+          "name": "turns128-sample1-upstream-r1"
+        },
+        {
+          "origin": "primary",
+          "name": "turns128-sample1-upstream-r2"
+        },
+        {
+          "origin": "primary",
+          "name": "turns128-sample1-upstream-r3"
+        },
+        {
+          "origin": "primary",
+          "name": "turns128-sample2-upstream-r1"
+        },
+        {
+          "origin": "primary",
+          "name": "turns128-sample2-upstream-r2"
+        },
+        {
+          "origin": "primary",
+          "name": "turns128-sample2-upstream-r3"
+        }
+      ],
+      "unique_selected_qa": 12,
+      "metrics": {
+        "fused": {
+          "paired_runs": 1,
+          "independent_conversations": 1,
+          "build_speedup_equal_conversation_geomean": 6.425520888898367,
+          "total_speedup_equal_conversation_geomean": 6.037219160019426,
+          "baseline_f1_equal_conversation_mean": 0.4437961548255666,
+          "candidate_f1_equal_conversation_mean": 0.303734827264239,
+          "f1_delta_equal_conversation_mean": -0.1400613275613276,
+          "conversations": [
+            {
+              "sample_index": 0,
+              "turns": 128,
+              "repeats": 1,
+              "build_log_speedup": 1.8602776996971906,
+              "total_log_speedup": 1.7979435019579797,
+              "baseline_f1": 0.4437961548255666,
+              "candidate_f1": 0.303734827264239,
+              "f1_delta": -0.1400613275613276
+            }
+          ]
+        },
+        "optimized": {
+          "paired_runs": 1,
+          "independent_conversations": 1,
+          "build_speedup_equal_conversation_geomean": 2.7637729855833566,
+          "total_speedup_equal_conversation_geomean": 2.656898278331201,
+          "baseline_f1_equal_conversation_mean": 0.4437961548255666,
+          "candidate_f1_equal_conversation_mean": 0.42105077992965406,
+          "f1_delta_equal_conversation_mean": -0.02274537489591255,
+          "conversations": [
+            {
+              "sample_index": 0,
+              "turns": 128,
+              "repeats": 1,
+              "build_log_speedup": 1.0165967699648328,
+              "total_log_speedup": 0.9771593816380357,
+              "baseline_f1": 0.4437961548255666,
+              "candidate_f1": 0.42105077992965406,
+              "f1_delta": -0.02274537489591255
+            }
+          ]
+        }
+      }
+    },
+    "planned_allocation_stable": {
+      "cell_refs": [],
+      "unique_selected_qa": 0,
+      "metrics": {}
+    },
+    "supplemental_balanced_stable": {
+      "available": false,
+      "reason": "Confirmation not yet supplied"
+    }
+  },
+  "retained_cells": [
+    {
+      "origin": "primary",
+      "name": "turns128-sample0-upstream-r1",
+      "status": "complete",
+      "classification": "resource-transition-confounded"
+    },
+    {
+      "origin": "primary",
+      "name": "turns128-sample0-upstream-r2",
+      "status": "failed",
+      "classification": "allocation-stable"
+    },
+    {
+      "origin": "primary",
+      "name": "turns128-sample0-upstream-r3",
+      "status": "pending",
+      "classification": "unavailable"
+    },
+    {
+      "origin": "primary",
+      "name": "turns128-sample1-upstream-r1",
+      "status": "pending",
+      "classification": "unavailable"
+    },
+    {
+      "origin": "primary",
+      "name": "turns128-sample1-upstream-r2",
+      "status": "pending",
+      "classification": "unavailable"
+    },
+    {
+      "origin": "primary",
+      "name": "turns128-sample1-upstream-r3",
+      "status": "pending",
+      "classification": "unavailable"
+    },
+    {
+      "origin": "primary",
+      "name": "turns128-sample2-upstream-r1",
+      "status": "pending",
+      "classification": "unavailable"
+    },
+    {
+      "origin": "primary",
+      "name": "turns128-sample2-upstream-r2",
+      "status": "pending",
+      "classification": "unavailable"
+    },
+    {
+      "origin": "primary",
+      "name": "turns128-sample2-upstream-r3",
+      "status": "pending",
+      "classification": "unavailable"
+    }
+  ]
+}

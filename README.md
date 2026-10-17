@@ -1,150 +1,126 @@
-# Agentic Memory 🧠
+# A-Mem-Fast
 
-A novel agentic memory system for LLM agents that can dynamically organize memories in an agentic way.
+A measured performance engineering project built on [A-Mem](https://github.com/WujiangXu/A-mem). It provides a bounded ingestion pipeline, an incremental exact vector index, a persistent response cache, and an opt-in fused memory evolution policy. The benchmark harness separates live inference, response replay, and index microbenchmarks so their speedups can be assessed independently.
 
-> **Note:** This repository is specifically designed to reproduce the results presented in our paper. If you want to use the A-Mem system in building your agents, please refer to our official implementation at: [A-mem-sys](https://github.com/WujiangXu/A-mem-sys)
+The reference implementation is the upstream **robust** memory layer at commit `0c8039f28fdcc08189a23c07a3437d9d2482f9c2`. The upstream source files and prompts remain in the repository. The fast implementation follows the upstream successful execution path with stricter error propagation; fused evolution and context deduplication are explicit policy changes. See [engineering details](README_FAST.md), [source audit](docs/audit.md), and [experiment report](docs/experiments.md).
 
-For more details, please refer to our paper: [A-Mem: Agentic Memory for LLM Agents](https://arxiv.org/pdf/2502.12110)
-
-## Introduction 🌟
-
-Large Language Model (LLM) agents have demonstrated remarkable capabilities in handling complex real-world tasks through external tool usage. However, to effectively leverage historical experiences, they require sophisticated memory systems. Traditional memory systems, while providing basic storage and retrieval functionality, often lack advanced memory organization capabilities.
-
-Our project introduces an innovative **Agentic Memory** system that revolutionizes how LLM agents manage and utilize their memories:
-
-<div align="center">
-  <img src="Figure/intro-a.jpg" alt="Traditional Memory System" width="600"/>
-  <img src="Figure/intro-b.jpg" alt="Our Proposed Agentic Memory" width="600"/>
-  <br>
-  <em>Comparison between traditional memory system (top) and our proposed agentic memory (bottom). Our system enables dynamic memory operations and flexible agent-memory interactions.</em>
-</div>
-
-## Key Features ✨
-
-- 🔄 Dynamic memory organization based on Zettelkasten principles
-- 🔍 Intelligent indexing and linking of memories
-- 📝 Comprehensive note generation with structured attributes
-- 🌐 Interconnected knowledge networks
-- 🔄 Continuous memory evolution and refinement
-- 🤖 Agent-driven decision making for adaptive memory management
-
-## Framework 🏗️
-
-<div align="center">
-  <img src="Figure/framework.jpg" alt="Agentic Memory Framework" width="800"/>
-  <br>
-  <em>The framework of our Agentic Memory system showing the dynamic interaction between LLM agents and memory components.</em>
-</div>
-
-## How It Works 🛠️
-
-When a new memory is added to the system:
-1. Generates comprehensive notes with structured attributes
-2. Creates contextual descriptions and tags
-3. Analyzes historical memories for relevant connections
-4. Establishes meaningful links based on similarities
-5. Enables dynamic memory evolution and updates
-
-## Results 📊
-
-Empirical experiments conducted on six foundation models demonstrate superior performance compared to existing SOTA baselines.
-
-## Getting Started 🚀
-
-1. Clone the repository:
-```bash
-git clone https://github.com/WujiangXu/AgenticMemory.git
-cd AgenticMemory
+```mermaid
+flowchart LR
+    T[Chronological turns] --> A[Bounded parallel metadata analysis]
+    A --> C[Exact request cache]
+    C --> S[Sequential note insertion]
+    S --> E{Evolution policy}
+    E --> U[Upstream conditional calls]
+    E --> F[Fused structured call]
+    U --> G[Memory graph]
+    F --> G
+    G --> I[Shared encoder and exact index]
+    I --> Q[Retrieval and QA]
 ```
 
-2. Install dependencies:
-Option 1: Using venv (Python virtual environment)
-```bash
-# Create and activate virtual environment
-python -m venv a-mem
-source a-mem/bin/activate  # Linux/Mac
-a-mem\Scripts\activate     # Windows
+| Component | Purpose | Semantic boundary |
+| --- | --- | --- |
+| Rolling metadata prefetch | Overlap independent analysis with ordered graph updates | Default retains upstream prompts and mutation order |
+| Exact incremental index | Reuse encoder, grow vector storage, batch changed documents at consolidation | Retains cosine ranking, row indices, consolidation schedule and stale-vector behavior |
+| SQLite WAL response cache | Reuse complete deterministic requests and audit replay | Includes model revision, endpoint and decoding settings in identity; HTTP failures and truncated outputs are rejected |
+| Fused evolution | Replace conditional decision/strengthen/update requests with one structured request | Changes prompts and potentially memory/QA outcomes; opt-in |
+| Context deduplication | Remove duplicate graph rows from QA context | Changes QA prompts; separate opt-in ablation |
 
-# Install dependencies
-pip install -r requirements.txt
-```
+## Evidence and limits
 
-Option 2: Using Conda
-```bash
-# Create and activate conda environment
-conda create -n myenv python=3.9
-conda activate myenv
+Real Qwen3-8B / MiniLM / LoCoMo measurements, including negative results and per-question outputs, are documented in [the experiment report](docs/experiments.md). The early 64-turn run achieved **1.34× build speedup**, while normalized token F1 changed from **0.490 to 0.401** in separately inferred live arms. Fixed-response replay matched the reference memory trace, original request sequence, and complete QA outputs. This validates replay equivalence; it does not establish identical live outputs under concurrent model serving.
 
-# Install dependencies
-pip install -r requirements.txt
-```
+The suite supports multiple conversations, repeated paired runs, three rotated arm orders, evidence-complete QA selection, token counts, stage latencies, parser/error counters, and GPU load logs. Repeats of the same questions are not independent new samples. Measurements on shared hardware and this small LoCoMo subset do not establish a general speed or accuracy guarantee. Cache replay and index-only speedups are reported separately from live end-to-end inference. This project does not reproduce the paper's full evaluation.
 
-3. Run the experiments in LoCoMo dataset:
+## Install
 
-**Option A — Original evaluation (requires OpenAI JSON schema support):**
-```bash
-python test_advanced.py
-```
-
-**Option B — Robust evaluation (recommended, works with any LLM backend):**
-
-The robust evaluation (`test_advanced_robust.py`) removes the JSON schema dependency and supports OpenAI API, vLLM, and Ollama backends.
+Python 3.12 is the tested environment. The package metadata allows Python 3.10–3.13, but those versions have not been benchmarked. A CPU embedding client and a separate GPU inference environment keep benchmark resource use explicit.
 
 ```bash
-# OpenAI models
-python test_advanced_robust.py --backend openai --model gpt-4o-mini \
-    --dataset data/locomo10.json --output results_robust_gpt-4o-mini.json
+# From a checkout of this repository. Requires uv; refuses an existing target.
+scripts/setup_environment.sh
 
-# vLLM-served open-source models (start vLLM server first)
-python -m vllm.entrypoints.openai.api_server \
-    --model Qwen/Qwen2.5-3B-Instruct --port 30000 \
-    --dtype float16 --enforce-eager --max-model-len 8192
-python test_advanced_robust.py --backend vllm --model Qwen/Qwen2.5-3B-Instruct \
-    --dataset data/locomo10.json --output results_robust_qwen3b.json \
-    --sglang_port 30000
-
-# Ollama models
-python test_advanced_robust.py --backend ollama --model qwen2.5:3b \
-    --dataset data/locomo10.json --output results_robust_ollama_qwen3b.json
+# Optional editable package installation in that client environment.
+uv pip install --python .venv-client/bin/python -e '.[test]'
+export NLTK_DATA="$PWD/.cache/nltk_data"
+export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4
+export TOKENIZERS_PARALLELISM=false
 ```
 
-Key arguments:
-- `--retrieve_k`: Number of memories to retrieve per query (default: 10). Tune this per model for best results.
-- `--ratio`: Fraction of dataset to evaluate (e.g., `--ratio 0.1` for 10% quick test).
-- `--backend`: One of `openai`, `vllm`, `ollama`.
-- `--sglang_port`: Port for vLLM/SGLang server (default: 30000).
+The setup script installs [pinned client dependencies](requirements-fast.txt), CPU PyTorch, NLTK resources, and the pinned `all-MiniLM-L6-v2` snapshot. It prints the embedding model directory; use it as `EMBEDDING_MODEL` below. For an existing environment, `python -m pip install -e '.[test]'` installs the package; download embedding/NLTK assets separately.
 
-4. Run the full k-sweep to find optimal retrieval k per model:
+A compatible OpenAI-style inference endpoint is required for live benchmarks. The provided local Qwen server setup is:
+
 ```bash
-bash run_k_sweep.sh
+uv venv --python 3.12 .venv-serve
+uv pip install --python .venv-serve/bin/python vllm==0.11.2 transformers==4.57.6
+INFERENCE_ENV="$PWD/.venv-serve" MODEL_DIR=/path/to/Qwen3-8B GPU_ID=0 \
+  scripts/serve_qwen.sh
 ```
 
-**Note:** To achieve the optimal performance reported in our paper, please adjust the hyperparameter `k` value accordingly. Memories are cached after the first run, so subsequent k-sweep evaluations only re-run the QA answering step.
+Download model weights before starting the server. The script binds to `127.0.0.1:21014` and enables the vLLM development prefix-cache reset endpoint used to isolate cold arms. GPU memory limits and other server options are configurable through environment variables in [the script](scripts/serve_qwen.sh).
 
-**Categories Information:** The LoCoMo dataset contains the following categories:
-* Category 1: Multi-hop
-* Category 2: Temporal
-* Category 3: Open-domain
-* Category 4: Single-hop
-* Category 5: Adversarial
+## Run
 
-For more details about the categories, please refer to [this GitHub issue](https://github.com/snap-research/locomo/issues/6). 
+Inspect coverage and the three-arm order without loading models or contacting a server:
 
-## Citation 📚
-
-If you use this code in your research, please cite our work:
-
-```bibtex
-@inproceedings{xu2025amem,
-  title={A-Mem: Agentic memory for llm agents},
-  author={Xu, Wujiang and Liang, Zujie and Mei, Kai and Gao, Hang and Tan, Juntao and Zhang, Yongfeng},
-  booktitle={Advances in Neural Information Processing Systems},
-  year={2025}
-}
+```bash
+python scripts/benchmark_suite.py --plan-only --include-fused \
+  --samples 0 1 2 --turns 128 --repeats 3 --max-questions 12 \
+  --output results/my-plan
 ```
 
-## License 📄
+Run an isolated reference / exact pipeline / fused comparison with each arm's replay:
 
-This project is licensed under the MIT License. See LICENSE for details.
+```bash
+export EMBEDDING_MODEL=/path/to/all-MiniLM-L6-v2
+# A stable identity for the actual weights, tokenizer, chat template and serving configuration.
+export MODEL_REVISION=your-model-and-template-revision
 
+.venv-client/bin/python scripts/benchmark.py \
+  --embedding-model "$EMBEDDING_MODEL" --model-revision "$MODEL_REVISION" \
+  --max-turns 64 --max-questions 12 \
+  --modes baseline,optimized,fused,replay,warm,fused_warm \
+  --output results/my-smoke
+```
 
+Run the repeated suite:
+
+```bash
+.venv-client/bin/python scripts/benchmark_suite.py --include-fused \
+  --embedding-model "$EMBEDDING_MODEL" --model-revision "$MODEL_REVISION" \
+  --samples 0 1 2 --turns 128 --repeats 3 --max-questions 12 \
+  --output results/my-suite
+```
+
+Use a fresh output directory for each cold run. `--resume` skips completed suite cells only when source and configuration hashes match; partial failed cells are preserved for inspection and require a new suite output. `--context-policy deduplicated` changes QA context for fast arms; the default is `upstream`. If a server does not support prefix-cache reset, `--prefix-cache-reset off` runs with that limitation recorded in the manifest.
+
+Every subset keeps chronological turns and selects QA whose nonempty evidence references are fully contained in those turns. Categories 1–4 are selected in round-robin order; category 5 is excluded. Metrics are normalized exact match and multiset token F1, defined in the harness. `summary.json` separates build and QA times. Model loading/startup/warmup and the reference's write-only recording flush are excluded from live timings and reported separately; real inference and fast-cache overhead are included.
+
+Response-cache SQLite files stay local and are excluded from git; the repository includes reports and source fingerprints. After a run has exited, `python scripts/archive_replay_cache.py --run-dir results/my-suite` creates a consistent private cache archive with SHA256 checks under `.private/artifacts/`.
+
+Existing recorded outputs can be replayed with the same benchmark configuration and `--modes replay,warm,fused_warm`. Replay is strict, never falls back to inference, and needs no live server. A changed model or template requires a new revision identity.
+
+## Test and inspect
+
+```bash
+.venv-client/bin/python -m pytest -q
+.venv-client/bin/python scripts/benchmark_index.py \
+  --embedding-model "$EMBEDDING_MODEL" --output results/my-index.json
+```
+
+Saved suites can be summarized and plotted without running inference:
+
+```bash
+python scripts/summarize_suite.py results/my-suite/suite.json --output results/my-suite/derived.json
+uv venv --python 3.12 .venv-analysis
+uv pip install --python .venv-analysis/bin/python 'matplotlib>=3.8,<3.11'
+.venv-analysis/bin/python scripts/plot_suite.py results/my-suite/suite.json \
+  --output results/my-suite/overview.svg --png
+```
+
+The figure includes individual repeat dots and saves the plotted data with a source-suite hash. Unit tests use deterministic HTTP and embedding doubles; they do not download models or contact a live service. They cover graph/request/QA replay equivalence, rolling prefetch, failures, parser validation, exact ranking and ties, index rebuilds, cache isolation and concurrent request coalescing. The index microbenchmark uses real MiniLM embeddings and LoCoMo text, and measures index work only.
+
+## Attribution
+
+The original A-Mem README, paper links and citation are preserved in [docs/UPSTREAM_README.md](docs/UPSTREAM_README.md). Original code copyright and MIT terms remain in [LICENSE](LICENSE); [NOTICE](NOTICE) records provenance and the scope of this engineering work. The dataset and original figures are inherited from upstream. LoCoMo data is separately licensed under [CC BY-NC 4.0](data/LICENSE-LOCOMO.txt); see [dataset attribution](data/README.md). No upstream paper results are claimed as results of A-Mem-Fast.

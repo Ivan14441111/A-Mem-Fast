@@ -1,0 +1,15 @@
+{
+  "defined_utc": "2026-10-17T17:07:08.289325+00:00",
+  "target_gpu_index": 2,
+  "gpu_timestamp_timezone": "Asia/Shanghai",
+  "allocation_transition_threshold_mib": 1024,
+  "classification": "resource-transition-confounded if target GPU max(memory.used)-min(memory.used)>1024MiB over whole cell; allocation-stable otherwise when samples exist",
+  "limitations": "Allocation stability does not establish compute-load stability or remove all confounding. Criterion defined after observing first baseline/exact load transition; all nine cells remain the primary aggregate.",
+  "cell_statuses_at_definition": {
+    "complete": 1,
+    "running": 1,
+    "pending": 7
+  },
+  "suite_configuration_fingerprint": "2b5ea21afb88428550a1d63450dc58319fe60ba94f44a8fb22bee85544b93122",
+  "confirmation": "One fresh same-config sample0 baseline/exact/fused plus all replays in a separate output after the main suite."
+}

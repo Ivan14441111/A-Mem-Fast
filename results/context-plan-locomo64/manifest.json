@@ -1,0 +1,324 @@
+{
+  "args": {
+    "run_dir": "results/locomo64-final",
+    "graph_mode": "baseline",
+    "output": "results/context-plan-locomo64",
+    "order": "upstream,deduplicated",
+    "base_url": null,
+    "embedding_model": null,
+    "prefix_cache_reset": "required",
+    "plan_only": true
+  },
+  "fixed_memory_digest": "5ebf8acb581b33d7f52a636df8a232bab77f9864944455ed4e10d2f7aaeac7cf",
+  "subset_fingerprint": "6eebabf47b28647e44929ccdb7ccf752b58f1d269a97fe774b8e510dae991437",
+  "fixed_keywords_digest": "91d01883108653c1d6e07819a4ad89e09d810666352c42fc740252e22f32c40a",
+  "graph_replay_llm": {
+    "logical_calls": 269,
+    "upstream_calls": 205,
+    "prefetch_calls": 64,
+    "http_requests": 0,
+    "cache_hits": 269,
+    "errors": 0,
+    "http_seconds_sum": 0.0,
+    "cache_read_seconds_sum": 0.00038204342126846313,
+    "cache_write_seconds_sum": 0.0,
+    "prompt_tokens_live": 0,
+    "completion_tokens_live": 0,
+    "latency_seconds_p50": 1.1473894119262695e-05,
+    "latency_seconds_p95": 2.405792474746704e-05,
+    "latency_seconds_max": 3.53008508682251e-05,
+    "by_stage": {
+      "analysis": {
+        "logical_calls": 128,
+        "http_requests": 0,
+        "cache_hits": 128,
+        "seconds_sum": 0.0020136795938014984,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 1.1751428246498108e-05,
+        "latency_seconds_p95": 2.4465657770633697e-05,
+        "latency_seconds_max": 3.53008508682251e-05
+      },
+      "evolution_decision": {
+        "logical_calls": 63,
+        "http_requests": 0,
+        "cache_hits": 63,
+        "seconds_sum": 0.0008264258503913879,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 1.2528151273727417e-05,
+        "latency_seconds_p95": 1.6599148511886594e-05,
+        "latency_seconds_max": 2.6755034923553467e-05
+      },
+      "strengthen": {
+        "logical_calls": 63,
+        "http_requests": 0,
+        "cache_hits": 63,
+        "seconds_sum": 0.0004207976162433624,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 6.593763828277588e-06,
+        "latency_seconds_p95": 7.448717951774597e-06,
+        "latency_seconds_max": 8.150935173034668e-06
+      },
+      "update_neighbors": {
+        "logical_calls": 3,
+        "http_requests": 0,
+        "cache_hits": 3,
+        "seconds_sum": 2.7019530534744263e-05,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 7.063150405883789e-06,
+        "latency_seconds_p95": 1.2856721878051757e-05,
+        "latency_seconds_max": 1.3500452041625977e-05
+      },
+      "query_keywords": {
+        "logical_calls": 12,
+        "http_requests": 0,
+        "cache_hits": 12,
+        "seconds_sum": 5.415827035903931e-05,
+        "prompt_tokens_live": 0,
+        "completion_tokens_live": 0,
+        "latency_seconds_p50": 3.779307007789612e-06,
+        "latency_seconds_p95": 7.983110845088955e-06,
+        "latency_seconds_max": 1.1447817087173462e-05
+      }
+    }
+  },
+  "source_run_manifest": {
+    "args": {
+      "dataset": "/data2/xyf25/A-Mem-Fast/data/locomo10.json",
+      "sample_index": 0,
+      "max_turns": 64,
+      "max_questions": 12,
+      "retrieve_k": 10,
+      "evo_threshold": 100,
+      "workers": 4,
+      "prefetch_window": 16,
+      "base_url": "http://127.0.0.1:21014/v1",
+      "model": "Qwen3-8B",
+      "model_revision": "qwen3-8b-config-f7c4eadf-index-f9fdbcb9-template-01de28f8",
+      "embedding_model": "/home/xyf25/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "max_tokens": 1000,
+      "seed": 42,
+      "output": "results/locomo64-final",
+      "modes": "optimized,baseline,replay,warm"
+    },
+    "python": "3.12.13",
+    "versions": {
+      "torch": "2.9.0+cu129",
+      "transformers": "4.57.6",
+      "sentence-transformers": "5.1.2",
+      "numpy": "2.2.6",
+      "scikit-learn": "1.7.2",
+      "vllm": "0.11.2"
+    },
+    "upstream_commit": "0c8039f28fdcc08189a23c07a3437d9d2482f9c2",
+    "subset_fingerprint": "6eebabf47b28647e44929ccdb7ccf752b58f1d269a97fe774b8e510dae991437",
+    "timing_note": "Inference/model download/startup excluded; init reported separately. Nested timing is inclusive.",
+    "decoding": "Both arms temperature=0, seed fixed, enable_thinking=false; upstream default temperature changed equally.",
+    "source_sha256": {
+      "scripts/benchmark.py": "0bf60d83acafeedd77222420eb973154bef1e860ac17051a2b27d73f7a9efc01",
+      "fast_amem/client.py": "449051058a53b8e0e7aed9fc180dc4abf22fd291ff196a27ef76087b8406de7e",
+      "fast_amem/system.py": "1ab02dedf582802b1075660dace3b4c1bd6d059219b9b64798e38d83679a74f0",
+      "fast_amem/retriever.py": "11dba8ce9b95579666740b2ad4b48b53353614e89589d0ef20d80e662463dd97",
+      "memory_layer.py": "b9a5b5797881b25c5524b98a543b22a1bbbcc7f285437ca667a5673e7f293eba",
+      "memory_layer_robust.py": "1c5cd36b50c9113440db0523b1f3d781aebc3711ff9b86b72b20e0f9bc981aef",
+      "llm_text_parsers.py": "353b77f57ce081ee51789e953ae8604b0c57e6470a332adc0377cf48f76d3a90"
+    },
+    "baseline_recording": "Responses buffered in RAM; SQLite flush excluded. Optimized persistent cache overhead included.",
+    "shared_encoder_and_warmup_seconds": 0.1948864981532097
+  },
+  "source_sha256": {
+    "scripts/benchmark_context.py": "8a40809a606150d723bd2075d27add83494c0f2e0053829bf8e19a56f1676d11",
+    "scripts/benchmark.py": "12161f0781b36969dc53f42390e6c8d7331f9988825ab953fd4d9692ddd85667",
+    "fast_amem/__init__.py": "b65405eac2cc5a5b488b000dba6d8b582d432fdb3b9d9a149d915e74b1c9932b",
+    "fast_amem/client.py": "96f025a2b1df5d023e11eb16e4778c5e72cff8fd00dbd980e5649b092c8d7327",
+    "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+    "fast_amem/retriever.py": "11dba8ce9b95579666740b2ad4b48b53353614e89589d0ef20d80e662463dd97",
+    "fast_amem/system.py": "88900a771e25b2806043658bf8d99e622ee4461cad3fa39b05b366f6c2ea881a"
+  },
+  "timing_note": "Graph replay, keyword lookup, encoder load, and one READY warmup excluded. Each timed arm includes one cold answer request per question and SQLite recording. QA context changes intentionally; this is not an exact-behavior optimization.",
+  "context_plan": [
+    {
+      "source_qa_index": null,
+      "question": "What did Caroline research?",
+      "category": 1,
+      "upstream": {
+        "context_digest": "b0060ce1544fa30911ff83920885035cc8127acf2908b8973f39abe1e89b2cc9",
+        "context_utf8_bytes": 24710,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "6b61dc30482fa9b1793d2d34eb6fe59b64db886dab0b6778ff72ef3b4c39ea64",
+        "context_utf8_bytes": 14907,
+        "context_rows": 25
+      }
+    },
+    {
+      "source_qa_index": null,
+      "question": "When did Caroline go to the LGBTQ support group?",
+      "category": 2,
+      "upstream": {
+        "context_digest": "7bf998d82effe9bb2bb81ed5bc3a8bc9fa524b0a2c02498d2f2f7e786ff45c14",
+        "context_utf8_bytes": 26379,
+        "context_rows": 39
+      },
+      "deduplicated": {
+        "context_digest": "daed042fc308c57f54e2154937802bffd622aabdcf9ce817130f6ed48488f655",
+        "context_utf8_bytes": 11293,
+        "context_rows": 17
+      }
+    },
+    {
+      "source_qa_index": null,
+      "question": "What fields would Caroline be likely to pursue in her educaton?",
+      "category": 3,
+      "upstream": {
+        "context_digest": "152db4f5a2b7c85a561e349971c381f4fa4f4492fca2b2ce7253cb97623d1825",
+        "context_utf8_bytes": 20976,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "f2315fd934446c71cb15d0690b2ca6ca711739792e63b7d3a8f14934c31b7a20",
+        "context_utf8_bytes": 11763,
+        "context_rows": 21
+      }
+    },
+    {
+      "source_qa_index": null,
+      "question": "What did the charity race raise awareness for?",
+      "category": 4,
+      "upstream": {
+        "context_digest": "709ab8aafe00d56b87f02753ae5c059cdfeb84a0223a6b2c233c9d389c912e74",
+        "context_utf8_bytes": 25355,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "0f1cb7b20b231086c521f445a966a2de6d4378eb76fc1a99465bdf0b28c04325",
+        "context_utf8_bytes": 14755,
+        "context_rows": 23
+      }
+    },
+    {
+      "source_qa_index": null,
+      "question": "What is Caroline's identity?",
+      "category": 1,
+      "upstream": {
+        "context_digest": "4a571b91e8342acb639f8d5f66713bfcf31b9fb434f9db8980ef2e6596acde83",
+        "context_utf8_bytes": 21385,
+        "context_rows": 37
+      },
+      "deduplicated": {
+        "context_digest": "f7aaa91e15c9b96ce03a08a91b25d3cb1c5a7e23c3b45550ab8292fee06f08e1",
+        "context_utf8_bytes": 13096,
+        "context_rows": 22
+      }
+    },
+    {
+      "source_qa_index": null,
+      "question": "When did Melanie paint a sunrise?",
+      "category": 2,
+      "upstream": {
+        "context_digest": "814f90de891b9079965dc34dfe0a82220c1e72c867f780b8b1b11cfe697f7329",
+        "context_utf8_bytes": 19471,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "689b10cb1cea3aada826975264894f12aada99ccb9b16124e8925f56327a33de",
+        "context_utf8_bytes": 11317,
+        "context_rows": 22
+      }
+    },
+    {
+      "source_qa_index": null,
+      "question": "What did Melanie realize after the charity race?",
+      "category": 4,
+      "upstream": {
+        "context_digest": "2a20825007f2a47ca45baa80c9e96965e641949ee833a98f0e9b4dc02bd7a391",
+        "context_utf8_bytes": 24826,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "aa55b2cd5206ad771a351537b2677247e064a78f3d6c082919d01563bc1ae81c",
+        "context_utf8_bytes": 14208,
+        "context_rows": 24
+      }
+    },
+    {
+      "source_qa_index": null,
+      "question": "What is Caroline's relationship status?",
+      "category": 1,
+      "upstream": {
+        "context_digest": "7c57018827980dd44dd14adae82cb6991189b9b88d2db9a02794b48e4441b4f1",
+        "context_utf8_bytes": 23862,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "589f0dfbe11168d41801014e37c12756f8a3511c17d7254c2ca00c9ea67bd280",
+        "context_utf8_bytes": 14821,
+        "context_rows": 25
+      }
+    },
+    {
+      "source_qa_index": null,
+      "question": "When did Melanie run a charity race?",
+      "category": 2,
+      "upstream": {
+        "context_digest": "fa35731da99910d57cd785df41575147c63976e6419ab34dfa75fe8dda63c403",
+        "context_utf8_bytes": 23039,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "9789ee280005c80b80c4160fb4653a6d6e6e8eda5b75986170eb57bf9f575008",
+        "context_utf8_bytes": 14263,
+        "context_rows": 25
+      }
+    },
+    {
+      "source_qa_index": null,
+      "question": "How does Melanie prioritize self-care?",
+      "category": 4,
+      "upstream": {
+        "context_digest": "dde60f976d7eee6e0e2a1a79f265a3c68537d8681c2cf5b6df969699b6fe65ee",
+        "context_utf8_bytes": 21414,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "892786676b757330bcf00716802164ad6607ac721479ae9bd839d8ea33b998ab",
+        "context_utf8_bytes": 12615,
+        "context_rows": 24
+      }
+    },
+    {
+      "source_qa_index": null,
+      "question": "Where did Caroline move from 4 years ago?",
+      "category": 1,
+      "upstream": {
+        "context_digest": "5f6fa22b9bc4ec3ee9ebd883983893648928d7365f7a93f9123a587efe323f5a",
+        "context_utf8_bytes": 18067,
+        "context_rows": 37
+      },
+      "deduplicated": {
+        "context_digest": "2854253ba1bf2d92e5027adbaaaf11e0191cd6eb4ccd496902b2ac1a7f84ff44",
+        "context_utf8_bytes": 11606,
+        "context_rows": 23
+      }
+    },
+    {
+      "source_qa_index": null,
+      "question": "When is Melanie planning on going camping?",
+      "category": 2,
+      "upstream": {
+        "context_digest": "7f02b692c9ffe115f2d41dd56c011c2a8b618dc4d8a785153856efc17b9839fd",
+        "context_utf8_bytes": 22630,
+        "context_rows": 40
+      },
+      "deduplicated": {
+        "context_digest": "4a3bb5d3ee115662558414bdf2f0e24955c86aaacc1d0d3540c37f316ba05700",
+        "context_utf8_bytes": 17207,
+        "context_rows": 30
+      }
+    }
+  ]
+}

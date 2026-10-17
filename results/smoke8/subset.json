@@ -1,0 +1,69 @@
+{
+  "sample_id": "conv-26",
+  "turns": [
+    {
+      "content": "Speaker Carolinesays : Hey Mel! Good to see you! How have you been?",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:1"
+    },
+    {
+      "content": "Speaker Melaniesays : Hey Caroline! Good to see you! I'm swamped with the kids & work. What's up with you? Anything new?",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:2"
+    },
+    {
+      "content": "Speaker Carolinesays : I went to a LGBTQ support group yesterday and it was so powerful.",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:3"
+    },
+    {
+      "content": "Speaker Melaniesays : Wow, that's cool, Caroline! What happened that was so awesome? Did you hear any inspiring stories?",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:4"
+    },
+    {
+      "content": "Speaker Carolinesays : [Image: a photo of a dog walking past a wall with a painting of a woman] The transgender stories were so inspiring! I was so happy and thankful for all the support.",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:5"
+    },
+    {
+      "content": "Speaker Melaniesays : Wow, love that painting! So cool you found such a helpful group. What's it done for you?",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:6"
+    },
+    {
+      "content": "Speaker Carolinesays : The support group has made me feel accepted and given me courage to embrace myself.",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:7"
+    },
+    {
+      "content": "Speaker Melaniesays : That's really cool. You've got guts. What now?",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:8"
+    }
+  ],
+  "questions": [
+    {
+      "question": "What is Caroline's identity?",
+      "answer": "Transgender woman",
+      "evidence": [
+        "D1:5"
+      ],
+      "category": 1
+    },
+    {
+      "question": "When did Caroline go to the LGBTQ support group?",
+      "answer": "7 May 2023",
+      "evidence": [
+        "D1:3"
+      ],
+      "category": 2
+    }
+  ],
+  "eligible_qa": 2,
+  "category_counts": {
+    "1": 1,
+    "2": 1
+  },
+  "fingerprint": "e4e02e59525b7b3063047a44d47fa873fb25264b8258c14be5c9a35c0b547393"
+}

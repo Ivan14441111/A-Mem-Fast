@@ -1,0 +1,14 @@
+# Python 3.12. Optional local serving uses vllm==0.11.2 in its own environment.
+# These pins reproduce the benchmark client and CPU embedding environment.
+torch==2.9.0
+transformers==4.57.6
+sentence-transformers==5.1.2
+numpy==2.2.6
+scipy==1.17.1
+scikit-learn==1.7.2
+nltk==3.9.2
+rank-bm25==0.2.2
+litellm==1.82.6
+openai==2.41.1
+requests==2.34.2
+pytest==9.0.2

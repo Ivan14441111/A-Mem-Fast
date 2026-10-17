@@ -1,0 +1,51 @@
+{
+  "args": {
+    "dataset": "/data2/xyf25/A-Mem-Fast/data/locomo10.json",
+    "sample_index": 0,
+    "max_turns": 128,
+    "max_questions": 12,
+    "retrieve_k": 10,
+    "evo_threshold": 100,
+    "workers": 4,
+    "context_policy": "upstream",
+    "evolution_policy": "upstream",
+    "prefix_cache_reset": "required",
+    "skip_server_warmup": false,
+    "prefetch_window": 16,
+    "base_url": "http://127.0.0.1:21014/v1",
+    "model": "Qwen3-8B",
+    "model_revision": "qwen3-8b-config-f7c4eadf-index-f9fdbcb9-template-01de28f8",
+    "embedding_model": "/home/xyf25/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "max_tokens": 1000,
+    "seed": 42,
+    "output": "results/suite128-three-arm-20261018/turns128-sample0-upstream-r1",
+    "modes": "baseline,optimized,fused,replay,warm,fused_warm"
+  },
+  "python": "3.12.13",
+  "versions": {
+    "torch": "2.9.0+cu129",
+    "transformers": "4.57.6",
+    "sentence-transformers": "5.1.2",
+    "numpy": "2.2.6",
+    "scikit-learn": "1.7.2",
+    "vllm": "0.11.2"
+  },
+  "upstream_commit": "0c8039f28fdcc08189a23c07a3437d9d2482f9c2",
+  "upstream_repository": "https://github.com/WujiangXu/A-mem",
+  "subset_fingerprint": "a04a4135825e2c5ad26ca9d5e2a2e85f3b82a0456f9cc7dd341461c5141a09dd",
+  "timing_note": "Inference/model download/startup excluded; init reported separately. Nested timing is inclusive.",
+  "decoding": "Both arms temperature=0, seed fixed, enable_thinking=false; upstream default temperature changed equally.",
+  "source_sha256": {
+    "scripts/benchmark.py": "12161f0781b36969dc53f42390e6c8d7331f9988825ab953fd4d9692ddd85667",
+    "memory_layer.py": "b9a5b5797881b25c5524b98a543b22a1bbbcc7f285437ca667a5673e7f293eba",
+    "memory_layer_robust.py": "1c5cd36b50c9113440db0523b1f3d781aebc3711ff9b86b72b20e0f9bc981aef",
+    "llm_text_parsers.py": "353b77f57ce081ee51789e953ae8604b0c57e6470a332adc0377cf48f76d3a90",
+    "fast_amem/__init__.py": "b65405eac2cc5a5b488b000dba6d8b582d432fdb3b9d9a149d915e74b1c9932b",
+    "fast_amem/client.py": "96f025a2b1df5d023e11eb16e4778c5e72cff8fd00dbd980e5649b092c8d7327",
+    "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+    "fast_amem/retriever.py": "11dba8ce9b95579666740b2ad4b48b53353614e89589d0ef20d80e662463dd97",
+    "fast_amem/system.py": "88900a771e25b2806043658bf8d99e622ee4461cad3fa39b05b366f6c2ea881a"
+  },
+  "baseline_recording": "Responses buffered in RAM; SQLite flush excluded. Optimized persistent cache overhead included.",
+  "shared_encoder_and_warmup_seconds": 0.22400779649615288
+}

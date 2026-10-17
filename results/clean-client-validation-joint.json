@@ -1,0 +1,74 @@
+{
+  "validation_phase": "integrated experimental joint policy before new2000token primary suite",
+  "python": "3.12.13",
+  "isolated_environment": "/tmp/amem-fast-clean-client-20261018",
+  "include_system_site_packages": false,
+  "torch_build": "2.9.0+cpu",
+  "cuda_runtime": null,
+  "setup_command": "scripts/setup_environment.sh --venv /tmp/amem-fast-clean-client-20261018 --python /data2/xyf25/qingcheng/.conda/envs/vllm-py312/bin/python --skip-assets",
+  "editable_install_command": "uv pip install --python /tmp/amem-fast-clean-client-20261018/bin/python -e '.[test]'",
+  "dependency_check": {
+    "command": "uv pip check --python /tmp/amem-fast-clean-client-20261018/bin/python",
+    "packages_checked": 70,
+    "compatible": true
+  },
+  "tests": {
+    "passed": 162,
+    "seconds": 8.98,
+    "warnings": 1,
+    "warning": "Untouched upstream memory_layer.py imports deprecated ast.Str.",
+    "environment": {
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1",
+      "NLTK_DATA": "/tmp/amem-fast-no-nltk-assets"
+    },
+    "assets_downloaded": false
+  },
+  "wheel_smoke": {
+    "wheel": "/tmp/amem-fast-joint-wheel-20261018/a_mem_fast-0.1.0-py3-none-any.whl",
+    "wheel_sha256": "8c68eef6f9c071f2d364cba2d0c8d1a03bef58de56fc37641db6f542d762ff97",
+    "installed_module_directory": "/tmp/amem-fast-joint-wheel-installed-20261018",
+    "execution_directory": "/tmp",
+    "used_isolated_dependencies": true,
+    "checks": [
+      "installed client/joint/retriever module paths",
+      "joint one-call ingestion",
+      "joint_note stage",
+      "exact retrieval"
+    ],
+    "passed": true
+  },
+  "environment_manifest": {
+    "python": "3.12.13",
+    "versions": {
+      "torch": "2.9.0+cpu",
+      "transformers": "4.57.6",
+      "sentence-transformers": "5.1.2",
+      "numpy": "2.2.6",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.7.2",
+      "nltk": "3.9.2",
+      "rank-bm25": "0.2.2",
+      "litellm": "1.82.6",
+      "openai": "2.41.1",
+      "requests": "2.34.2",
+      "pytest": "9.0.2"
+    },
+    "embedding_device": "cpu"
+  },
+  "source_sha256": {
+    "fast_amem/__init__.py": "b65405eac2cc5a5b488b000dba6d8b582d432fdb3b9d9a149d915e74b1c9932b",
+    "fast_amem/client.py": "3a3dfd747043c3909904fdd472ea386078e355bc780eabd8ac0b199266c5c9bf",
+    "fast_amem/evolution.py": "147ff3df03c3c02b7dd6e58ecae938796f2eb905e97aea8269bb240556bac83f",
+    "fast_amem/joint.py": "eb8ca78cbdc06732ad526a4c952a35ce46c62a541ebd043c1e71e6ef763fe2cd",
+    "fast_amem/retriever.py": "59f1e08a60470f447b5fd9c2a3df19b7a94bc2d0a541dea73e2e5a3fa8833e02",
+    "fast_amem/system.py": "cb0c2d82ea8632acfe2ee45ed30a2ed2c6b61f134f1b573ed2b10d69157cac3f"
+  },
+  "scope_note": "No live inference or algorithm quality claim. Joint remains experimental; main2000token benchmark and held-out joint pilot are separate validation stages.",
+  "focused_joint_tests": {
+    "passed": 18,
+    "seconds": 5.97,
+    "includes_explicit_joint_note_stage_assertion": true
+  },
+  "earlier_validation_report": "results/clean-client-validation.json"
+}

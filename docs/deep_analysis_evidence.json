@@ -1,0 +1,460 @@
+{
+  "source_cache": "results/locomo64-final/baseline.sqlite",
+  "source_sha256": "9c61d4b2bb4fc832f40206ab3517dd9ece89ea67ce0cd2a887559fc1c1d26805",
+  "scope": "Read-only post-hoc audit of the historical final baseline. No new inference. SQLite cache is local and excluded from Git; this is derived evidence, not a complete response archive.",
+  "method": "Classify full user prompts by upstream fixed prefixes; parse DECISION/CONNECTIONS headers; extract supplied global memory indices with memory index:(\\d+); split QA context at talk start time:, strip outer whitespace and count identical serialized rows. Dedup retains first occurrence and reinstates one newline. Character counts are not token counts.",
+  "decision_responses": [
+    {
+      "key": "7510f7a6849e64ff2f4354d68bcec9d02cbf5aeef3a854e3703adb8c83412bdf",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 50
+    },
+    {
+      "key": "9b359369601f1fe46e30a931b8a9b90da0e665b2e233cb873e783038c564201e",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 91
+    },
+    {
+      "key": "c4a0f689d7abb079824ca64144dfcec5a906568a398c79a0ab9e9e3c35a416e0",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 65
+    },
+    {
+      "key": "fb4def15296fa40014961915f2c0234dafcc74d0f4f95472af759aa3eb144489",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 68
+    },
+    {
+      "key": "420be3f5fccb2a9b81e3bf179990923a32a242ca782726de1c4e3e9b564adbce",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 44
+    },
+    {
+      "key": "5bca25a60408d2083f228e822f2cd45c8b970678470fdc4972fd2d9bae52a2f4",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 70
+    },
+    {
+      "key": "e434263bfb25fbef071f1173130c35838f4ede9c24e69aede1465b4cedca0f84",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 93
+    },
+    {
+      "key": "9c43bcee1f69fd5b754cd987369dbce2e37cbf4b8057719a4f6e055fd7b1589e",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 68
+    },
+    {
+      "key": "49a29630c3e5cdaa58b6b6366d0a6c1015fde427010f48262db8bf66adca42f0",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 65
+    },
+    {
+      "key": "5e6dd7b5ec45ddcf0fff63c934f048035c298a02be3ef279d56ad7b2bd277e3f",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 54
+    },
+    {
+      "key": "37b2a80bcd77f3822c8028d718384914a34fb82cefd8cb6cb61a797222332845",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 64
+    },
+    {
+      "key": "143507bbc043e099c974d243dece063f6187bf6aad91b851c3f9c231a1487869",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 75
+    },
+    {
+      "key": "e0c58ee62357ec8f9a3a1fb56ee2051a24261da69f5d5cfea75bdc8bcf63b3f8",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 74
+    },
+    {
+      "key": "6983d04357b96598fe7700c81559c91a365c4c7f74bb0f53b2307ec50438ce51",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 66
+    },
+    {
+      "key": "9d1c4ec25f30a8629a5254816495285621c6b7b450b83f015fffb947bc95c337",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 72
+    },
+    {
+      "key": "88f3265ba08429d17cbbb046af003f452ee7ab461ff5a20ee5923171d347d5dd",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 68
+    },
+    {
+      "key": "38fe4874be7f4f5203d48e43e93fadad6c8c4d2d65fcde2f4980c6aca8b23693",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 76
+    },
+    {
+      "key": "58c8c0a912f9010c07dc18b328c6e023671c05402b0976d5a11c863c156de3e5",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 76
+    },
+    {
+      "key": "29b58ef7c3f78cd4fb7ebf57cadc1dd74e96c5aed633cc6c50a1660a12f3654b",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 59
+    },
+    {
+      "key": "2b897668daf60030bb7457d9f93082c2960d0c2a17f3a906db503412f5a6a260",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 52
+    },
+    {
+      "key": "6a440741826b240950172aaf35ea3f9a655b3af797af4c5293ce9a41abe8fbf2",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 55
+    },
+    {
+      "key": "700f95d8a63441c3fbcf1ed44a6e05c0f2bfd43200fb70a1560baa0149f8f2e7",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 88
+    },
+    {
+      "key": "6c7362598943c248e45d398c40c2c2ff31de736c1260c1d39de8ddf5c60d734e",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 58
+    },
+    {
+      "key": "11744bbf0c000469e5981ccfcaec1adb2cc73108aef59440957cf3e022b2591e",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 69
+    },
+    {
+      "key": "119bbc68f4fd328f2c599b9d3881bb3810013c75c85d4affb0ebaae996816138",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 67
+    },
+    {
+      "key": "977613def76b9a89859d602fff9fe1353fcd06eba0db70c7414c2fde3e30e3d6",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 59
+    },
+    {
+      "key": "70002800f8829120b9488ea2a30ba60e03e4e614c79658ad115cdb16fde3fbe4",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 40
+    },
+    {
+      "key": "27a84db89d80b23696157d6c70a4bcd9cfee340bd513e64f98117f6daddb0647",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 65
+    },
+    {
+      "key": "57bad777547fd73e3d23b72ddf1d73cd45b4319bfae6f1bed093b687b0be6df9",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 74
+    },
+    {
+      "key": "76d780793d0b2fcfbe406c61fe0b94dbf811004a1588d88af4eb8f21fc8afb12",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 73
+    },
+    {
+      "key": "8f9f257a0ba959f19a35e1f5808b0b916f78f796c86096ea5fa7ea1ce4233160",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 68
+    },
+    {
+      "key": "ee7c8a5591e09e49a622f2138e59e0ffb83e9678083bf309f69386be36903814",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 56
+    },
+    {
+      "key": "4f554bb861a2f2f422aaee1cde9f58a53481b65fa17255aaa60f626179bd45a3",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 51
+    },
+    {
+      "key": "2e50695ed690fc1af80e4133a67aa6f4eb5c2fadc1c45a8a9452ab7174469162",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 69
+    },
+    {
+      "key": "82eb2e4b8979a115e37514adcbf70249fb40226df02598c89b86b692fb66229c",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 59
+    },
+    {
+      "key": "5c3c404e03aab90541d98d756047620b8a6ecb1522b2fde37757fb615b487716",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 72
+    },
+    {
+      "key": "0524c29716a9b3241fd9b1a545b55798be39a9847bec211e61b24b54e23a56f8",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 76
+    },
+    {
+      "key": "0592a5e594d0224ba07e8bdfddef23aff6faa358e6d53b608effd498cf0bda5e",
+      "decision": "STRENGTHEN_AND_UPDATE",
+      "completion_tokens": 94
+    },
+    {
+      "key": "7af5441d2d3874e1aa3456eac4596d20f0a391bc6ac89587f2ef75b1f96779bf",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 51
+    },
+    {
+      "key": "7fbe425671794e2c9271d55dac41354fca393af92f6ef81a8bbaf4e960a19e9a",
+      "decision": "STRENGTHEN_AND_UPDATE",
+      "completion_tokens": 82
+    },
+    {
+      "key": "eed246af4441832ed562fdf3c1d16f6002ace93813e9f2ead92d684d08c71fe4",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 73
+    },
+    {
+      "key": "6e42ea507fe43a0bf09b3a285beaf6248128d02dc11a7645ed42fd2b4c676a43",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 76
+    },
+    {
+      "key": "5aec9de54a434ae8164687b4c87975ccbedab43064ee773bff24fc74525685b9",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 56
+    },
+    {
+      "key": "ac5c7f8d1b2129dad308da554cd6f3d8e086f0d61b8cf7e547b368e49addcbd7",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 68
+    },
+    {
+      "key": "f88eb82f79f7704680d064bc670f5c74c522300b78b584fa5b53c7f165f2a776",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 76
+    },
+    {
+      "key": "63bbb15c6e99e880b236e87347e968c3cc708501cc2d799097285d50ef79a84a",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 64
+    },
+    {
+      "key": "683afa92f3f098fa18cc3d2286bc5c2a4749177590e38a4fa4ea6026cb717458",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 69
+    },
+    {
+      "key": "fcb8ca7a77a4b3b8737246bee533a3be904071744bc58664d0e397b2ec78e3b2",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 71
+    },
+    {
+      "key": "af106f00cc500d3f70bfe55678a5dcd717365c37b6b0780653726792175aa6de",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 68
+    },
+    {
+      "key": "77f263b1d37e46c202b1044fc802f3b2de2e0730ee7a28c2afc6a28c9d2b8609",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 73
+    },
+    {
+      "key": "8fb03984d5407a5bfcd6fa6037bcc0d2fc5f586c8376364347b57f8ba2e0949a",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 66
+    },
+    {
+      "key": "1d5ebf6470abd66bf4757b11c053b24d014f25fda38e5f30cbbb57177d92d39b",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 55
+    },
+    {
+      "key": "1986002f9ddd8630e6d9fb5eb502d76d9ad60f799eea7d7a11f35cf9983099ae",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 56
+    },
+    {
+      "key": "d012c35673deae347234ab47450b3f40b76ac73a0ca879ea01f9ede9e292bc22",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 66
+    },
+    {
+      "key": "ebb3e01aa16d73fabfb1fa9eaee1135da0c31251c5d9b4ad48e8dd58a7389f45",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 73
+    },
+    {
+      "key": "50bebe758979dd03ed4bdf1d52775404d0637c109f569ce16cff65262380a636",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 60
+    },
+    {
+      "key": "d37ab2dbd08b7751f906fa95393a450984886a5150ad3d567edef8f0d6d57d30",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 61
+    },
+    {
+      "key": "f17297fe0ce9e36e3fc94e8897f908e8524f2528970fd8ad78ceb189b0babce2",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 73
+    },
+    {
+      "key": "4a97483a929bf270881b10ebea411258065d23f2f7a00a027c8e5208475b4382",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 67
+    },
+    {
+      "key": "778a46f68e9bebf3c880e22bce354227b9ebe7502c3f3a6c82addbb1c166f4a7",
+      "decision": "STRENGTHEN_AND_UPDATE",
+      "completion_tokens": 98
+    },
+    {
+      "key": "b6d5225dffdc7cfcd11422664d4efc56fb6b3c51325a70bb8f764a8176e5d684",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 54
+    },
+    {
+      "key": "ea17db2caaf8247dc768da698ed2b5530b8ab76c9acbb75614571d9e45e57ec8",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 62
+    },
+    {
+      "key": "8a141fe62e9c8b9ab22eece32bb0eae514130003a80c3047e41363403bf22fe1",
+      "decision": "STRENGTHEN",
+      "completion_tokens": 59
+    }
+  ],
+  "total_strengthen_links": 186,
+  "outside_candidate_evidence": [
+    {
+      "key": "cb2050046cc3337be1ec1d49c1f1b04eff1a8713fe0453f9121e0ec79e3be712",
+      "candidate_global_rows": [
+        0,
+        3,
+        5,
+        7,
+        11
+      ],
+      "response_text": "CONNECTIONS: 0, 2, 3\nTAGS: Social Interaction, Conversation, Inspiration, Emotional Experience, Painting",
+      "out_of_candidate_rows": [
+        2
+      ]
+    },
+    {
+      "key": "5d4927fbcb8f8c101b5168bd341f68c6387a9a30380e8469afc64bad21e6be5e",
+      "candidate_global_rows": [
+        1,
+        3,
+        10,
+        12,
+        17
+      ],
+      "response_text": "CONNECTIONS: 0, 2, 3\nTAGS: Mental Health, Social Interaction, Conversation, Taking Care of Oneself, Charity Event, Emotional Experience",
+      "out_of_candidate_rows": [
+        0,
+        2
+      ]
+    }
+  ],
+  "qa_context_audit": [
+    {
+      "key": "83ef882036f7acfc535d5edfcee11c1e116bd97fe60ab573c7b23b759f3a462b",
+      "rendered_rows": 40,
+      "unique_serialized_rows": 25,
+      "context_characters": 24708,
+      "deduplicated_context_characters": 14905,
+      "prompt_tokens": 5619
+    },
+    {
+      "key": "113bd700788200d67228bc6a333c053ec0b3937bcc1bf959cd0238fab3b5cc11",
+      "rendered_rows": 39,
+      "unique_serialized_rows": 17,
+      "context_characters": 26379,
+      "deduplicated_context_characters": 11293,
+      "prompt_tokens": 5878
+    },
+    {
+      "key": "a0693d9ffe06a0ef7c7fa1162aad7ee5fb16cfeb4f72e72d7cdef7d7ceae3635",
+      "rendered_rows": 40,
+      "unique_serialized_rows": 21,
+      "context_characters": 20968,
+      "deduplicated_context_characters": 11759,
+      "prompt_tokens": 4930
+    },
+    {
+      "key": "4c857b65b1dc38b39bbafe3558953bf97bdd79dab3deda57353aa10438d16db0",
+      "rendered_rows": 40,
+      "unique_serialized_rows": 23,
+      "context_characters": 25349,
+      "deduplicated_context_characters": 14751,
+      "prompt_tokens": 5754
+    },
+    {
+      "key": "70e8fc2fd184d73023822392ac743d166bc4c37d7a0c41ab28e431db05b260ea",
+      "rendered_rows": 37,
+      "unique_serialized_rows": 22,
+      "context_characters": 21383,
+      "deduplicated_context_characters": 13094,
+      "prompt_tokens": 4985
+    },
+    {
+      "key": "d69218e70c0eee4d601f796ff2691cd24409c87f53ef2152e24857a3bf3ac60c",
+      "rendered_rows": 40,
+      "unique_serialized_rows": 22,
+      "context_characters": 19467,
+      "deduplicated_context_characters": 11313,
+      "prompt_tokens": 4685
+    },
+    {
+      "key": "1c4206f60340f22a81d18d5f8800d1f2850e4bf007f9d9eeaaea97825e5c3094",
+      "rendered_rows": 40,
+      "unique_serialized_rows": 24,
+      "context_characters": 24818,
+      "deduplicated_context_characters": 14204,
+      "prompt_tokens": 5705
+    },
+    {
+      "key": "d2c9130f6fcda64bbe1b740880d69db921d96d1c10d9ef0a70111a4214e3a63a",
+      "rendered_rows": 40,
+      "unique_serialized_rows": 25,
+      "context_characters": 23848,
+      "deduplicated_context_characters": 14813,
+      "prompt_tokens": 5575
+    },
+    {
+      "key": "62e1d72bed160a512e9f5020c3c304c83ba277f9ff896b1f7403d9376757b3c0",
+      "rendered_rows": 40,
+      "unique_serialized_rows": 25,
+      "context_characters": 23029,
+      "deduplicated_context_characters": 14259,
+      "prompt_tokens": 5461
+    },
+    {
+      "key": "01e58c9539cdb9c4598b15664fb715231a4dc8dd9faeae30e944f4893961fd88",
+      "rendered_rows": 40,
+      "unique_serialized_rows": 24,
+      "context_characters": 21404,
+      "deduplicated_context_characters": 12611,
+      "prompt_tokens": 5200
+    },
+    {
+      "key": "90be13b87d3cfa690a2b6a647583fd4cfbcd805e9fea9f848dbbf77040183b0a",
+      "rendered_rows": 37,
+      "unique_serialized_rows": 23,
+      "context_characters": 18061,
+      "deduplicated_context_characters": 11602,
+      "prompt_tokens": 4372
+    },
+    {
+      "key": "c77aa087800cb9bfcd3425bcb8ba75cd2e612926abc78e70ea5d4f8a487c835b",
+      "rendered_rows": 40,
+      "unique_serialized_rows": 30,
+      "context_characters": 22620,
+      "deduplicated_context_characters": 17201,
+      "prompt_tokens": 5381
+    }
+  ],
+  "qa_totals": {
+    "rendered_rows": 473,
+    "unique_serialized_rows": 281,
+    "context_characters": 272034,
+    "deduplicated_context_characters": 161805,
+    "prompt_tokens": 63545
+  }
+}

@@ -1,0 +1,434 @@
+{
+  "sample_id": "conv-26",
+  "turns": [
+    {
+      "content": "Speaker Carolinesays : Hey Mel! Good to see you! How have you been?",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:1"
+    },
+    {
+      "content": "Speaker Melaniesays : Hey Caroline! Good to see you! I'm swamped with the kids & work. What's up with you? Anything new?",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:2"
+    },
+    {
+      "content": "Speaker Carolinesays : I went to a LGBTQ support group yesterday and it was so powerful.",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:3"
+    },
+    {
+      "content": "Speaker Melaniesays : Wow, that's cool, Caroline! What happened that was so awesome? Did you hear any inspiring stories?",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:4"
+    },
+    {
+      "content": "Speaker Carolinesays : [Image: a photo of a dog walking past a wall with a painting of a woman] The transgender stories were so inspiring! I was so happy and thankful for all the support.",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:5"
+    },
+    {
+      "content": "Speaker Melaniesays : Wow, love that painting! So cool you found such a helpful group. What's it done for you?",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:6"
+    },
+    {
+      "content": "Speaker Carolinesays : The support group has made me feel accepted and given me courage to embrace myself.",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:7"
+    },
+    {
+      "content": "Speaker Melaniesays : That's really cool. You've got guts. What now?",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:8"
+    },
+    {
+      "content": "Speaker Carolinesays : Gonna continue my edu and check out career options, which is pretty exciting!",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:9"
+    },
+    {
+      "content": "Speaker Melaniesays : Wow, Caroline! What kinda jobs are you thinkin' of? Anything that stands out?",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:10"
+    },
+    {
+      "content": "Speaker Carolinesays : I'm keen on counseling or working in mental health - I'd love to support those with similar issues.",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:11"
+    },
+    {
+      "content": "Speaker Melaniesays : [Image: a photo of a painting of a sunset over a lake] You'd be a great counselor! Your empathy and understanding will really help the people you work with. By the way, take a look at this.",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:12"
+    },
+    {
+      "content": "Speaker Carolinesays : Thanks, Melanie! That's really sweet. Is this your own painting?",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:13"
+    },
+    {
+      "content": "Speaker Melaniesays : Yeah, I painted that lake sunrise last year! It's special to me.",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:14"
+    },
+    {
+      "content": "Speaker Carolinesays : Wow, Melanie! The colors really blend nicely. Painting looks like a great outlet for expressing yourself.",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:15"
+    },
+    {
+      "content": "Speaker Melaniesays : Thanks, Caroline! Painting's a fun way to express my feelings and get creative. It's a great way to relax after a long day.",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:16"
+    },
+    {
+      "content": "Speaker Carolinesays : Totally agree, Mel. Relaxing and expressing ourselves is key. Well, I'm off to go do some research.",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:17"
+    },
+    {
+      "content": "Speaker Melaniesays : Yep, Caroline. Taking care of ourselves is vital. I'm off to go swimming with the kids. Talk to you soon!",
+      "timestamp": "1:56 pm on 8 May, 2023",
+      "dia_id": "D1:18"
+    },
+    {
+      "content": "Speaker Melaniesays : Hey Caroline, since we last chatted, I've had a lot of things happening to me. I ran a charity race for mental health last Saturday – it was really rewarding. Really made me think about taking care of our minds.",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:1"
+    },
+    {
+      "content": "Speaker Carolinesays : That charity race sounds great, Mel! Making a difference & raising awareness for mental health is super rewarding - I'm really proud of you for taking part!",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:2"
+    },
+    {
+      "content": "Speaker Melaniesays : Thanks, Caroline! The event was really thought-provoking. I'm starting to realize that self-care is really important. It's a journey for me, but when I look after myself, I'm able to better look after my family.",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:3"
+    },
+    {
+      "content": "Speaker Carolinesays : I totally agree, Melanie. Taking care of ourselves is so important - even if it's not always easy. Great that you're prioritizing self-care.",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:4"
+    },
+    {
+      "content": "Speaker Melaniesays : Yeah, it's tough. So I'm carving out some me-time each day - running, reading, or playing my violin - which refreshes me and helps me stay present for my fam!",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:5"
+    },
+    {
+      "content": "Speaker Carolinesays : That's great, Mel! Taking time for yourself is so important. You're doing an awesome job looking after yourself and your family!",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:6"
+    },
+    {
+      "content": "Speaker Melaniesays : Thanks, Caroline. It's still a work in progress, but I'm doing my best. My kids are so excited about summer break! We're thinking about going camping next month. Any fun plans for the summer?",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:7"
+    },
+    {
+      "content": "Speaker Carolinesays : Researching adoption agencies — it's been a dream to have a family and give a loving home to kids who need it.",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:8"
+    },
+    {
+      "content": "Speaker Melaniesays : Wow, Caroline! That's awesome! Taking in kids in need - you're so kind. Your future family is gonna be so lucky to have you!",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:9"
+    },
+    {
+      "content": "Speaker Carolinesays : [Image: a photography of a sign for a new arrival and an information and domestic building] Thanks, Mel! My goal is to give kids a loving home. I'm truly grateful for all the support I've got from friends and mentors. Now the hard work starts to turn my dream into a reality. And here's one of the adoption agencies I'm looking into. It's a lot to take in, but I'm feeling hopeful and optimistic.",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:10"
+    },
+    {
+      "content": "Speaker Melaniesays : Wow, that agency looks great! What made you pick it?",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:11"
+    },
+    {
+      "content": "Speaker Carolinesays : I chose them 'cause they help LGBTQ+ folks with adoption. Their inclusivity and support really spoke to me.",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:12"
+    },
+    {
+      "content": "Speaker Melaniesays : That's great, Caroline! Loving the inclusivity and support. Anything you're excited for in the adoption process?",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:13"
+    },
+    {
+      "content": "Speaker Carolinesays : I'm thrilled to make a family for kids who need one. It'll be tough as a single parent, but I'm up for the challenge!",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:14"
+    },
+    {
+      "content": "Speaker Melaniesays : You're doing something amazing! Creating a family for those kids is so lovely. You'll be an awesome mom! Good luck!",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:15"
+    },
+    {
+      "content": "Speaker Carolinesays : Thanks, Melanie! Your kind words really mean a lot. I'll do my best to make sure these kids have a safe and loving home.",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:16"
+    },
+    {
+      "content": "Speaker Melaniesays : No doubts, Caroline. You have such a caring heart - they'll get all the love and stability they need! Excited for this new chapter!",
+      "timestamp": "1:14 pm on 25 May, 2023",
+      "dia_id": "D2:17"
+    },
+    {
+      "content": "Speaker Carolinesays : Hey Melanie! How's it going? I wanted to tell you about my school event last week. It was awesome! I talked about my transgender journey and encouraged students to get involved in the LGBTQ community. It was great to see their reactions. It made me reflect on how far I've come since I started transitioning three years ago.",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:1"
+    },
+    {
+      "content": "Speaker Melaniesays : Hey Caroline! Great to hear from you. Sounds like your event was amazing! I'm so proud of you for spreading awareness and getting others involved in the LGBTQ community. You've come a long way since your transition - keep on inspiring people with your strength and courage!",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:2"
+    },
+    {
+      "content": "Speaker Carolinesays : Thanks, Mel! Your backing really means a lot. I felt super powerful giving my talk. I shared my own journey, the struggles I had and how much I've developed since coming out. It was wonderful to see how the audience related to what I said and how it inspired them to be better allies. Conversations about gender identity and inclusion are so necessary and I'm thankful for being able to give a voice to the trans community.",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:3"
+    },
+    {
+      "content": "Speaker Melaniesays : Wow, Caroline, you're doing an awesome job of inspiring others with your journey. It's great to be part of it and see how you're positively affecting so many. Talking about inclusivity and acceptance is crucial, and you're so brave to speak up for the trans community. Keep up the great work!",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:4"
+    },
+    {
+      "content": "Speaker Carolinesays : Thanks Mel! Your kind words mean a lot. Sharing our experiences isn't always easy, but I feel it's important to help promote understanding and acceptance. I've been blessed with loads of love and support throughout this journey, and I want to pass it on to others. By sharing our stories, we can build a strong, supportive community of hope.",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:5"
+    },
+    {
+      "content": "Speaker Melaniesays : Yeah, Caroline! It takes courage to talk about our own stories. But it's in these vulnerable moments that we bond and understand each other. We all have our different paths, but if we share them, we show people that they're not alone. Our stories can be so inspiring and encouraging to others who are facing the same challenges. Thank you for using your voice to create love, acceptance, and hope. You're doing amazing!",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:6"
+    },
+    {
+      "content": "Speaker Carolinesays : Your words mean a lot to me. I'm grateful for the chance to share my story and give others hope. We all have unique paths, and by working together we can build a more inclusive and understanding world. I'm going to keep using my voice to make a change and lift others up. And you're part of that!",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:7"
+    },
+    {
+      "content": "Speaker Melaniesays : Thanks, Caroline, for letting me join your journey. I'm so proud to be part of the difference you're making. Let's keep motivating and helping each other out as we journey through life. We can make a real impact together!",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:8"
+    },
+    {
+      "content": "Speaker Carolinesays : Yeah Mel, let's spread love and understanding! Thanks for the support and encouragement. We can tackle life's challenges together! We got this!",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:9"
+    },
+    {
+      "content": "Speaker Melaniesays : Yes, Caroline! We can do it. Your courage is inspiring. I want to be couragous for my family- they motivate me and give me love. What motivates you?",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:10"
+    },
+    {
+      "content": "Speaker Carolinesays : [Image: a photo of a family posing for a picture in a yard] Thanks, Mel! My friends, family and mentors are my rocks – they motivate me and give me the strength to push on. Here's a pic from when we met up last week!",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:11"
+    },
+    {
+      "content": "Speaker Melaniesays : Wow, that photo is great! How long have you had such a great support system?",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:12"
+    },
+    {
+      "content": "Speaker Carolinesays : Yeah, I'm really lucky to have them. They've been there through everything, I've known these friends for 4 years, since I moved from my home country. Their love and help have been so important especially after that tough breakup. I'm super thankful. Who supports you, Mel?",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:13"
+    },
+    {
+      "content": "Speaker Melaniesays : [Image: a photo of a man and a little girl standing in front of a waterfall] I'm lucky to have my husband and kids; they keep me motivated.",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:14"
+    },
+    {
+      "content": "Speaker Carolinesays : Wow, what an amazing family pic! How long have you been married?",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:15"
+    },
+    {
+      "content": "Speaker Melaniesays : [Image: a photo of a bride in a wedding dress holding a bouquet] 5 years already! Time flies- feels like just yesterday I put this dress on! Thanks, Caroline!",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:16"
+    },
+    {
+      "content": "Speaker Carolinesays : Congrats, Melanie! You both looked so great on your wedding day! Wishing you many happy years together!",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:17"
+    },
+    {
+      "content": "Speaker Melaniesays : [Image: a photo of a man and woman sitting on a blanket eating food] Thanks, Caroline! Appreciate your kind words. Looking forward to more happy years. Our family and moments make it all worth it.",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:18"
+    },
+    {
+      "content": "Speaker Carolinesays : Looks like you had a great day! How was it? You all look so happy!",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:19"
+    },
+    {
+      "content": "Speaker Melaniesays : It so fun! We played games, ate good food, and just hung out together. Family moments make life awesome.",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:20"
+    },
+    {
+      "content": "Speaker Carolinesays : Sounds great, Mel! Glad you had a great time. Cherish the moments - they're the best!",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:21"
+    },
+    {
+      "content": "Speaker Melaniesays : Absolutely, Caroline! I cherish time with family. It's when I really feel alive and happy.",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:22"
+    },
+    {
+      "content": "Speaker Carolinesays : I 100% agree, Mel. Hanging with loved ones is amazing and brings so much happiness. Those moments really make me thankful. Family is everything.",
+      "timestamp": "7:55 pm on 9 June, 2023",
+      "dia_id": "D3:23"
+    },
+    {
+      "content": "Speaker Carolinesays : [Image: a photo of a person holding a necklace with a cross and a heart] Hey Melanie! Long time no talk! A lot's been going on in my life! Take a look at this.",
+      "timestamp": "10:37 am on 27 June, 2023",
+      "dia_id": "D4:1"
+    },
+    {
+      "content": "Speaker Melaniesays : Hey, Caroline! Nice to hear from you! Love the necklace, any special meaning to it?",
+      "timestamp": "10:37 am on 27 June, 2023",
+      "dia_id": "D4:2"
+    },
+    {
+      "content": "Speaker Carolinesays : Thanks, Melanie! This necklace is super special to me - a gift from my grandma in my home country, Sweden. She gave it to me when I was young, and it stands for love, faith and strength. It's like a reminder of my roots and all the love and support I get from my family.",
+      "timestamp": "10:37 am on 27 June, 2023",
+      "dia_id": "D4:3"
+    },
+    {
+      "content": "Speaker Melaniesays : That's gorgeous, Caroline! It's awesome what items can mean so much to us, right? Got any other objects that you treasure, like that necklace?",
+      "timestamp": "10:37 am on 27 June, 2023",
+      "dia_id": "D4:4"
+    },
+    {
+      "content": "Speaker Carolinesays : Yep, Melanie! I've got some other stuff with sentimental value, like my hand-painted bowl. A friend made it for my 18th birthday ten years ago. The pattern and colors are awesome-- it reminds me of art and self-expression.",
+      "timestamp": "10:37 am on 27 June, 2023",
+      "dia_id": "D4:5"
+    },
+    {
+      "content": "Speaker Melaniesays : That sounds great, Caroline! It's awesome having stuff around that make us think of good connections and times. Actually, I just took my fam camping in the mountains last week - it was a really nice time together!",
+      "timestamp": "10:37 am on 27 June, 2023",
+      "dia_id": "D4:6"
+    }
+  ],
+  "questions": [
+    {
+      "question": "What did Caroline research?",
+      "answer": "Adoption agencies",
+      "evidence": [
+        "D2:8"
+      ],
+      "category": 1
+    },
+    {
+      "question": "When did Caroline go to the LGBTQ support group?",
+      "answer": "7 May 2023",
+      "evidence": [
+        "D1:3"
+      ],
+      "category": 2
+    },
+    {
+      "question": "What fields would Caroline be likely to pursue in her educaton?",
+      "answer": "Psychology, counseling certification",
+      "evidence": [
+        "D1:9",
+        "D1:11"
+      ],
+      "category": 3
+    },
+    {
+      "question": "What did the charity race raise awareness for?",
+      "answer": "mental health",
+      "evidence": [
+        "D2:2"
+      ],
+      "category": 4
+    },
+    {
+      "question": "What is Caroline's identity?",
+      "answer": "Transgender woman",
+      "evidence": [
+        "D1:5"
+      ],
+      "category": 1
+    },
+    {
+      "question": "When did Melanie paint a sunrise?",
+      "answer": 2022,
+      "evidence": [
+        "D1:12"
+      ],
+      "category": 2
+    },
+    {
+      "question": "What did Melanie realize after the charity race?",
+      "answer": "self-care is important",
+      "evidence": [
+        "D2:3"
+      ],
+      "category": 4
+    },
+    {
+      "question": "What is Caroline's relationship status?",
+      "answer": "Single",
+      "evidence": [
+        "D3:13",
+        "D2:14"
+      ],
+      "category": 1
+    },
+    {
+      "question": "When did Melanie run a charity race?",
+      "answer": "The sunday before 25 May 2023",
+      "evidence": [
+        "D2:1"
+      ],
+      "category": 2
+    },
+    {
+      "question": "How does Melanie prioritize self-care?",
+      "answer": "by carving out some me-time each day for activities like running, reading, or playing the violin",
+      "evidence": [
+        "D2:5"
+      ],
+      "category": 4
+    },
+    {
+      "question": "Where did Caroline move from 4 years ago?",
+      "answer": "Sweden",
+      "evidence": [
+        "D3:13",
+        "D4:3"
+      ],
+      "category": 1
+    },
+    {
+      "question": "When is Melanie planning on going camping?",
+      "answer": "June 2023",
+      "evidence": [
+        "D2:7"
+      ],
+      "category": 2
+    }
+  ],
+  "eligible_qa": 26,
+  "category_counts": {
+    "1": 4,
+    "2": 4,
+    "3": 1,
+    "4": 3
+  },
+  "fingerprint": "6eebabf47b28647e44929ccdb7ccf752b58f1d269a97fe774b8e510dae991437"
+}
