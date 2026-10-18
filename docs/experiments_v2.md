@@ -1,122 +1,122 @@
 # A-Mem-Fast 多会话对照实验
 
-> 最终分协议报告：128-turn 主协议得到三个 baseline/exact 完成配对，九个无 schema 约束 fused arm 均失败；固定图 context 实验完成三个会话、36 道 QA。419-turn 案例仅 exact 完整完成，baseline 在 QA 失败且历史证据缺失，不形成速度配对。独立 64-turn structured pilot 完成四次预设尝试：11 个完整冷 arm 均通过零 HTTP 重放，两个 joint arm 在关键词阶段失败；128-turn 扩展因预设时间门槛未执行。各协议单列分母与配对范围，不合并成总体加速。
+> 本报告包含四项结果：128 条记录的主实验、固定图上下文去重、完整 419 条案例，以及独立会话的 64 条 structured 实验。128 条 structured 扩展因剩余时间不足取消。各节列出计划与实际完成情况，速度按同轮完成配对计算。
 
-本轮研究当前上游 robust 实现的长记忆工程效率，比较顺序基线、保持成功路径请求语义的 exact 优化，以及改变演化任务的 fused 策略。范围为三个 LoCoMo conversation、每个前 128 turns、三次重复；不是原论文全量复现。固定上游版本为 `WujiangXu/A-mem@0c8039f28fdcc08189a23c07a3437d9d2482f9c2`。瓶颈推导、具体代码语义与后续设计见 [深度分析](deep_analysis.md)。
+本轮以 `WujiangXu/A-mem@0c8039f28fdcc08189a23c07a3437d9d2482f9c2` 的 robust 实现为对照，研究记忆构建速度和问答（QA）变化。主实验使用三个 LoCoMo 会话、各前 128 条记录、三次重复；可选 fused/joint 策略分别测量。实现分析见 [深度分析](deep_analysis.md)。
 
 ## 1. 共同推理配置与比较对象
 
-所有组使用本地 Qwen3-8B BF16 / vLLM 0.11.2 / A100 80GB，关闭 thinking，temperature=0、seed=42；新协议统一 max_tokens=2000、repetition_penalty=1.05、tag_budget=16、tag_budget_policy="observe"，并在原 system message 后附加相同的指令：
+所有组使用本地 Qwen3-8B BF16 / vLLM 0.11.2 / A100 80GB，关闭 thinking，temperature=0、seed=42；本方案统一 max_tokens=2000、repetition_penalty=1.05、tag_budget=16、tag_budget_policy="observe"，并在原 system message 后附加相同的指令：
 
 > Return no more than 16 items in each TAGS/tags list, including lists for updated neighbors. Follow the requested format and stop after completing its required fields.
 
-这是显式配置后的 **configured-robust 基线**，不是上游默认 temperature=0.7 配置。共同重复惩罚和 system message 会改变模型输出，不能把它们的收益归给 exact 实现。上游 user prompt 模板保持原文；默认 API 不启用新增选项，只有实验显式设置时才改变请求。完整推理参数和 system message 进入缓存身份与 manifest。
+各组统一使用上述配置，上游默认 temperature=0.7。原 user 提示词保持不变，重复惩罚和 system 指令由实验显式开启；API 默认保留原设置。完整参数保存在配置记录并参与缓存键计算。
 
-Qwen3-8B 官方模型卡对非 thinking 模式建议 temperature=0.7、top_p=0.8、top_k=20、min_p=0；本轮 temperature=0 是实验选择，并非采用厂商推荐解码。模型卡的明确 greedy 重复警告位于 thinking 模式条目，不能直接作为当前非 thinking 失败的因果证明。本轮不因长尾结果再调参，未来可预设推荐解码的可靠性对照，并同时衡量质量、tokens 和完成率。[官方模型卡](https://huggingface.co/Qwen/Qwen3-8B#best-practices)
+Qwen3-8B 对非 thinking 模式建议 temperature=0.7、top_p=0.8、top_k=20、min_p=0；本轮固定 temperature=0。官方模型卡的 greedy 重复警告写在 thinking 条目，当前重复问题的具体原因还需解码对照。[官方模型卡](https://huggingface.co/Qwen/Qwen3-8B#best-practices)
 
-客户端在缓存写入前及读取后观察识别出的 tags 列表长度。超过 16 记录指令违例与实际长度，保留完整响应，不裁剪、不去重；它是生成偏好，不是强制 schema 上限。最大生成 tokens 仍由 2000 控制，触及截断、HTTP 错误或缺少正文仍明确失败；JSON 领域 schema 与候选引用仍严格校验。live 生成违例和缓存读取观察分别统计，避免同一响应预取后再次消费被算成两次模型违例。`observed-tags-v1` 与严格 `bounded-tags-v1` 的 HTTP payload 相同，但接受策略、缓存身份与实验身份不同。默认 API 仍保留严格策略，实验显式选择 observe。
+客户端在写入和读取缓存时记录 tags 列表长度。超过 16 项时保留全文并计数，最大输出仍为 2000 tokens；HTTP、缺少正文、截断、JSON 字段或候选引用错误仍会失败。实时生成和缓存读取分别统计。`observed-tags-v1` 与 `bounded-tags-v1` 使用相同 HTTP 请求，前者观察超限，后者拒绝超限，缓存分别区分。API 默认使用拒绝规则。
 
-| 组别 | 冷构建流程 | 是否改变模型任务 | 主要检查 |
+| 方案 | 构建流程 | 与原流程的关系 | 验证 |
 | --- | --- | --- | --- |
-| baseline | 上游 metadata、decision、条件 strengthen/update 顺序执行 | 共同配置后的对照组 | 录制真实响应 |
-| exact / `optimized` | 滚动有界 metadata 预取、增量精确索引、变化文本重建、请求缓存 | 成功路径保持共同配置下的请求内容与处理次序 | baseline→exact 严格重放 |
-| fused（仅提示词要求 JSON） | metadata 预取后，一次请求输出决策、连接、tags、稀疏邻居更新 | 是；同时明确全局 ID、限制候选、删除 reason 和无变化邻居重述 | 独立实时质量对照与自身重放 |
+| baseline | 依次提取关键词与摘要、判断更新（更新决策）、建立关联（建立关联）或修改邻居（邻居修改） | 统一配置的原流程对照 | 保存实际模型回答 |
+| exact / `optimized` | 提前提取信息，复用文本向量，按原顺序更新和写入 | 保留请求内容与处理顺序 | 用 baseline 回答逐步回放 |
+| fused（仅提示词要求 JSON） | 提前提取信息，一次返回决策、关联和需要修改的邻居 | 合并任务，调整编号与输出方式 | 独立测量并用自身回答回放 |
 
-“exact”不保证两次实时推理逐字相同。不同批次和调度仍可能产生不同模型输出；它保持的是固定响应下的成功路径语义。错误处理更严格，向量数值验证也限定于固定 encoder、dtype 和测试输入。fused 是整体策略消融，其收益不能单独归因于合并 HTTP 请求。本轮三组 QA 均采用 upstream 上下文策略，不同时打开去重。
+exact 保留原请求内容和顺序，并在固定模型回答下比较逐步状态。实时输出可能因服务调度等因素变化；向量测试使用固定编码器和 dtype。fused 同时修改任务、格式和邻居更新方式。三组 QA 均使用 upstream 上下文策略，保留重复条目。
 
 ## 2. 数据、环境与测量
 
-| sample | conversation | turns | 证据完整且类别 1–4 的候选 QA | 实际 QA | 实际类别分布 |
+| 样本 | 会话 | 记录数 | 证据完整且类别 1–4 的候选问题 | 实际问题数 | 实际类别分布 |
 | --- | --- | ---: | ---: | ---: | --- |
 | 0 | conv-26 | 128 | 52 | 12 | 1:3，2:3，3:3，4:3 |
 | 1 | conv-30 | 128 | 34 | 12 | 1:4，2:4，4:4 |
 | 2 | conv-41 | 128 | 19 | 12 | 1:4，2:4，3:1，4:3 |
 
-每个 conversation 取时间顺序前 128 turns；只选 evidence 非空且全部已载入的问题，从类别 1–4 轮转抽取 12 题。类别 5 未纳入。独立问题数为 **36**；三次重复仍回答同一题集，不能称作 108 道独立问题。subset 保存原始 QA 索引、证据和指纹。
+每会话按时间顺序取前 128 条，从类别 1–4 中轮转选 12 题，要求标注依据非空且全部已加载；类别 5 排除。共 **36** 道独立问题。重复运行复用这 36 道题，逐次保存实际完成的回答。subset 保存原始问题下标、标注依据与内容校验值。
 
-MiniLM 使用固定 revision、CPU 4 线程；retrieve-k=10、evo-threshold=100、metadata workers=4、prefetch-window=16。基础环境见 [environment.json](environment.json)；最终实验以各自 manifest 和代码快照为准。
+MiniLM 使用固定版本、CPU 4 线程；retrieve-k=10、evo-threshold=100、笔记信息 workers=4、prefetch-window=16。基础环境见 [environment.json](environment.json)；最终实验以各自配置记录和代码快照为准。
 
-三组每轮均从空响应缓存运行，每组前重置 vLLM prefix cache，并在三个重复中轮换位置。模型已加载；下载、服务启动、READY/encoder 预热不计入 build/QA，初始化单列。**真实请求的推理等待全部计入 build/QA**。baseline 为对照录制而新增的 SQLite flush 单列排除，优化组实际缓存读写计入时间。QA 包含轻量字符串评分。
+三组每轮均从空响应缓存运行，每组前重置 vLLM prefix cache，并在三个重复中轮换位置。模型已加载；下载、服务启动、READY/编码器预热不计入 build/QA，初始化单列。**真实请求的推理等待全部计入 build/QA**。baseline 为对照录制而新增的 SQLite flush 单列排除，优化组实际缓存读写计入时间。QA 包含轻量字符串评分。
 
-每个 cell 保存完整预测、阶段请求/tokens、live 事件、逐步记忆指纹和源文件哈希。测量源码独立归档；测量结束后的工程修订不能追溯成旧运行已使用的代码。新主实验位于 [suite128-primary-observed-v1-20261018](../results/suite128-primary-observed-v1-20261018/)，[协议](../results/suite128-primary-observed-v1-20261018/protocol.json) 固定于 UTC 2026-10-17 17:50:57；源码 checkpoint 为 `2019a73d4ce7135acff4fc2cf51978ccee087124`，源文件指纹为 `4d475aeb3218110018ab0d03505c0b0b95f27fa2c8b89012eaf71fee544fdd4b`。213 项测试通过后冻结源码，源归档 SHA-256 为 `a92b9787e52baa468c68cba7392719313181af1575abfcb5046e686c05486329`。此前 [bounded 主协议](../results/suite128-primary-bounded-v1-20261018/protocol.json) 和其 `81fcb979867b034111250b19edbd3023fa94476e` 源码快照作为失败协议保留，不能视作新协议已经使用的源码。
+每轮保存预测、阶段耗时和请求量、逐条记忆状态、源码与配置。[主实验目录](../results/suite128-primary-observed-v1-20261018/)的[方案](../results/suite128-primary-observed-v1-20261018/protocol.json)确定于 UTC 2026-10-17 17:50:57，源码提交为 `2019a73d4ce7135acff4fc2cf51978ccee087124`，冻结前通过 213 项测试。文件与归档校验值见目录内记录。此前 [bounded 方案](../results/suite128-primary-bounded-v1-20261018/protocol.json)使用 `81fcb979867b034111250b19edbd3023fa94476e`，结果单独保存。
 
-## 3. 结果与聚合口径
+## 3. 主实验结果与统计方法
 
-九个预设 cell 均尝试一次，但没有一个完成全部三组：中止点均为 fused。不能把“9 个 cell 失败”解释成默认实现失败；按实际冷 arm 区分如下。
+九轮各尝试一次，都在 fused 阶段中止。baseline、exact 已完成的构建与 QA 仍单独保留，状态如下。
 
-| 冷 arm | 计划 | 实际尝试 | 完成 | 失败 | 因前组失败未运行 |
+| 方案 | 计划 | 实际尝试 | 完成 | 失败 | 因前组失败未运行 |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | baseline | 9 | 3 | 3 | 0 | 6 |
 | exact | 9 | 6 | 6 | 0 | 3 |
 | fused | 9 | 9 | 0 | 9 | 0 |
 
-三个 conversation 各有一对 baseline/exact；其余三个完整 exact arm 仍保留独立描述，不混入配对均值。无完整 fused 构建/QA，因此不报告其完成耗时加速比或 F1。全部结局和源文件哈希见 [失败分类审计](primary_failure_audit.json)、[机器汇总](../results/suite128-primary-observed-v1-20261018/analysis_views.json)。
+三个会话各有一对完整 baseline/exact，其他三个完整 exact 单独描述。fused 九次均未完成构建和 QA。全部状态见 [失败记录](primary_failure_audit.json)及[结果汇总](../results/suite128-primary-observed-v1-20261018/analysis_views.json)。
 
-| 数据范围 | cell / conversation | exact 构建 / 总流程速度比 | fused 构建 / 总流程速度比 | baseline / exact / fused F1 |
+| 数据范围 | 配对数 / 会话数 | exact 构建 / 总流程速度比 | fused 构建 / 总流程速度比 | baseline / exact / fused F1 |
 | --- | --- | --- | --- | --- |
-| 已完成 baseline/exact 配对 | 3 对 / 3 conversations | 1.143× / 1.131× | 无完成配对 | 0.3981 / 0.4039 / — |
-| 显存分配稳定的完成配对 | 2 对 / 2 conversations | 1.075× / 1.068× | 无完成配对 | 0.4129 / 0.3930 / — |
+| 已完成 baseline/exact 配对 | 3 对 / 3 个会话 | 1.143× / 1.131× | 无完成配对 | 0.3981 / 0.4039 / — |
+| 显存分配稳定的完成配对 | 2 对 / 2 个会话 | 1.075× / 1.068× | 无完成配对 | 0.4129 / 0.3930 / — |
 
-三个保留下来的默认配对均为 baseline-first（sample0/r1、sample1/r3、sample2/r2），因此完成子集已不再保留原计划的位置平衡。上表 1.143× 与 stable 1.075× 都受这一顺序边界及共享资源影响，不能作为消除了顺序因素的因果估计。
+三个默认配对都先运行 baseline：sample0/r1、sample1/r3、sample2/r2。因此上表 1.143× 和 stable 1.075× 同时受运行顺序、共享资源影响。
 
-同一完成配对范围的构建资源均值如下；先在 conversation 内平均重复，再等权汇总，不能混入未配对的完整 arm：
+同一完成配对的构建资源如下，先平均会话内重复，再等权汇总会话：
 
-| 配对范围 | baseline → exact HTTP | input tokens | output tokens |
+| 配对范围 | baseline → exact HTTP | 输入 tokens | 输出 tokens |
 | --- | ---: | ---: | ---: |
 | 全部三对 | 390.00 → 392.67 | 313,779 → 317,631 | 23,337.67 → 24,843.00 |
 | stable 两对 | 390.50 → 396.00 | 319,124.50 → 326,861.00 | 23,450.50 → 26,381.50 |
 
-速度首先按同一 cell 内 baseline/对应组的配对比值计算。汇总时先对同一 conversation 的 log speedup 取均值，再在 conversation 间等权平均并取指数。F1 先平均同一 conversation 的重复运行，再对 conversation 等权平均；次数不等时不隐式降低某个 conversation 的权重。逐 cell、逐 conversation、范围和失败均保留，不把少量重复测量当作总体置信区间。新协议的 9 个预设 cell 各尝试一次；普通冷运行推理/策略失败保留记录后继续下一独立 cell；源码、配置或重放完整性失败立即终止。不会按结果修改参数或补跑到成功。若有失败，速度和 QA 汇总明确为“完成配对条件下”的描述，同时列出 planned/attempted/completed/failed/not-run 分母及每个 conversation 的完成数；不能以完成子集冒充全部九次结果。
+速度先计算同轮 baseline/候选组的时间比，再在会话内和会话间等权平均其对数，最后取指数，即配对几何平均。F1 也先平均会话内重复，再等权汇总会话。九轮各执行一次；普通推理失败后保存记录并继续下一轮，源码、配置或回放不一致时停止。表中同时保留计划、尝试、完成、失败和未运行数量。
 
-配对分析按 arm 完成状态判断，而不是要求同一 cell 的三个 arm 全部成功：baseline 与 exact 完成而 fused 失败时，前两者仍构成一个已完成配对，fused 保留失败。这个分析口径在首个 fused 失败后明确，未改变实时运行或增加模型调用。每个比较单列有效配对数、失败与未尝试 arm；不把其他策略失败的记录删除。若失败发生在原计划重放之前，明确标记“未执行”，可在 suite 后仅使用已有缓存补做零 HTTP 验证，并单列其源码与执行身份。
+配对要求两组都完成，例如 baseline 和 exact 完成、fused 失败时，前两组仍可比较。该方法在首个 fused 失败后明确，实时运行方案保持不变。被中止跳过的回放先标为未执行，实验结束后仅使用已有响应补做，并单列记录。
 
-质量为本 harness 的 normalized EM 与 multiset token F1，不是论文综合 Score，也不等于上游 set-F1。最终解释同时报告构建 HTTP、输入/输出 tokens、fused 决策分布、连接/邻居更新、consolidation 次数，以及每阶段 live tag 指令违例率和实际最大列表长度。少调用不代表同比例省时间；不同演化率也会改变重建与 QA 上下文。
+质量采用标准化精确匹配（EM）和按词频重合计算的 token F1，定义见实现分析。上游 set-F1、论文 Score 使用其他评分方式。配套数据还记录演化分支、连接与邻居更新、索引重建次数、各阶段标签超限率和最长列表。请求数、输出量和分支共同影响时间及 QA。
 
-推理时延分位数使用 `http_requests > 0` 的 live 事件。原始 client 入口分位数包含 cache hit，不能把优化组 metadata 的入口 p50 当作纯模型推理 p50。请求耗时之和在并发组可能超过 wall time，嵌套计时也不能直接相加。
+推理时延分位数取 `http_requests > 0` 的实时事件。包含缓存命中的 client 入口时间单独报告；并发请求耗时和嵌套耗时与总墙钟时间分别阅读。
 
-默认路径三对均来自预设 baseline-first cell（sample0/r1、sample1/r3、sample2/r2），其他完整 exact arm 不混入配对均值。三对汇总的 EM 两组均为 0.1111；stable 子集为 baseline 0.1667、exact 0.1250。实时质量有波动，不能凭三个 conversation 的 F1 均值接近就宣称非劣效或保持质量。数值和来源哈希见 [独立审计](primary_default_pair_audit.json)。
+三对结果的 EM 两组均为 0.1111；stable 子集分别为 baseline 0.1667、exact 0.1250。原始预测与计算见 [配对明细](primary_default_pair_audit.json)。样本量、运行顺序和共享 GPU 是这些均值的主要限制。
 
 ### 已完成默认路径配对的解释示例
 
-在最终聚合之前，三条已完成 baseline/exact 配对说明为什么预取并不保证每次实时运行更快。其所属 cell 随后在 fused 失败，下面只描述有效的默认路径 arm，不把它们当作完整三组成功。
+下面展开三个完成配对，说明预取与实际生成工作如何共同影响时间。各轮随后均在 fused 失败。
 
-| 配对 | baseline → exact 构建 | update 请求 | 构建输出 tokens | 串行演化客户端耗时增量 | 构建减串行演化的残差变化 |
+| 配对 | baseline → exact 构建 | 邻居更新请求 | 构建输出 tokens | 串行更新耗时变化 | 其余构建耗时变化 |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | sample0/r1 | 344.09 → 358.46 s | 13 → 23 | 25,787 → 31,422 | +79.65 s | −65.28 s |
 | sample1/r3 | 285.57 → 236.99 s | 4 → 5 | 21,114 → 21,341 | +14.81 s | −63.39 s |
 | sample2/r2 | 309.71 → 240.01 s | 7 → 4 | 23,112 → 21,766 | −5.63 s | −64.06 s |
 
-sample0 的新增 5,635 output tokens 中，5,331 来自更多/更长的邻居 update，占净增量约 94.6%。尽管串行演化之外的暴露时间减少，更多演化工作仍使总构建变慢；sample1 的生成工作量更接近，减少的残差则超过演化增加量。这里的残差只是 `build wall − decision/strengthen/update 客户端时长之和`，还包含 embedding、index、调度等，**不是纯 metadata 时间，也不是隐藏时长的直接测量**。并发 metadata 与演化计时不能直接相加得到 wall time。
+sample0 新增 5,635 output tokens，其中 5,331 来自更多或更长的邻居邻居修改，占净增量约 94.6%。额外更新使串行步骤增多，最终构建变慢。sample1 生成量较接近，最终构建缩短。表中残差为 `build wall − decision/strengthen/update 客户端时长之和`，还包含向量编码、索引和调度，用于描述演化之外的耗时。
 
-对相同完整请求身份做只读缓存对比，每个配对均有 128 个相同 metadata 请求，其中分别有 34、18、23 个返回不同正文。即使输出 token 总数几乎相同，metadata 也不必相同，后续图与分支可能沿不同路径发展。这些记录证明实时响应存在差异；没有隔离实验，不能断言并发本身导致这些语义变化。Amdahl 估算假定剩余工作不变，实际 LLM 分支和 tokens 不固定正是它的解释边界。固定响应重放另行检验实现是否改变同一响应下的处理语义。原始文件哈希、计时代数、请求键与响应哈希见 [默认路径配对审计](primary_default_pair_audit.json)。
+每个配对都有 128 个相同笔记信息请求，其中分别有 34、18、23 个返回不同正文。即使输出 token 总数接近，内容也可能改变后续图和分支。具体服务端原因尚未定位；固定回答回放用于另行检查程序处理是否一致。来源与计算见 [配对明细](primary_default_pair_audit.json)。
 
-## 4. 重放与共享资源边界
+## 4. 回放与 GPU 监控
 
-原计划每个 cell 做 baseline→exact、exact→自身、fused→自身三项重放，但 fused 中止使这些后置验证未被执行。suite 后对三个完整 baseline 和六个完整 exact arm 独立恢复零 HTTP 重放，校验逐条记忆状态、原序请求键及完整 QA；fused 没有完整可验证 arm。baseline→exact 隔离实时服务输出差异；fused 自身重放只能证明能复现该策略的记录，不证明与 baseline 等价。恢复验证于 UTC18:43:04 完成：3 次 baseline→exact 与 6 次 exact 自身重放全部通过，逐条规范化 memory trace、原序请求键和完整 QA 一致，新增 HTTP 与 client errors 均为 0。九次验证共覆盖 1,152 个逐条状态比较和 9 次 consolidation；这是重复运行的检查数量，不是 1,152 条独立实验样本。测量源码保持原冻结身份。证据见 [replay_recovery.json](../results/suite128-primary-observed-v1-20261018/replay_recovery.json) 与 [独立原始报告复核](primary_default_pair_audit.json)。原始九个 cell 的 failed 状态不因后置默认路径验证通过而改写。
+原计划每轮做 baseline→exact、exact 自身、fused 自身三项回放。fused 中止后，三个 baseline 和六个 exact 于实验结束后独立补做缓存回放；UTC18:43:04 全部完成。3 次 baseline→exact、6 次 exact 自回放的逐条状态、原顺序请求和完整 QA 均一致，新增 HTTP 和 client errors 为 0。共比较 1,152 个状态、执行 9 次索引重建，计数包含重复运行。九轮原失败状态保留。详见 [回放结果](../results/suite128-primary-observed-v1-20261018/replay_recovery.json)和[配对明细](primary_default_pair_audit.json)。
 
-所有预设 cell 都进入完整报告。另按新实验启动前固定的规则做描述性敏感性分析：GPU2 整个 cell 的显存最大值与最小值差不超过 1,024 MiB；至少 10 个样本；相邻采样间隔不超过 10 秒。监控不足不进入子集。这是“显存分配稳定”，不是“独占 GPU”或“计算负载恒定”；显存不变仍可能存在计算竞争。规则只按资源监控决定，不按速度或分数筛选。若发生新的资源切换，保留原始结果并说明，不静默替换。
+全部预设运行均纳入报告；另按运行前确定的规则筛选显存稳定子集：GPU2 全轮显存最大最小差 ≤1,024 MiB，至少 10 个采样，相邻间隔 ≤10 秒。缺少监控时跳过筛选。该规则只看资源记录，显存稳定时仍可能存在共享计算竞争。
 
-实际资源审计中，sample0/r1 和 sample1/r3 的 GPU2 全 cell 显存均保持 44,483 MiB；sample2/r2 在 UTC18:29:10 至18:29:24 间短暂上升，峰值80,216 MiB后回到44,483 MiB，发生在 baseline 构建内部。按预设规则，该配对仍保留在全部完成配对结果，但不进入 stable 子集。不能由显存轨迹量化未测到的计算竞争开销。stable 结果因此只覆盖两个 conversation，不是原三个 conversation 的均衡重复估计；显存稳定本身也不保证计算独占。
+sample0/r1 和 sample1/r3 全轮 GPU2 显存为 44,483 MiB。sample2/r2 在 UTC18:29:10 至18:29:24 的 baseline 构建期间短暂升至 80,216 MiB，随后回到 44,483 MiB。该配对保留在全部结果中，stable 子集仅含另外两个会话。
 
-无 schema 约束的 fused 在第 4–31 条之间失败：4 次完整正文 JSON 解析发现一个多余末尾 `}`；5 次 JSON 可解析，但邻居更新项缺少必需的 `context` 字段。九次响应均正常 `stop`，不是 token 截断。当前协议允许用空字符串表示 context 不变，但不允许省略必需字段；没有事后补空值或剪括号以伪造成功。这说明 prompt-only JSON 在长链上的完成率需要作为一等指标。后续固定 JSON schema 同时约束正确语法和 required 字段，并继续保留全局 ID、分支与领域校验；它是独立的新实验身份，不是对这九次失败的追溯修复。 九个失败 arm 的缓存还保留 419 个不同请求响应，usage 合计至少 190,802 input tokens、21,183 output tokens；独立只读复算一致。这个下界包括失败前已发出的 metadata 预取，不等于已提交记忆的工作量，也不包含所有可能重试，不能据此推算失败 arm 的完整速度或质量。见 [失败响应成本记录](../results/suite128-primary-observed-v1-20261018/failed_response_usage.json)。
+无 schema 约束的 fused 在第 4–31 条失败：4 次 JSON 末尾多一个 `}`，5 次缺少邻居更新的必需 `context` 字段。九次均正常 `stop`，程序按完整正文和必需字段判定失败。后续 schema 方案另行记录。失败组缓存保留 419 个不同请求响应，usage 至少为 190,802 input tokens、21,183 output tokens，包含已发出的预取；这是已保存响应的成本下限。详见 [失败响应记录](../results/suite128-primary-observed-v1-20261018/failed_response_usage.json)。
 
-## 5. Pilot 记录与共同配置的由来
+## 5. 早期试运行与配置调整
 
-最初 max_tokens=1000 的 [pilot suite](../results/suite128-three-arm-20261018/suite.json) 为 1 个完成、1 个失败、7 个未运行。第 116 条 `D7:8` 的 strengthen 触及输出上限，strict client 拒绝截断响应。用前序 decision 的文本、keywords 和邻居快照可复原此前 114 条 strengthen 请求键，唯一缺失键对应这次失败。旧失败正文未保存；[失败记录](../results/suite128-three-arm-20261018/failure_report.json) 保留了可验证范围。
+max_tokens=1000 的[早期试运行](../results/suite128-three-arm-20261018/suite.json)共 1 轮完成、1 轮失败、7 轮未运行。第 116 条 `D7:8` 建立关联达到输出上限。利用前序更新决策中的文本、keywords 和邻居快照，复原了此前 114 条建立关联请求键，缺失的键对应这次失败。旧正文未保存，详见 [失败记录](../results/suite128-three-arm-20261018/failure_report.json)。
 
-同一 prompt 的 [2000-token 诊断](../results/diagnostics/strengthen_cap2000.json) 仍截断，生成 15,001 字符，`Transformational` 重复 683 次。这是 Qwen3-8B、temperature=0 配置下的实证，不是上游默认配置或所有 A-Mem 模型的普遍行为。随后固定 RP=1.05、对预先选择的 10 个请求做格式诊断：9 个正常控制通过，失败输入变为 78 tokens、1.11 秒正常停止，但生成 25 个 tags，未满足预设 ≤16 条，因此 [RP-only 诊断](../results/diagnostics/rp105-fixed-controls/results.json) 仍记为失败，没有事后放宽门槛。
+同一提示词的 [2000-token 诊断](../results/diagnostics/strengthen_cap2000.json)仍截断，生成 15,001 字符，`Transformational` 重复 683 次。随后固定 RP=1.05，检查预选的 10 个请求：9 个正常控制通过；原失败输入在 78 tokens、1.11 秒正常停止，但生成 25 个 tags，超过预设 ≤16 条，故 [RP-only 诊断](../results/diagnostics/rp105-fixed-controls/results.json)仍判失败。
 
-随后仅加入第 1 节共同的 16-tag system 约束，保持 RP=1.05、同一批 10 个输入、同一接受标准，检查停止、明确格式与完整邻居块，不依据 QA 得分搜索参数。[bounded-tags-v1 诊断](../results/diagnostics/bounded-tags-v1-fixed-controls/results.json) 10/10 通过，实际执行 10 次 HTTP，未写入响应缓存。原失败输入正常停止于 58 output tokens，tags 不超过 16；两个五邻居 update 控制均保留完整块，分别为 326、391 tokens。这证明固定控制输入满足接受条件，不保证任意新输入不会失败。之前的失败与源码快照均保留，pilot 不与新主实验混合汇总。
+加入第 1 节共同标签指令后，RP=1.05、10 个输入和接受标准保持相同，[bounded-tags-v1 诊断](../results/diagnostics/bounded-tags-v1-fixed-controls/results.json)10/10 通过，实际 10 次 HTTP，诊断输出单独保存。原失败输入输出 58 tokens、tags ≤16；两个五邻居邻居修改分别输出 326、391 tokens，保留全部邻居块。
 
-严格 `bounded-tags-v1` 随后仍在首个 cell 的 exact 组第 83 条 `D5:7` 失败：strengthen 正常停止于 68 output tokens、271 字符，却给出 18 个 tags，超过固定 16 门槛。完整诊断见 [optimized-failure.json](../results/suite128-primary-bounded-v1-20261018/turns128-sample0-upstream-r1/optimized-failure.json)。这是指令遵循偏差，和前述 2000-token 重复长尾不同；十个固定控制通过并不保证运行时所有输入满足软提示。该失败判定不追溯更改。
+随后严格 `bounded-tags-v1` 在首轮 exact 第 83 条 `D5:7` 失败：建立关联正常停止，输出 68 tokens、271 字符、18 个 tags，超过 16 项上限。详见 [失败记录](../results/suite128-primary-bounded-v1-20261018/turns128-sample0-upstream-r1/optimized-failure.json)。
 
-新的 `observed-tags-v1` 不改模型请求或继续搜索惩罚系数，仅把非语义必需的 tag 数量上限改成显式观察项；严格截断及领域校验仍保留。observe 接受策略通过 213 项离线测试，包括 HTTP payload 不变、缓存身份隔离与已知超限 fixture；没有将十个先前控制全部再次离线重放，也没有重发十次实时诊断。先前十个 live 控制通过是相同请求配置的独立历史证据，不夸大成新接受策略的十项回归。未按 QA 分数选择参数。新协议九个 cell 重新从空缓存执行，与此前协议不混合。任何后续失败按固定继续策略报告，不再因正常 cell 失败而调整参数重启研究。
+`observed-tags-v1` 保持同一请求和惩罚系数，将完整标签超限改为观察项，截断、字段和引用仍严格检查。接受规则通过 213 项离线测试，覆盖请求不变、缓存区分和超限样例；先前 10 个实时控制保留为独立诊断，未再次回放或重发。新方案从空缓存重新执行九轮，参数固定，普通失败按规则继续。
 
-pilot 的唯一完整 cell 还遇到 GPU2 分配下降 15,995 MiB，导致顺序基线与优化组处于不同资源状态；其约 2.76× exact 构建比值不能作为纯实现收益。定位证据见 [resource_audit.json](resource_audit.json)。同一 cell 的 fused 上下文更稀疏，原始标注证据平均覆盖从 baseline 的 0.750 降至 0.542，见 [逐题诊断](first_cell_quality_audit.json)。它支持证据覆盖减少的线索，但连接密度、metadata、检索与重建同时变化，尚不能归因于某一条提示词。证据匹配也不是官方检索指标。
+早期试运行唯一完整轮次的 GPU2 显存下降 15,995 MiB，约 2.76× 构建比值受资源切换影响，详见 [资源记录](resource_audit.json)。同轮 fused 上下文较稀疏，标注依据的平均覆盖从 baseline 0.750 降至 0.542，详见 [逐题记录](first_cell_quality_audit.json)。图连接、笔记信息、检索与重建同时变化，此项匹配用于定位答案差异。
 
-## 6. 固定图 QA context 去重：已完成的独立消融
+## 6. 固定图 QA 上下文去重
 
-按输出前修订的来源规则，使用 sample0/r1、sample1/r3、sample2/r2 的三个 baseline 图，36 道固定 QA。图与关键词从原缓存严格重放，新模型调用只生成答案。独立核对了源图和两种上下文的 memory digest，从 baseline SQLite 重新计算固定关键词 digest，并检查每题 context 与预设计划的 hash、去重行数和分数；全部一致。两组各 36 次真实答案请求，无 client error；图/关键词重建 0 HTTP，另有每图一次不计时 READY 预热。
+按事前修订的来源规则，使用 sample0/r1、sample1/r3、sample2/r2 的三个 baseline 图和 36 道固定问题。图和关键词从原缓存回放，两组只重新生成答案。记忆内容、关键词、上下文校验值和去重行数均核对一致。每组 36 次实时请求，client error 为 0；图与关键词重建为 0 HTTP，每图另有一次不计时 READY 预热。
 
 | sample | 答案请求输入 tokens：upstream → 去重 | 输入减少 | 答案阶段速度比 | F1：upstream → 去重 |
 | --- | ---: | ---: | ---: | ---: |
@@ -125,64 +125,65 @@ pilot 的唯一完整 cell 还遇到 GPU2 分配下降 15,995 MiB，导致顺序
 | 2 | 75,463 → 50,492 | 33.09% | 1.329× | 0.4222 → 0.4476 |
 | 三图汇总 | 242,979 → 153,120 | 36.98% | 1.420×（配对几何均值） | 0.4118 → 0.4199 |
 
-context UTF-8 字节由 1,025,519 降至 636,340（−37.95%），渲染记忆行数由 1,447 降至 912（−36.97%）。两组 EM 均为 0.1111；36 题中 18 个预测正文相同，F1 提高 7 题、下降 3 题、其余 26 题相同。总体分数接近不等于去重无损或统计非劣效；sample0 F1 略降，另两个 conversation 略升。
+上下文 UTF-8 字节从 1,025,519 降至 636,340（−37.95%），记忆行从 1,447 降至 912（−36.97%）。两组 EM 为 0.1111；36 题中有 18 个答案正文相同，F1 提高 7 题、下降 3 题、26 题不变。sample0 均值略降，另外两个会话略升。
 
-计时的答案阶段合计 29.435 → 20.717 秒，包含检索/拼接、字符串评分与 SQLite 记录，**排除记忆构建、图重放和关键词 LLM 调用**；不能把 1.420× 称为整体记忆系统或完整 QA 流程加速。本阶段没有独立 GPU 监控工件，不沿用主实验的 allocation-stable 标签，时延只作为共享服务环境的观测。输入 tokens 和上下文字节减少则由真实请求 usage 与逐题内容直接核对。
+答案阶段合计 29.435 → 20.717 秒，包含检索、拼接、评分和 SQLite 记录，构建、图回放及关键词推理另计。因此 1.420× 对应本答案阶段；本阶段缺少独立 GPU 监控，时间受共享服务影响。输入 tokens 和字节数直接由逐题请求统计。
 
-历史 64-turn 的约 40.5% 是离线按完整文本去重的字符估算；这里是三个 128-turn 固定图中按记忆行号去重后的实测 tokens、UTF-8 bytes 和真实答案，不混用两种百分比。原始结果见 [context 实验](../results/context128-observed-v1-20261018/derived.json)，独立校验与逐题变化见 [context_live_audit.json](context_live_audit.json)。
+历史 64 条约 40.5% 来自按完整文本去重的离线字符估算。本实验在三个 128 条图中按行号去重，记录真实 tokens、UTF-8 字节和答案。详见 [实验结果](../results/context128-observed-v1-20261018/derived.json)与[逐题比较](context_live_audit.json)。
 
-## 7. 其他独立消融与项目结论
+## 7. 结构化检查与完整会话案例
 
-QA 去重、structured fused/joint 及完整 419-turn 案例均使用独立配置和结果目录，不混入三组主结果。完整案例已在调用前固定为 baseline/exact 两组，优先验证默认路径的多次 consolidation，见 [完整 conversation 协议](full_conversation_protocol.md)。可选 structured 策略须先通过 [固定三项格式门禁](structured_policy_gate_protocol.md)，不得修剪已有失败 JSON 来伪造成功。joint 会改变 metadata 的生成条件并取消独立预取，须用新的同轮 baseline 对照，不能借用数小时前的时间。联合策略的固定样本、顺序与比较口径见 [joint pilot 协议](joint_pilot_protocol.md)；另在任何 joint 输出前预设 [128-turn 扩展](joint128_extension_protocol.md)，只按固定时间/可用性门槛决定是否启动，不按64-turn质量挑选。
+上下文去重、structured fused/joint 和完整 419 条案例分别保存配置及结果。完整案例按[方案](full_conversation_protocol.md)使用 baseline/exact，检查多次索引重建；可选策略先通过[三项格式检查](structured_policy_gate_protocol.md)，再按 [joint 方案](joint_pilot_protocol.md)做同轮对照。[128 条扩展](joint128_extension_protocol.md)提前固定样本和时间条件。
 
-固定三项 schema 门禁已于 UTC18:50 完成，三项全部通过，恰好三次 POST；完整正文 JSON、固定 schema、候选引用与首条语义均通过独立校验。output tokens 分别170/88/100，全部正常stop。原失败 fused 请求的system/user/payload仅增加response_format；joint有邻居控制使用冻结的原baseline metadata。具体来源与哈希见 [structured_gate_audit.json](structured_gate_audit.json)。该小门禁只验证固定输入的格式与领域约束，不能替代长链完成率和QA对照。原无schema九次失败仍单列保留。
+三项 schema 检查于 UTC18:50 完成，各一次 POST，全部通过完整 JSON、schema、候选引用和首条规则检查，output tokens 为 170/88/100，均正常 stop。已知失败 fused 的原请求仅增加 response_format；joint 有邻居输入使用原 baseline 的固定笔记信息。详见 [检查结果](structured_gate_audit.json)。本检查覆盖三个固定输入，长期完成率和 QA 另测。
 
-完整 419-turn 默认两组案例使用相同 observed 配置、关闭结构约束，预设 48 QA。baseline 日志确认完成 419/419 条构建、1,286 次 build HTTP，但在第 35 道 QA（原索引 69）的答案生成触及 2,000-token 上限；诊断显示重复短答案列表，响应被严格拒绝。冻结 harness 直到全部 QA 完成后才 flush baseline 录制缓存，因此 `baseline.sqlite` 为 0 条，原 live trace、build 计时和完整 QA 报告没有保存。不能据日志恢复这些指标，也不能宣称 baseline 零 HTTP 回放通过。已按预设规则独立尝试尚未运行的 exact arm；不重试 baseline、不更换参数。原始证据和可用性规则见 [full419_evidence_audit.json](full419_evidence_audit.json)。
+完整 419 条案例使用共同 observed 配置，关闭结构约束，选 48 QA。baseline 完成 419/419 条构建、1,286 次 build HTTP，在第 35 题（原索引 69）答案生成时达到 2,000-token 上限，正文重复短答案列表。旧评测脚本在全部 QA 后才保存录制缓存，因而 `baseline.sqlite` 为 0 条，原构建轨迹和时间丢失。随后按既定规则独立运行尚未尝试的 exact。详见 [运行记录](full419_evidence_audit.json)。
 
-未尝试过的 exact arm 随后独立完成：419 条构建 1,067.105 秒，48 QA 67.610 秒，F1 0.30086、EM 0.04167；构建产生 1,314 次 HTTP、1,117,250 input tokens、93,730 output tokens，实际触发 4 次 consolidation。完整 exact 自身回放的逐条状态、逻辑请求序列和 48 个 QA 与原 live 报告全部一致，0 HTTP、0 client errors。这是一个完整默认路径规模案例，缺失完整 baseline，**没有配对速度或质量提升结论**。continuation GPU 监控在构建开始约 3 分钟后才启动，不能给整组分配稳定标签。
+exact 完成 419 条构建，耗时 1,067.105 秒；48 QA 为 67.610 秒，F1 0.30086、EM 0.04167。构建有 1,314 次 HTTP、1,117,250 input tokens、93,730 output tokens、4 次索引重建。自身回放的逐条状态、请求和全部 QA 一致，HTTP 与 client errors 为 0。该组完成规模验证；baseline 数据缺失，配对时间与质量无法计算。GPU 监控在构建开始约 3 分钟后启动。
 
-预先固定的共同缓存验证也已完成：reference 与 Fast 均从 exact 的 1,410 条持久响应中重建全部 419 条，逐条状态、原序请求、最终图和演化次数一致；在第 101、201、301、401 条执行四次 consolidation，两次重建还都与原 live exact trace 一致，0 HTTP、0 errors。独立核对了原始报告、缓存 digest、全部 419 步、48 题评分及源码哈希，见 [审计](full419_evidence_audit.json)。这证明共同响应下的构建等价，**并未恢复丢失的原 baseline trace**；自回放的完整 QA 证明也仅属于 exact。全部实时与重放实验结束后，最终代码加入构建计时结束后的录制 flush 和原子 build checkpoint，以及失败时可用证据保存；原生成异常与持久化错误分别保留。该工程修复通过 [281 项离线测试](../results/clean-client-validation-final.json)，不追溯改变旧实验，也不等于生产向量索引恢复。
+reference 和 Fast 使用 exact 保存的 1,410 个响应重建 419 条记忆，逐条状态、请求、最终图和演化次数一致，并与原实时 exact 轨迹一致。第 101、201、301、401 条发生四次索引重建，HTTP 与 errors 为 0；48 题评分和来源文件也已核对，详见 [检查记录](full419_evidence_audit.json)。这项比较固定相同模型回答，QA 完整自回放属于 exact。全部测量后，最终脚本加入构建结束即保存、异常时保留部分结果的机制，通过 [281 项离线测试](../results/clean-client-validation-final.json)。旧 baseline 丢失的数据仍无法恢复。
 
-项目贡献包括可核验的默认路径调度/索引优化、固定图 QA token 压缩和可选联合策略的有条件速度收益；同时保留失败分母、质量变化与共享资源边界。fused/joint 改变模型任务，不归入无损工程优化，也不声称原创 A-Mem 算法或论文全量复现。
-
-
-### held-out 的关键词长尾：完整应用链与图语义分开
-
-64-turn sample3/r1 的 joint 已完成全部构建，却在第一题关键词生成截断。该请求身份与同轮已完成 baseline、exact 的关键词请求完全相同：后二者均 87 input / 41 output tokens、正常停止且正文一致；joint 同一身份生成到 2,000 tokens，strict client 拒绝并未写缓存。问题为 Joanna 的 hobbies；关键词请求只含问题文本，在检索前发出，不携带 joint 图内容，也没有 schema。这个观察说明相同请求身份不保证实时返回相同，不能归因于 joint 图语义；具体服务/数值原因没有隔离。完整 payload、响应哈希与代码依赖见 [关键词失败审计](heldout_keyword_failure_audit.json)。原 cell 保留失败，后续预设 cell 继续，不改参数或补跑。
-同 conversation 的第二次重复也在 joint 的首个关键词请求失败：request key、87/2,000 tokens、8,949 字符及完整正文 hash 均与第一次一致。该轮 fused 的相同请求正常停止，41-token 正文又与首轮 baseline/exact 相同。因此当前记录中是三次同一正常正文、两次同一截断正文；这是可复核的重复模式，不是已隔离的原因。没有额外重发、prefix-reset 搜索或参数调整。
+主要工作包括有界预取和索引复用、固定图 QA 去重、联合任务策略，以及请求回放和失败保存。默认工程优化与可选任务合并分别测量，质量变化和完成次数随结果一起给出。
 
 
-## 8. 独立 64-turn structured pilot 与未执行的 128-turn 扩展
+### 独立会话中的关键词请求失败
 
-sample3/conv-42 与 sample4/conv-43 各取前 64 turns、重复两次，分别有 17 和 14 道证据完整 QA，共 31 道独立题。四组采用预设 Williams 顺序；仅 fused/joint 的记忆 JSON 阶段启用固定通用 schema，其他模型、解码和 QA 上下文设置保持预设值。源码仍为测量 checkpoint `21b5b23`，完整记录见 [pilot](../results/joint64-heldout-structured-v1-20261018/suite.json)。
+64 条 sample3/r1 的 joint 完成构建后，首题关键词请求截断。问题为 Joanna 的 hobbies，输入只含问题文本，在检索前生成关键词。相同请求在 baseline、exact 均以 87 input / 41 output tokens 正常停止，joint 达到 2,000 tokens。详见 [请求比较](heldout_keyword_failure_audit.json)。
 
-四个 cell 全部尝试：两个完整、两个因 joint 首题关键词截断而失败。13 个实际尝试的构建均完成 64 条记忆，但只有 11 个 arm 完成构建与全部 QA，不能把两种完成率混用：
+同一会话第二次 joint 重复也在首题失败，请求键、87/2,000 tokens、8,949 字符及正文校验值均相同；该轮 fused 正常返回同一 41-token 正文。共记录三次相同正常正文、两次相同截断正文。失败请求未读取记忆图，具体服务或数值原因尚未定位。
 
-| arm | 计划 | 尝试 | 构建完成 | 构建+QA 完成 | 失败 | 未到达 |
+
+## 8. 独立会话的 64 条实验与取消的 128 条扩展
+
+sample3/conv-42 与 sample4/conv-43 各取前 64 条记录、重复两次，分别有 17 和 14 道标注依据完整的问题，共 31 道独立题。四组按预设顺序轮换位置；fused/joint 的记忆生成使用 JSON Schema 格式约束，其余配置相同。源码提交为 `21b5b23`，完整记录见 [实验记录](../results/joint64-heldout-structured-v1-20261018/suite.json)。
+
+四轮全部启动，两轮完整完成，两轮在 joint 首题关键词阶段失败。实际 13 组构建全部完成 64 条记忆，完整构建+QA 共 11 组：
+
+| 方案 | 计划 | 尝试 | 构建完成 | 构建+QA 完成 | 失败 | 未到达 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | baseline | 4 | 3 | 3 | 3 | 0 | 1 |
 | exact | 4 | 3 | 3 | 3 | 0 | 1 |
 | structured fused | 4 | 3 | 3 | 3 | 0 | 1 |
 | structured joint | 4 | 4 | 4 | 2 | 2 | 0 |
 
-两个失败 joint 的 live 构建计时未保存，不从日志补造速度。其关键词请求没有读取图，并与 baseline/exact/fused 正常完成的请求身份相同；这仍是整条 joint arm 的失败，但不能归因于 joint 图。所有 11 个完整 arm 已逐条核对图、请求序列和完整 QA，自身/对照重放新增 HTTP 与 client errors 均为零，见 [恢复验证](../results/joint64-heldout-structured-v1-20261018/replay_recovery.json)。
+两个失败 joint 缺少保存的构建计时。11 个完整组均通过逐条图、请求和全部 QA 回放，新增 HTTP 与 client errors 为零。详见 [回放结果](../results/joint64-heldout-structured-v1-20261018/replay_recovery.json)。
 
-以下均只用同一 cell 的完成配对；先对 conversation 内重复取均值（速度用 log），再在 conversation 间等权平均。各行的 baseline、QA 与资源范围不同，不能横向当作共同全样本排名：
+下表使用同轮完成配对，先平均会话内重复，再等权汇总会话；速度采用配对比值的几何平均。各行的会话和 QA 范围分别列出：
 
-| 对照 | 配对 / conversation / 独立 QA | 构建 / build+QA 速度比 | baseline → candidate F1 | baseline → candidate EM |
+| 对照 | 配对数 / 会话数 / 独立问题 | 构建 / 构建+QA 速度比 | baseline → 对照组 F1 | baseline → 对照组 EM |
 | --- | --- | --- | --- | --- |
 | exact | 3 / 2 / 31 | 1.383× / 1.323× | 0.4449 → 0.4367 | 0.2143 → 0.1786 |
 | structured fused | 2 / 1 / 14 | 1.970× / 1.852× | 0.5475 → 0.5793 | 0.4286 → 0.3929 |
 | structured joint | 2 / 1 / 14 | 2.301× / 2.159× | 0.5475 → 0.6095 | 0.4286 → 0.4286 |
 
-| 同范围构建资源 | baseline → candidate HTTP | input tokens | output tokens |
+| 同范围构建资源 | baseline → 对照组 HTTP | 输入 tokens | 输出 tokens |
 | --- | ---: | ---: | ---: |
 | exact | 198.50 → 194.25 | 151,700 → 144,832.75 | 13,636 → 11,439.75 |
 | structured fused | 206 → 127 | 166,671 → 81,758 | 17,199 → 11,056 |
 | structured joint | 206 → 64 | 166,671 → 68,619 | 17,199 → 7,250 |
 
-joint 的积极结果明确限于 sample4 的两个完成配对：baseline 构建 224.221/223.264 秒，joint 97.407/97.061 秒，配对几何速度比 2.301×，构建请求 206→64。平均 F1 提高，但同一 14 题中有 2 题提高、1 题下降、11 题不变，两次重复的变化计数相同；不是无损或统计非劣效证明。构建任务、输出 tokens、演化分支和图同时改变，不能把收益单独归因于减少 HTTP 或预取。64-turn 各 arm 均未触发 consolidation；多轮重建的正确性证据来自独立 419-turn 案例。
+joint 的完成配对来自 sample4：baseline 构建为 224.221/223.264 秒，joint 为 97.407/97.061 秒，配对速度比 2.301×，请求 206→64。14 题中 2 题 F1 提高、1 题下降、11 题不变，两次重复的变化相同。任务、输出 tokens、分支和记忆图同时变化，质量和耗时需结合阅读。各 64 条组均未触发索引重建，多次重建另由 419 条案例验证。
 
-原先四行平衡顺序因两个 cell 中止而未在完整子集保留；sample4 的两个完整顺序互逆仍不足以排除共享 GPU 竞争。更不能把 samples0–2、128 turns 的九次无约束失败与 samples3–4、64 turns 的 structured 构建完成作受控可靠性提升对照。固定三项门禁只在它的相同输入上隔离增加 response_format 的变化。原始计数、逐题重算、资源加总与官方配对汇总已独立核对，见 [heldout64_audit.json](heldout64_audit.json) 和 [机器分析](../results/joint64-heldout-structured-v1-20261018/analysis_views.json)。
+两轮中止使完成子集失去原计划的完整顺序平衡；sample4 两次顺序互逆，仍受共享 GPU 影响。128 条无结构约束实验与 64 条 structured 实验使用不同样本和长度，分别报告。仅三项固定格式检查在相同输入上增加 response_format。原始计数、评分和资源已核对，详见 [逐项检查](heldout64_audit.json)与[结果汇总](../results/joint64-heldout-structured-v1-20261018/analysis_views.json)。
 
-128-turn 扩展没有执行：预设公式得到 7,266.976 秒（121.12 分钟），当时剩余 9,280.230 秒，扣除 40 分钟收尾预算后仅有 6,880.230 秒，未满足启动门槛；四个计划 cell 均为零尝试。没有依据 64-turn 分数、策略速度或失败结果更换样本/参数，也没有追加模型调用。见 [固定排期决定](../results/joint128-heldout-structured-v1-20261018/scheduling_decision.json)。
+128 条扩展未执行。预设公式估计 7,266.976 秒（121.12 分钟）；当时剩余 9,280.230 秒，扣除 40 分钟收尾时间后可用 6,880.230 秒，未达到启动条件。四轮均未尝试，详见 [排期记录](../results/joint128-heldout-structured-v1-20261018/scheduling_decision.json)。

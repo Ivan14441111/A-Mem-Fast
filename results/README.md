@@ -1,50 +1,73 @@
-# Measurement index
+# 实验结果
 
-The [current experiment report](../docs/experiments_v2.md) interprets the final measurements. JSON reports retain per-question outputs, token counts, request events, source fingerprints and failures. Repeats reuse the same questions and do not increase the independent conversation or question count. SQLite response caches remain private and are excluded from git.
+[实验报告](../docs/experiments_v2.md)解释各项结果。这里按实验列出汇总、图表和运行记录，便于查找。JSON 文件包含逐题答案、耗时、token 用量、运行配置和错误信息。
 
-## Current protocol
+## 主要实验
 
-| Directory | Status and scope |
+| 实验 | 结果与运行情况 | 查看 |
+| --- | --- | --- |
+| 默认流程，128 条记忆 | 三个会话的完成配对，构建速度 1.143×；共完成原版 3 次、优化版 6 次。九次可选 fused 均因响应格式或字段错误中止 | [汇总](suite128-primary-observed-v1-20261018/derived.json) · [配对分析](suite128-primary-observed-v1-20261018/analysis_views.json) · [运行记录](suite128-primary-observed-v1-20261018/suite.json) |
+| 回答材料去重 | 三个固定图、36 道不同问题，原版与去重各生成 36 个答案；答案输入减少 36.98% | [结果](context128-observed-v1-20261018/derived.json) · [实验配置](context128-observed-v1-20261018/protocol.json) |
+| 联合策略，64 条记忆 | 两个会话各重复两次，比较四种方案；计划 16 次，执行 13 次，完整完成 11 次，joint 关键词生成失败 2 次，其余 3 次随所在组中止 | [配对结果](joint64-heldout-structured-v1-20261018/paired_metrics.md) · [汇总](joint64-heldout-structured-v1-20261018/derived.json) · [运行记录](joint64-heldout-structured-v1-20261018/suite.json) |
+| 完整会话，419 条记忆 | 优化版完成构建与 48 道问答，构建 1,067.105 秒，问答 67.610 秒。原版在第 35 道问答截断，完整会话按单次运行结果展示 | [汇总](full419-default-observed-v1-20261018/derived.json) · [运行记录](full419-default-observed-v1-20261018/suite.json) |
+| 索引重建 | 1,024 文档、真实 MiniLM，批量重建速度约 2.52× | [索引测量](index_benchmark.json) |
+
+64 条联合策略的配对范围：默认优化为 3 对、2 个会话、31 道不同问题；fused 和 joint 各为 2 对、1 个会话、14 道不同问题。速度按每个会话内的配对比值汇总，再对会话等权计算。
+
+图表：[默认流程](joint64-heldout-structured-v1-20261018/default_pairs.svg) · [fused](joint64-heldout-structured-v1-20261018/fused_pairs.svg) · [joint](joint64-heldout-structured-v1-20261018/joint_pairs.svg) · [同一子集的四种方案](joint64-heldout-structured-v1-20261018/four_arm_pairs.svg)。
+
+## 回放与异常记录
+
+| 内容 | 记录 |
 | --- | --- |
-| [suite128-primary-observed-v1-20261018](suite128-primary-observed-v1-20261018/suite.json) | All nine planned cells attempted once; all nine failed in the optional unstructured fused arm. Three baseline and six exact arms completed, providing three complete, reference-first default-path pairs across three conversations (128 turns, 12 evidence-complete QA each); surviving pairs are not counterbalanced. Use [arm-wise tables](suite128-primary-observed-v1-20261018/derived.json) and [paired/sensitivity analysis](suite128-primary-observed-v1-20261018/analysis_views.json); all nine completed default cold arms passed [strict zero-HTTP replay recovery](suite128-primary-observed-v1-20261018/replay_recovery.json). Whole-cell failure status and full denominator remain in `suite.json`; [saved failed-response usage](suite128-primary-observed-v1-20261018/failed_response_usage.json) gives a clearly labeled token lower bound. |
-| [context128-observed-v1-20261018](context128-observed-v1-20261018/protocol.json) | Completed three fixed-graph cases, 36 unique QA and 72 live answer calls. Graph and keyword reconstruction made zero HTTP requests; [derived results](context128-observed-v1-20261018/derived.json) compare upstream/deduplicated answer contexts. |
-| [joint64-heldout-observed-v1-20261018](joint64-heldout-observed-v1-20261018/suite.json) | Unused observed-profile held-out plan; superseded before any live joint outputs by the [structured-policy pilot amendment](../docs/joint_pilot_protocol.md). No measurements in this directory. |
-| [full419-default-observed-v1-20261018](full419-default-observed-v1-20261018/suite.json) | Reference built all 419 notes (1,286 build HTTP), then answer 35/48 truncated; its unflushed recording buffer was lost. The independent exact arm completed: build 1,067.105 s, QA 67.610 s, F1 0.3009 on 48 questions, four consolidations. Its [strict own replay](full419-default-observed-v1-20261018/replay_recovery.json) matched all graph/request/QA outputs with zero HTTP. [Build-only reconstruction](full419-default-observed-v1-20261018/build_only_reconstruction.json) compared reference and fast algorithms using the same exact-arm cache and matched the original live exact trace; this is not recovery of the lost baseline. Original cell remains failed; no paired speed result. See [continuation](full419-default-observed-v1-20261018/independent_continuation.json) and [arm-wise tables](full419-default-observed-v1-20261018/derived.json). |
-| [joint64-heldout-structured-v1-20261018](joint64-heldout-structured-v1-20261018/suite.json) | All four cells attempted once: two complete, two joint keyword-generation truncations. Of 16 planned cold arms, 13 were attempted, 11 completed, two failed and three were not reached. All 11 completed arms passed [strict zero-HTTP replay](joint64-heldout-structured-v1-20261018/replay_recovery.json). [Paired metrics](joint64-heldout-structured-v1-20261018/paired_metrics.md) use separate eligible pairs: exact 3 pairs/2 conversations/31 unique QA; fused and joint 2 pairs/1 conversation/14 unique QA each. [Arm-wise tables](joint64-heldout-structured-v1-20261018/derived.json), [resource sensitivity](joint64-heldout-structured-v1-20261018/analysis_views.json), [failed-response usage](joint64-heldout-structured-v1-20261018/failed_response_usage.json), and paired figures preserve all outcomes. |
-| [joint128-heldout-structured-v1-20261018](joint128-heldout-structured-v1-20261018/suite.json) | **Not executed.** The [recorded timing decision](joint128-heldout-structured-v1-20261018/scheduling_decision.json) projected 121.12 minutes against 114.67 available after the required 40-minute reserve. All four planned cells remain untouched and unattempted; [execution status](joint128-heldout-structured-v1-20261018/execution_status.json). The 48 planned QA include all 31 from the 64-turn pilot and are not measured results. |
+| 128 条默认流程 | [九次完成运行的响应回放](suite128-primary-observed-v1-20261018/replay_recovery.json)，逐步状态、请求和问答输出一致 |
+| 64 条策略比较 | [十一次完成运行的回放](joint64-heldout-structured-v1-20261018/replay_recovery.json)，各方案使用自己的录制响应重建；[资源记录](joint64-heldout-structured-v1-20261018/analysis_views.json) |
+| 419 条完整会话 | [优化版自身回放](full419-default-observed-v1-20261018/replay_recovery.json)匹配全部状态、请求和 48 个答案；[原逻辑与优化实现](full419-default-observed-v1-20261018/build_only_reconstruction.json)在同一份优化版响应记录下匹配 419 步构建，覆盖 4 次索引重建 |
+| 419 条原版问答失败 | 原版构建完成，问答第 35 题截断；旧版程序尚待问答结束后保存缓存，构建计时和录制响应随退出丢失。详见[运行说明](../docs/full419_evidence_audit.json)与[后续优化版运行](full419-default-observed-v1-20261018/independent_continuation.json) |
+| 失败请求的用量 | [128 条实验](suite128-primary-observed-v1-20261018/failed_response_usage.json)与[64 条实验](joint64-heldout-structured-v1-20261018/failed_response_usage.json)统计已保存响应的 token 用量 |
 
-Executed current-protocol runs use `observed-tags-v1`; the structured 64-turn pilot additionally guides only fused/joint JSON stages using fixed generic schemas. Baseline/exact/QA payloads remain unchanged by that opt-in flag. Common decoding: max 2,000 output tokens, repetition penalty 1.05, the same system instruction requesting at most 16 tags, and observation of complete oversized tag lists without clipping. Truncated or malformed responses remain errors. Each independent planned cell is attempted once; conditional timing/QA summaries must retain the failed-cell denominator. Source snapshots and archives identify the measured code.
+这些回放均从本地读取模型响应。原版响应驱动优化实现，用于检查实现是否一致；各方案自己的响应驱动自己，用于重复检查运行结果。答案质量由真实问答实验单独评分。
 
-The primary 128-turn and context measurements used checkpoint `2019a73d4ce7135acff4fc2cf51978ccee087124`; the structured gate, full419 and held-out64 measurements used `21b5b23de2089e6b096a86242a7d51a67cc06d29`. Their source snapshots/archives remain authoritative. Failure-preservation and integrity-classification fixes added for the final release do not change these historical outcomes or recover the lost full419 baseline buffer.
+## 生成问题排查
 
-## Preserved failures and diagnostics
-
-| Directory | Status and interpretation |
+| 实验 | 记录与发现 |
 | --- | --- |
-| [suite128-three-arm-20261018](suite128-three-arm-20261018/suite.json) | Aborted original 1,000-token pilot: one complete cell, one failed cell, seven pending. The first complete pair also crossed an unrelated GPU allocation transition. Its measurements are not pooled with the primary run. |
-| [suite128-primary-bounded-v1-20261018](suite128-primary-bounded-v1-20261018/suite.json) | Aborted strict tag-budget run: no complete pairs, one failed cell, eight pending. Exact execution generated a complete 18-item tag list against the hard limit of 16. Its successful baseline remains visible; no failed pair was waived or resumed. |
-| [diagnostics/structured-policy-v1-fixed-controls](diagnostics/structured-policy-v1-fixed-controls/results.json) | Fixed three-control generation-schema gate: 3/3 passed, exactly one POST attempt per control. Verifies syntax/domain acceptance of these inputs, not general quality or long-chain reliability. Model already loaded; any first schema compilation is included in gate wall times. |
-| [diagnostics/strengthen_cap2000.json](diagnostics/strengthen_cap2000.json) | One isolated reconstruction of the original failed strengthen request; a 2,000-token cap still truncated a repetitive response. Diagnostic only. |
-| [diagnostics/rp105-fixed-controls](diagnostics/rp105-fixed-controls/results.json) | Fixed ten-request repetition-penalty diagnostic: nine controls passed, the selected failure prompt exceeded the preregistered 16-tag criterion. Preserved as a failed protocol. |
-| [diagnostics/bounded-tags-v1-fixed-controls](diagnostics/bounded-tags-v1-fixed-controls/results.json) | The same ten controls with the common tag instruction passed their fixed criteria. The later hard-budget run nevertheless failed; these diagnostic checks do not establish general reliability. |
+| 最初的 1,000-token 实验 | [一组完成、一组失败、七组待运行](suite128-three-arm-20261018/suite.json)；完成组运行时发生 GPU 显存分配变化，单独保留 |
+| 严格标签上限 | [优化版生成 18 个标签，超过设定的 16 个](suite128-primary-bounded-v1-20261018/suite.json)；第一组停止，另八组待运行 |
+| 重复生成 | [同一请求增加到 2,000 tokens 后仍截断](diagnostics/strengthen_cap2000.json) |
+| 重复惩罚 1.05 | [十个固定请求中九个通过](diagnostics/rp105-fixed-controls/results.json)，另一个超过标签数量上限 |
+| 增加标签数量提示 | [相同十个请求通过](diagnostics/bounded-tags-v1-fixed-controls/results.json)；后续长链实验仍出现超限 |
+| JSON 结构约束 | [三个固定输入通过格式和记忆引用检查](diagnostics/structured-policy-v1-fixed-controls/results.json) |
 
-The unused [bounded context plan](context128-bounded-v1-20261018/protocol.json) and [bounded joint plan](joint64-heldout-bounded-v1-20261018/suite.json) contain no live results and were superseded before execution.
+## 配置与代码版本
 
-## Historical and engineering checks
+主要实验使用相同生成设置：最多输出 2,000 tokens，重复惩罚 1.05，提示词要求最多 16 个标签，完整的超限列表记录为观察项。64 条策略比较额外为 fused/joint 启用 JSON 结构约束。各组开始前清空响应缓存，模型和结构模板已预热。
 
-| Evidence | Scope |
+| 实验 | 测量时的提交 |
 | --- | --- |
-| [locomo64-final](locomo64-final/summary.json), [locomo64](locomo64/summary.json) | Earlier single-conversation 64-turn results, described in the [historical report](../docs/experiments.md); separate from the primary protocol. |
-| [index_benchmark.json](index_benchmark.json) | Real MiniLM/LoCoMo index microbenchmark; measures index work, not live end-to-end inference. |
-| [smoke-three-arm-20261018](smoke-three-arm-20261018/summary.json), [smoke8](smoke8/summary.json) | Small integration smokes, not broad quality or performance estimates. |
-| [context-plan-locomo64](context-plan-locomo64/manifest.json) | Offline historical graph replay and context-size plan; zero live answer requests. |
-| [clean-client-validation-final.json](clean-client-validation-final.json) | Final promoted release sources: **281 offline tests passed in 12.24 s** in the clean isolated CPU environment, including integrity classification and failure-evidence preservation. Recorded source hashes identify the tested bytes before the final commit. |
-| [clean-client-validation-structured.json](clean-client-validation-structured.json) | Historical schema/CLI checkpoint: 235 offline tests. The earlier observed checkpoint passed 213 tests; these are retained validation snapshots, separate from the final 281-test check. |
-| [Final c95c918 wheel proof](package-validation-c95c918.json) | Exact committed release source installed into a fresh temporary target from outside the repository; library imports, default/structured/cache/joint/observe behavior and README/license bytes verified with mocked HTTP and embeddings. Dependencies and model assets are not bundled. |
-| [Archive-restored replay proof](archive-replay-validation-final.json) | Private SQLite archive restored in a detached measured `2019a73` checkout; 128 memory states, request sequence and 12 QA matched, with zero HTTP/errors and unchanged cached responses. |
-| [81fcb979 wheel proof](final-package-validation.json), [21b5b23 wheel proof](package-validation-21b5b23.json) | Historical installed-wheel/API validations for their named source checkpoints. The older file named `final-package-validation.json` is the **81fcb979 checkpoint proof**, not the final release wheel proof. |
-| [Original example validation](readme-example-validation.json), [structured example validation](readme-example-validation-structured.json) | Mocked documentation/API examples and strict zero-HTTP replay checks; no live inference performance claim. |
+| 128 条默认流程、回答材料去重 | `2019a73d4ce7135acff4fc2cf51978ccee087124` |
+| JSON 结构检查、419 条完整会话、64 条策略比较 | `21b5b23de2089e6b096a86242a7d51a67cc06d29` |
 
-The paired figures are [default](joint64-heldout-structured-v1-20261018/default_pairs.svg), [fused](joint64-heldout-structured-v1-20261018/fused_pairs.svg), [joint](joint64-heldout-structured-v1-20261018/joint_pairs.svg), and [the common all-four subset](joint64-heldout-structured-v1-20261018/four_arm_pairs.svg). Each states independent conversation/question counts and paired repeat counts; no unpaired arm mean is presented as a common comparison.
+后续代码补充了构建完成后立即保存响应和报告的处理。回看历史结果时，可通过提交号和各目录中的源码快照找到对应实现。原始记录中的绝对路径指向当时使用的机器；新环境配置见[使用指南](../README_FAST.md)。
 
-Raw manifests may include the original machine's paths to document what actually ran. Portable setup and reproduction commands are in the [project README](../README.md).
+## 计划记录
+
+| 计划 | 状态 |
+| --- | --- |
+| [128 条联合策略扩展](joint128-heldout-structured-v1-20261018/suite.json) | 因时间预算取消。预计需要 121.12 分钟，当时扣除收尾时间后可用 114.67 分钟；[计算记录](joint128-heldout-structured-v1-20261018/scheduling_decision.json)、[执行状态](joint128-heldout-structured-v1-20261018/execution_status.json) |
+| [原联合策略计划](joint64-heldout-observed-v1-20261018/suite.json) | 启动前改用 JSON 结构约束方案，见[实验安排](../docs/joint_pilot_protocol.md) |
+| [严格标签配置下的去重计划](context128-bounded-v1-20261018/protocol.json)、[联合策略计划](joint64-heldout-bounded-v1-20261018/suite.json) | 配置调整后重新安排，原计划留存 |
+
+## 早期实验与软件测试
+
+| 内容 | 文件 |
+| --- | --- |
+| 早期 64 条对照 | [locomo64-final](locomo64-final/summary.json)、[locomo64](locomo64/summary.json)，解读见[早期报告](../docs/experiments.md) |
+| 小规模联调 | [三种方案](smoke-three-arm-20261018/summary.json)、[8 条记录](smoke8/summary.json) |
+| 早期回答材料分析 | [本地回放与材料长度](context-plan-locomo64/manifest.json) |
+| 自动测试 | [281 项通过](clean-client-validation-final.json)，独立 CPU 环境，耗时 12.24 秒；[较早版本的 235 项测试](clean-client-validation-structured.json) |
+| 安装包检查 | [c95c918 版本](package-validation-c95c918.json)，安装后检查导入、接口、缓存和包内文件；历史版本：[81fcb979](final-package-validation.json)、[21b5b23](package-validation-21b5b23.json) |
+| 缓存归档恢复 | [在测量版本重建 128 条记忆与 12 道问答](archive-replay-validation-final.json) |
+| 接口示例 | [原示例](readme-example-validation.json)、[带结构约束的示例](readme-example-validation-structured.json)，使用模拟模型和文本向量执行 |
+
+SQLite 响应缓存保存在本机私有目录。报告和图表随仓库提交。

@@ -1,10 +1,39 @@
-# Engineering notes
+# 使用指南
 
-The [project README](README.md) contains portable setup and benchmark commands. Current measurements and limits live in [docs/experiments_v2.md](docs/experiments_v2.md), with [technical analysis](docs/deep_analysis.md) and [historical measurements](docs/experiments.md); the [source audit](docs/audit.md) explains the original bottlenecks.
+[项目首页](README.md)介绍主要功能和结果；[性能分析](docs/deep_analysis.md)解释调用链和优化方法；[实验报告](docs/experiments_v2.md)汇总测量。
 
-## Library example
+## 准备环境
 
-After setup, point the encoder at downloaded local weights and configure the running vLLM OpenAI-compatible endpoint. Set the revision to identify the actual weights, tokenizer and chat template.
+在仓库根目录运行以下命令，创建 Python 3.12 客户端环境：
+
+```bash
+scripts/setup_environment.sh
+uv pip install --python .venv-client/bin/python -e '.[test]'
+export NLTK_DATA="$PWD/.cache/nltk_data"
+export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4
+export TOKENIZERS_PARALLELISM=false
+```
+
+脚本使用 `requirements-fast.txt` 安装已测试的依赖，并准备 MiniLM 和 NLTK 资源。包支持的 Python 版本范围为 3.10–3.13，现有测试使用 3.12。
+
+若已有客户端环境，也可执行 `python -m pip install -e '.[test]'`，再自行准备模型与 NLTK 资源。
+
+### 本地模型服务
+
+准备 Qwen3-8B 权重，在独立环境启动 vLLM：
+
+```bash
+uv venv --python 3.12 .venv-serve
+uv pip install --python .venv-serve/bin/python vllm==0.11.2 transformers==4.57.6
+INFERENCE_ENV="$PWD/.venv-serve" MODEL_DIR=/path/to/Qwen3-8B GPU_ID=0 \
+  scripts/serve_qwen.sh
+```
+
+服务默认监听 `127.0.0.1:21014`，显存用量等参数可在[启动脚本](scripts/serve_qwen.sh)中配置。脚本启用前缀缓存重置接口，供实验开始前清理服务端缓存。
+
+## Python 接口
+
+将路径替换为本机模型和缓存目录。`AMEM_MODEL_REVISION` 用于标识实际使用的权重、分词器和聊天模板；更换它们时使用新的版本名。
 
 ```bash
 export AMEM_EMBEDDING_MODEL=/path/to/all-MiniLM-L6-v2
@@ -46,7 +75,18 @@ context, row_indices = memory.find_related_memories("Maya's robotics plans", k=2
 print(context)
 ```
 
-Optional fused evolution and joint metadata/evolution change the model task and can change memory and QA quality. Use separate caches when comparing policies. A server supporting `response_format: json_schema` can additionally constrain these policies' output structure:
+`ingest` 提前处理独立的关键词和摘要提取，并按输入顺序完成检索与记忆更新。默认最多使用 4 个分析线程，预取窗口为 16 条记录。
+
+### 选择记忆策略
+
+| 方案 | 行为 | 配置 |
+| --- | --- | --- |
+| 默认流程 | 保留上游提示词与更新顺序，并行准备关键词和摘要 | `FastAgenticMemorySystem` |
+| 合并演化 | 一次请求给出关联、标签和旧笔记更新 | `evolution_policy="fused"` |
+| 联合整理 | 每条记录用一次请求完成关键词、摘要和演化 | `JointAgenticMemorySystem` |
+| 回答材料去重 | 同一条记忆在回答材料中保留一次 | `context_policy="deduplicated"` |
+
+`fused`、`joint` 和去重会改变模型输入或任务，适合分别比较耗时与回答质量。比较时为每个方案使用独立缓存。
 
 ```python
 from pathlib import Path
@@ -63,43 +103,110 @@ joint = JointAgenticMemorySystem(
 # Choose fused or joint, then use ingest(iter(turns)) and retrieval as above.
 ```
 
-`structured_policy_outputs` defaults to `False`; unconstrained generation remains available when it is disabled. When enabled, it adds a fixed JSON schema only to fused-evolution and joint-note requests. It constrains fields, types and decision values; application parsers still validate retrieved candidate IDs, action consistency and metadata. It provides no semantic or QA-quality guarantee, adds no hard tag-list limit, and leaves upstream evolution and QA requests unchanged. Joint ingestion is sequential and does not prefetch metadata.
+`structured_policy_outputs=True` 要求服务支持 `response_format: json_schema`。它约束 fused/joint 响应的字段、类型和动作取值，程序随后检查记忆编号、动作组合、关键词与摘要。标签数量由提示词和客户端规则控制。原流程与问答请求沿用各自的格式。
 
-The graph and vector index live in memory; SQLite persists LLM responses. To reconstruct a graph, rerun the same ordered turns with `AMEM_CACHE_MODE=replay` and unchanged encoder, endpoint, revision, decoding, policy and structured-output setting. Strict replay makes no live LLM calls and raises on a missing response; the local encoder is still required.
+联合整理按顺序执行，每条记录直接生成完整结果。默认流程提前并行提取关键词与摘要，两者使用不同的调度方式。
 
-## Default execution path
+### 缓存与回放
 
-`FastAgenticMemorySystem` reuses the shared CPU encoder and `FastEmbeddingRetriever`. Independent metadata requests run in a rolling, bounded thread pool. Graph mutation, neighbor retrieval, conditional upstream evolution, and note insertion run chronologically. Prefetch responses enter an exact-request cache and are consumed through the same parser. The successful path follows the robust reference; inference/cache errors propagate in the default strict mode instead of producing a silent benchmark fallback.
+缓存键包含完整请求、服务地址和模型版本。在 `readwrite` 模式下，相同请求并发到达可共享一次真实调用。支持以下模式：
 
-The exact retriever uses normalized vectors, growing contiguous storage, an embedding cache and a bounded query cache. Consolidation preserves the upstream threshold and its distinct document format; only changed text is encoded, in batches. It intentionally preserves the upstream refresh schedule after neighbor mutations and positional graph links. Immediately refreshing every changed neighbor, remapping links to stable IDs, approximate nearest-neighbor search and context removal would change behavior. The fast retriever is in memory and does not implement the upstream retriever save/load API. SQLite persists responses; it does not provide transactional graph persistence. Benchmark graph reconstruction uses strict response replay.
+| 模式 | 用途 |
+| --- | --- |
+| `off` | 直接调用模型，适合单次请求或顺序处理 |
+| `write` | 每次调用模型并记录响应，用于原版对照 |
+| `readwrite` | 读取已有响应，缺失时调用模型并保存，用于并行预取 |
+| `replay` | 只读取录制响应，缺失时立即报错，用于重复检查 |
 
-`evolution_policy="fused"` uses one JSON-output call for evolution, validates its decision and references, and records mutation/parser counters. It changes the prompting contract and can change memory and QA quality. `context_policy="deduplicated"` removes repeated memory rows before answering; it is another independent opt-in policy. Default values for both policies are `"upstream"`.
+并行预取通过缓存交接分析结果，使用 `readwrite` 或 `replay`。
 
-## Cache and experiment identities
+回放时设置 `AMEM_CACHE_MODE=replay`，使用相同的记录顺序、编码器、服务地址、模型版本、生成参数和策略。回放仍需本地文本编码器。
 
-`MeasuredClient` hashes the complete request, endpoint and explicit model revision. Transport, truncation and configured tag-budget checks precede SQLite WAL cache writes. Fused/joint policy parsing happens afterward, so invalid policy JSON can remain recorded; strict ingestion raises instead of repairing it. Concurrent identical requests share one live request. `write` records the reference while bypassing reads; `readwrite` enables the optimized pipeline; `replay` raises on every miss and never contacts the server.
+笔记和向量索引保存在内存中，SQLite 保存模型响应。重新处理相同输入可从响应记录重建记忆。客户端会记录格式完整的模型响应；如果后续记忆字段校验失败，构建停止，录制内容可用于排查。
 
-The schema enters the complete request and therefore the fused/joint cache key. Replay must use the recorded setting; enabling it cannot reuse an unstructured fused/joint response. With the default `False`, historical keys are preserved. Upstream and QA keys remain unchanged even when it is enabled.
+## 运行实验
 
-The benchmark uses separate configured-reference, optimized, fused and optional joint databases. The measured `observed-tags-v1` profile passes max_tokens=2000, repetition_penalty=1.05, tag_budget=16 and tag_budget_policy="observe" uniformly. A common system instruction requests tag lists of at most 16 items. Otherwise valid complete overshoots are recorded without clipping; live-generation counts are separated from cached response inspections. Truncated or malformed HTTP responses remain errors. The optional default `"error"` policy rejects oversized lists. User prompt templates remain unchanged, and observe uses a separate cache identity. Historical omitted parameters retain their original identities. The unbounded 1000-token pilot, failed RP-only diagnostic and strict tag-budget abort remain separate from the observed-profile primary. Cold-arm prefix caches are reset, and initialization/warmup is reported separately. The reference's write-only recording is buffered in memory and flushed outside timing; optimized cache overhead remains timed. Build/QA also exclude checkpoint/report JSON writes; `total_seconds` is their sum, rather than full process elapsed time. Reported nested stage timings are inclusive and must not be summed into wall time. Per-call latency percentiles also include overlapping requests and are not end-to-end latency.
+模型服务就绪后，设置 MiniLM 路径和模型版本：
 
-The full419 run at measured checkpoint `21b5b23` exposed an evidence-loss bug: the baseline reached answer 35 and truncated before its buffered responses were flushed, so its original cache, live trace and build timing were lost. The independent exact arm completed and passed its own replay; reconstruction from that arm's cache does not recover the lost baseline or provide a paired speed result. See the [evidence audit](docs/full419_evidence_audit.json). The final harness now flushes successful baseline responses and writes a build-only checkpoint before QA, then preserves available partial evidence on failure. This does not restore the lost run; archived measurements retain their original source identities.
+```bash
+export EMBEDDING_MODEL=/path/to/all-MiniLM-L6-v2
+export MODEL_REVISION=your-model-and-template-revision
+```
 
-Three different comparisons serve different purposes:
+先运行一个 64 条记录的对照：
 
-- Live reference versus fast pipeline measures elapsed time and output/QA differences under separate inference. Greedy decoding and a fixed seed do not guarantee identical responses under different batching.
-- Reference responses replayed through the default fast pipeline check every memory snapshot, chronological request key, and complete QA output for equivalence.
-- Each optimized policy replayed from its own cold responses checks reproducibility and cache integrity. Fused self replay cannot establish equivalence with upstream prompts.
+```bash
+.venv-client/bin/python scripts/benchmark.py \
+  --embedding-model "$EMBEDDING_MODEL" --model-revision "$MODEL_REVISION" \
+  --max-turns 64 --max-questions 12 \
+  --max-tokens 2000 --repetition-penalty 1.05 --tag-budget 16 --tag-budget-policy observe \
+  --modes baseline,optimized,replay,warm \
+  --output results/my-smoke
+```
 
-For completed arms, the suite records source hashes, subset fingerprints, source QA indices, complete per-question predictions, stage token use, errors, parser counters and GPU load. It refuses source drift between cells and retains failed-cell status, diagnostics and the planned denominator. Available partial evidence depends on the recorded harness version. A three-arm suite rotates cold-arm order over repeated pairs. Four-arm counterbalanced runs use four fixed Williams orders with paired reversals. Small samples and shared GPU activity limit timing and quality conclusions.
+多个会话的重复对照：
 
-## Reproduction assets
+```bash
+.venv-client/bin/python scripts/benchmark_suite.py \
+  --embedding-model "$EMBEDDING_MODEL" --model-revision "$MODEL_REVISION" \
+  --samples 0 1 2 --turns 128 --repeats 2 --max-questions 12 \
+  --max-tokens 2000 --repetition-penalty 1.05 --tag-budget 16 --tag-budget-policy observe \
+  --continue-on-error --output results/my-suite
+```
 
-- `requirements-fast.txt`: exact tested client versions; `pyproject.toml`: installable core package and optional test dependencies.
-- `scripts/setup_environment.sh`: fresh CPU-client environment and pinned embedding/NLTK assets.
-- `scripts/serve_qwen.sh`: separate local vLLM server; model/environment paths are explicit configuration.
-- `scripts/benchmark.py`: one subset, live arms, strict replay and detailed JSON.
-- `scripts/benchmark_suite.py`: evidence coverage, repeated multi-conversation protocol, GPU monitor and paired summaries.
-- `scripts/benchmark_index.py`: real-text/real-embedding index microbenchmark, excluding LLM calls and QA.
+加入 fused 与 joint 比较：
 
-Historical raw manifests record the machine on which they were collected. Their local paths are evidence, not instructions for another machine. Historical results may correspond to earlier source hashes; use the manifest's fingerprint when interpreting them.
+```bash
+.venv-client/bin/python scripts/benchmark_suite.py \
+  --embedding-model "$EMBEDDING_MODEL" --model-revision "$MODEL_REVISION" \
+  --samples 3 4 --turns 64 --repeats 2 --max-questions 24 \
+  --max-tokens 2000 --repetition-penalty 1.05 --tag-budget 16 --tag-budget-policy observe \
+  --include-fused --include-joint --structured-policy-outputs \
+  --continue-on-error --output results/my-policy-pilot
+```
+
+每次真实推理实验使用新的输出目录。`--continue-on-error` 保存当前组的错误后继续下一组；源码、配置、缓存或回放检查出错时停止。`--resume` 可跳过源码和配置相符的完整实验组，失败组保留原记录。
+
+以上命令使用统一的生成配置：最多输出 2,000 tokens，重复惩罚 1.05，提示词要求最多 16 个标签。`observe` 记录超出标签数量的完整响应；截断和解析错误会中止当前运行。支持前缀缓存重置的服务会在各次真实运行前清理缓存，其他服务可用 `--prefix-cache-reset off` 并记录这一设置。
+
+问题从类别 1–4 中轮流选取，所需事实均位于选定对话范围。报告包含词项 F1、标准化完全匹配率及逐题答案。
+
+### 查看和绘制结果
+
+```bash
+.venv-client/bin/python scripts/summarize_suite.py results/my-suite/suite.json \
+  --output results/my-suite/derived.json
+uv pip install --python .venv-client/bin/python -e '.[analysis]'
+.venv-client/bin/python scripts/plot_suite.py results/my-suite/suite.json \
+  --output results/my-suite/overview.svg --png
+```
+
+`summary.json` 分别记录构建和问答耗时。模型加载、预热、原版响应批量落盘和报告写入单独处理；`total_seconds` 为构建与问答耗时之和。并行请求的计时可能重叠，阶段累计值适合定位工作量，整次运行耗时用于比较速度。
+
+程序在构建结束时保存录制响应和构建报告，再进入问答。失败时保留已完成部分与错误信息。现有测量对应的源码版本、完成次数和失败情况见[结果目录](results/README.md)。
+
+### 保存响应记录
+
+实验进程退出后，可把 SQLite 缓存归档到私有目录：
+
+```bash
+.venv-client/bin/python scripts/archive_replay_cache.py --run-dir results/my-suite
+```
+
+归档位于 `.private/artifacts/`，保存数据库备份及其校验值。对已有默认流程结果，可使用原配置及 `--modes replay,warm` 重新检查。Git 默认忽略 SQLite 文件和 `.private/`。
+
+## 检索实现
+
+`FastEmbeddingRetriever` 共享编码器，缓存文本向量，按容量扩展连续存储，并使用归一化向量做精确余弦搜索。定期重建时，变化文本批量编码。
+
+为了沿用原流程的检索结果，实现保留上游的刷新时点、插入和重建时的文本格式，以及按行号记录的关联。编码器输出类型固定，发生变化时会报错，便于发现可能影响排序的数值差异。
+
+## 测试
+
+```bash
+.venv-client/bin/python -m pytest -q
+.venv-client/bin/python scripts/benchmark_index.py \
+  --embedding-model "$EMBEDDING_MODEL" --output results/my-index.json
+```
+
+自动测试覆盖请求缓存、并发预取、检索排序、记忆更新、结构校验、回放和失败保存。索引实验使用真实 MiniLM 与 LoCoMo 文本，单独测量索引工作。
